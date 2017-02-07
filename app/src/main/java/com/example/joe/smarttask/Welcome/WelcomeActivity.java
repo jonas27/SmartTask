@@ -14,15 +14,17 @@ import android.view.ViewGroup;
 import com.example.joe.smarttask.R;
 
 /**
- * Class handles the welcome slides
+ * Class handles the welcome slides - slides inflate welcome_activity.xml and are no fragments (only one lifecycle)
  * Created on 07/02/2017.
  */
 
 public class WelcomeActivity extends AppCompatActivity {
 
-
+    //ViewPager allows flipping through pages
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
+
+    //array for welcome slides which inflate welcome_activity.xml
     private int[] welcome_layouts;
 
 
@@ -30,19 +32,21 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //set's the content (layout)
         setContentView(R.layout.welcome_activity);
 
+        //ViewPager allows flipping through pages
         viewPager = (ViewPager) findViewById(R.id.view_pager);
 
+        //add inflating layouts
         welcome_layouts = new int[]{
                 R.layout.welcome1,
                 R.layout.welcome2
         };
 
 
-
-
         viewPagerAdapter=new ViewPagerAdapter();
+        //makes inflating of welcome_activity possible
         viewPager.setAdapter(viewPagerAdapter);
 
         //for changes in slide add this (eg admin sees more...)
@@ -52,44 +56,45 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
-    private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
-    }
-
-
 
 
 
 
     /**
+     * Base class providing the adapter to populate pages inside of a ViewPager
      * instantiates and sets new Window/Container as current. Destroys old window
-     * adapted to our needs
+     * Overwritten Methods below  are requirement to use PagerAdapter
      */
+
     public class ViewPagerAdapter extends PagerAdapter {
+
 
         private LayoutInflater layoutInflater;
 
+        //Create the page for the given position.
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(welcome_layouts[position], container, false);
             container.addView(view);
 
             return view;
         }
 
+        //Return the number of views available (#numbers of inflating pages)
         @Override
         public int getCount() {
             return welcome_layouts.length;
         }
 
+        //???no idea what it does :D maybe checks if the current view is really an object???
         @Override
-        public boolean isViewFromObject(View view, Object obj) {
-            return view == obj;
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
         }
 
-
+        //Remove a page for the given position.
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             View view = (View) object;
