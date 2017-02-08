@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by joe on 08/02/2017.
+ * Creates a file and boolean in that file with setter and getter methods
+ * boolean defines if welcome dialog shows (show if true)
  */
 
 public class ShowWelcome {
@@ -16,6 +17,7 @@ public class ShowWelcome {
     private SharedPreferences.Editor editor;
     private Context context;
 
+    //constructor opens (or creates) shared preference file in editor (0 means it is private; can only be accessed by the calling application)
     public ShowWelcome(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0);
