@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //checks if welcome page did already run. If yes nothing happens. If no it shows welcome page
-        //Intent needs activity line in manifest to access subpackage
-        //Creates new Intent with WelcomeActivity and starts it
-
 
         logInButton = (Button) findViewById(R.id.logIn);
         logInButton.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //checks if welcome page did already run. If yes nothing happens. If no it shows welcome page
+    //Intent needs activity line in manifest to access subpackage
+    //Creates new Intent with WelcomeActivity and starts it
     public void checkShowWelcome() {
         ShowWelcome showWelcome = new ShowWelcome(this);
         if (showWelcome.getSharedPrefencesWelcome()) {

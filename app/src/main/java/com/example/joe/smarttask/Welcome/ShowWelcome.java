@@ -24,6 +24,7 @@ public class ShowWelcome {
         editor = sharedPreferences.edit();
     }
 
+    //sets if Welcome should show
     public void setSharedPreferencesWelcome(boolean showWelcome) {
         editor.putBoolean(SHOW_WELCOME, showWelcome);
         editor.commit();

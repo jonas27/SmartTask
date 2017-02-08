@@ -12,21 +12,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
         android:hint="Enter your email"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/enter_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:ems="25"
         android:hint="Enter your password"
         android:inputType="textPersonName"
+        android:textAlignment="center"
 
         />
 
