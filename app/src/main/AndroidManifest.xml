@@ -15,8 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Welcome.WelcomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainPage.MPage"
             android:screenOrientation="portrait" />
     </application>
 
