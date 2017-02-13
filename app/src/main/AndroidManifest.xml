@@ -2,12 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.joe.smarttask">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,12 +21,18 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:name=".Welcome.WelcomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainPage.MPage"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUp.SignUp"
+            android:screenOrientation="portrait" />
+
+        <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
 </manifest>

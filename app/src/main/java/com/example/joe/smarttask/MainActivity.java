@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.joe.smarttask.MainPage.MPage;
+import com.example.joe.smarttask.SignUp.SignUp;
 import com.example.joe.smarttask.Welcome.ShowWelcome;
 import com.example.joe.smarttask.Welcome.WelcomeActivity;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                                               checkShowWelcome();
+                                               signUp();
                                            }
                                        }
         );
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
+                                               checkShowWelcome();
                                                openApp();
                                            }
                                        }
@@ -57,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void signUp() {
+        intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+    }
+
     //checks if welcome page did already run. If yes nothing happens. If no it shows welcome page
     //Intent needs activity line in manifest to access subpackage
     //Creates new Intent with WelcomeActivity and starts it
@@ -64,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         showWelcome = new ShowWelcome(this);
         if (showWelcome.getSharedPrefencesWelcome()) {
             //hides welcome
-            //showWelcome.setSharedPreferencesWelcome(false);
             intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
         }

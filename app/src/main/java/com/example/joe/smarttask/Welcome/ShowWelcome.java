@@ -25,8 +25,8 @@ public class ShowWelcome {
     }
 
     //sets if Welcome should show
-    public void setSharedPreferencesWelcome(boolean showWelcome) {
-        editor.putBoolean(SHOW_WELCOME, showWelcome);
+    public void setSharedPreferencesWelcome(boolean skipTurorial) {
+        editor.putBoolean(SHOW_WELCOME, skipTurorial);
         editor.commit();
     }
 

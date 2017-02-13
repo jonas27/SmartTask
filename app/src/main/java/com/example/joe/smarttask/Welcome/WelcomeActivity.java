@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 
@@ -29,24 +33,50 @@ public class WelcomeActivity extends AppCompatActivity {
     //ViewPager allows flipping through pages
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
+    private WelcomeColors welcomeColors;
 
     //array for welcome slides which inflate welcome_activity.xml
     private int[] welcome_layouts;
 
-    //define Buttons
+    //define Elements (Buttons, Views...)
+    private TextView[] circles;
+    private LinearLayout boxCircles;
     private Button skipBtn, nextBtn, gotitBtn;
+    private CheckBox showWelcomeAgain;
+
+    //boolean to show tutorial again
+    private boolean skipTutorial;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         intent = getIntent();
         super.onCreate(savedInstanceState);
+
         //set's the content (layout)
         setContentView(R.layout.welcome_activity);
 
-        //Bind all buttons to objects
+        //Bind all elemnts to objects
         skipBtn = (Button) findViewById(R.id.btnSkip);
         nextBtn = (Button) findViewById(R.id.btnNext);
+        boxCircles = (LinearLayout) findViewById(R.id.boxCircles);
+        showWelcomeAgain = (CheckBox) findViewById(R.id.showAgain);
+
+        //create Object for Colors
+        welcomeColors = new WelcomeColors();
+
+        //add inflating layouts before pageview as it gives nullpointer exception
+        welcome_layouts = new int[]{
+                R.layout.welcome0,
+                R.layout.welcome1,
+                R.layout.welcome2,
+                R.layout.welcome3,
+                R.layout.welcome4,
+        };
+
+
+        //adds circles
+        addCircles(0);
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
@@ -55,19 +85,13 @@ public class WelcomeActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        //add inflating layouts before pageview as it gives nullpointer exception
-        welcome_layouts = new int[]{
-                R.layout.welcome1,
-                R.layout.welcome2
-        };
-
 
         //ViewPager allows flipping through pages. ID is defined
         viewPager = (ViewPager) findViewById(R.id.view_pager_welcome_activity);
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
 
-        //for changes in slide
+        //methods for changes in current slide number
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -76,11 +100,16 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                //last page
                 if (position == welcome_layouts.length - 1) {
                     nextBtn.setText("Got It!");
-                } else {
+                }
+                //else
+                else {
                     nextBtn.setText("Next");
                 }
+                addCircles(position);
+
             }
 
 
@@ -98,12 +127,51 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPager.getCurrentItem() == welcome_layouts.length - 1) {
+
+                } else {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                }
+            }
+        });
 
 
     }
 
 
+    private void addCircles(int position) {
+        boxCircles.removeAllViews();
+        circles = new TextView[welcome_layouts.length];
+        for (int counter = 0; counter < welcome_layouts.length; counter++) {
+            circles[counter] = new TextView(this);
+            circles[counter].setText(Html.fromHtml("&#8226;"));
+            circles[counter].setTextSize(35);
+            circles[counter].setTextColor(welcomeColors.chooseColor(position, counter));
+            boxCircles.addView(circles[counter]);
+        }
+    }
 
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        skipTutorial = ((CheckBox) view).isChecked();
+    }
+
+
+    //If activity goes into pause, it writes preference of showing tutorial again in file.
+    @Override
+    public void onPause() {
+        if (skipTutorial) {
+            ShowWelcome showWelcome = new ShowWelcome(this);
+            //modify boolean showWelcomeAgain
+            showWelcome.setSharedPreferencesWelcome(!skipTutorial);
+        }
+        //run superclass method
+        super.onPause();
+    }
 
 
     /**
@@ -124,7 +192,6 @@ public class WelcomeActivity extends AppCompatActivity {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(welcome_layouts[position], container, false);
             container.addView(view);
-
             return view;
         }
 
