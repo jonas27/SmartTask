@@ -123,7 +123,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@+id/signup"
+        android:layout_below="@+id/signupButton"
         android:layout_marginStart="20dp"
         android:text="*I read, understood and accept the terms of usage. "
         android:textSize="10sp" />
