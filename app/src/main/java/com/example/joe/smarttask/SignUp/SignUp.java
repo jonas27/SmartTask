@@ -63,8 +63,7 @@ public class SignUp extends AppCompatActivity {
         dataString[3] = email.getText().toString();
         dataString[4] = userName.getText().toString();
         dataString[5] = password.getText().toString();
-        ServerSettings serverSettings = new ServerSettings(this);
-        serverSettings.setUploadStrings(dataString);
+
     }
 
 
