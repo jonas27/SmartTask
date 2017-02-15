@@ -13,6 +13,7 @@ public class ServerSettings {
 
     private boolean emailExists;
 
+    private String s = "compare Branch";
 
     private String firstName, lastName, email, birthday, userName, password;
 
