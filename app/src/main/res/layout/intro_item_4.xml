@@ -14,7 +14,7 @@
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="15dp"
         android:button="@null"
-        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
         android:onClick="onCheckboxClicked"
         android:text="Show tutorial on next start?"
         android:textColor="#FFFFFF"

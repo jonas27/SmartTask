@@ -4,7 +4,7 @@
     android:id="@+id/welcome_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.joe.smarttask.Welcome.WelcomeActivity">
+    tools:context="com.example.joe.smarttask.IntroSlider.IntroActivity">
 
     <!--
     follow colorschemes at https://material.io/guidelines/style/color.html#color-color-palette
@@ -13,10 +13,19 @@
 
     <!-- makes inflator possible -->
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager_welcome_activity"
+        android:id="@+id/view_pager_intro_view_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_centerInParent="true"
+        android:alpha="0.4"
+        android:src="@mipmap/smlogo"
+
+        />
 
 
     <LinearLayout
@@ -59,20 +68,6 @@
             android:textSize="15sp" />
 
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="113dp"
-        android:text="finish" />
-
-
-
 
 
 </RelativeLayout>

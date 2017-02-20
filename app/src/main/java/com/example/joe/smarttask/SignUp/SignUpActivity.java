@@ -1,5 +1,6 @@
 package com.example.joe.smarttask.SignUp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,18 +14,17 @@ import com.example.joe.smarttask.R;
  * Created by joe on 11/02/2017.
  */
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
-
+    protected static boolean createdNewAccount = false;
+    private Context context;
     private Intent intent;
-
     //Buttons and textviews
     private Button signUp;
     private EditText firstName, lastName, email, birthday, userName, password;
 
     //create String for data to upload (comma delimited)
-    private String[] dataString;
-
+    //private String[] dataString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class SignUp extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
-                                          setData();
+
+                                          sendData();
                                       }
                                   }
         );
@@ -56,13 +57,26 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private void setData() {
+
+    private void sendData() {
+        String[] dataString = new String[6];
         dataString[0] = firstName.getText().toString();
         dataString[1] = lastName.getText().toString();
         dataString[2] = birthday.getText().toString();
         dataString[3] = email.getText().toString();
         dataString[4] = userName.getText().toString();
         dataString[5] = password.getText().toString();
+
+        CheckData checkData = new CheckData(this);
+        checkData.setData(dataString);
+
+
+        ServerSettings serverSettings = new ServerSettings(this);
+        serverSettings.setData(dataString);
+
+        if (createdNewAccount) {
+            finish();
+        }
 
     }
 

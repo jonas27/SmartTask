@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.Welcome;
+package com.example.joe.smarttask.IntroSlider;
 
 //sub_packages need to import this in order to use R
 
@@ -21,11 +21,11 @@ import android.widget.TextView;
 import com.example.joe.smarttask.R;
 
 /**
- * Class handles the welcome slides - slides inflate welcome_activity.xml and are no fragments (only one lifecycle)
+ * Class handles the intro slides - slides inflate intro_activity.xml and are no fragments (only one lifecycle)
  * Created on 07/02/2017.
  */
 
-public class WelcomeActivity extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity {
 
     //Intent
     private Intent intent;
@@ -33,16 +33,16 @@ public class WelcomeActivity extends AppCompatActivity {
     //ViewPager allows flipping through pages
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    private WelcomeColors welcomeColors;
+    private IntroColors introColors;
 
-    //array for welcome slides which inflate welcome_activity.xml
-    private int[] welcome_layouts;
+    //array for intro slides which inflate intro_activity.xml
+    private int[] intro_layouts;
 
     //define Elements (Buttons, Views...)
     private TextView[] circles;
     private LinearLayout boxCircles;
     private Button skipBtn, nextBtn, gotitBtn;
-    private CheckBox showWelcomeAgain;
+    private CheckBox showIntroAgain;
 
     //boolean to show tutorial again
     private boolean skipTutorial;
@@ -54,24 +54,25 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //set's the content (layout)
-        setContentView(R.layout.welcome_activity);
+        setContentView(R.layout.intro_view_menu);
+
 
         //Bind all elemnts to objects
         skipBtn = (Button) findViewById(R.id.btnSkip);
         nextBtn = (Button) findViewById(R.id.btnNext);
         boxCircles = (LinearLayout) findViewById(R.id.boxCircles);
-        showWelcomeAgain = (CheckBox) findViewById(R.id.showAgain);
+        showIntroAgain = (CheckBox) findViewById(R.id.showAgain);
 
         //create Object for Colors
-        welcomeColors = new WelcomeColors();
+        introColors = new IntroColors();
 
         //add inflating layouts before pageview as it gives nullpointer exception
-        welcome_layouts = new int[]{
-                R.layout.welcome0,
-                R.layout.welcome1,
-                R.layout.welcome2,
-                R.layout.welcome3,
-                R.layout.welcome4,
+        intro_layouts = new int[]{
+                R.layout.intro_item_0,
+                R.layout.intro_item_1,
+                R.layout.intro_item_2,
+                R.layout.intro_item_3,
+                R.layout.intro_item_4,
         };
 
 
@@ -87,7 +88,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
         //ViewPager allows flipping through pages. ID is defined
-        viewPager = (ViewPager) findViewById(R.id.view_pager_welcome_activity);
+        viewPager = (ViewPager) findViewById(R.id.view_pager_intro_view_menu);
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
 
@@ -95,13 +96,13 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
+            //Listener for when new page is selected
             @Override
             public void onPageSelected(int position) {
                 //last page
-                if (position == welcome_layouts.length - 1) {
+                if (position == intro_layouts.length - 1) {
                     nextBtn.setText("Got It!");
                 }
                 //else
@@ -130,7 +131,7 @@ public class WelcomeActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewPager.getCurrentItem() == welcome_layouts.length - 1) {
+                if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
 
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
@@ -144,12 +145,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void addCircles(int position) {
         boxCircles.removeAllViews();
-        circles = new TextView[welcome_layouts.length];
-        for (int counter = 0; counter < welcome_layouts.length; counter++) {
+        circles = new TextView[intro_layouts.length];
+        for (int counter = 0; counter < intro_layouts.length; counter++) {
             circles[counter] = new TextView(this);
             circles[counter].setText(Html.fromHtml("&#8226;"));
             circles[counter].setTextSize(35);
-            circles[counter].setTextColor(welcomeColors.chooseColor(position, counter));
+            circles[counter].setTextColor(introColors.chooseColor(position, counter));
             boxCircles.addView(circles[counter]);
         }
     }
@@ -165,9 +166,9 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         if (skipTutorial) {
-            ShowWelcome showWelcome = new ShowWelcome(this);
-            //modify boolean showWelcomeAgain
-            showWelcome.setSharedPreferencesWelcome(!skipTutorial);
+            ShowIntro showIntro = new ShowIntro(this);
+            //modify boolean showIntroAgain
+            showIntro.setSharedPreferencesIntro(!skipTutorial);
         }
         //run superclass method
         super.onPause();
@@ -180,6 +181,7 @@ public class WelcomeActivity extends AppCompatActivity {
      * Overwritten Methods below  are requirement to use PagerAdapter
      */
 
+
     public class ViewPagerAdapter extends PagerAdapter {
 
 
@@ -190,7 +192,7 @@ public class WelcomeActivity extends AppCompatActivity {
         public Object instantiateItem(ViewGroup container, int position) {
 
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(welcome_layouts[position], container, false);
+            View view = layoutInflater.inflate(intro_layouts[position], container, false);
             container.addView(view);
             return view;
         }
@@ -198,7 +200,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //Return the number of views available (#numbers of inflating pages)
         @Override
         public int getCount() {
-            return welcome_layouts.length;
+            return intro_layouts.length;
         }
 
         //???no idea what it does :D maybe checks if the current view is really an object???

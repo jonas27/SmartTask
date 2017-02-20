@@ -8,16 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.joe.smarttask.IntroSlider.IntroActivity;
+import com.example.joe.smarttask.IntroSlider.ShowIntro;
 import com.example.joe.smarttask.MainPage.MPage;
-import com.example.joe.smarttask.SignUp.SignUp;
-import com.example.joe.smarttask.Welcome.ShowWelcome;
-import com.example.joe.smarttask.Welcome.WelcomeActivity;
+import com.example.joe.smarttask.SignUp.SignUpActivity;
+
+
+/**
+ * Sets the first screen
+ */
 
 public class MainActivity extends AppCompatActivity {
 
     private Intent intent;
 
-    private ShowWelcome showWelcome;
+    private ShowIntro showIntro;
     private Button logInButton;
 
     private Toolbar mToolbar;
@@ -37,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
 
+        logInButton = (Button) findViewById(R.id.logIn);
+        logInButton.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               if (checkShowIntro()) {
+                                                   introShow();
+                                               }
+                                           }
+                                       }
+        );
+
         logInButton = (Button) findViewById(R.id.signUp);
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
@@ -46,34 +62,32 @@ public class MainActivity extends AppCompatActivity {
                                        }
         );
 
-        logInButton = (Button) findViewById(R.id.logIn);
-        logInButton.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               checkShowWelcome();
-                                               openApp();
-                                           }
-                                       }
-        );
-
     }
 
 
     private void signUp() {
-        intent = new Intent(this, SignUp.class);
+        intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 
-    //checks if welcome page did already run. If yes nothing happens. If no it shows welcome page
+    private void introShow() {
+        intent = new Intent(this, IntroActivity.class);
+        startActivity(intent);
+    }
+
+    //checks if intro page did already run. If yes nothing happens. If no it shows intro page
     //Intent needs activity line in manifest to access subpackage
-    //Creates new Intent with WelcomeActivity and starts it
-    private void checkShowWelcome() {
-        showWelcome = new ShowWelcome(this);
-        if (showWelcome.getSharedPrefencesWelcome()) {
-            //hides welcome
-            intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-        }
+    //Creates new Intent with IntroActivity and starts it
+    private boolean checkShowIntro() {
+        showIntro = new ShowIntro(this);
+        return showIntro.getSharedPrefencesIntro();
+        /**
+         //re-wrote & named classes and now intent closes with
+         "endAllStagingAnimators on 0xb85d99b0 (RippleDrawable) with handle 0xb86c5090"
+         and I don't know why.
+         **/
+            
+
     }
 
     private void openApp() {

@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.Welcome;
+package com.example.joe.smarttask.IntroSlider;
 
 import android.graphics.Color;
 
@@ -7,7 +7,7 @@ import android.graphics.Color;
  * use material design colors https://material.io/guidelines/style/color.html#color-color-palette
  */
 
-public class WelcomeColors {
+public class IntroColors {
 
 
     //counter==position: active sheet/circle
