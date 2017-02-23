@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Creates a file and boolean in that file with setter and getter methods
- * boolean defines if intro dialog shows (show if true)
+ * Intro into our app
+ * layout is inflated
  */
 
 public class ShowIntro {

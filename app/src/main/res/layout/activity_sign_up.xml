@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.joe.smarttask.MainActivity">
@@ -13,7 +13,7 @@
         android:background="#1565C0"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:text="Sign up"
+        android:text="@string/signup_sign_up"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -28,7 +28,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="First name"
+        android:hint="@string/signup_first_name"
         android:inputType="textPersonName"
         android:textSize="20sp" />
 
@@ -42,7 +42,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="Last name"
+        android:hint="@string/signup_last_name"
         android:inputType="textPersonName"
         android:textSize="20sp" />
 
@@ -56,7 +56,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="Birthday"
+        android:hint="@string/signup_birthday"
         android:inputType="date"
         android:textSize="20sp" />
 
@@ -71,7 +71,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="Email"
+        android:hint="@string/signup_email"
         android:inputType="textEmailAddress"
         android:textSize="20sp" />
 
@@ -86,7 +86,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="User name"
+        android:hint="@string/signup_user_name"
         android:inputType="textPersonName"
         android:textSize="20sp" />
 
@@ -101,7 +101,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="Password"
+        android:hint="@string/signup_password"
         android:inputType="textPassword"
         android:textSize="20sp" />
 
@@ -114,7 +114,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="#1565C0"
-        android:text="Sign me UP!!!*"
+        android:text="@string/signup_sign_me_up"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
@@ -125,7 +125,7 @@
         android:layout_height="20dp"
         android:layout_below="@+id/signupButton"
         android:layout_marginStart="20dp"
-        android:text="*I read, understood and accept the terms of usage. "
+        android:text="@string/signup_read_terms"
         android:textSize="10sp" />
 
 </RelativeLayout>

@@ -8,10 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.joe.smarttask.FireBase.SignUpActivity;
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.IntroSlider.ShowIntro;
 import com.example.joe.smarttask.MainPage.MPage;
-import com.example.joe.smarttask.SignUp.SignUpActivity;
 
 
 /**
