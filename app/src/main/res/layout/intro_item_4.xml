@@ -16,7 +16,7 @@
         android:button="@null"
         android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
         android:onClick="onCheckboxClicked"
-        android:text="Show tutorial on next start?"
+        android:text="@string/intro_dont_show_again"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 

@@ -103,11 +103,11 @@ public class IntroActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 //last page
                 if (position == intro_layouts.length - 1) {
-                    nextBtn.setText("Got It!");
+                    nextBtn.setText(R.string.intro_got_it);
                 }
                 //else
                 else {
-                    nextBtn.setText("Next");
+                    nextBtn.setText(R.string.intro_next);
                 }
                 addCircles(position);
 
