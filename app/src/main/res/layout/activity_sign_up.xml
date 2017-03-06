@@ -17,12 +17,19 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp">
 
-    <EditText
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
@@ -127,5 +134,9 @@
         android:layout_marginStart="20dp"
         android:text="@string/signup_read_terms"
         android:textSize="10sp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

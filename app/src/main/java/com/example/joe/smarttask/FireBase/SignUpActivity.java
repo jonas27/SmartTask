@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Intent intent;
     //Buttons and textviews
     private Button signUp;
-    private EditText firstName, lastName, email, birthday, userName, password;
+    private EditText firstName, lastName, birthday, email, userName, password;
     //firebase objects
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -104,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     //creates new account in FireBase with email & PW
-    public void createAccount(final String email, final String password) {
+    public void createAccount(String email, String password) {
         Log.d(TAG, email + " " + password);
 
         Log.d(TAG, (mAuth == null) ? "null" : "not null");
@@ -115,11 +115,15 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
+
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "Account created. Please verify your email.", Toast.LENGTH_SHORT).show();
+                            sendVerificationEmail();
                         }
                         // ...
                     }
@@ -127,23 +131,73 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+    private void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // email sent
+
+
+                            // after email is sent just logout the user and finish this activity
+                            FirebaseAuth.getInstance().signOut();
+                            finish();
+                        } else {
+                            // email not sent, so display message and restart the activity or do whatever you wish to do
+
+                            //restart this activity
+                            overridePendingTransition(0, 0);
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+
+                        }
+                    }
+                });
+    }
+
+    public void singIn(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail", task.getException());
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
     //checks if user filled out all fields, if so then creates new user, if not toasts what is missing
     private void sendData() {
         String[] dataString = new String[6];
         dataString[0] = firstName.getText().toString();
         dataString[1] = lastName.getText().toString();
-        dataString[2] = birthday.getText().toString();
+        dataString[2] = birthday.toString();
         dataString[3] = email.getText().toString();
         dataString[4] = userName.getText().toString();
         dataString[5] = password.getText().toString();
 
         //if (data format correct){create new account}
         CheckData checkData = new CheckData(this);
-        if (checkData.setData(dataString)) {
+        //if (checkData.setData(dataString)) {
+        Log.d(TAG, "Data is checked");
             createAccount(dataString[3], dataString[5]);
 
 
-        }
+        //}
     }
 
 

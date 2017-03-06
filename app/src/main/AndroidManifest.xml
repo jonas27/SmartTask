@@ -24,8 +24,7 @@
 
 
         <activity
-            android:name=".FireBase.SignUpActivity"
-            android:screenOrientation="portrait" />
+            android:name=".FireBase.SignUpActivity" />
         <activity
             android:name=".IntroSlider.IntroActivity"
             android:screenOrientation="portrait" />
