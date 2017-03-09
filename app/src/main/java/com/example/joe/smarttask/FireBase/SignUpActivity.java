@@ -191,7 +191,7 @@ public class SignUpActivity extends AppCompatActivity {
         dataString[5] = password.getText().toString();
 
         //if (data format correct){create new account}
-        CheckData checkData = new CheckData(this);
+        CheckSingUpData checkData = new CheckSingUpData(this);
         //if (checkData.setData(dataString)) {
         Log.d(TAG, "Data is checked");
             createAccount(dataString[3], dataString[5]);

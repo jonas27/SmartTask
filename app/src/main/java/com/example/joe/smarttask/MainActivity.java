@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +15,7 @@ import com.example.joe.smarttask.FireBase.SignUpActivity;
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.IntroSlider.ShowIntro;
 import com.example.joe.smarttask.MainPage.MPage;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,7 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 /**
- * Sets the first screen
+ * Created by us with Firebase methods taken from google and modified by us
+ * Log ing screen for Email, Google and Facebook
+ * Goes to Sign-up or App-content (Either Intro or personal site)
+ * Created by us (but we took FireBase methods from google and modefied them to fit our needs)
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -34,26 +37,35 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent intent;
 
+    // To check if introduction pages should be showed
     private ShowIntro showIntro;
+
+    // [START Define Views]
     private Button logInButton;
-
-    private Toolbar mToolbar;
-
     private EditText email, password;
+    // [END Define Views]
 
-    //firebase objects
+    // [Start declare Firebase Auth and Auth listener]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    // [End declare Firebase auth]
 
 
-    //Defines where program starts
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // add Views
         email = (EditText) findViewById(R.id.enter_email);
         password = (EditText) findViewById(R.id.enter_password);
+        // add Buttons
+        logInButton = (Button) findViewById(R.id.logIn);
+        logInButton = (Button) findViewById(R.id.signUp);
+        // initialize_auth
+        mAuth = FirebaseAuth.getInstance();
+
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
@@ -63,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
 
-        mAuth = FirebaseAuth.getInstance();
-
-
+        // Configure auth listener for Firebase
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -83,9 +93,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
 
         //Log in button, eiher shows intro or goes into app
-        logInButton = (Button) findViewById(R.id.logIn);
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
@@ -96,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         //Brings users to the sign up page
-        logInButton = (Button) findViewById(R.id.signUp);
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
@@ -108,6 +122,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Sign in via google
+
+    /**
+     * private void signIn() {
+     * Intent signInIntent = AUTH.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+     * startActivityForResult(signInIntent, RC_SIGN_IN);
+     * }
+     ***/
 
     //Starts a new sign up activity
     private void signUp() {

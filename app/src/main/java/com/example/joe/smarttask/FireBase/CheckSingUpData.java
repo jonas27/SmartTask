@@ -7,12 +7,12 @@ import android.widget.Toast;
  * Created by joe on 20/02/2017.
  */
 
-public class CheckData {
+public class CheckSingUpData {
 
     Context context;
     private boolean noError;
 
-    public CheckData(Context context) {
+    public CheckSingUpData(Context context) {
         this.context = context;
     }
 
