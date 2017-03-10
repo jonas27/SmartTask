@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.joe.smarttask.MainPage.MPage;
+import com.example.joe.smarttask.MainPage.SmartTask_Main_Activity;
 import com.example.joe.smarttask.SignUp.SignUp;
 import com.example.joe.smarttask.Welcome.ShowWelcome;
 import com.example.joe.smarttask.Welcome.WelcomeActivity;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openApp() {
-        intent = new Intent(this, MPage.class);
+        intent = new Intent(this, SmartTask_Main_Activity.class);
         startActivity(intent);
     }
 
