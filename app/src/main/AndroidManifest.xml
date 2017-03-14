@@ -23,13 +23,12 @@
         </activity>
 
 
-        <activity
-            android:name=".FireBase.SignUpActivity" />
+        <activity android:name=".SignUp.SignUpActivity" />
         <activity
             android:name=".IntroSlider.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainPage.MPage"
+            android:name=".SmartTask_MainPage.SmartTask_Main_Activity"
             android:screenOrientation="portrait" />
         <!-- <activity
             android:hardwareAccelerated="true" />

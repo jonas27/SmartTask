@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.FireBase;
+package com.example.joe.smarttask.SignUp;
 
 import android.content.Context;
 import android.widget.Toast;
