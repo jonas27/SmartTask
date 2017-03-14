@@ -2,13 +2,15 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
+
+import com.example.joe.smarttask.R;
 
 /**
  * Delete class --> naming is shit
  */
 
-public class SmartTask_Main_Activity extends AppCompatActivity {
+public class SmartTask_Main_Activity extends FragmentActivity {
 
 
     @Override
@@ -16,7 +18,7 @@ public class SmartTask_Main_Activity extends AppCompatActivity {
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         //set's the content (layout)
-        //setContentView(R.layout.intro_view_menu);
+        setContentView(R.layout.activity_smarttask);
     }
 
 
