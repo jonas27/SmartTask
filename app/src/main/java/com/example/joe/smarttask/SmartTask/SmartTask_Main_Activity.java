@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.MainPage;
+package com.example.joe.smarttask.SmartTask;
 
 import android.content.Intent;
 import android.os.Bundle;

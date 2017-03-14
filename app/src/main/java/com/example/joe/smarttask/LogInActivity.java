@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.joe.smarttask.MainPage.SmartTask_Main_Activity;
 import com.example.joe.smarttask.SignUp.SignUp;
+import com.example.joe.smarttask.SmartTask.SmartTask_Main_Activity;
 import com.example.joe.smarttask.Welcome.ShowWelcome;
 import com.example.joe.smarttask.Welcome.WelcomeActivity;
 
