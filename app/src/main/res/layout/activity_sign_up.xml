@@ -4,7 +4,7 @@
     android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.joe.smarttask.MainActivity">
+    tools:context="com.example.joe.smarttask.LogInActivity">
 
     <TextView
         android:id="@+id/bar"

@@ -12,7 +12,6 @@ import com.example.joe.smarttask.R;
 
 public class SmartTask_Main_Activity extends FragmentActivity {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
