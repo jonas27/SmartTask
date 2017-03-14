@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "75743662297",
+    "firebase_url": "https://smarttask-81579.firebaseio.com",
+    "project_id": "smarttask-81579",
+    "storage_bucket": "smarttask-81579.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75743662297:android:104e08f66e11a2ad",
+        "android_client_info": {
+          "package_name": "com.example.joe.smarttask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75743662297-8fcmjtgj595igbun62qpn2oj0u6l38dp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.joe.smarttask",
+            "certificate_hash": "01d1f716e08f66043ec85b9cd23a11868ccf248f"
+          }
+        },
+        {
+          "client_id": "75743662297-il1g13v75j0ve6e4n885drufosaec4hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.joe.smarttask",
+            "certificate_hash": "f61d8b430c65f36fba6a8b2a32ba8d9ff5e55974"
+          }
+        },
+        {
+          "client_id": "75743662297-fimcvmr58ud7atud0cl0at65hj74uume.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.joe.smarttask",
+            "certificate_hash": "f9931ccbf38dc307fcd719d0e211401e6fec7122"
+          }
+        },
+        {
+          "client_id": "75743662297-e8tu4qngebihnl66h4dmg1u7e5hn91s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8I7xlQxJi16-nD2WfG8Zht7x80-9zApU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75743662297-e8tu4qngebihnl66h4dmg1u7e5hn91s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.joe.smarttask.FireBase.SignUpActivity;
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.IntroSlider.ShowIntro;
-import com.example.joe.smarttask.MainPage.MPage;
+import com.example.joe.smarttask.SmartTask_MainPage.SmartTask_Main_Activity;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, MPage.class);
+        intent = new Intent(this, SmartTask_Main_Activity.class);
         startActivity(intent);
     }
 
