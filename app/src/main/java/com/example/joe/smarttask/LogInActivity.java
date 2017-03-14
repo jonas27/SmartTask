@@ -13,7 +13,7 @@ import com.example.joe.smarttask.SignUp.SignUp;
 import com.example.joe.smarttask.Welcome.ShowWelcome;
 import com.example.joe.smarttask.Welcome.WelcomeActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
 
     private Intent intent;
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_activity);
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
