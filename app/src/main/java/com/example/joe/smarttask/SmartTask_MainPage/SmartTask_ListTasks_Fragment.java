@@ -12,7 +12,7 @@ import com.example.joe.smarttask.R;
  * Created by joe on 14/03/2017.
  */
 
-public class SmartTask_Tasks_Fragment extends Fragment {
+public class SmartTask_ListTasks_Fragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class SmartTask_Tasks_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_tasks_smarttask, container, false);
+        View v = inflater.inflate(R.layout.fragment_task_smarttask, container, false);
         return v;
     }
 
