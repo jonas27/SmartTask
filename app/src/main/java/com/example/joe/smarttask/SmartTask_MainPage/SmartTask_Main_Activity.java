@@ -24,7 +24,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
-            fragment = new SmartTask_Tasks_Fragment();
+            fragment = new SmartTask_ListTasks_Fragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
