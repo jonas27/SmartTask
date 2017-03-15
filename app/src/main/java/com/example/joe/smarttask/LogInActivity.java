@@ -206,6 +206,8 @@ public class LogInActivity extends AppCompatActivity {
         if (user.isEmailVerified()) {
             if (checkShowIntro()) {
                 introShow();
+            } else {
+                openApp();
             }
         } else {
             Toast.makeText(LogInActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();

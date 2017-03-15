@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SmartTask_Main_Activity;
 
 /**
  * Class handles the intro slides - slides inflate intro_activity.xml and are no fragments (only one lifecycle)
@@ -125,14 +126,14 @@ public class IntroActivity extends AppCompatActivity {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                openApp();
             }
         });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
-
+                    openApp();
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 }
@@ -153,6 +154,12 @@ public class IntroActivity extends AppCompatActivity {
             circles[counter].setTextColor(introColors.chooseColor(position, counter));
             boxCircles.addView(circles[counter]);
         }
+    }
+
+    //opens main app
+    private void openApp() {
+        intent = new Intent(this, SmartTask_Main_Activity.class);
+        startActivity(intent);
     }
 
 
