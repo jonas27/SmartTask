@@ -28,8 +28,7 @@
             android:name=".IntroSlider.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SmartTask_MainPage.SmartTask_Main_Activity"
-            android:screenOrientation="portrait" />
+            android:name=".SmartTask_MainPage.SmartTask_Main_Activity" />
         <!-- <activity
             android:hardwareAccelerated="true" />
             -->
