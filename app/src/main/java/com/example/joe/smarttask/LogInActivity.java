@@ -30,10 +30,10 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by us (but we took FireBase methods from google and modefied them to fit our needs)
  */
 
-public class MainActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
 
     //TAG for Logs
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "LogInActivity";
 
     private Intent intent;
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     // [START Define Views]
     private Button logInButton;
+    private Button signUpButton;
     private EditText email, password;
     // [END Define Views]
 
@@ -61,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.enter_email);
         password = (EditText) findViewById(R.id.enter_password);
         // add Buttons
-        logInButton = (Button) findViewById(R.id.logIn);
-        logInButton = (Button) findViewById(R.id.signUp);
+
+
         // initialize_auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
 
-        //Log in button, eiher shows intro or goes into app
+        //Log in button, either shows intro or goes into app
+        logInButton = (Button) findViewById(R.id.logIn);
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
@@ -111,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
         );
 
         //Brings users to the sign up page
-        logInButton.setOnClickListener(new View.OnClickListener() {
+        signUpButton = (Button) findViewById(R.id.signUp);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
                                                signUp();
@@ -188,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(LogInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
                         }
@@ -203,9 +206,11 @@ public class MainActivity extends AppCompatActivity {
         if (user.isEmailVerified()) {
             if (checkShowIntro()) {
                 introShow();
+            } else {
+                openApp();
             }
         } else {
-            Toast.makeText(MainActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogInActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
         }
     }
 
