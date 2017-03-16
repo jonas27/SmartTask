@@ -15,7 +15,7 @@
     <string name="signup_birthday">Birthday</string>
     <string name="signup_email">Email</string>
     <string name="signup_user_name">User name</string>
-    <string name="signup_password">Password</string>
+    <string name="signup_password">Password. Minimum 6 characters</string>
     <string name="signup_sign_me_up">Sign me UP!!!*</string>
     <string name="signup_read_terms">*I read, understood and accept the terms of usage.</string>
 
@@ -24,6 +24,10 @@
     <string name="intro_skip">Skip</string>
     <string name="intro_got_it">Got It!</string>
     <string name="intro_dont_show_again">Show tutorial on next start?</string>
+
+    <!-- SmartTask List Tasks -->
+    <string name="title">Title</string>
+    <string name="task_name">Name of your task</string>
 
 
 </resources>

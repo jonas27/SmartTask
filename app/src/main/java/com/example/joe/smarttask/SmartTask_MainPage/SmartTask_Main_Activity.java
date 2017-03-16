@@ -22,7 +22,15 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         setContentView(R.layout.activity_smarttask);
 
         FragmentManager fm = getSupportFragmentManager();
+
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        if (fragment == null) {
+            fragment = new SmartTask_Task_Fragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
+        }
+
         if (fragment == null) {
             fragment = new SmartTask_ListTasks_Fragment();
             fm.beginTransaction()
