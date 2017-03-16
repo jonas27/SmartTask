@@ -20,7 +20,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         //set's the content (layout)
         setContentView(R.layout.activity_smarttask);
-
+        //Test Git commment
 
         FragmentManager fm = getSupportFragmentManager();
 
