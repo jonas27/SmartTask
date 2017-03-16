@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.IntroSlider.ShowIntro;
+import com.example.joe.smarttask.SignUp.CheckSingUpData;
 import com.example.joe.smarttask.SignUp.SignUpActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SmartTask_Main_Activity;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -106,8 +107,10 @@ public class LogInActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                                               signIn(email.getText().toString(), password.getText().toString());
-
+                                               CheckSingUpData checkSingUpData = new CheckSingUpData(LogInActivity.this);
+                                               if (checkSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString())) {
+                                                   signIn(email.getText().toString(), password.getText().toString());
+                                               }
                                            }
                                        }
         );
@@ -115,11 +118,11 @@ public class LogInActivity extends AppCompatActivity {
         //Brings users to the sign up page
         signUpButton = (Button) findViewById(R.id.signUp);
         signUpButton.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               signUp();
-                                           }
-                                       }
+                                            @Override
+                                            public void onClick(View v) {
+                                                signUp();
+                                            }
+                                        }
         );
 
 

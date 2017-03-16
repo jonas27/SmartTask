@@ -31,7 +31,6 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                     .commit();
         }
 
-        fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             fragment = new SmartTask_ListTasks_Fragment();
             fm.beginTransaction()

@@ -16,6 +16,10 @@ public class CheckSingUpData {
         this.context = context;
     }
 
+    public boolean checkEmailWithPassword(String email, String password) {
+        return checkEmail(email) && checkPassword(password);
+    }
+
     protected boolean setData(String[] sArray) {
 
         noError = checkName(sArray[0]) &&
@@ -46,7 +50,7 @@ public class CheckSingUpData {
     }
 
 
-    public boolean checkBirthday(String s) {
+    private boolean checkBirthday(String s) {
         boolean rightStructure = true;
         if (s.equals("")) {
             Toast.makeText(context, "Please fill out all fields", Toast.LENGTH_SHORT).show();
@@ -63,39 +67,33 @@ public class CheckSingUpData {
 
 
     private boolean checkEmail(String s) {
-        boolean atSign = true;
         if (s.equals("")) {
             Toast.makeText(context, "Please fill out all fields", Toast.LENGTH_SHORT).show();
         } else {
             char[] cArray = s.toCharArray();
             for (char c : cArray) {
                 if (c == '@') {
-                    atSign = true;
-                    return atSign;
-                } else {
-                    atSign = false;
-
+                    return true;
                 }
             }
         }
         Toast.makeText(context, "Your email has no @ sign.", Toast.LENGTH_SHORT).show();
-        return atSign;
+        return false;
     }
 
     private boolean checkPassword(String s) {
-        boolean specialSign = false;
         if (s.length() < 6) {
-            Toast.makeText(context, "Your passwords needs more than 6 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Your passwords needs 6 or more characters", Toast.LENGTH_SHORT).show();
         } else {
             char[] cArray = s.toCharArray();
             for (char c : cArray) {
                 if (c == '@' || c == '_' || c == '-' || c == '.' || c == ',' || c == '$' || c == '%') {
-                    specialSign = true;
-                    Toast.makeText(context, "Password must contain special sign", Toast.LENGTH_SHORT).show();
+                    return true;
                 }
             }
+            Toast.makeText(context, "Password must contain special sign", Toast.LENGTH_SHORT).show();
         }
-        return !specialSign;
+        return false;
     }
 
 
