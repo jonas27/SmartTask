@@ -26,8 +26,9 @@
     <string name="intro_dont_show_again">Show tutorial on next start?</string>
 
     <!-- SmartTask List Tasks -->
-    <string name="title">Title</string>
-    <string name="task_name">Name of your task</string>
+    <string name="smarttask_title_label">Title</string>
+    <string name="smarttask_task_name">Name of your task</string>
+    <string name="smarttask_solved">Solved?</string>
 
 
 </resources>
