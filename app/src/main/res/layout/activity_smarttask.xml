@@ -2,26 +2,45 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="4">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/listtasks"
+            android:id="@+id/tasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/smarttask_task_name" />
+            android:text="@string/smarttask_activity_tasks"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/Overview"
+            android:id="@+id/calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/smarttask_task_name" />
+            android:text="@string/smarttask_activity_calendar"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/smarttask_activity_messages"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
 
     </LinearLayout>

@@ -9,7 +9,7 @@
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/smarttask_title_label"
+        android:text="@string/smarttask_list_title_label"
         />
 
     <LinearLayout
@@ -23,13 +23,13 @@
             android:layout_width="wrap_content"
         android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="@string/smarttask_task_name" />
+            android:text="@string/smarttask_list_task_name" />
 
         <CheckBox
             android:id="@+id/crime_solved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/smarttask_solved" />
+            android:hint="@string/smarttask_list_solved" />
     </LinearLayout>
 </LinearLayout>

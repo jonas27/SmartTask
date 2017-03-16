@@ -25,10 +25,16 @@
     <string name="intro_got_it">Got It!</string>
     <string name="intro_dont_show_again">Show tutorial on next start?</string>
 
+
+    <!-- SmartTask Activity Rework -->
+    <string name="smarttask_activity_tasks">Tasks</string>
+    <string name="smarttask_activity_calendar">Calendar</string>
+    <string name="smarttask_activity_messages">Messages</string>
+
     <!-- SmartTask List Tasks -->
-    <string name="smarttask_title_label">Title</string>
-    <string name="smarttask_task_name">Name of your task</string>
-    <string name="smarttask_solved">Solved?</string>
+    <string name="smarttask_list_title_label">Title</string>
+    <string name="smarttask_list_task_name">Name of your task</string>
+    <string name="smarttask_list_solved">Solved?</string>
 
 
 </resources>
