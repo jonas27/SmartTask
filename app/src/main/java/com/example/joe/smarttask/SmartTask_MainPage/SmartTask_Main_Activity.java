@@ -23,6 +23,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
 
         //Test Git commment
         //try write something
+        //new
 
         FragmentManager fm = getSupportFragmentManager();
 
