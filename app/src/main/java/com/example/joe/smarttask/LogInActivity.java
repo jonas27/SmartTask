@@ -43,28 +43,22 @@ public class LogInActivity extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "LogInActivity";
-
+    private static final int RC_SIGN_IN = 1;
     private Intent intent;
-
     // To check if introduction pages should be showed
     private ShowIntro showIntro;
-
     // [START Define Views]
     private Button logInButton;
     private Button signUpButton;
-    private EditText email, password;
     // [END Define Views]
-
+    private EditText email, password;
     // [Start declare Firebase Auth and Auth listener]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseUser user;
     // [End declare Firebase auth]
-
-
+    private FirebaseUser user;
     //Google Login
     private SignInButton mGoogleButton;
-    private  static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
 
 
@@ -170,8 +164,8 @@ public class LogInActivity extends AppCompatActivity {
         mGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
                 Log.d(TAG, " Button working");
+                signIn();
             }
         });
 
