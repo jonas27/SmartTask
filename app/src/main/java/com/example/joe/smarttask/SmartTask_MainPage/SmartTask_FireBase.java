@@ -82,6 +82,10 @@ public class SmartTask_FireBase extends AppCompatActivity {
         return smartTask_fireBase;
     }
 
+    protected void push2() {
+
+    }
+
     protected void push() {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();

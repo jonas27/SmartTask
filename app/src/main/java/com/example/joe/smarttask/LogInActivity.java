@@ -85,8 +85,8 @@ public class LogInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Log.d("data",mDatabase.toString());
-        Log.d("data",mDatabase.getDatabase().toString());
+        Log.d("data", mDatabase.toString());
+        Log.d("data", mDatabase.getDatabase().toString());
 /*
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User");
