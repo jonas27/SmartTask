@@ -13,8 +13,11 @@ import android.widget.Button;
 import com.example.joe.smarttask.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Delete class --> naming is shit
@@ -23,14 +26,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SmartTask_Main_Activity extends FragmentActivity {
 
     //TAG for Logs
-    private static final String TAG = "SmartTask_Main_Activity";
+    private static final String TAG = "Yes Yes";
     Button upload;
     // [Start declare Firebase Auth and Auth listener]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
     // [End declare Firebase auth]
-    private FirebaseAuth firebaseAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,28 @@ public class SmartTask_Main_Activity extends FragmentActivity {
             }
         };
 
+
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference(mAuth.getCurrentUser().getUid());
+
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
 
         //assign button to upload to firebase
@@ -70,10 +91,10 @@ public class SmartTask_Main_Activity extends FragmentActivity {
 
                                           // Write a message to the database
                                           FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                          DatabaseReference myRef = database.getReference("message");
+                                          DatabaseReference myRef = database.getReference(mAuth.getCurrentUser().getUid());
 
 
-                                          myRef.setValue("Hello, World!");
+                                          myRef.setValue("hello");
                                       }
                                   }
         );
