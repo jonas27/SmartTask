@@ -85,17 +85,18 @@ public class CheckSingUpData {
     }
 
     private boolean checkPassword(String s) {
-        if (s.length() < 6) {
-            Toast.makeText(context, "Your passwords needs 6 or more characters", Toast.LENGTH_SHORT).show();
-        } else {
-            char[] cArray = s.toCharArray();
+        if (s.length() > 5) {
+            return true;
+        }
+        //special sign in password?
+            /*char[] cArray = s.toCharArray();
             for (char c : cArray) {
                 if (c == '@' || c == '_' || c == '-' || c == '.' || c == ',' || c == '$' || c == '%') {
                     return true;
                 }
             }
-            Toast.makeText(context, "Password must contain special sign", Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(context, "Password must contain special sign", Toast.LENGTH_SHORT).show();*/
+        Toast.makeText(context, "Your passwords needs 6 or more characters", Toast.LENGTH_SHORT).show();
         return false;
     }
 
