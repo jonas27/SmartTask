@@ -2,6 +2,7 @@ package com.example.joe.smarttask;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -60,6 +63,7 @@ public class LogInActivity extends AppCompatActivity {
     //Google Login
     private SignInButton mGoogleButton;
     private GoogleApiClient mGoogleApiClient;
+    private DatabaseReference mDatabase;
 
 
 
@@ -75,17 +79,26 @@ public class LogInActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.enter_password);
         // add Buttons
 
-
         // initialize_auth
         mAuth = FirebaseAuth.getInstance();
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Log.d("data",mDatabase.toString());
+        Log.d("data",mDatabase.getDatabase().toString());
+/*
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User");
+        Log.d("DATA ", String.valueOf(myRef));
+*/
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
 
         // Configure auth listener for Firebase
