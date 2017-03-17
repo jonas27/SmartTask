@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!-- SmartTask Activity -->
+    <color name="smartask_sliding_main">#1976D2</color>
+    <color name="smartask_sliding_background">#90CAF9</color>
+
+
 </resources>

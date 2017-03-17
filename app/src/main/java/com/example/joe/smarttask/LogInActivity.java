@@ -108,8 +108,7 @@ public class LogInActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                                               CheckSingUpData checkSingUpData = new CheckSingUpData(LogInActivity.this);
-                                               if (checkSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString())) {
+                                               if (CheckSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
                                                    signIn(email.getText().toString(), password.getText().toString());
                                                }
                                            }

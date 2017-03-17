@@ -10,26 +10,29 @@ import android.widget.Toast;
 public class CheckSingUpData {
 
     Context context;
-    private boolean noError;
 
-    public CheckSingUpData(Context context) {
+    //Context for Toast
+    private CheckSingUpData(Context context) {
         this.context = context;
     }
 
-    public boolean checkEmailWithPassword(String email, String password) {
-        return checkEmail(email) && checkPassword(password);
+
+    // static factory methods (enhances encapsulation, object handling by garbage collector, class can't be subclassed and
+    public static boolean controlSignUpArray(String[] sArray, Context context) {
+        CheckSingUpData checkSingUpData = new CheckSingUpData(context);
+        return checkSingUpData.checkName(sArray[0]) &&
+                checkSingUpData.checkName(sArray[1]) &&
+                checkSingUpData.checkBirthday(sArray[2]) &&
+                checkSingUpData.checkEmail(sArray[3]) &&
+                checkSingUpData.checkName(sArray[4]) &&
+                checkSingUpData.checkPassword(sArray[5]);
     }
 
-    protected boolean setData(String[] sArray) {
-
-        noError = checkName(sArray[0]) &&
-                checkName(sArray[1]) &&
-                checkBirthday(sArray[2]) &&
-                checkEmail(sArray[3]) &&
-                checkName(sArray[4]) &&
-                checkPassword(sArray[5]);
-        return false;
+    public static boolean checkEmailWithPassword(String email, String password, Context context) {
+        CheckSingUpData checkSingUpData = new CheckSingUpData(context);
+        return checkSingUpData.checkEmail(email) && checkSingUpData.checkPassword(password);
     }
+
 
     private boolean checkName(String s) {
         boolean onlyLetters = false;
