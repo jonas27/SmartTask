@@ -43,6 +43,7 @@ public class LogInActivity extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "LogInActivity";
+
     private static final int RC_SIGN_IN = 1;
     private Intent intent;
     // To check if introduction pages should be showed
@@ -52,12 +53,13 @@ public class LogInActivity extends AppCompatActivity {
     private Button signUpButton;
     // [END Define Views]
     private EditText email, password;
-    // [Start declare Firebase Auth and Auth listener]
+    // [Start declare Firebase Auth, Auth listener and User]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // [End declare Firebase auth]
     private FirebaseUser user;
-    //Google Login
+    // [End declare Firebase auth]
+
+    // [Google Login]
     private SignInButton mGoogleButton;
     private GoogleApiClient mGoogleApiClient;
 
