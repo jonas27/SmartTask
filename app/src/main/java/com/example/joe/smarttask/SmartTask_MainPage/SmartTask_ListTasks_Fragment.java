@@ -29,8 +29,8 @@ public class SmartTask_ListTasks_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listtasks_smarttask, container, false);
 
-        mSmartTaskListTaskRecyclerView = (RecyclerView) view.findViewById(R.id.smarttask_listtask_recycler_view);
-        mSmartTaskListTaskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mSmartTaskListTaskRecyclerView = (RecyclerView) view.findViewById(R.id.smarttask_listtask_recycler_view);
+//        mSmartTaskListTaskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
