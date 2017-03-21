@@ -77,6 +77,7 @@ public class SmartTask_FireBase extends AppCompatActivity {
         });
     }
 
+    //  static factory method for singleton
     public static SmartTask_FireBase fireBase(Context context) {
         if (smartTask_fireBase == null) {
             smartTask_fireBase = new SmartTask_FireBase(context);
