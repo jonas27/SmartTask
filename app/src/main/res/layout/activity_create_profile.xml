@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.joe.smarttask.CreateProfile">
+
+    <TextView
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1565C0"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/smarttask_create_profile_Headline"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:ems="25"
+                android:hint="@string/smarttask_create_profile_name"
+                android:inputType="textPersonName"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/Pincode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ProfileName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:ems="25"
+                android:hint="@string/smarttask_create_profile_pincode"
+                android:inputType="text|numberPassword"
+                android:textSize="20sp" />
+
+
+            <Button
+                android:id="@+id/SaveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Pincode"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="#1565C0"
+                android:text="@string/smarttask_create_profile_Save"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
+
+
+
