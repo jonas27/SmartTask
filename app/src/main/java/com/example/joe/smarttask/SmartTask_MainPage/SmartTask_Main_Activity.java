@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
- * Delete class --> naming is shit
+ * Made by us
  */
 
 public class SmartTask_Main_Activity extends FragmentActivity {
@@ -21,6 +21,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
     //TAG for Logs
     private static final String TAG = "Yes Yes";
     Button upload;
+
     // [Start declare Firebase Auth and Auth listener]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -37,7 +38,8 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         setContentView(R.layout.activity_smarttask);
 
 
-        // All firebase related change run over this singleton. (--> Calling it doesn't waste resources!)
+        // All firebase related changes run over this singleton.
+        // Calling it doesn't waste resources!!!
         smartTask_fireBase = SmartTask_FireBase.fireBase(this);
 
 
@@ -70,6 +72,35 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         }
 
     }
+
+
+/*
+
+
+    // Instances of this class are fragments representing a single
+// object in our collection.
+    public static class DemoObjectFragment extends Fragment {
+        public static final String ARG_OBJECT = "object";
+
+        @Override
+        public View onCreateView(LayoutInflater inflater,
+                                 ViewGroup container, Bundle savedInstanceState) {
+            // The last two arguments ensure LayoutParams are inflated
+            // properly.
+            View rootView = inflater.inflate(
+                    R.layout.fragment_collection_object, container, false);
+            Bundle args = getArguments();
+            ((TextView) rootView.findViewById(android.R.id.text1)).setText(
+                    Integer.toString(args.getInt(ARG_OBJECT)));
+            return rootView;
+        }
+    }
+
+
+*/
+
+
+
 
 
 }

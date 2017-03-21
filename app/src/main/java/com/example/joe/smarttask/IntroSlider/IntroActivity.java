@@ -189,7 +189,7 @@ public class IntroActivity extends AppCompatActivity {
      */
 
 
-    public class ViewPagerAdapter extends PagerAdapter {
+    private class ViewPagerAdapter extends PagerAdapter {
 
 
         private LayoutInflater layoutInflater;

@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by us.
+ * Created by us (with googles firebase methods)
  * Singleton class to manage all connections (Push and Pull) to FireBase
  * Use only protected methods except for pushing Sign Up data.
  */
@@ -23,9 +23,11 @@ public class SmartTask_FireBase extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "current";
+    //private static final String TAG = "SmartTask_FireBase";
+    // Singleton object of class itself (static --> Garbage collector wont delete it)
     private static SmartTask_FireBase smartTask_fireBase;
     private Context context;
-    // [Start declare Firebase Auth and Auth listener]
+    // [Start declare Firebase Auth, Auth listener, Database and User]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
@@ -40,7 +42,7 @@ public class SmartTask_FireBase extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -82,8 +84,8 @@ public class SmartTask_FireBase extends AppCompatActivity {
         return smartTask_fireBase;
     }
 
-    protected void push2() {
-
+    protected void addNewTask() {
+        
     }
 
     protected void push() {
