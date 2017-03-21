@@ -31,50 +31,16 @@ public class SmartTask_FireBase extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private String uid;
     // [End declare Firebase auth]
 
 
     private SmartTask_FireBase(Context context) {
         this.context = context;
-
         mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-                // ...
-            }
-        };
+        user = mAuth.getCurrentUser();
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
     }
 
     //  static factory method for singleton
@@ -89,13 +55,19 @@ public class SmartTask_FireBase extends AppCompatActivity {
         
     }
 
-    protected void push() {
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+    protected void push(String action) {
+        switch (action) {
+            case "CreateUser":
+                FirebaseDatabase.getInstance().getReference("User").child(user.getUid()).child("profile").setValue("yo");
+                //myRef.setValue("Yo");
+                Log.d(TAG, "Value is: " + mAuth.getCurrentUser().getUid());
+                ;
+                break;
+            default: Log.d(TAG,"Invalid action");
+                break;
+        }
+        Log.d("asdasd","pushing "+user.getUid());
 
-        myRef.setValue("3255");
-        Log.d(TAG, "Value is: " + mAuth.getCurrentUser().getUid());
     }
 
 }
