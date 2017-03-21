@@ -13,6 +13,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * Created by us (with googles firebase methods)
  * Singleton class to manage all connections (Push and Pull) to FireBase
@@ -55,35 +59,20 @@ public class SmartTask_FireBase extends AppCompatActivity {
         
     }
 
-    protected void push(String action) {
-
+    protected void push(Map<String,String> map) {
+        /*
+            Information should be pushed as a map with String destination on firebase server,value.
+         */
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         DatabaseReference myRef = database.getReference("User/"+user.getUid());
-        switch (action) {
-            case "CreateUser":
-                myRef.child("email").setValue("email@whencreating.com");
 
-                //myRef.setValue("Yo");
-                Log.d(TAG, "Value is: " + mAuth.getCurrentUser().getUid());
-                break;
-            case "CreateProfile":
-                database = FirebaseDatabase.getInstance();
-
-                myRef = database.getReference("User/"+user.getUid());
-                myRef.child("profile/pid").setValue("1");
-                myRef.child("profile/picture").setValue("linktopic");
-                myRef.child("profile/pincode").setValue("1234");
-                myRef.child("profile/preferences").setValue("12341234");
-                myRef.child("profile/privilgies").setValue("1");
-                myRef.child("profile/score").setValue("0");
-
-                break;
-            default: Log.d(TAG,"Invalid action");
-                break;
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            myRef.child(pair.getKey().toString()).setValue(pair.getValue());
+            it.remove();
         }
-        Log.d("asdasd","pushing "+user.getUid());
-
     }
 
 }

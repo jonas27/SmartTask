@@ -13,6 +13,9 @@ import com.example.joe.smarttask.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Made by us
  */
@@ -49,7 +52,29 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         upload.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
-                                          smartTask_fireBase.push("CreateProfile");
+                                          //Profile example
+                                          Map<String, String> aMap = new HashMap<String, String>();
+                                          aMap.put("profile/pid" , "1");
+                                          aMap.put("profile/picture" , "asd");
+                                          aMap.put("profile/pincode" , "4311");
+                                          smartTask_fireBase.push(aMap);
+                                          //Task example
+                                          Map<String, String> task = new HashMap<String, String>();
+                                          task.put("task/categories","All Rooms");
+                                          task.put("task/colorcode","setcolourlink");
+                                          task.put("task/datetime","setdatetime");
+                                          task.put("task/description","setdescription");
+                                          task.put("task/freqency","setfreq");
+                                          task.put("task/name","getname");
+                                          task.put("task/owner","getPID");
+                                          task.put("task/points","Set score");
+                                          task.put("task/priority","Set priorty");
+                                          task.put("task/responsible","define profile");
+                                          task.put("task/status","set status");
+                                          task.put("task/taskid","Set Task ID");
+                                          task.put("task/subtask/maintaskid","0");
+                                          task.put("task/subtask/tid","0");
+                                          smartTask_fireBase.push(task);
                                       }
                                   }
         );
