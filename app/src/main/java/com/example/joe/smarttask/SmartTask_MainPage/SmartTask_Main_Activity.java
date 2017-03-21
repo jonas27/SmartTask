@@ -49,7 +49,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         upload.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
-                                          smartTask_fireBase.push();
+                                          smartTask_fireBase.push("CreateProfile");
                                       }
                                   }
         );

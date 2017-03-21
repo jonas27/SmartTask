@@ -56,12 +56,28 @@ public class SmartTask_FireBase extends AppCompatActivity {
     }
 
     protected void push(String action) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference myRef = database.getReference("User/"+user.getUid());
         switch (action) {
             case "CreateUser":
-                FirebaseDatabase.getInstance().getReference("User").child(user.getUid()).child("profile").setValue("yo");
+                myRef.child("email").setValue("email@whencreating.com");
+
                 //myRef.setValue("Yo");
                 Log.d(TAG, "Value is: " + mAuth.getCurrentUser().getUid());
-                ;
+                break;
+            case "CreateProfile":
+                database = FirebaseDatabase.getInstance();
+
+                myRef = database.getReference("User/"+user.getUid());
+                myRef.child("profile/pid").setValue("1");
+                myRef.child("profile/picture").setValue("linktopic");
+                myRef.child("profile/pincode").setValue("1234");
+                myRef.child("profile/preferences").setValue("12341234");
+                myRef.child("profile/privilgies").setValue("1");
+                myRef.child("profile/score").setValue("0");
+
                 break;
             default: Log.d(TAG,"Invalid action");
                 break;
