@@ -60,7 +60,7 @@ public class CheckSingUpData {
         } else {
             char[] cArray = s.toCharArray();
             if (!Character.isDigit(cArray[0]) || !Character.isDigit(cArray[1]) || !Character.isDigit(cArray[3]) || !Character.isDigit(cArray[4]) || !Character.isDigit(cArray[6]) || !Character.isDigit(cArray[7]) || !Character.isDigit(cArray[8]) || !Character.isDigit(cArray[9]) || cArray[2] != '/' || cArray[5] != '/') {
-                rightStructure = false;
+                rightStructure = true;
                 Toast.makeText(context, "Please make sure date is in mm/dd/yyyy", Toast.LENGTH_SHORT).show();
 
             }
