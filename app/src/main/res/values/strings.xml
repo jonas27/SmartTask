@@ -36,5 +36,23 @@
     <string name="smarttask_list_task_name">Name of your task</string>
     <string name="smarttask_list_solved">Solved?</string>
 
+    <!-- SmartTask Create  Profile-->
+    <string name="smarttask_create_profile_Headline">Profile</string>
+    <string name="smarttask_create_profile_name">enter your profile name</string>
+    <string name="smarttask_create_profile_pincode">Enter Pincode </string>
+    <string name="smarttask_create_profile_privilgies">Define access level</string>
+    <string name="smarttask_create_profile_picture">Click to add picture</string>
+    <string name="smarttask_create_profile_Save">Save Settings</string>
+
+    <!-- SmartTask Create Tasks -->
+    <string name="smarttask_create_task_categories">Room/Area?</string>
+    <string name="smarttask_create_task_colour">Choose colour for task</string>
+    <string name="smarttask_create_task_description">Write a description for the task</string>
+    <string name="smarttask_create_task_frequency">choose frequency</string>
+    <string name="smarttask_create_task_name">Name of the Task</string>
+    <string name="smarttask_create_task_point">assign points</string>
+    <string name="smarttask_create_task_priority">set priority</string>
+    <string name="smarttask_create_task_responsible">Assign task to</string>
+
 
 </resources>
