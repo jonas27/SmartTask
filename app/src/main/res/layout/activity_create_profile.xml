@@ -91,10 +91,10 @@
 
 
         <Button
-            android:id="@+id/DoneButton"
+            android:id="@+id/CreateProfileDoneButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/AddButton"
+            android:layout_below="@+id/CreateProfileAddButton"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
@@ -105,7 +105,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/AddButton"
+            android:id="@+id/CreateProfileAddButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Privilgies"
@@ -121,28 +121,28 @@
     </RelativeLayout>
 
     <ImageButton
-        android:id="@+id/uploadButton"
+        android:id="@+id/CreateProfileUploadButton"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_menu_upload"
-        android:layout_alignTop="@+id/CameraButton"
-        android:layout_toEndOf="@+id/CameraButton" />
+        android:layout_alignTop="@+id/CreateProfileCameraButton"
+        android:layout_toEndOf="@+id/CreateProfileCameraButton" />
 
     <ImageButton
-        android:id="@+id/SavePictureButton"
+        android:id="@+id/CreateProfileSavePictureButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_menu_save"
         android:layout_alignTop="@+id/imageView"
         android:layout_toEndOf="@+id/imageView" />
     <ImageButton
-        android:id="@+id/CameraButton"
+        android:id="@+id/CreateProfileCameraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_alignTop="@+id/SavePictureButton"
-        android:layout_toEndOf="@+id/SavePictureButton" />
+        android:layout_alignTop="@+id/CreateProfileSavePictureButton"
+        android:layout_toEndOf="@+id/CreateProfileSavePictureButton" />
 
 
 </RelativeLayout>
