@@ -115,6 +115,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                     .commit();
         }
 
+        //Read data from task
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
