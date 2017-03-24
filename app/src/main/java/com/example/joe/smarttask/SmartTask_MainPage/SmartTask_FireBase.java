@@ -2,11 +2,14 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -54,7 +57,7 @@ public class SmartTask_FireBase extends AppCompatActivity {
         
     }
 
-    protected void push(Map<String,String> map) {
+    protected void push(Map<String,String> map, String root) {
         /*
             Information should be pushed as a map with String destination on firebase server,value.
          */
@@ -63,9 +66,19 @@ public class SmartTask_FireBase extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("User/"+user.getUid());
 
         Iterator it = map.entrySet().iterator();
+        String rootElement = null;
+        String rootdistanation = root;
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            myRef.child(pair.getKey().toString()).setValue(pair.getValue());
+            Log.d(TAG,"key: "+pair.getKey()+"  val   "+pair.getValue());
+            if(rootElement==null){
+                rootElement = myRef.push().getKey();
+            }
+            if(rootElement==null){
+                myRef.child(pair.getKey().toString()).setValue(pair.getValue());
+            }else{
+                myRef.child(rootdistanation).child(rootElement).child(pair.getKey().toString()).setValue(pair.getValue());
+            }
             it.remove();
         }
     }
