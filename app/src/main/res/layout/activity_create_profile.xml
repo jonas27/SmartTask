@@ -91,15 +91,15 @@
 
 
         <Button
-            android:id="@+id/SaveButton"
+            android:id="@+id/DoneButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Privilgies"
+            android:layout_below="@+id/AddButton"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
             android:background="#1565C0"
-            android:text="@string/smarttask_create_profile_Save"
+            android:text="@string/smarttask_create_profile_done"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
@@ -108,7 +108,7 @@
             android:id="@+id/AddButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/SaveButton"
+            android:layout_below="@+id/Privilgies"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
@@ -143,25 +143,6 @@
         app:srcCompat="@android:drawable/ic_menu_camera"
         android:layout_alignTop="@+id/SavePictureButton"
         android:layout_toEndOf="@+id/SavePictureButton" />
-
-    <EditText
-        android:id="@+id/Score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="GetScore"
-        android:layout_above="@+id/relativeLayout"
-        android:layout_toEndOf="@+id/imageView" />
-
-    <EditText
-        android:id="@+id/CurrentName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="CurrentName"
-        android:layout_above="@+id/Score"
-        android:layout_toEndOf="@+id/imageView" />
 
 
 </RelativeLayout>
