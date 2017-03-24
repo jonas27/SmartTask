@@ -4,8 +4,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class CreateProfile extends AppCompatActivity {
+
+    private static final String TAG = "CreateProfile";
+    private Button CreateProfileDoneButton;
+    private Button CreateProfileAddButton;
+    private Button CreateProfileUploadButton;
+    private Button CreateProfileSavePictureButton;
+    private Button CreateProfileCameraButton;
+    private EditText ProfileName, PinCode;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +34,8 @@ public class CreateProfile extends AppCompatActivity {
     private static final String[] PRIVILIGIES = new String[] {
             "admin", "user", "child"
     };
+
+
 }
 
 
