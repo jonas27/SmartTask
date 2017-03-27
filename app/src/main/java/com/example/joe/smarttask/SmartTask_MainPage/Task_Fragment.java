@@ -14,7 +14,7 @@ import com.example.joe.smarttask.R;
  * Created by joe on 14/03/2017.
  */
 
-public class SM_Task_Fragment extends Fragment {
+public class Task_Fragment extends Fragment {
 
 
     private RecyclerView mSmartTaskListRecyclerView;

@@ -26,7 +26,7 @@ import java.util.Iterator;
  * Made by us
  */
 
-public class SmartTask_Main_Activity extends FragmentActivity {
+public class Main_Activity extends FragmentActivity {
 
     //TAG for Logs
     private static final String TAG = "Class_SM_Main_Activity";
@@ -40,7 +40,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
     private DatabaseReference mPostReference;
     // [End declare Firebase auth]
 
-    private SmartTask_FireBase smartTask_fireBase;
+    private FireBase mFireBase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,14 @@ public class SmartTask_Main_Activity extends FragmentActivity {
 
         // All firebase related changes run over this singleton.
         // Calling it doesn't waste resources!!!
-        smartTask_fireBase = SmartTask_FireBase.fireBase(this);
+        mFireBase = FireBase.fireBase(this);
 
         text = (EditText) findViewById(R.id.listtasks);
 
+
+        /* TODO: move this to another class.
+        Main is only meant to host Nav Bar and fragment manager
+        */
         //assign button to upload to firebase
         upload = (Button) findViewById(R.id.tasks);
         upload.setOnClickListener(new View.OnClickListener() {
@@ -99,14 +103,14 @@ public class SmartTask_Main_Activity extends FragmentActivity {
 
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
-            fragment = new SmartTask_ListTasks_Fragment();
+            fragment = new List_Fragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
 
         if (fragment == null) {
-            fragment = new SmartTask_ListTasks_Fragment();
+            fragment = new List_Fragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
@@ -139,7 +143,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
-                Toast.makeText(SmartTask_Main_Activity.this, "Failed to load post.",
+                Toast.makeText(Main_Activity.this, "Failed to load post.",
                         Toast.LENGTH_SHORT).show();
                 // [END_EXCLUDE]
             }

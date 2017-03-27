@@ -18,13 +18,13 @@ import java.util.Map;
  * Use only protected methods except for pushing Sign Up data.
  */
 
-public class SM_FireBase extends AppCompatActivity {
+public class FireBase extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "CLASS_SM_FireBase";
     //private static final String TAG = "SmartTask_FireBase";
     // Singleton object of class itself (static --> Garbage collector wont delete it)
-    private static SM_FireBase mFireBase;
+    private static FireBase mFireBase;
     private Context context;
     // [Start declare Firebase Auth, Auth listener, Database and User]
     private FirebaseAuth mAuth;
@@ -34,7 +34,7 @@ public class SM_FireBase extends AppCompatActivity {
     // [End declare Firebase auth]
 
 
-    private SM_FireBase(Context context) {
+    private FireBase(Context context) {
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
 
@@ -43,9 +43,9 @@ public class SM_FireBase extends AppCompatActivity {
     }
 
     //  static factory method for singleton
-    public static SM_FireBase fireBase(Context context) {
+    public static FireBase fireBase(Context context) {
         if (mFireBase == null) {
-            mFireBase = new SM_FireBase(context);
+            mFireBase = new FireBase(context);
         }
         return mFireBase;
     }
