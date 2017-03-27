@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
@@ -21,9 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Made by us
@@ -32,7 +29,7 @@ import java.util.Map;
 public class SmartTask_Main_Activity extends FragmentActivity {
 
     //TAG for Logs
-    private static final String TAG = "Yes Yes";
+    private static final String TAG = "Class_SM_Main_Activity";
     Button upload;
     private EditText text;
 
@@ -115,6 +112,13 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                     .commit();
         }
 
+
+
+
+
+       /* TODO: move this to another class.
+        Main is only meant to host Nav Bar and fragment manager
+        */
         //Read data from task
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -141,13 +145,13 @@ public class SmartTask_Main_Activity extends FragmentActivity {
             }
         };
         mPostReference.addValueEventListener(postListener);
-
     }
 
 
+    /**
+     * TODO: Add layout inflator
+     * */
 /*
-
-
     // Instances of this class are fragments representing a single
 // object in our collection.
     public static class DemoObjectFragment extends Fragment {
@@ -166,7 +170,5 @@ public class SmartTask_Main_Activity extends FragmentActivity {
             return rootView;
         }
     }
-
-
 */
 }
