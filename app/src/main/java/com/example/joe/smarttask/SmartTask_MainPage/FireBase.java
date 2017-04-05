@@ -6,10 +6,8 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -20,13 +18,13 @@ import java.util.Map;
  * Use only protected methods except for pushing Sign Up data.
  */
 
-public class SmartTask_FireBase extends AppCompatActivity {
+public class FireBase extends AppCompatActivity {
 
     //TAG for Logs
-    private static final String TAG = "current";
+    private static final String TAG = "CLASS_SM_FireBase";
     //private static final String TAG = "SmartTask_FireBase";
     // Singleton object of class itself (static --> Garbage collector wont delete it)
-    private static SmartTask_FireBase smartTask_fireBase;
+    private static FireBase mFireBase;
     private Context context;
     // [Start declare Firebase Auth, Auth listener, Database and User]
     private FirebaseAuth mAuth;
@@ -36,7 +34,7 @@ public class SmartTask_FireBase extends AppCompatActivity {
     // [End declare Firebase auth]
 
 
-    private SmartTask_FireBase(Context context) {
+    private FireBase(Context context) {
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
 
@@ -45,38 +43,38 @@ public class SmartTask_FireBase extends AppCompatActivity {
     }
 
     //  static factory method for singleton
-    public static SmartTask_FireBase fireBase(Context context) {
-        if (smartTask_fireBase == null) {
-            smartTask_fireBase = new SmartTask_FireBase(context);
+    public static FireBase fireBase(Context context) {
+        if (mFireBase == null) {
+            mFireBase = new FireBase(context);
         }
-        return smartTask_fireBase;
+        return mFireBase;
     }
 
 
     protected void addNewTask() {
-        
+
     }
 
-    protected void push(Map<String,String> map, String root) {
+    protected void push(Map<String, String> map, String root) {
         /*
             Information should be pushed as a map with String destination on firebase server,value.
          */
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference myRef = database.getReference("User/"+user.getUid());
+        DatabaseReference myRef = database.getReference("User/" + user.getUid());
 
         Iterator it = map.entrySet().iterator();
         String rootElement = null;
         String rootdistanation = root;
         while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            Log.d(TAG,"key: "+pair.getKey()+"  val   "+pair.getValue());
-            if(rootElement==null){
+            Map.Entry pair = (Map.Entry) it.next();
+            Log.d(TAG, "key: " + pair.getKey() + "  val   " + pair.getValue());
+            if (rootElement == null) {
                 rootElement = myRef.push().getKey();
             }
-            if(rootElement==null){
+            if (rootElement == null) {
                 myRef.child(pair.getKey().toString()).setValue(pair.getValue());
-            }else{
+            } else {
                 myRef.child(rootdistanation).child(rootElement).child(pair.getKey().toString()).setValue(pair.getValue());
             }
             it.remove();
