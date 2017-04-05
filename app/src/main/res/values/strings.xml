@@ -31,7 +31,7 @@
     <string name="smarttask_activity_calendar">Calendar</string>
     <string name="smarttask_activity_messages">Messages</string>
 
-    <!-- SmartTask List Tasks -->
+    <!-- SmartTask ListTask Tasks -->
     <string name="smarttask_list_title_label">Title</string>
     <string name="smarttask_list_task_name">Name of your task</string>
     <string name="smarttask_list_solved">Solved?</string>
