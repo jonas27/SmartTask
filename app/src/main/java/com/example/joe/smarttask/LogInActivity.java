@@ -16,7 +16,8 @@ import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.IntroSlider.ShowIntro;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
 import com.example.joe.smarttask.SignUp.SignUpActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.*;
+import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.Main_Activity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -55,11 +56,14 @@ public class LogInActivity extends AppCompatActivity {
     private Button logInButton;
     private Button signUpButton;
     // [END Define Views]
+
     private EditText email, password;
+
     // [Start declare Firebase Auth, Auth listener and User]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private FireBase mFireBase;
     // [End declare Firebase auth]
 
     // [Google Login]
@@ -68,7 +72,9 @@ public class LogInActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
-
+/*
+* TODO: Use firebase singleton class here
+* */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +98,8 @@ public class LogInActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("User");
         Log.d("DATA ", String.valueOf(myRef));
 */
+
+        mFireBase = FireBase.fireBase(this);
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
@@ -257,7 +265,7 @@ public class LogInActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, SmartTask_Main_Activity.class);
+        intent = new Intent(this, Main_Activity.class);
         startActivity(intent);
     }
 
