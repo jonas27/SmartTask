@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
@@ -20,16 +22,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Made by us
  */
 
-public class Main_Activity extends FragmentActivity {
+public class SmartTask_Main_Activity extends FragmentActivity {
 
     //TAG for Logs
-    private static final String TAG = "Class_SM_Main_Activity";
+    private static final String TAG = "Yes Yes";
     Button upload;
     private EditText text;
 
@@ -40,7 +44,13 @@ public class Main_Activity extends FragmentActivity {
     private DatabaseReference mPostReference;
     // [End declare Firebase auth]
 
-    private FireBase mFireBase;
+    private SmartTask_FireBase smartTask_fireBase;
+
+    private ListView listView1;
+    private Task listItems[];
+
+    //Array of tasks string = id
+    public Map<String, Task> tasks = new HashMap<String, Task>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,27 +63,26 @@ public class Main_Activity extends FragmentActivity {
 
         // All firebase related changes run over this singleton.
         // Calling it doesn't waste resources!!!
-        mFireBase = FireBase.fireBase(this);
+        smartTask_fireBase = SmartTask_FireBase.fireBase(this);
 
-        text = (EditText) findViewById(R.id.listtasks);
+        //text = (EditText) findViewById(R.id.listtasks);
 
 
-        /* TODO: move this to another class.
-        Main is only meant to host Nav Bar and fragment manager
-        */
+
         //assign button to upload to firebase
         upload = (Button) findViewById(R.id.tasks);
         upload.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
                                           //Profile example
-                                          /*
+                                            /*
                                           Map<String, String> aMap = new HashMap<String, String>();
                                           aMap.put("profile", "root");
                                           aMap.put("pid" , "1");
                                           aMap.put("picture" , "asd");
                                           aMap.put("pincode" , "4311");
                                           smartTask_fireBase.push(aMap,"profile");
+                                          */
                                           //Task example
                                           Map<String, String> task = new HashMap<String, String>();
                                           task.put("task","root");
@@ -81,18 +90,16 @@ public class Main_Activity extends FragmentActivity {
                                           task.put("colorcode","setcolourlink");
                                           task.put("datetime","setdatetime");
                                           task.put("description","setdescription");
-                                          task.put("freqency","setfreq");
-                                          task.put("name","getname");
+                                          task.put("frequency","setfreq");
+                                          task.put("name","new name");
                                           task.put("owner","getPID");
                                           task.put("points","Set score");
                                           task.put("priority","Set priorty");
                                           task.put("responsible","define profile");
                                           task.put("status","set status");
-                                          task.put("taskid","Set Task ID");
-                                          task.put("subtask/maintaskid","0");
-                                          task.put("subtask/tid","0");
                                           smartTask_fireBase.push(task,"task");
-                                          */
+
+
                                       }
                                   }
         );
@@ -103,14 +110,14 @@ public class Main_Activity extends FragmentActivity {
 
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
-            fragment = new List_Fragment();
+            fragment = new SmartTask_ListTasks_Fragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
 
         if (fragment == null) {
-            fragment = new List_Fragment();
+            fragment = new SmartTask_ListTasks_Fragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
@@ -118,44 +125,15 @@ public class Main_Activity extends FragmentActivity {
 
 
 
-
-
-       /* TODO: move this to another class.
-        Main is only meant to host Nav Bar and fragment manager
-        */
         //Read data from task
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                Task post = new Task();
-                for(Iterator<DataSnapshot> i = dataSnapshot.getChildren().iterator(); i.hasNext();){
-                    post = i.next().getValue(Task.class);
-                }
-                // [START_EXCLUDE]
-                Log.d(post.categories,post.categories);
-             //   text.setText(post.categories);
-                // [END_EXCLUDE]
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                Toast.makeText(Main_Activity.this, "Failed to load post.",
-                        Toast.LENGTH_SHORT).show();
-                // [END_EXCLUDE]
-            }
-        };
-        mPostReference.addValueEventListener(postListener);
+
     }
 
 
-    /**
-     * TODO: Add layout inflator
-     * */
 /*
+
+
     // Instances of this class are fragments representing a single
 // object in our collection.
     public static class DemoObjectFragment extends Fragment {
@@ -174,5 +152,7 @@ public class Main_Activity extends FragmentActivity {
             return rootView;
         }
     }
+
+
 */
 }
