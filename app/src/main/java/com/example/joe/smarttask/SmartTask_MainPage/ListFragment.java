@@ -33,7 +33,7 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
         mListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
-        mListRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
 
@@ -67,7 +67,7 @@ public class ListFragment extends Fragment {
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item, parent, false);
+            View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
             return new TaskHolder(view);
         }
 
