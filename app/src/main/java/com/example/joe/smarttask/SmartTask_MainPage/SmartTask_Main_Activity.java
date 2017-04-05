@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,12 @@ public class SmartTask_Main_Activity extends FragmentActivity {
 
     private SmartTask_FireBase smartTask_fireBase;
 
+    private ListView listView1;
+    private Task listItems[];
+
+    //Array of tasks string = id
+    public Map<String, Task> tasks = new HashMap<String, Task>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -58,7 +65,9 @@ public class SmartTask_Main_Activity extends FragmentActivity {
         // Calling it doesn't waste resources!!!
         smartTask_fireBase = SmartTask_FireBase.fireBase(this);
 
-        text = (EditText) findViewById(R.id.listtasks);
+        //text = (EditText) findViewById(R.id.listtasks);
+
+
 
         //assign button to upload to firebase
         upload = (Button) findViewById(R.id.tasks);
@@ -66,13 +75,14 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                                       @Override
                                       public void onClick(View v) {
                                           //Profile example
-                                          /*
+                                            /*
                                           Map<String, String> aMap = new HashMap<String, String>();
                                           aMap.put("profile", "root");
                                           aMap.put("pid" , "1");
                                           aMap.put("picture" , "asd");
                                           aMap.put("pincode" , "4311");
                                           smartTask_fireBase.push(aMap,"profile");
+                                          */
                                           //Task example
                                           Map<String, String> task = new HashMap<String, String>();
                                           task.put("task","root");
@@ -80,18 +90,16 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                                           task.put("colorcode","setcolourlink");
                                           task.put("datetime","setdatetime");
                                           task.put("description","setdescription");
-                                          task.put("freqency","setfreq");
-                                          task.put("name","getname");
+                                          task.put("frequency","setfreq");
+                                          task.put("name","new name");
                                           task.put("owner","getPID");
                                           task.put("points","Set score");
                                           task.put("priority","Set priorty");
                                           task.put("responsible","define profile");
                                           task.put("status","set status");
-                                          task.put("taskid","Set Task ID");
-                                          task.put("subtask/maintaskid","0");
-                                          task.put("subtask/tid","0");
                                           smartTask_fireBase.push(task,"task");
-                                          */
+
+
                                       }
                                   }
         );
@@ -115,32 +123,10 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                     .commit();
         }
 
-        //Read data from task
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                Task post = new Task();
-                for(Iterator<DataSnapshot> i = dataSnapshot.getChildren().iterator(); i.hasNext();){
-                    post = i.next().getValue(Task.class);
-                }
-                // [START_EXCLUDE]
-                Log.d(post.categories,post.categories);
-             //   text.setText(post.categories);
-                // [END_EXCLUDE]
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                Toast.makeText(SmartTask_Main_Activity.this, "Failed to load post.",
-                        Toast.LENGTH_SHORT).show();
-                // [END_EXCLUDE]
-            }
-        };
-        mPostReference.addValueEventListener(postListener);
+
+        //Read data from task
+
 
     }
 
