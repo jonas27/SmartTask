@@ -31,6 +31,7 @@ public class Main_Activity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
+        mFireBase = FireBase.fireBase(this);
         return new ListFragment();
     }
 
