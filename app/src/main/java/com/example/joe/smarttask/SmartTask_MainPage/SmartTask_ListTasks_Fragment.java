@@ -65,7 +65,6 @@ public class SmartTask_ListTasks_Fragment extends Fragment {
                     DataSnapshot current = i.next();
                     Task post = tasks.get(current.getKey());
                     post = current.getValue(Task.class);
-                    Log.d("Task loaded ",post.name);
                     listItems[count]=post;
                     count++;
                 }
