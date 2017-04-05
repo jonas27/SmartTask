@@ -1,14 +1,10 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
@@ -24,6 +20,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
     int layoutResourceId;
     private List<Task>  data;
 
+    public TaskAdapter(List<Task> data) {
+        this.data = data;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -35,7 +35,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Task task = data.get(position);
-        holder.txtTask.setText(task.getmTaskName());
+        holder.txtTask.setText(task.getName());
     }
 
     @Override
@@ -51,7 +51,4 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         txtTask = (TextView) view.findViewById(R.id.txtTitle);
     }
 }
-    public TaskAdapter(List<Task> data) {
-        this.data = data;
-    }
 }
