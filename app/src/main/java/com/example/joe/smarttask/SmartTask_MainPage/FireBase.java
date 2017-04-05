@@ -42,6 +42,7 @@ public class FireBase extends AppCompatActivity {
 
     }
 
+
     //  static factory method for singleton
     public static FireBase fireBase(Context context) {
         if (mFireBase == null) {
