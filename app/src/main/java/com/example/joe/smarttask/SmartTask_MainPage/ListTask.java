@@ -35,7 +35,6 @@ public class ListTask {
 //    [End]
 
 //    [Start: static factory method for singleton]
-
     /**
      * @param context global information on application environment
      * @return THE single Object of this class

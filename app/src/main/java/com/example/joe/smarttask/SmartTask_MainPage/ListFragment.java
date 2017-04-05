@@ -21,7 +21,7 @@ public class ListFragment extends Fragment {
 
 
     private RecyclerView mListRecyclerView;
-    private CrimeAdapter mAdapter;
+    private TaskAdapter mAdapter;
 
     /* This Method should host nothing but super.onCreate method call as fragments follow a slightly different lifecycle than normal activities.
        All intialisations and else should be in onCreateView
@@ -29,8 +29,7 @@ public class ListFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         mListRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_list);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -43,7 +42,7 @@ public class ListFragment extends Fragment {
     private void updateUI() {
         ListTask mListTask = ListTask.list(getContext());
         List<Task> mList = mListTask.getmTaskList();
-        mAdapter = new CrimeAdapter(mList);
+        mAdapter = new TaskAdapter(mList);
         mListRecyclerView.setAdapter(mAdapter);
     }
 
@@ -57,10 +56,10 @@ public class ListFragment extends Fragment {
         }
     }
 
-    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
+    private class TaskAdapter extends RecyclerView.Adapter<CrimeHolder> {
         private List<Task> mTasks;
 
-        public CrimeAdapter(List<Task> tasks) {
+        public TaskAdapter(List<Task> tasks) {
             mTasks = tasks;
         }
 
@@ -68,7 +67,7 @@ public class ListFragment extends Fragment {
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater
-                    .inflate(android.R.layout.simple_list_item_1, parent, false);
+                    .inflate(R.layout.list_item, parent, false);
             return new CrimeHolder(view);
         }
 
