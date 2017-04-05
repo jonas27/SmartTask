@@ -24,6 +24,9 @@ public class CreateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
+        ProfileName = (EditText) findViewById(R.id.ProfileName);
+        PinCode = (EditText) findViewById(R.id.Pincode);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, PRIVILIGIES);
         AutoCompleteTextView textView = (AutoCompleteTextView)
@@ -34,6 +37,8 @@ public class CreateProfile extends AppCompatActivity {
     private static final String[] PRIVILIGIES = new String[] {
             "admin", "user", "child"
     };
+
+
 
 
 }
