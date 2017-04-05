@@ -35,7 +35,7 @@ public class TaskFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_task_smarttask, container, false);
 
         mDateButton = (Button) v.findViewById(R.id.task_date);
-        mDateButton.setText(mTask.getmDate().toString());
+        mDateButton.setText(mTask.getDatetime().toString());
         mDateButton.setEnabled(true);
 
         mSolvedCheckBox = (CheckBox) v.findViewById(R.id.task_solved);

@@ -28,7 +28,7 @@ public class ListTask {
         mList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             task = new Task();
-            task.setmTaskName("Clean apartment");
+            task.setName("Clean apartment");
             mList.add(task);
         }
     }
@@ -63,7 +63,7 @@ public class ListTask {
      */
     public Task getTask(String id) {
         for (Task t : mList) {
-            if (id.equals(t.getmTaskID())) {
+            if (id.equals(t.getId())) {
                 return t;
             }
         }

@@ -59,7 +59,7 @@ public class ListFragment extends Fragment {
                     DataSnapshot current = i.next();
                     Task post = tasks.get(current.getKey());
                     post = current.getValue(Task.class);
-                    Log.d("tassk name ",post.name);
+                    Log.d("tassk name ", post.getName());
                     listItems.add(post);
                 }
                 Log.d("Tasks size ", String.valueOf(tasks.size()));
@@ -131,7 +131,7 @@ public class ListFragment extends Fragment {
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
             Task task = mListTasks.get(position);
-            holder.mTitleTextView.setText(task.name);
+            holder.mTitleTextView.setText(task.getName());
         }
 
         @Override
