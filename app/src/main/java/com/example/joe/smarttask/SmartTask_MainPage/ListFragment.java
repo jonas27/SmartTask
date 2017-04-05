@@ -31,8 +31,9 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        mListRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_list);
-        mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
+        mListRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         updateUI();
 
@@ -47,39 +48,38 @@ public class ListFragment extends Fragment {
     }
 
 
-    private class CrimeHolder extends RecyclerView.ViewHolder {
+    private class TaskHolder extends RecyclerView.ViewHolder {
         public TextView mTitleTextView;
 
-        public CrimeHolder(View itemView) {
+        public TaskHolder(View itemView) {
             super(itemView);
             mTitleTextView = (TextView) itemView;
         }
     }
 
-    private class TaskAdapter extends RecyclerView.Adapter<CrimeHolder> {
-        private List<Task> mTasks;
+    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
+        private List<Task> mListTasks;
 
-        public TaskAdapter(List<Task> tasks) {
-            mTasks = tasks;
+        public TaskAdapter(List<Task> mListTasks) {
+            this.mListTasks = mListTasks;
         }
 
         @Override
-        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater
-                    .inflate(R.layout.list_item, parent, false);
-            return new CrimeHolder(view);
+            View view = layoutInflater.inflate(R.layout.list_item, parent, false);
+            return new TaskHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(CrimeHolder holder, int position) {
-            Task task = mTasks.get(position);
+        public void onBindViewHolder(TaskHolder holder, int position) {
+            Task task = mListTasks.get(position);
             holder.mTitleTextView.setText(task.getmTaskName());
         }
 
         @Override
         public int getItemCount() {
-            return mTasks.size();
+            return mListTasks.size();
         }
     }
 
