@@ -37,7 +37,6 @@ public class FireBase extends AppCompatActivity {
     private FireBase(Context context) {
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
-
         user = mAuth.getCurrentUser();
 
     }

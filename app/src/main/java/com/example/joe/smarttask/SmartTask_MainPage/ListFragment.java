@@ -43,16 +43,17 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
+                listItems = new ArrayList<>();
                 for (Iterator<DataSnapshot> i = dataSnapshot.getChildren().iterator(); i.hasNext(); ) {
                     Task task = new Task();
                     tasks.put(i.next().getKey(), task);
                 }
-                listItems = new ArrayList<Task>();
 
                 Log.d("Length ", String.valueOf(dataSnapshot.getChildrenCount()));
                 for (Iterator<DataSnapshot> i = dataSnapshot.getChildren().iterator(); i.hasNext(); ) {
@@ -64,7 +65,6 @@ public class ListFragment extends Fragment {
                 }
                 Log.d("Tasks size ", String.valueOf(tasks.size()));
 
-                //TaskAdapter adapter = new TaskAdapter(listItems);
                 mAdapter = new TaskAdapter(listItems);
                 // Set CustomAdapter as the adapter for RecyclerView.
                 mListRecyclerView.setAdapter(mAdapter);
