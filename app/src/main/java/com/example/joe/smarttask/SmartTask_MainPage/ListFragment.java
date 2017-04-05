@@ -23,8 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.joe.smarttask.R.id.tasks;
-
 /**
  * Created by joe on 14/03/2017.
  */
@@ -32,12 +30,12 @@ import static com.example.joe.smarttask.R.id.tasks;
 public class ListFragment extends Fragment {
 
 
+    public Map<String, Task> tasks = new HashMap<String, Task>();
     private RecyclerView mListRecyclerView;
     private TaskAdapter mAdapter;
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
     private ArrayList<Task> listItems;
-    public Map<String, Task> tasks = new HashMap<String, Task>();
 
     /* This Method should host nothing but super.onCreate method call as fragments follow a slightly different lifecycle than normal activities.
        All intialisations and else should be in onCreateView
@@ -133,7 +131,7 @@ public class ListFragment extends Fragment {
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
             Task task = mListTasks.get(position);
-            holder.mTitleTextView.setText(task.getmTaskName());
+            holder.mTitleTextView.setText(task.name);
         }
 
         @Override
