@@ -16,7 +16,7 @@ import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.IntroSlider.ShowIntro;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
 import com.example.joe.smarttask.SignUp.SignUpActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Main_Activity;
+import com.example.joe.smarttask.SmartTask_MainPage.*;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -257,7 +257,7 @@ public class LogInActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, Main_Activity.class);
+        intent = new Intent(this, SmartTask_Main_Activity.class);
         startActivity(intent);
     }
 

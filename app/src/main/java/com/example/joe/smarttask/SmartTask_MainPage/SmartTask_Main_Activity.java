@@ -44,7 +44,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
     private DatabaseReference mPostReference;
     // [End declare Firebase auth]
 
-    private SmartTask_FireBase smartTask_fireBase;
+    private FireBase smartTask_fireBase;
 
     private ListView listView1;
     private Task listItems[];
@@ -63,7 +63,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
 
         // All firebase related changes run over this singleton.
         // Calling it doesn't waste resources!!!
-        smartTask_fireBase = SmartTask_FireBase.fireBase(this);
+        smartTask_fireBase = FireBase.fireBase(this);
 
         //text = (EditText) findViewById(R.id.listtasks);
 
@@ -84,6 +84,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                                           smartTask_fireBase.push(aMap,"profile");
                                           */
                                           //Task example
+
                                           Map<String, String> task = new HashMap<String, String>();
                                           task.put("task","root");
                                           task.put("categories","All Rooms");
@@ -91,7 +92,7 @@ public class SmartTask_Main_Activity extends FragmentActivity {
                                           task.put("datetime","setdatetime");
                                           task.put("description","setdescription");
                                           task.put("frequency","setfreq");
-                                          task.put("name","new name");
+                                          task.put("name","New task");
                                           task.put("owner","getPID");
                                           task.put("points","Set score");
                                           task.put("priority","Set priorty");
