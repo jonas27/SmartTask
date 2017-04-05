@@ -2,6 +2,7 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,50 +13,45 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 
+import java.util.List;
+
 /**
  * Created by Jones on 04-04-2017.
  */
-public class TaskAdapter extends ArrayAdapter<Task> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> {
 
     Context context;
     int layoutResourceId;
-    Task data[] = null;
+    private List<Task>  data;
 
-    public TaskAdapter(Context context, int layoutResourceId, Task[] data) {
-        super(context, layoutResourceId, data);
-        this.layoutResourceId = layoutResourceId;
-        this.context = context;
-        this.data = data;
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.task_list_layout, parent, false);
+
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        TaskHolder holder = null;
-
-        if(row == null)
-        {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-
-            holder = new TaskHolder();
-            holder.txtTask = (TextView)row.findViewById(R.id.txtTitle);
-
-            row.setTag(holder);
-        }
-        else
-        {
-            holder = (TaskHolder)row.getTag();
-        }
-
-        Task Task = data[position];
-        holder.txtTask.setText(Task.name);
-
-        return row;
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Task task = data.get(position);
+        holder.txtTask.setText(task.getmTaskName());
     }
 
-    static class TaskHolder
-    {
-        TextView txtTask;
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public TextView txtTask;
+
+    public MyViewHolder(View view) {
+        super(view);
+        txtTask = (TextView) view.findViewById(R.id.txtTitle);
+    }
+}
+    public TaskAdapter(List<Task> data) {
+        this.data = data;
     }
 }
