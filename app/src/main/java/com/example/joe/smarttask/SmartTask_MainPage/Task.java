@@ -2,7 +2,6 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 
 import com.google.firebase.database.Exclude;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,27 +15,22 @@ import java.util.Map;
 
 public class Task{
 
-    public String categories;
-    public String colorcode;
-    public String datetime;
-    public String description;
-    public String frequency;
-    public String name;
-    public String owner;
-    public String points;
-    public String priority;
-    public String responsible;
-    public String status;
-    public String id;
-    public String task;
     //    [Start: Variables of a task]
-    private String mTaskID;
-    private String mTaskName;
-    private Date mDate;
-    private String mDescription;
-
-
+    private String categories;
+    private String colorcode;
+    private String datetime;
+    private String description;
+    private String frequency;
+    private String name;
+    private String owner;
+    private String points;
+    private String priority;
+    private String responsible;
+    private String status;
+    private String id;
+    private String task;
     //    [End: Variables of a task]
+
     private boolean mCompleted;
 
     public Task() {
@@ -46,7 +40,7 @@ public class Task{
 
     public Task(String categories, String datetime,
                 String description, String frequency, String name, String owner,
-                String priority, String responsible, String points, String status,String id,String task) {
+                String priority, String responsible, String points, String status, String id, String task) {
         super();
         this.categories = categories;
         this.datetime = datetime;
@@ -86,36 +80,108 @@ public class Task{
 
 //      Getter and setters for variables
 
-    public String getmTaskID() {
-        return mTaskID;
+    public String getCategories() {
+        return categories;
     }
 
-    public void setmTaskID(String mTaskID) {
-        this.mTaskID = mTaskID;
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 
-    public String getmTaskName() {
-        return mTaskName;
+    public String getColorcode() {
+        return colorcode;
     }
 
-    public void setmTaskName(String mTaskName) {
-        this.mTaskName = mTaskName;
+    public void setColorcode(String colorcode) {
+        this.colorcode = colorcode;
     }
 
-    public Date getmDate() {
-        return mDate;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setmDate(Date mEndDate) {
-        this.mDate = mEndDate;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
-    public String getmDescription() {
-        return mDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTask() {
+        return task;
+    }
+
+    public void setTask(String task) {
+        this.task = task;
     }
 
     public boolean ismCompleted() {
@@ -126,11 +192,6 @@ public class Task{
         this.mCompleted = mCompleted;
     }
 
-    public String getCategories() {
-        return categories;
-    }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
+
 }
