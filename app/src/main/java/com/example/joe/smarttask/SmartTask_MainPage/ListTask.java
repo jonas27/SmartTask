@@ -85,7 +85,7 @@ public class ListTask {
     }
 
     //    getter Method for List of Tasks
-    public List<Task> getmTaskList() {
+    public static List<Task> getmTaskList() {
         return sList;
     }
 

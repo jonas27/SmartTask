@@ -51,7 +51,7 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         mListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mList = new ArrayList<>();
+        mList = ListTask.getmTaskList();
         updateUI(mList);
         return view;
     }
