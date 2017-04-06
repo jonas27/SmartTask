@@ -80,6 +80,7 @@ public class ListTask {
                 sList.add(post);
             }
             Log.d(TAG + "Tasks size ", String.valueOf(tasksMap.size()));
+            ListFragment.updateUI(sList);
         }
     }
 

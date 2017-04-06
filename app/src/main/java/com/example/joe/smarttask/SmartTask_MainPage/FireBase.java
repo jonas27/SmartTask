@@ -1,6 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.content.Context;
+import android.support.v4.app.*;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -110,7 +111,7 @@ public class FireBase extends AppCompatActivity {
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mDataSnapshot) {
-                ListTask.setmDataSnapshot(mDataSnapshot);
+                callback(mDataSnapshot);
             }
 
             @Override
@@ -120,5 +121,8 @@ public class FireBase extends AppCompatActivity {
             }
         };
         mPostReference.addValueEventListener(postListener);
+    }
+    private void callback(DataSnapshot mDataSnapshot){
+        ListTask.setmDataSnapshot(mDataSnapshot);
     }
 }
