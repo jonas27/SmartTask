@@ -107,7 +107,7 @@ public class FireBase extends AppCompatActivity {
 
 
     private void pull() {
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/"+user.getUid()).child("task");
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mDataSnapshot) {

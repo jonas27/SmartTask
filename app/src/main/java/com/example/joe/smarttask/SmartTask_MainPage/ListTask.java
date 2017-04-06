@@ -20,12 +20,10 @@ public class ListTask {
 
     //TAG for Logs
     private static final String TAG = "CL_ListTask";
-
-    private static FireBase sFireBase;
+    
     private static ListTask sListTask;
     private Context context;
     private static List<Task> sList;
-    private Task task;
     private static DataSnapshot sDataSnapshot;
 
 
