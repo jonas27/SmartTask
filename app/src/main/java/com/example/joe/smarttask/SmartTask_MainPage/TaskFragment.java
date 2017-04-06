@@ -18,6 +18,9 @@ import com.example.joe.smarttask.R;
 
 public class TaskFragment extends Fragment {
 
+    //TAG for Logs
+    private static final String TAG = "CLASS_TaskFragment";
+
     private Task mTask;
     private EditText mTitleField;
     private Button mDateButton;

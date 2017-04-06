@@ -2,6 +2,7 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,6 +30,8 @@ import java.util.Map;
 
 public class ListFragment extends Fragment {
 
+    //TAG for Logs
+    private static final String TAG = "CLASS_ListFragment";
 
     public Map<String, Task> tasks = new HashMap<String, Task>();
     private RecyclerView mListRecyclerView;
@@ -40,78 +43,44 @@ public class ListFragment extends Fragment {
     /* This Method should host nothing but super.onCreate method call as fragments follow a slightly different lifecycle than normal activities.
        All intialisations and else should be in onCreateView
     */
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
-        postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                listItems = new ArrayList<>();
-                for (Iterator<DataSnapshot> i = dataSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                    Task task = new Task();
-                    tasks.put(i.next().getKey(), task);
-                }
-
-                Log.d("Length ", String.valueOf(dataSnapshot.getChildrenCount()));
-                for (Iterator<DataSnapshot> i = dataSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                    DataSnapshot current = i.next();
-                    Task post = tasks.get(current.getKey());
-                    post = current.getValue(Task.class);
-                    Log.d("tassk name ", post.getName());
-                    listItems.add(post);
-                }
-                Log.d("Tasks size ", String.valueOf(tasks.size()));
-
-                mAdapter = new TaskAdapter(listItems);
-                // Set CustomAdapter as the adapter for RecyclerView.
-                mListRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("Error", "loadPost:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                // [END_EXCLUDE]
-            }
-        };
-        mPostReference.addValueEventListener(postListener);
-
-    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-
         mListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         updateUI();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        updateUI();
+        super.onResume();
     }
 
     private void updateUI() {
         ListTask mListTask = ListTask.list(getContext());
         List<Task> mList = mListTask.getmTaskList();
+
+//        Log.d("CLASS_LF", Integer.toString(mList.size()));
+//        Log.d("CLASS_LF", mList.get(0).getName());
+
         mAdapter = new TaskAdapter(mList);
+        mAdapter.notifyDataSetChanged();
         mListRecyclerView.setAdapter(mAdapter);
     }
 
 
-    private class TaskHolder extends RecyclerView.ViewHolder {
+    private class TaskHolder extends RecyclerView.ViewHolder{
         public TextView mTitleTextView;
 
         public TaskHolder(View itemView) {
             super(itemView);
             mTitleTextView = (TextView) itemView;
         }
+
     }
 
     private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {

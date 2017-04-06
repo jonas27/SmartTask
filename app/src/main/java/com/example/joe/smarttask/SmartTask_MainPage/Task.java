@@ -15,7 +15,10 @@ import java.util.Map;
 
 public class Task{
 
-    //    [Start: Variables of a task]
+    //TAG for Logs
+    private static final String TAG = "CLASS_Task";
+
+//    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
     private String categories;
     private String colorcode;
     private String datetime;
@@ -29,13 +32,13 @@ public class Task{
     private String status;
     private String id;
     private String task;
-    //    [End: Variables of a task]
+//    [End: Variables of a task]
 
     private boolean mCompleted;
 
+    // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     public Task() {
         super();
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
     public Task(String categories, String datetime,
@@ -78,120 +81,92 @@ public class Task{
         return result;
     }
 
-//      Getter and setters for variables
-
+//      [Start: Getter and setters for variables]
     public String getCategories() {
         return categories;
     }
-
     public void setCategories(String categories) {
         this.categories = categories;
     }
-
     public String getColorcode() {
         return colorcode;
     }
-
     public void setColorcode(String colorcode) {
         this.colorcode = colorcode;
     }
-
     public String getDatetime() {
         return datetime;
     }
-
     public void setDatetime(String datetime) {
         this.datetime = datetime;
     }
-
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public String getFrequency() {
         return frequency;
     }
-
     public void setFrequency(String frequency) {
         this.frequency = frequency;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getOwner() {
         return owner;
     }
-
     public void setOwner(String owner) {
         this.owner = owner;
     }
-
     public String getPoints() {
         return points;
     }
-
     public void setPoints(String points) {
         this.points = points;
     }
-
     public String getPriority() {
         return priority;
     }
-
     public void setPriority(String priority) {
         this.priority = priority;
     }
-
     public String getResponsible() {
         return responsible;
     }
-
     public void setResponsible(String responsible) {
         this.responsible = responsible;
     }
-
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getTask() {
         return task;
     }
-
     public void setTask(String task) {
         this.task = task;
     }
-
     public boolean ismCompleted() {
         return mCompleted;
     }
-
     public void setmCompleted(boolean mCompleted) {
         this.mCompleted = mCompleted;
     }
-
+//      [End: Getter and setters for variables]
 
 
 }

@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 
 public class TaskActivity extends SingleFragmentActivity {
 
+    //TAG for Logs
+    private static final String TAG = "CLASS_TaskActivity";
 
     @Override
     protected Fragment createFragment() {

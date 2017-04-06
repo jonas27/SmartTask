@@ -1,6 +1,8 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
+import android.nfc.Tag;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -15,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 public class Main_Activity extends SingleFragmentActivity {
 
     //TAG for Logs
-    private static final String TAG = "Class_SM_Main_Activity";
+    private static final String TAG = "Class_Main_Activity";
     Button upload;
     private EditText text;
 
@@ -27,14 +29,20 @@ public class Main_Activity extends SingleFragmentActivity {
     // [End declare Firebase auth]
 
     private FireBase mFireBase;
+    private ListTask mListTask;
 
 
     @Override
     protected Fragment createFragment() {
-        mFireBase = FireBase.fireBase(this);
+        Log.d(TAG, "FB intialized");
         return new ListFragment();
     }
 
+    @Override
+    protected void initSingletons(){
+        mFireBase = FireBase.fireBase(this);
+        mListTask = ListTask.list(this);
+    }
 
 }
 

@@ -13,12 +13,18 @@ import com.example.joe.smarttask.R;
 
 public abstract class SingleFragmentActivity extends FragmentActivity {
 
+    //TAG for Logs
+    private static final String TAG = "CLASS_FragmentActivity";
+
     protected abstract Fragment createFragment();
+
+    protected void initSingletons(){};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+        initSingletons();
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);

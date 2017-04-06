@@ -6,10 +6,16 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,24 +27,33 @@ import java.util.Map;
 public class FireBase extends AppCompatActivity {
 
     //TAG for Logs
-    private static final String TAG = "CLASS_SM_FireBase";
+    private static final String TAG = "CLASS_FireBase";
+
     //private static final String TAG = "SmartTask_FireBase";
     // Singleton object of class itself (static --> Garbage collector wont delete it)
     private static FireBase mFireBase;
+
+
     private Context context;
-    // [Start declare Firebase Auth, Auth listener, Database and User]
+
+    private static ListTask mListTask;
+
+    // [Start declare Firebase variables]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
-    private String uid;
-    // [End declare Firebase auth]
+    private ValueEventListener postListener;
+    private DatabaseReference mPostReference;
+    private static DataSnapshot sDataSnapshot;
+
+    // [End declare Firebase variables]
 
 
     private FireBase(Context context) {
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
+        pull();
     }
 
 
@@ -49,6 +64,9 @@ public class FireBase extends AppCompatActivity {
         }
         return mFireBase;
     }
+
+
+
 
 
     protected void addNewTask() {
@@ -81,4 +99,26 @@ public class FireBase extends AppCompatActivity {
         }
     }
 
+    public DataSnapshot getmDataSnapshot() {
+        return sDataSnapshot;
+    }
+
+
+
+    private void pull() {
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
+        postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot mDataSnapshot) {
+                ListTask.setmDataSnapshot(mDataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mPostReference.addValueEventListener(postListener);
+    }
 }
