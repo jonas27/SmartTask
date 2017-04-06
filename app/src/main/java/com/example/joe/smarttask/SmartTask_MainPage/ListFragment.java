@@ -52,11 +52,13 @@ public class ListFragment extends Fragment {
         mListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList = new ArrayList<>();
+        updateUI(mList);
         return view;
     }
 
     @Override
     public void onResume() {
+        updateUI(mList);
         super.onResume();
     }
 
@@ -65,10 +67,12 @@ public class ListFragment extends Fragment {
 
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
+        if(mListRecyclerView!=null){
+            mAdapter = new TaskAdapter(mList);
+            mAdapter.notifyDataSetChanged();
+            mListRecyclerView.setAdapter(mAdapter);
 
-        mAdapter = new TaskAdapter(mList);
-        mAdapter.notifyDataSetChanged();
-        mListRecyclerView.setAdapter(mAdapter);
+        }
     }
 
 
