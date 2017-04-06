@@ -5,7 +5,9 @@ package com.example.joe.smarttask.IntroSlider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +20,8 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SmartTask_Main_Activity;
+import com.example.joe.smarttask.*;
+import com.example.joe.smarttask.SmartTask_MainPage.Main_Activity;
 
 /**
  * Class handles the intro slides - slides inflate intro_activity.xml and are no fragments (only one lifecycle)
@@ -49,6 +51,7 @@ public class IntroActivity extends AppCompatActivity {
     private boolean skipTutorial;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         intent = getIntent();
@@ -158,7 +161,7 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, SmartTask_Main_Activity.class);
+        intent = new Intent(this, Main_Activity.class);
         startActivity(intent);
     }
 
@@ -189,7 +192,7 @@ public class IntroActivity extends AppCompatActivity {
      */
 
 
-    public class ViewPagerAdapter extends PagerAdapter {
+    private class ViewPagerAdapter extends PagerAdapter {
 
 
         private LayoutInflater layoutInflater;
