@@ -1,5 +1,6 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,12 +18,13 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private static final String TAG = "CLASS_FragmentActivity";
 
     protected abstract Fragment createFragment();
-
+    private static Context context;
     protected void initSingletons(){};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SingleFragmentActivity.context = getApplicationContext();
         setContentView(R.layout.activity_fragment);
         initSingletons();
 
@@ -35,5 +37,8 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
+    }
+    public static Context getAppContext() {
+        return SingleFragmentActivity.context;
     }
 }

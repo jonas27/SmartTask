@@ -80,11 +80,12 @@ public class ListTask {
                 sList.add(post);
             }
             Log.d(TAG + "Tasks size ", String.valueOf(tasksMap.size()));
+            ListFragment.updateUI(sList);
         }
     }
 
     //    getter Method for List of Tasks
-    public List<Task> getmTaskList() {
+    public static List<Task> getmTaskList() {
         return sList;
     }
 

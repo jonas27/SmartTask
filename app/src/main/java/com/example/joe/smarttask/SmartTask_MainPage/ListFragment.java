@@ -34,11 +34,12 @@ public class ListFragment extends Fragment {
     private static final String TAG = "CLASS_ListFragment";
 
     public Map<String, Task> tasks = new HashMap<String, Task>();
-    private RecyclerView mListRecyclerView;
-    private TaskAdapter mAdapter;
+    private static RecyclerView mListRecyclerView;
+    private static TaskAdapter mAdapter;
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
     private ArrayList<Task> listItems;
+    private List<Task> mList;
 
     /* This Method should host nothing but super.onCreate method call as fragments follow a slightly different lifecycle than normal activities.
        All intialisations and else should be in onCreateView
@@ -50,30 +51,32 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         mListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        updateUI();
+        mList = ListTask.getmTaskList();
+        updateUI(mList);
         return view;
     }
 
     @Override
     public void onResume() {
-        updateUI();
+        updateUI(mList);
         super.onResume();
     }
 
-    private void updateUI() {
-        ListTask mListTask = ListTask.list(getContext());
-        List<Task> mList = mListTask.getmTaskList();
+
+    public static void updateUI(List<Task> mList) {
 
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
+        if(mListRecyclerView!=null){
+            mAdapter = new TaskAdapter(mList);
+            mAdapter.notifyDataSetChanged();
+            mListRecyclerView.setAdapter(mAdapter);
 
-        mAdapter = new TaskAdapter(mList);
-        mAdapter.notifyDataSetChanged();
-        mListRecyclerView.setAdapter(mAdapter);
+        }
     }
 
 
-    private class TaskHolder extends RecyclerView.ViewHolder{
+    private static class TaskHolder extends RecyclerView.ViewHolder{
         public TextView mTitleTextView;
 
         public TaskHolder(View itemView) {
@@ -83,7 +86,7 @@ public class ListFragment extends Fragment {
 
     }
 
-    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
+    private static class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
         private List<Task> mListTasks;
 
         public TaskAdapter(List<Task> mListTasks) {
@@ -92,7 +95,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(SingleFragmentActivity.getAppContext());
             View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
             return new TaskHolder(view);
         }
