@@ -67,11 +67,18 @@ public class FireBase extends AppCompatActivity {
 
 
 
-    protected void addNewTask() {
 
+
+
+    /**
+    * Methods from here fetch/pull data from server
+     *
+     * */
+    public DataSnapshot getmDataSnapshot() {
+        return sDataSnapshot;
     }
 
-    protected void push(Map<String, String> map, String root) {
+    private void push(Map<String, String> map, String root) {
         /*
             Information should be pushed as a map with String destination on firebase server,value.
          */
@@ -96,13 +103,6 @@ public class FireBase extends AppCompatActivity {
             it.remove();
         }
     }
-
-    public DataSnapshot getmDataSnapshot() {
-        return sDataSnapshot;
-    }
-
-
-
     private void pull() {
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
         postListener = new ValueEventListener() {
@@ -122,4 +122,9 @@ public class FireBase extends AppCompatActivity {
     private void callback(DataSnapshot mDataSnapshot){
         ListTask.setmDataSnapshot(mDataSnapshot);
     }
+
+
+
+
+
 }

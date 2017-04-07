@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,6 @@ public class ListFragment extends Fragment {
 
 
     public static void updateUI(List<Task> mList) {
-
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
         if(sListRecyclerView!=null){
@@ -84,7 +84,8 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(sContext, TaskActivity.class);
+            Intent intent = TaskActivity.newIntent(sContext, mTask.getName());
+            Log.d(TAG,mTask.getName());
             sContext.startActivity(intent);
         }
 

@@ -97,13 +97,14 @@ public class ListTask {
 
     /**
      * return a task for single view
-     * @param id is a unique id identifying a task
+     * TODO: change name into UID
+     * @param name is a unique id identifying a task
      * @return the object with the id or null if the task id was not found
      * *
      */
-    public Task getTask(String id) {
+    public Task getTask(String name) {
         for (Task t : sList) {
-            if (id.equals(t.getId())) {
+            if (name.equals(t.getName())) {
                 return t;
             }
         }

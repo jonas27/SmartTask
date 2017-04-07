@@ -1,5 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Task_P;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
@@ -12,6 +14,15 @@ public class TaskActivity extends SingleFragmentActivity {
 
     //TAG for Logs
     private static final String TAG = "CLASS_TaskActivity";
+
+
+    public static final String TASK_Name = "";
+
+    public static Intent newIntent(Context packageContext, String mTaskID) {
+        Intent intent = new Intent(packageContext, TaskActivity.class);
+        intent.putExtra(TASK_Name, mTaskID);
+        return intent;
+    }
 
     @Override
     protected Fragment createFragment() {

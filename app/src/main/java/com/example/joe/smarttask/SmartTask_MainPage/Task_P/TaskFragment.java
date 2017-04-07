@@ -11,6 +11,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 
 /**
  * Created by joe on 14/03/2017.
@@ -26,10 +29,15 @@ public class TaskFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
 
+    private ListTask mList;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String mTaskName= (String) getActivity().getIntent().getSerializableExtra(TaskActivity.TASK_Name);
+        mList = ListTask.list(getContext());
+        this.mTask=mList.getTask(mTaskName);
     }
 
     @Override
@@ -38,7 +46,7 @@ public class TaskFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_task_smarttask, container, false);
 
         mDateButton = (Button) v.findViewById(R.id.task_date);
-//        mDateButton.setText(mTask.getDatetime().toString());
+        mDateButton.setText(mTask.getDatetime().toString());
         mDateButton.setEnabled(true);
 
         mSolvedCheckBox = (CheckBox) v.findViewById(R.id.task_solved);
