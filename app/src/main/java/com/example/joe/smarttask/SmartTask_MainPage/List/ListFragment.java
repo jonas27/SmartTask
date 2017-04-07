@@ -40,7 +40,7 @@ public class ListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.recycler_list, container, false);
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList = ListTask.getmTaskList();
@@ -55,10 +55,12 @@ public class ListFragment extends Fragment {
         super.onResume();
     }
 
-
+//    Use notifyDataSetChanged on all views as we do not know
+//    which View should be updated when changes on FireBase occur
     public static void updateUI(List<TaskObject> mList) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
+
         if(sListRecyclerView!=null){
             sAdapter = new TaskAdapter(mList);
             sAdapter.notifyDataSetChanged();
@@ -67,6 +69,7 @@ public class ListFragment extends Fragment {
     }
 
 
+    // Provide a reference to the views for each data item
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDescriptionTextView;
@@ -113,7 +116,7 @@ public class ListFragment extends Fragment {
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(SingleFragmentActivity.getAppContext());
-            View view = layoutInflater.inflate(R.layout.list_item, parent, false);
+            View view = layoutInflater.inflate(R.layout.recycler_list_item, parent, false);
             return new TaskHolder(view);
         }
 
