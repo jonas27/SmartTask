@@ -23,7 +23,7 @@ public class ListTask {
 
     //TAG for Logs
     private static final String TAG = "CL_ListTask";
-    
+
     private static ListTask sListTask;
     private Context context;
     private static List<TaskObject> sList;
@@ -32,6 +32,7 @@ public class ListTask {
 
     /**
      * Creates a new ArrayList where all the TaskObject object are going to be stored
+     *
      * @param context global information on application environment
      */
     private ListTask(Context context) {
@@ -41,9 +42,9 @@ public class ListTask {
     }
 
 
-
     /**
      * Static factory method for singleton
+     *
      * @param context global information on application environment
      * @return THE single Object of this class
      */
@@ -55,10 +56,9 @@ public class ListTask {
     }
 
 
-
-    public static void setmDataSnapshot(DataSnapshot mDataSnapshot){
-        sDataSnapshot=mDataSnapshot;
-        if(sList!=null) {
+    public static void setDataSnapshot(DataSnapshot mDataSnapshot) {
+        sDataSnapshot = mDataSnapshot;
+        if (sList != null) {
             createList();
         }
     }
@@ -67,9 +67,9 @@ public class ListTask {
      * This method is called by {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} and creates List of tasks
      * It then calls the recycler view in {@link ListFragment} to update itslef
      * Static methods are used to ease the call backs from the OnDataChangeListener in {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase}
-    * */
+     */
     private static void createList() {
-        if(sDataSnapshot!=null) {
+        if (sDataSnapshot != null) {
             Map<String, TaskObject> tasksMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 TaskObject task = new TaskObject();
@@ -80,10 +80,10 @@ public class ListTask {
             sList.clear();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 DataSnapshot current = i.next();
-                TaskObject post = tasksMap.get(current.getKey());
-                post = current.getValue(TaskObject.class);
-                Log.d(TAG, post.getName());
-                sList.add(post);
+                TaskObject mTask = tasksMap.get(current.getKey());
+                mTask = current.getValue(TaskObject.class);
+                mTask.setId(current.getKey());
+                sList.add(mTask);
             }
             Log.d(TAG + "Tasks size ", String.valueOf(tasksMap.size()));
             ListFragment.updateUI(sList);
@@ -98,13 +98,14 @@ public class ListTask {
     /**
      * return a task for single view
      * TODO: change name into UID
-     * @param name is a unique id identifying a task
+     *
+     * @param mTaskId is a unique id identifying a task
      * @return the object with the id or null if the task id was not found
      * *
      */
-    public TaskObject getTask(String name) {
+    public TaskObject getTask(String mTaskId) {
         for (TaskObject t : sList) {
-            if (name.equals(t.getName())) {
+            if (mTaskId.equals(t.getId())) {
                 return t;
             }
         }

@@ -22,6 +22,8 @@ public class TaskFragment extends Fragment {
     //TAG for Logs
     private static final String TAG = "CLASS_TaskFragment";
 
+    private static final String TASK_ID = "task_id";
+
     private TaskObject mTask;
     private EditText mTitleField;
     private Button mDateButton;
@@ -29,13 +31,20 @@ public class TaskFragment extends Fragment {
 
     private ListTask mList;
 
+    public static TaskFragment newInstance(String taskId) {
+        Bundle args = new Bundle();
+        args.putSerializable(TASK_ID, taskId);
+        TaskFragment fragment = new TaskFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String mTaskName= (String) getActivity().getIntent().getSerializableExtra(TaskActivity.TASK_Name);
+        String mTaskId= (String) getArguments().getSerializable(TASK_ID);
         mList = ListTask.list(getContext());
-        this.mTask=mList.getTask(mTaskName);
+        this.mTask=mList.getTask(mTaskId);
     }
 
     @Override

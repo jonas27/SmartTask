@@ -94,7 +94,7 @@ public class LogInActivity extends AppCompatActivity {
         Log.d("data", mDatabase.toString());
         Log.d("data", mDatabase.getDatabase().toString());
 
-        mFireBase = FireBase.fireBase(this);
+//        mFireBase = FireBase.fireBase(this);
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(

@@ -17,6 +17,7 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -88,8 +89,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = TaskActivity.newIntent(sContext, mTask.getName());
-            Log.d(TAG,mTask.getName());
+            Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId());
             sContext.startActivity(intent);
         }
 

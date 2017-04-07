@@ -25,11 +25,11 @@ import java.util.Map;
 public class FireBase extends AppCompatActivity {
 
     //TAG for Logs
-    private static final String TAG = "CLASS_FireBase";
+    private static final String TAG = "CL_FireBase";
 
     //private static final String TAG = "SmartTask_FireBase";
     // Singleton object of class itself (static --> Garbage collector wont delete it)
-    private static FireBase mFireBase;
+    private static FireBase sFireBase;
 
 
     private Context context;
@@ -56,10 +56,10 @@ public class FireBase extends AppCompatActivity {
 
     //  static factory method for singleton
     public static FireBase fireBase(Context context) {
-        if (mFireBase == null) {
-            mFireBase = new FireBase(context);
+        if (sFireBase == null) {
+            sFireBase = new FireBase(context);
         }
-        return mFireBase;
+        return sFireBase;
     }
 
 
@@ -69,13 +69,6 @@ public class FireBase extends AppCompatActivity {
 
 
 
-    /**
-    * Methods from here fetch/pull data from server
-     *
-     * */
-    public DataSnapshot getmDataSnapshot() {
-        return sDataSnapshot;
-    }
 
     private void push(Map<String, String> map, String root) {
         /*
@@ -102,12 +95,21 @@ public class FireBase extends AppCompatActivity {
             it.remove();
         }
     }
+
+    /**
+     * Methods from here fetch/pull data from server
+     *
+     * */
+    public DataSnapshot getDataSnapshot() {
+        return sDataSnapshot;
+    }
+
     private void pull() {
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
+        Log.d(TAG, mAuth.getCurrentUser().toString());
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
         postListener = new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot mDataSnapshot) {
-                callback(mDataSnapshot);
+            public void onDataChange(DataSnapshot mDataSnapshot) {callback(mDataSnapshot);
             }
 
             @Override
@@ -119,7 +121,7 @@ public class FireBase extends AppCompatActivity {
         mPostReference.addValueEventListener(postListener);
     }
     private void callback(DataSnapshot mDataSnapshot){
-        ListTask.setmDataSnapshot(mDataSnapshot);
+        ListTask.setDataSnapshot(mDataSnapshot);
     }
 
 
