@@ -1,26 +1,23 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Task_P.Task;
+import com.example.joe.smarttask.SmartTask_MainPage.Task_P.TaskActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +35,8 @@ public class ListFragment extends Fragment {
     private static TaskAdapter sAdapter;
     private List<Task> mList;
 
+    private static Context sContext;
+
     /* This Method should host nothing but super.onCreate method call as fragments follow a slightly different lifecycle than normal activities.
        All intialisations and else should be in onCreateView
     */
@@ -50,6 +49,7 @@ public class ListFragment extends Fragment {
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList = ListTask.getmTaskList();
         updateUI(mList);
+        sContext=this.getContext();
         return view;
     }
 
@@ -72,18 +72,37 @@ public class ListFragment extends Fragment {
     }
 
 
-    private static class TaskHolder extends RecyclerView.ViewHolder{
+    private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
+        private TextView mDescriptionTextView;
+        private CheckBox mTaskCompleted;
+
         private Task mTask;
 
         public TaskHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_title);
+            mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
+            mTaskCompleted= (CheckBox) itemView.findViewById(R.id.list_item_box);
         }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(sContext, TaskActivity.class);
+            sContext.startActivity(intent);
+        }
+
 
         public void bindTask(Task task) {
             mTask = task;
             mTitleTextView.setText(mTask.getName());
+            mDescriptionTextView.setText(mTask.getDescription());
+            if(mTask.getStatus().equals("true")){
+                mTaskCompleted.setChecked(true);
+            }else{
+                mTaskCompleted.setChecked(false);
+            }
         }
 
     }

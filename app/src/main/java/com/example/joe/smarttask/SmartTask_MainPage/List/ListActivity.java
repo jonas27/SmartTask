@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 
 /**

@@ -1,9 +1,9 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.Task_P.Task;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -87,10 +87,8 @@ public class ListTask {
         return sList;
     }
 
-
     /**
      * return a task for single view
-     *
      * @param id is a unique id identifying a task
      * @return the object with the id or null if the task id was not found
      * *

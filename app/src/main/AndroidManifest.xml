@@ -24,6 +24,7 @@
             android:name=".IntroSlider.IntroActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".SmartTask_MainPage.Main_Activity" />
+        <activity android:name=".SmartTask_MainPage.Task_P.TaskActivity" />
         <!--
              <activity
             android:hardwareAccelerated="true" />
