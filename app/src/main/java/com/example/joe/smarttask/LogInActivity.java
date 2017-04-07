@@ -93,11 +93,6 @@ public class LogInActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Log.d("data", mDatabase.toString());
         Log.d("data", mDatabase.getDatabase().toString());
-/*
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("User");
-        Log.d("DATA ", String.valueOf(myRef));
-*/
 
         mFireBase = FireBase.fireBase(this);
 

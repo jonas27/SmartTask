@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.Task_P;
+package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import com.google.firebase.database.Exclude;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Depending on this use constructor or getter and setter
  */
 
-public class Task{
+public class TaskObject {
 
     //TAG for Logs
     private static final String TAG = "CLASS_Task";
@@ -37,13 +37,13 @@ public class Task{
     private boolean mCompleted;
 
     // Default constructor required for calls to DataSnapshot.getValue(Post.class)
-    public Task() {
+    public TaskObject() {
         super();
     }
 
-    public Task(String categories, String datetime,
-                String description, String frequency, String name, String owner,
-                String priority, String responsible, String points, String status, String id, String task) {
+    public TaskObject(String categories, String datetime,
+                      String description, String frequency, String name, String owner,
+                      String priority, String responsible, String points, String status, String id, String task) {
         super();
         this.categories = categories;
         this.datetime = datetime;

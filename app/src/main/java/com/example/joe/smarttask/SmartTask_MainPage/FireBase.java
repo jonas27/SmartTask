@@ -43,7 +43,6 @@ public class FireBase extends AppCompatActivity {
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
     private static DataSnapshot sDataSnapshot;
-
     // [End declare Firebase variables]
 
 

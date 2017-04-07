@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Task_P.Task;
-import com.example.joe.smarttask.SmartTask_MainPage.Task_P.TaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +31,10 @@ public class ListFragment extends Fragment {
     //TAG for Logs
     private static final String TAG = "CL_ListFragment";
 
-    public Map<String, Task> tasks = new HashMap<String, Task>();
+    public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
     private static RecyclerView sListRecyclerView;
     private static TaskAdapter sAdapter;
-    private List<Task> mList;
+    private List<TaskObject> mList;
 
     private static Context sContext;
 
@@ -56,7 +56,7 @@ public class ListFragment extends Fragment {
     }
 
 
-    public static void updateUI(List<Task> mList) {
+    public static void updateUI(List<TaskObject> mList) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
         if(sListRecyclerView!=null){
@@ -72,7 +72,7 @@ public class ListFragment extends Fragment {
         private TextView mDescriptionTextView;
         private CheckBox mTaskCompleted;
 
-        private Task mTask;
+        private TaskObject mTask;
 
         public TaskHolder(View itemView) {
             super(itemView);
@@ -90,7 +90,7 @@ public class ListFragment extends Fragment {
         }
 
 
-        public void bindTask(Task task) {
+        public void bindTask(TaskObject task) {
             mTask = task;
             mTitleTextView.setText(mTask.getName());
             mDescriptionTextView.setText(mTask.getDescription());
@@ -104,9 +104,9 @@ public class ListFragment extends Fragment {
     }
 
     private static class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
-        private List<Task> mListTasks;
+        private List<TaskObject> mListTasks;
 
-        public TaskAdapter(List<Task> mListTasks) {
+        public TaskAdapter(List<TaskObject> mListTasks) {
             this.mListTasks = mListTasks;
         }
 
@@ -119,7 +119,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
-            Task task = mListTasks.get(position);
+            TaskObject task = mListTasks.get(position);
             holder.bindTask(task);
         }
 

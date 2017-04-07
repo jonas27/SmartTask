@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.Task_P;
+package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 
 /**
@@ -24,7 +22,7 @@ public class TaskFragment extends Fragment {
     //TAG for Logs
     private static final String TAG = "CLASS_TaskFragment";
 
-    private Task mTask;
+    private TaskObject mTask;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
