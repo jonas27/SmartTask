@@ -1,10 +1,10 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.content.Context;
-import android.support.v4.app.*;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -13,10 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,7 +43,6 @@ public class FireBase extends AppCompatActivity {
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
     private static DataSnapshot sDataSnapshot;
-
     // [End declare Firebase variables]
 
 
@@ -70,11 +66,18 @@ public class FireBase extends AppCompatActivity {
 
 
 
-    protected void addNewTask() {
 
+
+
+    /**
+    * Methods from here fetch/pull data from server
+     *
+     * */
+    public DataSnapshot getmDataSnapshot() {
+        return sDataSnapshot;
     }
 
-    protected void push(Map<String, String> map, String root) {
+    private void push(Map<String, String> map, String root) {
         /*
             Information should be pushed as a map with String destination on firebase server,value.
          */
@@ -99,15 +102,8 @@ public class FireBase extends AppCompatActivity {
             it.remove();
         }
     }
-
-    public DataSnapshot getmDataSnapshot() {
-        return sDataSnapshot;
-    }
-
-
-
     private void pull() {
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/"+user.getUid()).child("task");
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/Zkw8FY9RKsfTsHd2GQy0rDFXm133").child("task");
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mDataSnapshot) {
@@ -125,4 +121,9 @@ public class FireBase extends AppCompatActivity {
     private void callback(DataSnapshot mDataSnapshot){
         ListTask.setmDataSnapshot(mDataSnapshot);
     }
+
+
+
+
+
 }

@@ -1,9 +1,9 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -13,24 +13,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by joe on 05/04/2017.
+ * Singleton for handling the list of all tasks which is then displayed in the List fragment
+ * It gets a  <p><font color="green"> FireBase {@link DataSnapshot} </font> from the {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} class when the this class is first created or on data change (on the server)
+ * The information from this DataSnapshot is then put into single TaskObject Objects {@link TaskObject} which are all stored in a ArrayList
+ * <p><font color="red"> This class has a static method
  */
 
 public class ListTask {
 
     //TAG for Logs
     private static final String TAG = "CL_ListTask";
-
-    private static FireBase sFireBase;
+    
     private static ListTask sListTask;
     private Context context;
-    private static List<Task> sList;
-    private Task task;
+    private static List<TaskObject> sList;
     private static DataSnapshot sDataSnapshot;
 
 
     /**
-     * Creates a new ArrayList where all the Task object are going to be stored
+     * Creates a new ArrayList where all the TaskObject object are going to be stored
      * @param context global information on application environment
      */
     private ListTask(Context context) {
@@ -62,11 +63,16 @@ public class ListTask {
         }
     }
 
+    /**
+     * This method is called by {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} and creates List of tasks
+     * It then calls the recycler view in {@link ListFragment} to update itslef
+     * Static methods are used to ease the call backs from the OnDataChangeListener in {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase}
+    * */
     private static void createList() {
         if(sDataSnapshot!=null) {
-            Map<String, Task> tasksMap = new HashMap<>();
+            Map<String, TaskObject> tasksMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                Task task = new Task();
+                TaskObject task = new TaskObject();
                 tasksMap.put(i.next().getKey(), task);
             }
 
@@ -74,8 +80,8 @@ public class ListTask {
             sList.clear();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 DataSnapshot current = i.next();
-                Task post = tasksMap.get(current.getKey());
-                post = current.getValue(Task.class);
+                TaskObject post = tasksMap.get(current.getKey());
+                post = current.getValue(TaskObject.class);
                 Log.d(TAG, post.getName());
                 sList.add(post);
             }
@@ -85,21 +91,20 @@ public class ListTask {
     }
 
     //    getter Method for List of Tasks
-    public static List<Task> getmTaskList() {
+    public static List<TaskObject> getmTaskList() {
         return sList;
     }
 
-
     /**
      * return a task for single view
-     *
-     * @param id is a unique id identifying a task
+     * TODO: change name into UID
+     * @param name is a unique id identifying a task
      * @return the object with the id or null if the task id was not found
      * *
      */
-    public Task getTask(String id) {
-        for (Task t : sList) {
-            if (id.equals(t.getId())) {
+    public TaskObject getTask(String name) {
+        for (TaskObject t : sList) {
+            if (name.equals(t.getName())) {
                 return t;
             }
         }

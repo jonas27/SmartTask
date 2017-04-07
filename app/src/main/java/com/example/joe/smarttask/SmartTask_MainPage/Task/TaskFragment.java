@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 
 /**
  * Created by joe on 14/03/2017.
@@ -21,15 +22,20 @@ public class TaskFragment extends Fragment {
     //TAG for Logs
     private static final String TAG = "CLASS_TaskFragment";
 
-    private Task mTask;
+    private TaskObject mTask;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+
+    private ListTask mList;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String mTaskName= (String) getActivity().getIntent().getSerializableExtra(TaskActivity.TASK_Name);
+        mList = ListTask.list(getContext());
+        this.mTask=mList.getTask(mTaskName);
     }
 
     @Override
