@@ -57,6 +57,7 @@ public class ListFragment extends Fragment {
 
 //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
+//    Is it possible to change that? Results in efficiency gain
     public static void updateUI(List<TaskObject> mList) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
