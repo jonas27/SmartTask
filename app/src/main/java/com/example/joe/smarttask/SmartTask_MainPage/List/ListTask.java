@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by joe on 05/04/2017.
+ * Singleton for handling the list of all tasks which is then displayed in the List fragment
+ * It gets a  <p><font color="green"> FireBase {@link DataSnapshot} </font> from the {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} class when the this class is first created or on data change (on the server)
+ * The information from this DataSnapshot is then put into single Task Objects {@link Task} which are all stored in a ArrayList
+ * <p><font color="red"> This class has a static method
  */
 
 public class ListTask {
@@ -60,6 +63,11 @@ public class ListTask {
         }
     }
 
+    /**
+     * This method is called by {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} and creates List of tasks
+     * It then calls the recycler view in {@link ListFragment} to update itslef
+     * Static methods are used to ease the call backs from the OnDataChangeListener in {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase}
+    * */
     private static void createList() {
         if(sDataSnapshot!=null) {
             Map<String, Task> tasksMap = new HashMap<>();

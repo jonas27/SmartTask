@@ -37,11 +37,6 @@ public class ListFragment extends Fragment {
 
     private static Context sContext;
 
-    /* This Method should host nothing but super.onCreate method call as fragments follow a slightly different lifecycle than normal activities.
-       All intialisations and else should be in onCreateView
-    */
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
