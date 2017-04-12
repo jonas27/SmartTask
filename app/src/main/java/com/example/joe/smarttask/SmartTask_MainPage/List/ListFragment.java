@@ -17,6 +17,7 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +58,7 @@ public class ListFragment extends Fragment {
 
 //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
+//    Is it possible to change that? Results in efficiency gain
     public static void updateUI(List<TaskObject> mList) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
@@ -87,8 +89,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = TaskActivity.newIntent(sContext, mTask.getName());
-            Log.d(TAG,mTask.getName());
+            Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId());
             sContext.startActivity(intent);
         }
 
