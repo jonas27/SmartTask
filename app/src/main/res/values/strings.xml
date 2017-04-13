@@ -55,5 +55,8 @@
     <string name="smarttask_create_task_priority">set priority</string>
     <string name="smarttask_create_task_responsible">Assign task to</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
