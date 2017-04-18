@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
  * Mostly done by google
  */
 
-public class SignUpActivity  {
+public class SignUpActivity extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "SignUpActivity";
@@ -37,11 +37,11 @@ public class SignUpActivity  {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        intent = getIntent();
-//        super.onCreate(savedInstanceState);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        intent = getIntent();
+        super.onCreate(savedInstanceState);
 //        Log.d(TAG, "onCreateSuccesful");
 //
 //        mAuth = FirebaseAuth.getInstance();
@@ -198,7 +198,7 @@ public class SignUpActivity  {
 //        }
 //
 //        //}
-//    }
+    }
 
 
 }

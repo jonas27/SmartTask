@@ -17,9 +17,13 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     //TAG for Logs
     private static final String TAG = "CLASS_FragmentActivity";
 
-    protected abstract Fragment createFragment();
+    /*
+    * TODO: Remove static here
+    * */
     private static Context context;
+
     protected void initSingletons(){};
+    protected abstract Fragment createFragment();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         SingleFragmentActivity.context = getApplicationContext();
         setContentView(R.layout.activity_fragment);
         initSingletons();
+
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);

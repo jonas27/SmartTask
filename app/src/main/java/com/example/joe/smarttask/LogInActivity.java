@@ -160,8 +160,6 @@ public class LogInActivity extends AppCompatActivity {
         );
 
 
-
-
         //Googelogin buttons
         mGoogleButton =(SignInButton) findViewById(R.id.googleButton);
         // Configure Google Sign In
@@ -188,9 +186,6 @@ public class LogInActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-
-
     }
 
     // Sign in via google

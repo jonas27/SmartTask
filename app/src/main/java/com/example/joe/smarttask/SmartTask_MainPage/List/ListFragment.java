@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
-import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.HashMap;
@@ -85,6 +83,7 @@ public class ListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_title);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
             mTaskCompleted= (CheckBox) itemView.findViewById(R.id.list_item_box);
+
         }
 
         @Override
@@ -103,6 +102,7 @@ public class ListFragment extends Fragment {
             }else{
                 mTaskCompleted.setChecked(false);
             }
+
         }
 
     }
