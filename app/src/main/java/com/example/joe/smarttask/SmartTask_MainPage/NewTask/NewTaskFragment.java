@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
+import com.google.android.gms.tasks.Task;
+
+import java.util.Map;
 
 /**
  * Created by joe on 18/04/2017.
@@ -64,7 +69,20 @@ public class NewTaskFragment extends FragmentActivity {
 
     private void buildMap(){
 
+        FireBase fireBase = FireBase.fireBase(this);
+
+        TaskObject taskObject= new TaskObject("categories", "datetime",
+                "String description", "String frequency", "String name", "String owner",
+                "String priority", "String responsible", "String points", "String status", "String id", "String task");
+
+        fireBase.createTask(taskObject);
+        name= mName.getText().toString();
+
+
+
 
     }
+
+
 
 }
