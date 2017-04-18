@@ -2,6 +2,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * Depending on this use constructor or getter and setter
  */
 
-public class TaskObject {
+public class TaskObject implements Serializable {
 
     //TAG for Logs
     private static final String TAG = "CLASS_Task";

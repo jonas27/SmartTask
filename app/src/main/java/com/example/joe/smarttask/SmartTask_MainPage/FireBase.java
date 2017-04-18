@@ -32,6 +32,7 @@ public class FireBase extends AppCompatActivity {
     // Singleton object of class itself
     private static FireBase sFireBase;
 
+    public static boolean isAdmin;
 
     private Context context;
 
@@ -64,16 +65,23 @@ public class FireBase extends AppCompatActivity {
         return sFireBase;
     }
 
+    /**
+     * Methods from here fetch/pull data from server
+     */
+
+//    [start: create a new Task]
     public void createTask(TaskObject taskObject) {
         createNewTask(taskObject);
     }
 
-        private void createNewTask(TaskObject taskObject){
-            String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
-            mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
-            Log.d(TAG, key);
-            mPostReference.child(key).setValue(taskObject);
-        }
+    private void createNewTask(TaskObject taskObject) {
+        String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
+        Log.d(TAG, key);
+        mPostReference.child(key).setValue(taskObject);
+    }
+//    [start: create a new Task]
+
 
 
     private void push(Map<String, String> map, String root) {

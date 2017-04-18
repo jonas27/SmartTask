@@ -60,14 +60,14 @@ public class NewTaskFragment extends FragmentActivity {
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildMap();
+                createNewTask();
             }
         });
 
     }
 
 
-    private void buildMap(){
+    private void createNewTask(){
 
         FireBase fireBase = FireBase.fireBase(this);
 
@@ -76,8 +76,7 @@ public class NewTaskFragment extends FragmentActivity {
                 "String priority", "String responsible", "String points", "String status", "String id", "String task");
 
         fireBase.createTask(taskObject);
-        name= mName.getText().toString();
-
+        finish();
 
 
 
