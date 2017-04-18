@@ -16,6 +16,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:id="@+id/list_item_box"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
         />
     <TextView
         android:id="@+id/list_item_description"
@@ -23,5 +27,7 @@
         android:layout_height="40dp"
         android:layout_below="@+id/list_item_title"
         />
+
+
 
 </RelativeLayout>

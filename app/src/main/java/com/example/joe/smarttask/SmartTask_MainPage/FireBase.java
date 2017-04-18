@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,9 +29,10 @@ public class FireBase extends AppCompatActivity {
     private static final String TAG = "CL_FireBase";
 
     //private static final String TAG = "SmartTask_FireBase";
-    // Singleton object of class itself (static --> Garbage collector wont delete it)
+    // Singleton object of class itself
     private static FireBase sFireBase;
 
+    public static boolean isAdmin;
 
     private Context context;
 
@@ -40,6 +42,7 @@ public class FireBase extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private FirebaseDatabase mDatabase;
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
     private static DataSnapshot sDataSnapshot;
@@ -62,11 +65,22 @@ public class FireBase extends AppCompatActivity {
         return sFireBase;
     }
 
+    /**
+     * Methods from here fetch/pull data from server
+     */
 
+//    [start: create a new Task]
+    public void createTask(TaskObject taskObject) {
+        createNewTask(taskObject);
+    }
 
-
-
-
+    private void createNewTask(TaskObject taskObject) {
+        String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
+        Log.d(TAG, key);
+        mPostReference.child(key).setValue(taskObject);
+    }
+//    [start: create a new Task]
 
 
 
@@ -74,9 +88,9 @@ public class FireBase extends AppCompatActivity {
         /*
             Information should be pushed as a map with String destination on firebase server,value.
          */
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
 
-        DatabaseReference myRef = database.getReference("User/" + user.getUid());
+        DatabaseReference myRef = mDatabase.getReference("User/" + user.getUid());
 
         Iterator it = map.entrySet().iterator();
         String rootElement = null;
@@ -98,8 +112,7 @@ public class FireBase extends AppCompatActivity {
 
     /**
      * Methods from here fetch/pull data from server
-     *
-     * */
+     */
     public DataSnapshot getDataSnapshot() {
         return sDataSnapshot;
     }
@@ -109,7 +122,8 @@ public class FireBase extends AppCompatActivity {
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
         postListener = new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot mDataSnapshot) {callback(mDataSnapshot);
+            public void onDataChange(DataSnapshot mDataSnapshot) {
+                callback(mDataSnapshot);
             }
 
             @Override
@@ -120,12 +134,10 @@ public class FireBase extends AppCompatActivity {
         };
         mPostReference.addValueEventListener(postListener);
     }
-    private void callback(DataSnapshot mDataSnapshot){
+
+    private void callback(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
     }
-
-
-
 
 
 }

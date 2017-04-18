@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
@@ -134,7 +133,7 @@ public class ListFragment extends Fragment {
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.getAppContext());
-            View view = layoutInflater.inflate(R.layout.recycler_list_item, parent, false);
+            View view = layoutInflater.inflate(R.layout.fragment_list, parent, false);
             return new TaskHolder(view);
         }
 
