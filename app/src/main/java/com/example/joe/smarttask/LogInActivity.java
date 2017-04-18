@@ -94,7 +94,6 @@ public class LogInActivity extends AppCompatActivity {
         Log.d("data", mDatabase.toString());
         Log.d("data", mDatabase.getDatabase().toString());
 
-//        mFireBase = FireBase.fireBase(this);
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
@@ -152,12 +151,13 @@ public class LogInActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                signUp();
+                                                if (CheckSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
+                                                    createAccount(email.getText().toString(), password.getText().toString());
+                                                    sendVerificationEmail();
+                                                }
                                             }
                                         }
         );
-
-
 
 
         //Googelogin buttons
@@ -186,9 +186,6 @@ public class LogInActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-
-
     }
 
     // Sign in via google
@@ -302,6 +299,53 @@ public class LogInActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void createAccount(String email, String password) {
+        Log.d(TAG, email + " " + password);
+
+        Log.d(TAG, (mAuth == null) ? "null" : "not null");
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LogInActivity.this, "Account created. Please verify your email.", Toast.LENGTH_SHORT).show();
+                            sendVerificationEmail();
+                        }
+                    }
+                });
+    }
+
+    private void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // email sent
+                            // after email is sent just logout the user and finish this activity
+                            FirebaseAuth.getInstance().signOut();
+                            finish();
+                        } else {
+                            // email not sent, so display message and restart the activity or do whatever you wish to do
+                            //restart this activity
+                            overridePendingTransition(0, 0);
+                            finish();
+//                            overridePendingTransition(0, 0);
+//                            startActivity(getIntent());
+                        }
+                    }
+                });
     }
 
     public void isVerified(FirebaseUser user) {

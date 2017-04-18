@@ -2,6 +2,8 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.EditText;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 
+import java.util.List;
+
 /**
  * Created by joe on 14/03/2017.
  */
@@ -20,16 +24,19 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 public class TaskFragment extends Fragment {
 
     //TAG for Logs
-    private static final String TAG = "CLASS_TaskFragment";
+    private static final String TAG = "CL_TaskFragment";
 
     private static final String TASK_ID = "task_id";
+
+    private Toolbar toolbar;
 
     private TaskObject mTask;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+    private String mTaskId;
 
-    private ListTask mList;
+    private  ListTask mList;
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -42,7 +49,11 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String mTaskId= (String) getArguments().getSerializable(TASK_ID);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_task);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        mTaskId= (String) getArguments().getSerializable(TASK_ID);
         mList = ListTask.list(getContext());
         this.mTask=mList.getTask(mTaskId);
     }
@@ -69,5 +80,11 @@ public class TaskFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume(){
+        mList = ListTask.list(getContext());
+        this.mTask=mList.getTask(mTaskId);
+        super.onResume();
+    }
 
 }

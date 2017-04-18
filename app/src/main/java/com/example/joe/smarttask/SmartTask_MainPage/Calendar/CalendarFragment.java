@@ -1,20 +1,14 @@
-package com.example.joe.smarttask.Calendar;
+package com.example.joe.smarttask.SmartTask_MainPage.Calendar;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.joe.smarttask.Calendar.CalendarView;
-import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
 
 import java.text.DateFormat;
 import java.util.Date;
