@@ -34,12 +34,12 @@ public class TaskPagerActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pager_task);
+        setContentView(R.layout.activity_task);
 
         String mId = (String) getIntent().getSerializableExtra(TASK_ID);
 
 
-        mViewPager = (ViewPager) findViewById(R.id.view_pager_task);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_task);
         mTasksList = ListTask.getmTaskList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {

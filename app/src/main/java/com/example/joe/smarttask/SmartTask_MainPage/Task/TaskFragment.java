@@ -2,6 +2,8 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,8 @@ public class TaskFragment extends Fragment {
 
     private static final String TASK_ID = "task_id";
 
+    private Toolbar toolbar;
+
     private TaskObject mTask;
     private EditText mTitleField;
     private Button mDateButton;
@@ -45,6 +49,10 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_task);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         mTaskId= (String) getArguments().getSerializable(TASK_ID);
         mList = ListTask.list(getContext());
         this.mTask=mList.getTask(mTaskId);

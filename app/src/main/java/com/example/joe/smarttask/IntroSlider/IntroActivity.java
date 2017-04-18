@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.*;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
 
 /**
  * Class handles the intro slides - slides inflate intro_activity.xml and are no fragments (only one lifecycle)
@@ -161,7 +162,7 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, ListActivity.class);
+        intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

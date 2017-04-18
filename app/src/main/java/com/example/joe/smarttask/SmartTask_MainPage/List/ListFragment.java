@@ -13,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
@@ -30,6 +32,14 @@ public class ListFragment extends Fragment {
     //TAG for Logs
     private static final String TAG = "CL_ListFragment";
 
+
+    // [Start: get Singletons]
+    private FireBase mFireBase;
+    private ListTask mListTask;
+    // [End: get Singletons]
+
+
+
     public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
     private static RecyclerView sListRecyclerView;
     private static TaskAdapter sAdapter;
@@ -40,12 +50,19 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_list, container, false);
+        initSingletons();
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList = ListTask.getmTaskList();
         updateUI(mList);
         sContext=this.getContext();
+
         return view;
+    }
+
+    private void initSingletons(){
+        mFireBase = FireBase.fireBase(getContext());
+        mListTask = ListTask.list(getContext());
     }
 
     @Override
@@ -116,7 +133,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(SingleFragmentActivity.getAppContext());
+            LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.getAppContext());
             View view = layoutInflater.inflate(R.layout.recycler_list_item, parent, false);
             return new TaskHolder(view);
         }
