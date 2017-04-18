@@ -24,4 +24,6 @@
         android:layout_below="@+id/list_item_title"
         />
 
+
+
 </RelativeLayout>

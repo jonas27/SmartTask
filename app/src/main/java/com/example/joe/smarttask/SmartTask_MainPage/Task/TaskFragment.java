@@ -2,7 +2,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,6 @@ import android.widget.EditText;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-
-import java.util.List;
 
 /**
  * Created by joe on 14/03/2017.
@@ -61,7 +58,7 @@ public class TaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_task_smarttask, container, false);
+        View v = inflater.inflate(R.layout.fragment_task, container, false);
 
         mDateButton = (Button) v.findViewById(R.id.task_date);
         mDateButton.setText(mTask.getDatetime().toString());

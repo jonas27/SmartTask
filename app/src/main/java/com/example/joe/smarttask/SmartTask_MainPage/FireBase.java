@@ -28,7 +28,7 @@ public class FireBase extends AppCompatActivity {
     private static final String TAG = "CL_FireBase";
 
     //private static final String TAG = "SmartTask_FireBase";
-    // Singleton object of class itself (static --> Garbage collector wont delete it)
+    // Singleton object of class itself
     private static FireBase sFireBase;
 
 
@@ -62,13 +62,9 @@ public class FireBase extends AppCompatActivity {
         return sFireBase;
     }
 
-
-
-
-
-
-
-
+    public void createNewTask(Map<String, String> map, String root){
+        push(map, root);
+    }
 
     private void push(Map<String, String> map, String root) {
         /*
