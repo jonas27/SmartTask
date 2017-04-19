@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 /**
 
  */
-public class CalendarFragment extends Fragment {
+public class  CalendarFragment extends Fragment {
 
     CalendarView calendar;
 

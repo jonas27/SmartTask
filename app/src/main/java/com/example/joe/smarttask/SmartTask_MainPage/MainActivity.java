@@ -30,6 +30,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -77,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
 
         sFragmentList = new ArrayList<>();
 

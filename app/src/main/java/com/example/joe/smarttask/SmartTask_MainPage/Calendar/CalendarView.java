@@ -3,7 +3,9 @@ package com.example.joe.smarttask.SmartTask_MainPage.Calendar;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
+import com.google.android.gms.tasks.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Created by Jones on 04/12/17.
@@ -29,7 +35,7 @@ import java.util.HashSet;
 public class CalendarView extends LinearLayout
 {
     // for logging
-    private static final String LOGTAG = "Calendar View";
+    private static final String TAG = "Calendar View";
 
     // how many days to show, defaults to six weeks, 42 days
     private static final int DAYS_COUNT = 42;
@@ -53,16 +59,6 @@ public class CalendarView extends LinearLayout
     private TextView txtDate;
     private GridView grid;
 
-    // seasons' rainbow
-    int[] rainbow = new int[] {
-            R.color.summer,
-            R.color.fall,
-            R.color.winter,
-            R.color.spring
-    };
-
-    // month-season association (northern hemisphere, sorry australia :)
-    int[] monthSeason = new int[] {2, 2, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2};
 
     public CalendarView(Context context)
     {
@@ -185,10 +181,8 @@ public class CalendarView extends LinearLayout
 
         // set header color according to current season
         int month = currentDate.get(Calendar.MONTH);
-        int season = monthSeason[month];
-        int color = rainbow[season];
 
-        header.setBackgroundColor(getResources().getColor(color));
+        header.setBackgroundColor(getResources().getColor(R.color.headerBG));
     }
 
 
@@ -225,15 +219,6 @@ public class CalendarView extends LinearLayout
 
             // if this day has an event, specify event image
             view.setBackgroundResource(0);
-            if (eventDays != null)
-            {
-                for (Date eventDate : eventDays)
-                {
-                    /**
-                     * Get task info here and put to calendar
-                     */
-                }
-            }
 
             // clear styling
             ((TextView)view).setTypeface(null, Typeface.NORMAL);
@@ -250,9 +235,18 @@ public class CalendarView extends LinearLayout
                 ((TextView)view).setTypeface(null, Typeface.BOLD);
                 ((TextView)view).setTextColor(getResources().getColor(R.color.today));
             }
+            for (Iterator<TaskObject> i = ListTask.getmTaskList().iterator(); i.hasNext(); ) {
+                TaskObject current = i.next();
+                Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
+                if(day==cDate.getDay()&&month==cDate.getMonth()&&year==cDate.getYear()){
+                    Log.d(TAG,"Should set bg "+String.valueOf(date.getDate()));
+                    view.setBackgroundResource(R.mipmap.reminder);
+                }
+            }
             // set text
             ((TextView)view).setText(String.valueOf(date.getDate()));
+           // ((TextView)view).setBackground(Drawable.createFromPath("res/drawable/borders.xml"));
             ((TextView)view).setHeight(300);
 
             return view;

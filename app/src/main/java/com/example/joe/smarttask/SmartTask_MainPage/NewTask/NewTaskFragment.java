@@ -71,17 +71,11 @@ public class NewTaskFragment extends FragmentActivity {
 
         FireBase fireBase = FireBase.fireBase(this);
 
-        TaskObject taskObject= new TaskObject("categories", "datetime",
+        TaskObject taskObject= new TaskObject("categories", "1492767949661",
                 "String description", "String frequency", "String name", "String owner",
                 "String priority", "String responsible", "String points", "String status", "String id", "String task");
 
         fireBase.createTask(taskObject);
         finish();
-
-
-
     }
-
-
-
 }
