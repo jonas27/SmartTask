@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.android.gms.tasks.Task;
 
@@ -27,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Jones on 04/12/17.
@@ -44,20 +46,22 @@ public class CalendarView extends LinearLayout
     private static final String DATE_FORMAT = "MMM yyyy";
 
     // date format
-    private String dateFormat = "MMM yyyy";
+    private static String dateFormat = "MMM yyyy";
 
     // current displayed month
-    private Calendar currentDate = Calendar.getInstance();
+    private static Calendar currentDate = Calendar.getInstance();
 
     //event handling
     private EventHandler eventHandler = null;
 
     // internal components
-    private LinearLayout header;
+    private static LinearLayout header;
     private ImageView btnPrev;
     private ImageView btnNext;
-    private TextView txtDate;
-    private GridView grid;
+    private static TextView txtDate;
+    private static GridView grid;
+
+    private static List<TaskObject> list;
 
 
     public CalendarView(Context context)
@@ -68,6 +72,8 @@ public class CalendarView extends LinearLayout
     public CalendarView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+        list = ListTask.getmTaskList();
+        Log.d(TAG,"init");
         initControl(context);
     }
 
@@ -145,7 +151,7 @@ public class CalendarView extends LinearLayout
     /**
      * Display dates correctly in grid
      */
-    public void updateCalendar()
+    public static void updateCalendar()
     {
         updateCalendar(null);
     }
@@ -153,7 +159,7 @@ public class CalendarView extends LinearLayout
     /**
      * Display dates correctly in grid
      */
-    public void updateCalendar(HashSet<Date> events)
+    public static void updateCalendar(HashSet<Date> events)
     {
         ArrayList<Date> cells = new ArrayList<>();
         Calendar calendar = (Calendar)currentDate.clone();
@@ -173,20 +179,16 @@ public class CalendarView extends LinearLayout
         }
 
         // update grid
-        grid.setAdapter(new CalendarAdapter(getContext(), cells, events));
+        grid.setAdapter(new CalendarAdapter(MainActivity.getAppContext(), cells, events));
 
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         txtDate.setText(sdf.format(currentDate.getTime()));
-
-        // set header color according to current season
-        int month = currentDate.get(Calendar.MONTH);
-
-        header.setBackgroundColor(getResources().getColor(R.color.headerBG));
+        header.setBackgroundColor(Color.parseColor("#03a9f4"));
     }
 
 
-    private class CalendarAdapter extends ArrayAdapter<Date>
+    private static class CalendarAdapter extends ArrayAdapter<Date>
     {
         // days with events
         private HashSet<Date> eventDays;
@@ -204,6 +206,7 @@ public class CalendarView extends LinearLayout
         @Override
         public View getView(int position, View view, ViewGroup parent)
         {
+            Log.d(TAG,"getView");
             // day in question
             Date date = getItem(position);
             int day = date.getDate();
@@ -220,34 +223,45 @@ public class CalendarView extends LinearLayout
             // if this day has an event, specify event image
             view.setBackgroundResource(0);
 
+            TextView textDay = (TextView) view.findViewById(R.id.day);
+            TextView taskNumber = (TextView) view.findViewById(R.id.tasknumber);
+
             // clear styling
-            ((TextView)view).setTypeface(null, Typeface.NORMAL);
-            ((TextView)view).setTextColor(Color.BLACK);
+            textDay.setTypeface(null, Typeface.NORMAL);
+            textDay.setTextColor(Color.BLACK);
 
             if (currentDate.getTime().getMonth() != month)
             {
                 // if this day is outside current month, grey it out
-                ((TextView)view).setTextColor(getResources().getColor(R.color.greyed_out));
+                textDay.setTextColor(Color.parseColor("#c7c7c7"));
             }
             else if (day == today.getDate()&&month == today.getMonth()&&year==today.getYear())
             {
                 // if it is today, set it to blue/bold
-                ((TextView)view).setTypeface(null, Typeface.BOLD);
-                ((TextView)view).setTextColor(getResources().getColor(R.color.today));
+                textDay.setTypeface(null, Typeface.BOLD);
+                textDay.setTextColor(Color.parseColor("#4b82ff"));
             }
-            for (Iterator<TaskObject> i = ListTask.getmTaskList().iterator(); i.hasNext(); ) {
+            int counter = 0;
+
+            for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
                 TaskObject current = i.next();
                 Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
+                Log.d(TAG,"getting tasks "+ date.getDate());
                 if(day==cDate.getDay()&&month==cDate.getMonth()&&year==cDate.getYear()){
                     Log.d(TAG,"Should set bg "+String.valueOf(date.getDate()));
-                    view.setBackgroundResource(R.mipmap.reminder);
+                    counter++;
                 }
             }
+            if(counter>0){
+                taskNumber.setText(String.valueOf(counter)+" Tasks");
+                taskNumber.setVisibility(VISIBLE);
+            }
             // set text
-            ((TextView)view).setText(String.valueOf(date.getDate()));
-           // ((TextView)view).setBackground(Drawable.createFromPath("res/drawable/borders.xml"));
-            ((TextView)view).setHeight(300);
+            textDay.setText(String.valueOf(date.getDate()));
+           // textDay.setBackground(Drawable.createFromPath("res/drawable/borders.xml"));
+            textDay.setHeight(70);
+            taskNumber.setHeight(35);
 
             return view;
         }

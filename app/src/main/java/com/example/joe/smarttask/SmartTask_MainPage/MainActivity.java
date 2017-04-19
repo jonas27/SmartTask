@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                     mActionAdd.setVisibility(View.VISIBLE);
                 } else {
                     mActionAdd.setVisibility(View.INVISIBLE);
+                }
+                if(position==0){
+                    CalendarView.updateCalendar();
                 }
             }
 
