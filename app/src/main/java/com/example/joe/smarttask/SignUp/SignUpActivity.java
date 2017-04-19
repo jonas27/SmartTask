@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
 
+
     //TAG for Logs
     private static final String TAG = "SignUpActivity";
     //if bln is wrong the input from the user does not match requirements and no new account will be created
