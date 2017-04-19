@@ -229,14 +229,9 @@ public class CalendarView extends LinearLayout
             {
                 for (Date eventDate : eventDays)
                 {
-                    if (eventDate.getDate() == day &&
-                            eventDate.getMonth() == month &&
-                            eventDate.getYear() == year)
-                    {
-                        // mark this day for event
-                        view.setBackgroundResource(R.mipmap.reminder);
-                        break;
-                    }
+                    /**
+                     * Get task info here and put to calendar
+                     */
                 }
             }
 
@@ -249,7 +244,7 @@ public class CalendarView extends LinearLayout
                 // if this day is outside current month, grey it out
                 ((TextView)view).setTextColor(getResources().getColor(R.color.greyed_out));
             }
-            else if (day == today.getDate())
+            else if (day == today.getDate()&&month == today.getMonth()&&year==today.getYear())
             {
                 // if it is today, set it to blue/bold
                 ((TextView)view).setTypeface(null, Typeface.BOLD);
@@ -258,7 +253,7 @@ public class CalendarView extends LinearLayout
 
             // set text
             ((TextView)view).setText(String.valueOf(date.getDate()));
-            ((TextView)view).setHeight(100);
+            ((TextView)view).setHeight(300);
 
             return view;
         }
