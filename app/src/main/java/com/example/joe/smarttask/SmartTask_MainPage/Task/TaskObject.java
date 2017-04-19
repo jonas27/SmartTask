@@ -161,7 +161,7 @@ public class TaskObject implements Serializable {
     public void setTask(String task) {
         this.task = task;
     }
-    public boolean ismCompleted() {
+    public boolean isCompleted() {
         return mCompleted;
     }
     public void setmCompleted(boolean mCompleted) {

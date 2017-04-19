@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -20,8 +21,27 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <EditText
-        android:id="@+id/task_name"
+    <TextView
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1565C0"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/NewTask_Headline"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <EditText
+        android:id="@+id/newtask_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -29,85 +49,128 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="@string/signup_first_name"
+        android:hint="@string/NewTaskName"
         android:inputType="textPersonName"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/sadf"
+        <EditText
+        android:id="@+id/newtask_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/firstName"
+        android:layout_below="@+id/NewTaskDescription"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="@string/signup_last_name"
-        android:inputType="textPersonName"
+        android:hint="@string/NewTaskDescription"
+        android:inputType="textAutoComplete"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/dfas"
+        <EditText
+        android:id="@+id/newtask_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lastName"
+        android:layout_below="@+id/NewTaskDescription"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="@string/signup_birthday"
+        android:hint="@string/NewTaskTime"
+        android:inputType="datetime"
+        android:textSize="20sp" />
+
+        <EditText
+        android:id="@+id/newtask_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewTaskTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="25"
+        android:hint="@string/NewTaskDate"
         android:inputType="date"
         android:textSize="20sp" />
 
 
-    <EditText
-        android:id="@+id/asdf"
+        <EditText
+        android:id="@+id/newtask_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/birthday"
+        android:layout_below="@+id/NewTaskDate"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="@string/signup_email"
-        android:inputType="textEmailAddress"
+        android:hint="@string/NewTaskCategory"
+        android:inputType="textAutoCorrect"
         android:textSize="20sp" />
 
 
-    <EditText
-        android:id="@+id/asdf"
+        <EditText
+        android:id="@+id/newtask_frequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/email"
+        android:layout_below="@+id/NewTaskCategory"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="25"
-        android:hint="@string/signup_user_name"
+        android:hint="@string/NewTaskFrequency"
+        android:inputType="number"
+        android:textSize="20sp" />
+
+
+        <EditText
+        android:id="@+id/newtask_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewTaskFrequency"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="25"
+        android:hint="@string/NewTaskPriority"
+        android:inputType="number"
+        android:textSize="20sp" />
+
+        <EditText
+        android:id="@+id/newtask_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewTaskPriority"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="25"
+        android:hint="@string/NewTaskPoints"
+        android:inputType="number"
+        android:textSize="20sp" />
+
+        <EditText
+        android:id="@+id/newtask_responsible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewTaskPoints"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="25"
+        android:hint="@string/NewTaskResponsible"
         android:inputType="textPersonName"
         android:textSize="20sp" />
 
 
-    <EditText
-        android:id="@+id/asd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:ems="25"
-        android:hint="@string/signup_password"
-        android:inputType="textPassword"
-        android:textSize="20sp" />
-
     <Button
-        android:id="@+id/task_create"
+        android:id="@+id/newtask_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
@@ -115,16 +178,16 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="#1565C0"
-        android:text="@string/signup_sign_me_up"
+        android:text="@string/NewTaskCreateTaskButton"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
-
+        </LinearLayout>
+    </ScrollView>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_new_task"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+        android:layout_height="match_parent" />
 </LinearLayout>
