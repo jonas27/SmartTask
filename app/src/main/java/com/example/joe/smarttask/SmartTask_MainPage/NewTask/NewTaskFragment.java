@@ -24,12 +24,13 @@ import java.util.Map;
 public class NewTaskFragment extends FragmentActivity {
 
     private static final String TAG = "CL_NTF";
-    private boolean taskChecked=true;
+    private static boolean sTaskChecked;
 
-//    [Start: define Views]
+    //    [Start: define Views]
     EditText mCategories;
     EditText mColorcode;
-    EditText mDatetime;
+    EditText mTime;
+    EditText mDate;
     EditText mDescription;
     EditText mFrequency;
     EditText mName;
@@ -46,7 +47,7 @@ public class NewTaskFragment extends FragmentActivity {
 //    [End: define Views]
 
 
-//    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
+    //    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
     private String categories;
     private String colorcode;
     private String datetime;
@@ -71,6 +72,7 @@ public class NewTaskFragment extends FragmentActivity {
         super.onCreate(savedInstanceState);
         fireBase = FireBase.fireBase(this);
         t= new TaskObject();
+        sTaskChecked=true;
         setContentView(R.layout.fragment_new_task);
 
         mCategories = (EditText) findViewById(R.id.newtask_category);
@@ -80,40 +82,43 @@ public class NewTaskFragment extends FragmentActivity {
         mPoints  = (EditText) findViewById(R.id.newtask_points);
         mPriority = (EditText) findViewById(R.id.newtask_priority);
         mResponsible  = (EditText) findViewById(R.id.newtask_responsible);
-
+        mTime = (EditText) findViewById(R.id.newtask_time);
+        mDate = (EditText) findViewById(R.id.newtask_date);
 
         mCreate=(Button) findViewById(R.id.newtask_create);
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createNewTask();
-                if(taskChecked){
+                if(sTaskChecked){
                     fireBase.createTask(t);
                     finish();
-            }}
+                }}
         });
 
     }
 
 
     private void createNewTask(){
-        if(mCategories!=null){t.setCategories(mCategories.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_categories, Toast.LENGTH_SHORT).show(); taskChecked=false;}
-        if(mDatetime!=null){t.setDatetime(mDatetime.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();taskChecked=false;}
-        if(mDescription!=null){t.setDescription(mDescription.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_description, Toast.LENGTH_SHORT).show();taskChecked=false;}
-        if(mFrequency!=null){t.setFrequency(mFrequency.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_frequency, Toast.LENGTH_SHORT).show();taskChecked=false;}
-        if(mName!=null){t.setName(mName.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_name, Toast.LENGTH_SHORT).show();taskChecked=false;}
+        if(mCategories.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_categories, Toast.LENGTH_SHORT).show(); sTaskChecked=false;}
+        else{t.setCategories(mCategories.getText().toString());}
+        if(mDate.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setDatetime(mDate.getText().toString());}
+        if(mTime.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setDatetime(mTime.getText().toString());}
+        if(mDescription.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_description, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setDescription(mDescription.getText().toString());}
+        if(mFrequency.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_frequency, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setFrequency(mFrequency.getText().toString());}
+        if(mName.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_name, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setName(mName.getText().toString());}
         t.setOwner("Owner is admin");
-        if(mPriority!=null){t.setPriority(mPriority.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_priority, Toast.LENGTH_SHORT).show();taskChecked=false;}
-        if(mResponsible!=null){t.setResponsible(mResponsible.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_responsible, Toast.LENGTH_SHORT).show();taskChecked=false;}
-        if(mPoints!=null){t.setPoints(mPoints.getText().toString());}
-        else{Toast.makeText(NewTaskFragment.this,R.string.newtask_points, Toast.LENGTH_SHORT).show();taskChecked=false;}
+        if(mPriority.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_priority, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setPriority(mPriority.getText().toString());}
+        if(mResponsible.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_responsible, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setResponsible(mResponsible.getText().toString());}
+        if(mPoints.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_points, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+        else{t.setPoints(mPoints.getText().toString());}
         t.setStatus("false");
         t.setId("not used (legacy)");
         t.setTask("not used (legacy)");
