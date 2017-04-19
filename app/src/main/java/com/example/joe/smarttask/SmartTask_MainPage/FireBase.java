@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
@@ -137,6 +138,7 @@ public class FireBase extends AppCompatActivity {
 
     private void callback(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
+        CalendarView.updateCalendar();
     }
 
 

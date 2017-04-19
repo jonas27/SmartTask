@@ -51,9 +51,6 @@ public class CalendarView extends LinearLayout
     // current displayed month
     private static Calendar currentDate = Calendar.getInstance();
 
-    //event handling
-    private EventHandler eventHandler = null;
-
     // internal components
     private static LinearLayout header;
     private ImageView btnPrev;
@@ -132,18 +129,12 @@ public class CalendarView extends LinearLayout
         });
 
         // long-pressing a day
-        grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        grid.setOnClickListener(new AdapterView.OnClickListener()
         {
-
             @Override
-            public boolean onItemLongClick(AdapterView<?> view, View cell, int position, long id)
-            {
-                // handle long-press
-                if (eventHandler == null)
-                    return false;
-
-                eventHandler.onDayLongPress((Date)view.getItemAtPosition(position));
-                return true;
+            public void onClick(View v) {
+                TextView current = (TextView) v.findViewById(R.id.day);
+                
             }
         });
     }
@@ -265,22 +256,5 @@ public class CalendarView extends LinearLayout
 
             return view;
         }
-    }
-
-    /**
-     * Assign event handler to be passed needed events
-     */
-    public void setEventHandler(EventHandler eventHandler)
-    {
-        this.eventHandler = eventHandler;
-    }
-
-    /**
-     * This interface defines what events to be reported to
-     * the outside world
-     */
-    public interface EventHandler
-    {
-        void onDayLongPress(Date date);
     }
 }
