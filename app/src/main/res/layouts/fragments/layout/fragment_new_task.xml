@@ -41,7 +41,7 @@
             android:orientation="vertical">
 
         <EditText
-        android:id="@+id/NewTaskName"
+        android:id="@+id/newtask_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -54,7 +54,7 @@
         android:textSize="20sp" />
 
         <EditText
-        android:id="@+id/NewTaskDescription"
+        android:id="@+id/newtask_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskDescription"
@@ -68,7 +68,7 @@
         android:textSize="20sp" />
 
         <EditText
-        android:id="@+id/NewTaskTime"
+        android:id="@+id/newtask_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskDescription"
@@ -82,7 +82,7 @@
         android:textSize="20sp" />
 
         <EditText
-        android:id="@+id/NewTaskDate"
+        android:id="@+id/newtask_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskTime"
@@ -97,7 +97,7 @@
 
 
         <EditText
-        android:id="@+id/NewTaskCategory"
+        android:id="@+id/newtask_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskDate"
@@ -112,7 +112,7 @@
 
 
         <EditText
-        android:id="@+id/NewTaskFrequency"
+        android:id="@+id/newtask_frequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskCategory"
@@ -127,7 +127,7 @@
 
 
         <EditText
-        android:id="@+id/NewTaskPriority"
+        android:id="@+id/newtask_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskFrequency"
@@ -141,7 +141,7 @@
         android:textSize="20sp" />
 
         <EditText
-        android:id="@+id/NewTaskPoints"
+        android:id="@+id/newtask_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskPriority"
@@ -155,7 +155,7 @@
         android:textSize="20sp" />
 
         <EditText
-        android:id="@+id/NewTaskResponsible"
+        android:id="@+id/newtask_responsible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/NewTaskPoints"
@@ -170,7 +170,7 @@
 
 
     <Button
-        android:id="@+id/task_create"
+        android:id="@+id/newtask_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
