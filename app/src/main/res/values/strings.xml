@@ -46,14 +46,20 @@
     <string name="smarttask_create_profile_Add">Add User</string>
 
     <!-- SmartTask Create Tasks -->
-    <string name="smarttask_create_task_categories">Room/Area?</string>
+    <string name="NewTask_Headline">Define The task</string>
+    <string name="NewTaskCategory">Room/Area?</string>
     <string name="smarttask_create_task_colour">Choose colour for task</string>
-    <string name="smarttask_create_task_description">Write a description for the task</string>
-    <string name="smarttask_create_task_frequency">choose frequency</string>
-    <string name="smarttask_create_task_name">Name of the Task</string>
-    <string name="smarttask_create_task_point">assign points</string>
-    <string name="smarttask_create_task_priority">set priority</string>
-    <string name="smarttask_create_task_responsible">Assign task to</string>
+    <string name="NewTaskPoints">Define Points</string>
+    <string name="NewTaskTime">Enter Due Time</string>
+    <string name="NewTaskDate">Enter Due Date</string>
+    <string name="NewTaskDescription">Write a description for the task</string>
+    <string name="NewTaskFrequency">Choose frequency</string>
+    <string name="NewTaskName">Name of the Task</string>
+    <string name="NewTaskPriority">Set priority</string>
+    <string name="NewTaskResponsible">Assign task to</string>
+    <string name="NewTaskCreateTaskButton">Save</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -54,7 +54,7 @@ public class NewTaskFragment extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_new_task);
 
-        mName=(EditText) findViewById(R.id.task_name);
+        mName=(EditText) findViewById(R.id.NewTaskName);
 
         mCreate=(Button) findViewById(R.id.task_create);
         mCreate.setOnClickListener(new View.OnClickListener() {

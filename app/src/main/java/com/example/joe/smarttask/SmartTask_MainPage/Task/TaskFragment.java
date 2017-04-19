@@ -58,7 +58,7 @@ public class TaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_task, container, false);
+        View v = inflater.inflate(R.layout.fragm ent_task, container, false);
 
         mDateButton = (Button) v.findViewById(R.id.task_date);
         mDateButton.setText(mTask.getDatetime().toString());
