@@ -40,7 +40,7 @@ public class TaskPagerActivity extends FragmentActivity {
 
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager_task);
-        mTasksList = ListTask.getmTaskList();
+        mTasksList = ListTask.getTaskList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override

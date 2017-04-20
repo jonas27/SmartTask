@@ -1,5 +1,6 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -10,9 +11,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by joe on 14/03/2017.
@@ -28,10 +33,25 @@ public class TaskFragment extends Fragment {
     private Toolbar toolbar;
 
     private TaskObject mTask;
-    private EditText mTitleField;
-    private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
     private String mTaskId;
+
+//    [Start: Define views for task]
+    private TextView mTaskDate;
+    private CheckBox mTaskSolved;
+    private Button mTaskEdit;
+    private TextView mTaskName;
+    private TextView mTaskResponsible;
+    private TextView mTaskDescription;
+    private TextView mTaskCategory;
+    private TextView mTaskPriority;
+    private TextView mTaskPoints;
+    private TextView mTaskStatus;
+    private Button mTaskDone;
+    private Button mTaskPicture;
+    private Button mTaskConfirm;
+    private ImageView mTaskImageView;
+//    [End: Define views for task]
+
 
     private  ListTask mList;
 
@@ -60,18 +80,43 @@ public class TaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
 
-        mDateButton = (Button) v.findViewById(R.id.task_date);
-        mDateButton.setText(mTask.getDatetime().toString());
-        mDateButton.setEnabled(true);
+        mTaskDate = (TextView) v.findViewById(R.id.task_date);
+        mTaskDate.setText(mTask.getDatetime());
 
-        mSolvedCheckBox = (CheckBox) v.findViewById(R.id.task_solved);
-        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mTaskSolved = (CheckBox) v.findViewById(R.id.task_solved);
+        if(mTask.getStatus().toString().equals("true")){mTaskSolved.setChecked(true);}else{mTaskSolved.setChecked(false);}
+
+        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
+
+        mTaskName =(TextView) v.findViewById(R.id.task_name);
+        mTaskName.setText(mTask.getName());
+
+        mTaskResponsible = (TextView) v.findViewById(R.id.task_responsible);
+        mTaskResponsible.setText(mTask.getResponsible());
+
+        mTaskDescription = (TextView) v.findViewById(R.id.task_description);
+        mTaskDescription.setText(mTask.getResponsible());
+
+        mTaskCategory = (TextView) v.findViewById(R.id.task_category);
+        mTaskCategory.setText(mTask.getCategories());
+
+        mTaskPriority = (TextView) v.findViewById(R.id.task_category);
+        mTaskPriority.setText(mTask.getPriority());
+
+        mTaskPoints =(TextView) v.findViewById(R.id.task_points);
+        mTaskPoints.setText(mTask.getPoints());
+
+        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
+        mTaskEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Set the task's solved property
-                mTask.setmCompleted(isChecked);
+            public void onClick(View v) {
+                Intent i= new Intent();
             }
         });
+
+
+
+
 
 
         return v;
