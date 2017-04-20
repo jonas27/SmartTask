@@ -129,11 +129,11 @@ public class CalendarView extends LinearLayout
         });
 
         // long-pressing a day
-        grid.setOnClickListener(new AdapterView.OnClickListener()
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onClick(View v) {
-                TextView current = (TextView) v.findViewById(R.id.day);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView current = (TextView) view.findViewById(R.id.tasknumber);
 
             }
         });
