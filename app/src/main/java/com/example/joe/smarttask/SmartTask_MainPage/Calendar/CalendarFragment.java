@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat;
 /**
 
  */
-public class CalendarFragment extends Fragment {
+public class  CalendarFragment extends Fragment {
 
     CalendarView calendar;
 
@@ -29,7 +30,6 @@ public class CalendarFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,17 +43,19 @@ public class CalendarFragment extends Fragment {
         cv.updateCalendar(events);
 
         // assign event handler
+        /*
         cv.setEventHandler(new CalendarView.EventHandler()
         {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onDayLongPress(Date date)
+            public void onClick(Date date)
             {
                 // show returned day
                 DateFormat df = SimpleDateFormat.getDateInstance();
             }
         });
-
+        */
+        cv.updateCalendar();
         return view;
     }
 
