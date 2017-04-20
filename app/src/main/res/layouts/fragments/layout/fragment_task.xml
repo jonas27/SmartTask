@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:baselineAligned="false">
 
     <TextView
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1565C0"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/ViewTaskHeadline"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+
+    <!--<TextView
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
-    <EditText
+    <TextView
         android:id="@+id/task_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,19 +36,149 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
+!-->
 
     <Button
         android:id="@+id/task_date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/ViewTaskDoneButton"
+        android:layout_alignStart="@+id/ViewTaskDoneButton"
+        android:layout_marginBottom="22dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:text="Test" />
 
     <CheckBox
         android:id="@+id/task_solved"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bar"
+        android:layout_alignBottom="@+id/bar"
+        android:layout_alignEnd="@+id/ViewTaskEditButton"
+        android:layout_marginEnd="15dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="" />
-</LinearLayout>
+
+    <Button
+        android:id="@+id/ViewTaskEditButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ViewTaskName"
+        android:layout_alignBottom="@+id/ViewTaskName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:text="@string/ViewTaskEditButton" />
+
+    <TextView
+        android:id="@+id/ViewTaskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ViewTaskDoneButton"
+        android:layout_below="@+id/bar"
+        android:text="Task Name"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/ViewTaskResponsible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ViewTaskEditButton"
+        android:layout_alignStart="@+id/ViewTaskName"
+        android:layout_below="@+id/ViewTaskEditButton"
+        android:layout_marginTop="23dp"
+        android:text="Responsible"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ViewTaskDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ViewTaskResponsible"
+        android:layout_below="@+id/ViewTaskResponsible"
+        android:text="Description"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/ViewTaskCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ViewTaskDescription"
+        android:layout_alignStart="@+id/ViewTaskDescription"
+        android:layout_below="@+id/ViewTaskDescription"
+        android:layout_marginTop="19dp"
+        android:text="Category" />
+
+    <TextView
+        android:id="@+id/ViewTaskPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ViewTaskEditButton"
+        android:layout_alignStart="@+id/ViewTaskCategory"
+        android:layout_below="@+id/ViewTaskCategory"
+        android:text="Priority"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ViewTaskPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ViewTaskPriority"
+        android:layout_alignStart="@+id/ViewTaskPriority"
+        android:layout_below="@+id/ViewTaskPriority"
+        android:text="Points"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ViewTaskStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ViewTaskPriority"
+        android:layout_alignStart="@+id/ViewTaskPoints"
+        android:layout_below="@+id/ViewTaskPoints"
+        android:text="Status"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/ViewTaskDoneButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="146dp"
+        android:layout_marginStart="15dp"
+        android:text="@string/ViewTaskDoneButton" />
+
+    <Button
+        android:id="@+id/ViewTaskAddPictureButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ViewTaskDoneButton"
+        android:layout_below="@+id/task_date"
+        android:layout_marginTop="46dp"
+        android:text="@string/ViewTaskAddPictureButton" />
+
+    <Button
+        android:id="@+id/ViewTaskConfirmButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ViewTaskAddPictureButton"
+        android:layout_below="@+id/ViewTaskAddPictureButton"
+        android:text="@string/ViewTaskConfirmButton" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/smlogo"
+        android:layout_alignBottom="@+id/ViewTaskConfirmButton"
+        android:layout_alignEnd="@+id/ViewTaskStatus"
+        android:layout_marginBottom="17dp" />
+
+
+</RelativeLayout>
