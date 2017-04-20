@@ -197,7 +197,6 @@ public class CalendarView extends LinearLayout
         @Override
         public View getView(int position, View view, ViewGroup parent)
         {
-            Log.d(TAG,"getView");
             // day in question
             Date date = getItem(position);
             int day = date.getDate();
@@ -238,9 +237,7 @@ public class CalendarView extends LinearLayout
                 TaskObject current = i.next();
                 Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
-                Log.d(TAG,"getting tasks "+ date.getDate());
                 if(day==cDate.getDay()&&month==cDate.getMonth()&&year==cDate.getYear()){
-                    Log.d(TAG,"Should set bg "+String.valueOf(date.getDate()));
                     counter++;
                 }
             }
