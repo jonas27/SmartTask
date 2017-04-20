@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 
 import org.w3c.dom.Text;
@@ -106,11 +107,23 @@ public class TaskFragment extends Fragment {
         mTaskPoints =(TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
 
-        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
-        mTaskEdit.setOnClickListener(new View.OnClickListener() {
+//        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
+//        mTaskEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mTask.setStatus("true");
+//                FireBase f=FireBase.fireBase(getContext());
+//                f.createTask(mTask);
+//            }
+//        });
+
+        mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
+        mTaskConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent();
+                mTask.setStatus("true");
+                FireBase f=FireBase.fireBase(getContext());
+                f.createTask(mTask);
             }
         });
 
