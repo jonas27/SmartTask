@@ -120,7 +120,7 @@ public class NewTaskFragment extends FragmentActivity {
         if(mPoints.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_points, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
         else{t.setPoints(mPoints.getText().toString());}
         t.setStatus("false");
-        t.setId("not used (legacy)");
+        t.setId("");
         t.setTask("not used (legacy)");
     }
 
