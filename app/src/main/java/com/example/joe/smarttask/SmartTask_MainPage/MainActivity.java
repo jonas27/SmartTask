@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         sFragmentList = new ArrayList<>();
 
         // ViewPager and its adapters use support library
-        // fragments, so use getSupportFragmentManager.
+        // layout.layouts.fragments, so use getSupportFragmentManager.
         mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(mViewPager);

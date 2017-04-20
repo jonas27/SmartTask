@@ -25,7 +25,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
 
 /**
- * Class handles the intro slides - slides inflate intro_activity.xml and are no fragments (only one lifecycle)
+ * Class handles the intro slides - slides inflate intro_activity.xml and are no layout.layouts.fragments (only one lifecycle)
  * Created on 07/02/2017.
  */
 

@@ -52,7 +52,7 @@ public class ListFragment extends Fragment {
         initSingletons();
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mList = ListTask.getmTaskList();
+        mList = ListTask.getTaskList();
         updateUI(mList);
         sContext=this.getContext();
 

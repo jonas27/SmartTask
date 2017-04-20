@@ -46,14 +46,36 @@
     <string name="smarttask_create_profile_Add">Add User</string>
 
     <!-- SmartTask Create Tasks -->
-    <string name="smarttask_create_task_categories">Room/Area?</string>
+    <string name="NewTask_Headline">Define The task</string>
+    <string name="NewTaskCategory">Room/Area?</string>
     <string name="smarttask_create_task_colour">Choose colour for task</string>
-    <string name="smarttask_create_task_description">Write a description for the task</string>
-    <string name="smarttask_create_task_frequency">choose frequency</string>
-    <string name="smarttask_create_task_name">Name of the Task</string>
-    <string name="smarttask_create_task_point">assign points</string>
-    <string name="smarttask_create_task_priority">set priority</string>
-    <string name="smarttask_create_task_responsible">Assign task to</string>
+    <string name="NewTaskPoints">Define Points</string>
+    <string name="NewTaskTime">Enter Due Time</string>
+    <string name="NewTaskDate">Enter Due Date</string>
+    <string name="NewTaskDescription">Write a description for the task</string>
+    <string name="NewTaskFrequency">Choose frequency</string>
+    <string name="NewTaskName">Name of the Task</string>
+    <string name="NewTaskPriority">Set priority</string>
+    <string name="NewTaskResponsible">Assign task to</string>
+    <string name="NewTaskCreateTaskButton">Save</string>
+    <!-- Toasts -->
+    <string name="newtask_categories">Please specify a category.</string>
+    <string name="newtask_colorcode">Please specify a color code.</string>
+    <string name="newtask_datetime">Please specify an end date.</string>
+    <string name="newtask_description">Please specify a description.</string>
+    <string name="newtask_frequency">Please specify a frequency.</string>
+    <string name="newtask_name">Please specify a name.</string>
+    <string name="newtask_points">Please specify how many points this task is worth.</string>
+    <string name="newtask_priority">Please specify a priority.</string>
+    <string name="newtask_responsible">Please specify the responsible persons.</string>
+
+
+    <!-- SmartTask View Task -->
+    <string name="ViewTaskHeadline">Task Viewer</string>
+    <string name="ViewTaskEditButton">Edit</string>
+    <string name="ViewTaskDoneButton">Task Complete</string>
+    <string name="ViewTaskAddPictureButton">Upload Picture</string>
+    <string name="ViewTaskConfirmButton">Task Confirmed</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

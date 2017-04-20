@@ -18,6 +18,7 @@
         android:id="@+id/list_item_box"
         android:descendantFocusability="blocksDescendants"
         android:focusable="false"
+
         android:clickable="false"
         android:focusableInTouchMode="false"
         />
