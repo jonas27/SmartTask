@@ -33,7 +33,8 @@ public class TaskFragment extends Fragment {
 
 //    [Start: Define views for task]
     private TextView mTaskDate;
-    private CheckBox mTaskSolved;
+    private ImageView mTaskSolved;
+    private ImageView mTaskUnSolved;
     private Button mTaskEdit;
     private TextView mTaskName;
     private TextView mTaskResponsible;
@@ -80,8 +81,13 @@ public class TaskFragment extends Fragment {
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
         mTaskDate.setText(mTask.getDatetime());
 
-        mTaskSolved = (CheckBox) v.findViewById(R.id.task_solved);
-        if(mTask.getStatus().toString().equals("true")){mTaskSolved.setChecked(true);}else{mTaskSolved.setChecked(false);}
+
+
+        mTaskSolved = (ImageView) v.findViewById(R.id.task_check);
+        mTaskUnSolved = (ImageView) v.findViewById(R.id.task_uncheck);
+
+        if(mTask.getStatus().toString().equals("true")){mTaskSolved.setVisibility(View.VISIBLE);mTaskUnSolved.setVisibility(View.INVISIBLE);
+        }else{mTaskSolved.setVisibility(View.INVISIBLE);mTaskUnSolved.setVisibility(View.VISIBLE);}
 
         mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
 
@@ -92,12 +98,12 @@ public class TaskFragment extends Fragment {
         mTaskResponsible.setText(mTask.getResponsible());
 
         mTaskDescription = (TextView) v.findViewById(R.id.task_description);
-        mTaskDescription.setText(mTask.getResponsible());
+        mTaskDescription.setText(mTask.getDescription());
 
         mTaskCategory = (TextView) v.findViewById(R.id.task_category);
         mTaskCategory.setText(mTask.getCategories());
 
-        mTaskPriority = (TextView) v.findViewById(R.id.task_category);
+        mTaskPriority = (TextView) v.findViewById(R.id.task_priority);
         mTaskPriority.setText(mTask.getPriority());
 
         mTaskPoints =(TextView) v.findViewById(R.id.task_points);
