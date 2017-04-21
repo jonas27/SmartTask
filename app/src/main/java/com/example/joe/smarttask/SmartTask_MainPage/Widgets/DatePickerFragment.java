@@ -16,6 +16,7 @@ import com.example.joe.smarttask.R;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by joe on 20/04/2017.
@@ -64,8 +65,8 @@ public class DatePickerFragment extends DialogFragment {
                 int year = mDatePicker.getYear();
                 int month = mDatePicker.getMonth();
                 int day = mDatePicker.getDayOfMonth();
-                Date date2 = new Date(year, month, day);
-                long date = date2.getTime();
+                Calendar date = new GregorianCalendar(year, month, day, 0, 0);
+//                long date = date2.getTimeInMillis();
                 sendResult(Activity.RESULT_OK, date);
                 Log.d(TAG, "Year Month Day: " + year + month + day);
             }
@@ -73,7 +74,7 @@ public class DatePickerFragment extends DialogFragment {
     }
 
 
-    private void sendResult(int resultCode, Long date) {
+    private void sendResult(int resultCode, Calendar date) {
         if (getTargetFragment() == null) {
             return; }
         Intent intent = new Intent();

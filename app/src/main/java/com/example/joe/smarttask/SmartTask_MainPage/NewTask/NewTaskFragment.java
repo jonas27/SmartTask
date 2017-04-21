@@ -21,7 +21,6 @@ import com.example.joe.smarttask.SmartTask_MainPage.Widgets.TimePickerFragment;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by joe on 18/04/2017.
@@ -60,7 +59,7 @@ FireBase fireBase;
     private String categories;
     private String colorcode;
     private Long date;
-    private Long time;
+    private int time;
     private long datetime;
     private String description;
     private String frequency;
@@ -73,6 +72,9 @@ FireBase fireBase;
     //    [End: Variables of a task]
     private String id;
     private String task;
+
+    private Calendar cal;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -143,19 +145,18 @@ return v;
         if (resultCode != Activity.RESULT_OK) {
             return; }
         if (requestCode == REQUEST_DATE) {
-            Date result = new Date((long) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE));
-            date = (Long) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            String formatDate=date.toString().substring(0,4) + "/" + date.toString().substring(4,6) + "/" + date.toString().substring(6,8);
-            mDate.setText(formatDate);
+            cal = (Calendar) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+//            String formatDate=date.toString().substring(0,4) + "/" + date.toString().substring(4,6) + "/" + date.toString().substring(6,8);
+            mDate.setText(cal.get(Calendar.DAY_OF_WEEK) + " / " + cal.get(Calendar.MONTH) + " / " + cal.get(Calendar.YEAR));
         }
         if (requestCode == REQUEST_TIME) {
-            time = (Long) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            String formatTime;
-            if (time < 2400 && time > 10000) {
-                formatTime = time.toString().substring(0, 2) + ":" + time.toString().substring(2, 4);
-            }else{
-                formatTime = "00:" + time.toString().substring(2, 4);
-            }
+            time = (Integer) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            String formatTime = time / 60 + " : " + time % 60;
+//            if (time < 2400 && time > 10000) {
+//                formatTime = time.toString().substring(0, 2) + ":" + time.toString().substring(2, 4);
+//            }else{
+//                formatTime = "00:" + time.toString().substring(2, 4);
+//            }
             mTime.setText(formatTime);
         }
     }
@@ -178,13 +179,8 @@ return v;
             Toast.makeText(getContext(), R.string.newtask_datetime, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            int year = Integer.parseInt(Long.toString(date).substring(0, 4));
-            int month = Integer.parseInt(Long.toString(date).substring(4, 6));
-            int day = Integer.parseInt(Long.toString(date).substring(6));
-            int hrs = Integer.parseInt(Long.toString(time).substring(0, 2));
-            int min = Integer.parseInt(Long.toString(time).substring(2));
-            Calendar cal = new GregorianCalendar(year, month, day, hrs, min, 0);
-            datetime = cal.getTimeInMillis();
+            cal.add(Calendar.MINUTE, time);
+            datetime = cal.get(Calendar.MILLISECOND);
             Log.d(TAG, Long.toString(datetime));
             t.setDatetime(Long.toString(datetime));
         }

@@ -66,15 +66,15 @@ public class TimePickerFragment extends DialogFragment {
                         }
 
                         Log.d(TAG, "Hour: " + hour + " " + min);
-                        if(hour==0){hour=24;}
-                        long time = hour * 60 + min;
+//                        if(hour==0){hour=24;}
+                        int time = hour * 60 + min;
                         sendResult(Activity.RESULT_OK, time);
                     }
                 }).create();
     }
 
 
-    private void sendResult(int resultCode, Long time) {
+    private void sendResult(int resultCode, int time) {
         if (getTargetFragment() == null) {
             return;
         }
