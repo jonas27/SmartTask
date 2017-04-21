@@ -3,7 +3,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;

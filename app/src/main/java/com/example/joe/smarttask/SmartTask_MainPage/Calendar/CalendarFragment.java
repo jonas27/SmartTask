@@ -43,16 +43,18 @@ public class  CalendarFragment extends Fragment {
         cv.updateCalendar(events);
 
         // assign event handler
+        /*
         cv.setEventHandler(new CalendarView.EventHandler()
         {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onDayLongPress(Date date)
+            public void onClick(Date date)
             {
                 // show returned day
                 DateFormat df = SimpleDateFormat.getDateInstance();
             }
         });
+        */
         cv.updateCalendar();
         return view;
     }

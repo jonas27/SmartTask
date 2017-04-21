@@ -71,15 +71,21 @@ public class FireBase extends AppCompatActivity {
      */
 
 //    [start: create a new Task]
-    public void createTask(TaskObject taskObject) {
-        createNewTask(taskObject);
+    public void createTask(TaskObject mTaskObject) {
+        createNewTask(mTaskObject);
     }
 
-    private void createNewTask(TaskObject taskObject) {
-        String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
+    private void createNewTask(TaskObject mTaskObject) {
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
-        Log.d(TAG, key);
-        mPostReference.child(key).setValue(taskObject);
+//        Log.d(TAG, key);
+        if(mTaskObject.getId().equals("")){
+            String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
+        mTaskObject.setId(key);
+        mPostReference.child(key).setValue(mTaskObject);
+        }
+        else{
+            mPostReference.child(mTaskObject.getId()).setValue(mTaskObject);
+        }
     }
 //    [start: create a new Task]
 

@@ -69,7 +69,7 @@ public class CalendarView extends LinearLayout
     public CalendarView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        list = ListTask.getmTaskList();
+        list = ListTask.getTaskList();
         Log.d(TAG,"init");
         initControl(context);
     }
@@ -129,12 +129,12 @@ public class CalendarView extends LinearLayout
         });
 
         // long-pressing a day
-        grid.setOnClickListener(new AdapterView.OnClickListener()
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onClick(View v) {
-                TextView current = (TextView) v.findViewById(R.id.day);
-                
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView current = (TextView) view.findViewById(R.id.tasknumber);
+
             }
         });
     }
@@ -197,7 +197,6 @@ public class CalendarView extends LinearLayout
         @Override
         public View getView(int position, View view, ViewGroup parent)
         {
-            Log.d(TAG,"getView");
             // day in question
             Date date = getItem(position);
             int day = date.getDate();
@@ -238,9 +237,7 @@ public class CalendarView extends LinearLayout
                 TaskObject current = i.next();
                 Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
-                Log.d(TAG,"getting tasks "+ date.getDate());
                 if(day==cDate.getDay()&&month==cDate.getMonth()&&year==cDate.getYear()){
-                    Log.d(TAG,"Should set bg "+String.valueOf(date.getDate()));
                     counter++;
                 }
             }
@@ -250,7 +247,7 @@ public class CalendarView extends LinearLayout
             }
             // set text
             textDay.setText(String.valueOf(date.getDate()));
-           // textDay.setBackground(Drawable.createFromPath("res/drawable/borders.xml"));
+            // textDay.setBackground(Drawable.createFromPath("res/drawable/borders.xml"));
             textDay.setHeight(70);
             taskNumber.setHeight(35);
 

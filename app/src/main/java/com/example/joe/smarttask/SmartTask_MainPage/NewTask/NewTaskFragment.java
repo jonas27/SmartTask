@@ -102,10 +102,10 @@ public class NewTaskFragment extends FragmentActivity {
     private void createNewTask(){
         if(mCategories.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_categories, Toast.LENGTH_SHORT).show(); sTaskChecked=false;}
         else{t.setCategories(mCategories.getText().toString());}
-        if(mDate.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
-        else{t.setDatetime(mDate.getText().toString());}
-        if(mTime.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
-        else{t.setDatetime(mTime.getText().toString());}
+//        if(mDate.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+//        else{t.setDatetime(mDate.getText().toString());}
+//        if(mTime.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
+//        else{t.setDatetime(mTime.getText().toString());}
         if(mDescription.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_description, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
         else{t.setDescription(mDescription.getText().toString());}
         if(mFrequency.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_frequency, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
@@ -120,7 +120,7 @@ public class NewTaskFragment extends FragmentActivity {
         if(mPoints.getText().toString().equals("")){Toast.makeText(NewTaskFragment.this,R.string.newtask_points, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
         else{t.setPoints(mPoints.getText().toString());}
         t.setStatus("false");
-        t.setId("not used (legacy)");
+        t.setId("");
         t.setTask("not used (legacy)");
     }
 
