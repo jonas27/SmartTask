@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private static List<Fragment> sFragmentList;
     private static boolean sStartActivity;
 
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -73,7 +74,12 @@ public class MainActivity extends AppCompatActivity {
         mActionAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getAppContext(), NewTaskFragment.class);
+//                FragmentManager fm = getSupportFragmentManager();
+//                    Fragment fragment = new NewTaskFragment();
+//                    fm.beginTransaction()
+//                            .add(R.id.fragment_container, fragment)
+//                            .commit();
+                Intent intent= new Intent(getApplicationContext(), NewTaskActivity.class);
                 startActivity(intent);
             }
         });

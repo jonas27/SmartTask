@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_container_new_task"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -67,7 +68,7 @@
         android:inputType="textAutoComplete"
         android:textSize="20sp" />
 
-        <EditText
+        <Button
         android:id="@+id/newtask_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +82,7 @@
         android:inputType="datetime"
         android:textSize="20sp" />
 
-        <EditText
+        <Button
         android:id="@+id/newtask_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
