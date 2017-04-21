@@ -1,6 +1,5 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -9,16 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by joe on 14/03/2017.
@@ -80,6 +75,7 @@ public class TaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
+
 
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
         mTaskDate.setText(mTask.getDatetime());
