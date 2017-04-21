@@ -11,29 +11,23 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.example.joe.smarttask.R;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by joe on 20/04/2017.
  */
 
 public class TimePickerFragment extends DialogFragment {
-    private static final String TAG = "CL_TPF";
-
     public static final String EXTRA_TIME = "com.joe.android.smarttask.time";
-
+    private static final String TAG = "CL_TPF";
+    private static final String ARG_DATE = "date";
     Calendar calendar = Calendar.getInstance();
     int hour = calendar.get(Calendar.HOUR_OF_DAY);
     int min = calendar.get(Calendar.MINUTE);
-
-    private static final String ARG_DATE = "date";
-
     private TimePicker mTimePicker;
 
 
@@ -70,9 +64,10 @@ public class TimePickerFragment extends DialogFragment {
                             hour = mTimePicker.getCurrentHour();
                             min = mTimePicker.getCurrentMinute();
                         }
-                        Log.d(TAG, "Hour: "+ Long.toString(System.currentTimeMillis()));
+
+                        Log.d(TAG, "Hour: " + hour + " " + min);
                         if(hour==0){hour=24;}
-                        long time=hour*100+min;
+                        long time = hour * 60 + min;
                         sendResult(Activity.RESULT_OK, time);
                     }
                 }).create();

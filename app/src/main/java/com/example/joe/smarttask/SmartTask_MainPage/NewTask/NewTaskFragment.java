@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,9 @@ import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.DatePickerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.TimePickerFragment;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by joe on 18/04/2017.
@@ -140,6 +143,7 @@ return v;
         if (resultCode != Activity.RESULT_OK) {
             return; }
         if (requestCode == REQUEST_DATE) {
+            Date result = new Date((long) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE));
             date = (Long) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             String formatDate=date.toString().substring(0,4) + "/" + date.toString().substring(4,6) + "/" + date.toString().substring(6,8);
             mDate.setText(formatDate);
@@ -147,7 +151,7 @@ return v;
         if (requestCode == REQUEST_TIME) {
             time = (Long) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             String formatTime;
-            if(time<2400) {
+            if (time < 2400 && time > 10000) {
                 formatTime = time.toString().substring(0, 2) + ":" + time.toString().substring(2, 4);
             }else{
                 formatTime = "00:" + time.toString().substring(2, 4);
@@ -170,8 +174,19 @@ return v;
         } else {
             t.setCategories(mCategories.getText().toString());
         }
-        if(mDate.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
-        else if(mTime.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;} else {
+        if(mDate.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;} else if (mTime.getText().toString().equals("")) {
+            Toast.makeText(getContext(), R.string.newtask_datetime, Toast.LENGTH_SHORT).show();
+            sTaskChecked = false;
+        } else {
+            int year = Integer.parseInt(Long.toString(date).substring(0, 4));
+            int month = Integer.parseInt(Long.toString(date).substring(4, 6));
+            int day = Integer.parseInt(Long.toString(date).substring(6));
+            int hrs = Integer.parseInt(Long.toString(time).substring(0, 2));
+            int min = Integer.parseInt(Long.toString(time).substring(2));
+            Calendar cal = new GregorianCalendar(year, month, day, hrs, min, 0);
+            datetime = cal.getTimeInMillis();
+            Log.d(TAG, Long.toString(datetime));
+            t.setDatetime(Long.toString(datetime));
         }
         if (mDescription.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_description, Toast.LENGTH_SHORT).show();

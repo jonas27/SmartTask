@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import com.example.joe.smarttask.R;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by joe on 20/04/2017.
@@ -26,19 +23,15 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
 
-    private static final String TAG = "CL_DPF";
-
     public static final String EXTRA_DATE = "com.joe.android.smarttask.date";
-
+    private static final String TAG = "CL_DPF";
+    private static final String ARG_DATE = "date";
 //    Date date = (Date) getArguments().getSerializable(ARG_DATE);
     Date date;
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH);
     int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-    private static final String ARG_DATE = "date";
-
     private DatePicker mDatePicker;
 
 
@@ -71,7 +64,8 @@ public class DatePickerFragment extends DialogFragment {
                 int year = mDatePicker.getYear();
                 int month = mDatePicker.getMonth();
                 int day = mDatePicker.getDayOfMonth();
-                long date=year*10000+month*100+day;
+                Date date2 = new Date(year, month, day);
+                long date = date2.getTime();
                 sendResult(Activity.RESULT_OK, date);
                 Log.d(TAG, "Year Month Day: " + year + month + day);
             }
