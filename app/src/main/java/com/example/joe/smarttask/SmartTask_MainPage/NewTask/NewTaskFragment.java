@@ -4,11 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +14,11 @@ import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.DatePickerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.TimePickerFragment;
 
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by joe on 18/04/2017.
@@ -33,15 +27,12 @@ import java.util.Map;
 public class NewTaskFragment extends Fragment {
 
     private static final String TAG = "CL_NTF";
-    private static boolean sTaskChecked;
-
-    Date mDateNumber;
-
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
-
+    private static boolean sTaskChecked;
+    Date mDateNumber;
     //    [Start: define Views]
     EditText mCategories;
     EditText mColorcode;
@@ -60,8 +51,8 @@ public class NewTaskFragment extends Fragment {
 
     Button mCreate;
 //    [End: define Views]
-
-
+FireBase fireBase;
+    TaskObject t;
     //    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
     private String categories;
     private String colorcode;
@@ -76,14 +67,9 @@ public class NewTaskFragment extends Fragment {
     private String priority;
     private String responsible;
     private String status;
+    //    [End: Variables of a task]
     private String id;
     private String task;
-//    [End: Variables of a task]
-
-
-    FireBase fireBase;
-    TaskObject t;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -185,8 +171,8 @@ return v;
             t.setCategories(mCategories.getText().toString());
         }
         if(mDate.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
-        else if(mTime.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;}
-        else{t.setDatetime(mTime.getText().toString());}
+        else if(mTime.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;} else {
+        }
         if (mDescription.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_description, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
