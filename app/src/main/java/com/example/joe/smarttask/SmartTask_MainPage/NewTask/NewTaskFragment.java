@@ -146,17 +146,11 @@ return v;
             return; }
         if (requestCode == REQUEST_DATE) {
             cal = (Calendar) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            String formatDate=date.toString().substring(0,4) + "/" + date.toString().substring(4,6) + "/" + date.toString().substring(6,8);
             mDate.setText(cal.get(Calendar.DAY_OF_WEEK) + " / " + cal.get(Calendar.MONTH) + " / " + cal.get(Calendar.YEAR));
         }
         if (requestCode == REQUEST_TIME) {
             time = (Integer) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             String formatTime = time / 60 + " : " + time % 60;
-//            if (time < 2400 && time > 10000) {
-//                formatTime = time.toString().substring(0, 2) + ":" + time.toString().substring(2, 4);
-//            }else{
-//                formatTime = "00:" + time.toString().substring(2, 4);
-//            }
             mTime.setText(formatTime);
         }
     }

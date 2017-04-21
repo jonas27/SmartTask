@@ -66,7 +66,6 @@ public class TimePickerFragment extends DialogFragment {
                         }
 
                         Log.d(TAG, "Hour: " + hour + " " + min);
-//                        if(hour==0){hour=24;}
                         int time = hour * 60 + min;
                         sendResult(Activity.RESULT_OK, time);
                     }
