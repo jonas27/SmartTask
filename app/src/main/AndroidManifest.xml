@@ -25,8 +25,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".SmartTask_MainPage.List.ListActivity" />
         <activity android:name=".SmartTask_MainPage.Task.TaskPagerActivity" />
-        <activity android:name=".SmartTask_MainPage.NewTask.NewTaskFragment" />
         <activity android:name=".SmartTask_MainPage.MainActivity" />
+        <activity android:name=".SmartTask_MainPage.NewTask.NewTaskActivity" />
         <!--
              <activity
             android:hardwareAccelerated="true" />
