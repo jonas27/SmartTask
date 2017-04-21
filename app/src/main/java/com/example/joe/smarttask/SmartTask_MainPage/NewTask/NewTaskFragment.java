@@ -146,7 +146,7 @@ return v;
             return; }
         if (requestCode == REQUEST_DATE) {
             cal = (Calendar) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mDate.setText(cal.get(Calendar.DAY_OF_WEEK) + " / " + cal.get(Calendar.MONTH) + " / " + cal.get(Calendar.YEAR));
+            mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
         }
         if (requestCode == REQUEST_TIME) {
             time = (Integer) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
