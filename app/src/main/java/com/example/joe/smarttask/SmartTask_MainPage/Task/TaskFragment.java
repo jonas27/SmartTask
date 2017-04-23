@@ -204,6 +204,7 @@ public class TaskFragment extends Fragment {
                         Bitmap bitmap = BitmapFactory.decodeFile(finalLocalFile.getAbsolutePath());
                         mTaskImageView.setImageBitmap(bitmap);
 
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
