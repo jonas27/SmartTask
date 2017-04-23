@@ -4,7 +4,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
  * Created by joe on 23/04/2017.
  */
 
-public class SMSettings {
+public class Settings {
 
 
     /**
@@ -17,12 +17,12 @@ public class SMSettings {
      */
     public final static int LIST_SORTED_PRIORITY = 2;
     public static final String home = "";
-    private static final SMSettings ourInstance = new SMSettings();
+    private static final Settings ourInstance = new Settings();
 
-    private SMSettings() {
+    private Settings() {
     }
 
-    public static SMSettings getInstance() {
+    public static Settings getInstance() {
         return ourInstance;
     }
 
