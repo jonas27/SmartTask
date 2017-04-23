@@ -3,8 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miProfile"
-        android:icon="@drawable/ic_logo"
+        android:icon="@drawable/ic_more_vert_grey_24dp"
         android:title="Profile"
         app:showAsAction="ifRoom|withText">
+        <menu>
+            <item
+                android:id="@+id/create_new"
+                android:title="@string/close" />
+            <item
+                android:id="@+id/open"
+                android:title="@string/open" />
+        </menu>
     </item>
 </menu>

@@ -29,7 +29,7 @@ import java.util.List;
  * Created by joe on 18/04/2017.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class SMMainActivity extends AppCompatActivity {
 
     private static final String TAG = "CL_MaAc";
     private static Context context;
@@ -46,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton mActionAdd;
 
     public static Context getAppContext() {
-        return MainActivity.context;
+        return SMMainActivity.context;
     }
 
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainActivity.context = getApplicationContext();
+        SMMainActivity.context = getApplicationContext();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

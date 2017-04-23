@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
 
 import android.content.Context;
 import android.os.Bundle;
