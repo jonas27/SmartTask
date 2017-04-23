@@ -9,10 +9,10 @@
         <menu>
             <item
                 android:id="@+id/create_new"
-                android:title="@string/close" />
+                android:title="@string/menu_settings" />
             <item
                 android:id="@+id/open"
-                android:title="@string/open" />
+                android:title="@string/close" />
         </menu>
     </item>
 </menu>
