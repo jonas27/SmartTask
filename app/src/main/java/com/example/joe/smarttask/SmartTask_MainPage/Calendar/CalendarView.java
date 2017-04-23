@@ -200,8 +200,9 @@ public class CalendarView extends LinearLayout
             Date today = new Date();
 
             // inflate item if it does not exist yet
-            if (view == null)
+            if (view == null){
                 view = inflater.inflate(R.layout.control_calendar_day, parent, false);
+            }
 
             // if this day has an event, specify event image
             view.setBackgroundResource(0);
@@ -230,7 +231,8 @@ public class CalendarView extends LinearLayout
                 TaskObject current = i.next();
                 Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
-                if(day==cDate.getDay()&&month==cDate.getMonth()&&year==cDate.getYear()){
+
+                if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
                     counter++;
                 }
             }
@@ -240,7 +242,6 @@ public class CalendarView extends LinearLayout
             }
             // set text
             textDay.setText(String.valueOf(date.getDate()));
-            // textDay.setBackground(Drawable.createFromPath("res/drawable/borders.xml"));
             textDay.setHeight(70);
             taskNumber.setHeight(35);
 

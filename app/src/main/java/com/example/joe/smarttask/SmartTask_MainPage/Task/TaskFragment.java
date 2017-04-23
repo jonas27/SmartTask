@@ -149,11 +149,6 @@ public class TaskFragment extends Fragment {
             }
         });
 
-
-
-
-
-
         return v;
     }
 
