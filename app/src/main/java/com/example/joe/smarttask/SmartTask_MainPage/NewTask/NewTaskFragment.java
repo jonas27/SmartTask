@@ -52,8 +52,8 @@ public class NewTaskFragment extends Fragment {
     EditText mTask;
 
     Button mCreate;
-//    [End: define Views]
-FireBase fireBase;
+    //    [End: define Views]
+    FireBase fireBase;
     TaskObject t;
     //    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
     private String categories;
@@ -81,9 +81,6 @@ FireBase fireBase;
         super.onCreate(savedInstanceState);
 
     }
-
-
-
 
 
     @Override
@@ -137,29 +134,23 @@ FireBase fireBase;
                 }
             }
         });
-return v;
+        return v;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
-            return; }
+            return;
+        }
         if (requestCode == REQUEST_DATE) {
             cal = (Calendar) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
         }
         if (requestCode == REQUEST_TIME) {
             time = (Integer) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            String formatTime = time / 60 + " : " + time % 60;
-            mTime.setText(formatTime);
+            mTime.setText(String.format("%02d:%02d", time / 60, time % 60));
         }
     }
-
-
-
-
-
-
 
 
     private void createNewTask() {
@@ -180,6 +171,7 @@ return v;
             datetime = cal.getTimeInMillis();
             Log.d(TAG, Long.toString(datetime));
             t.setDatetime(Long.toString(datetime));
+
         }
         if (mDescription.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_description, Toast.LENGTH_SHORT).show();
