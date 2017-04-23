@@ -1,13 +1,18 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
+import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +22,11 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by joe on 14/03/2017.
@@ -55,6 +64,7 @@ public class TaskFragment extends Fragment {
 
 
     private  ListTask mList;
+    private String dir = "/smarttask/";
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -146,6 +156,35 @@ public class TaskFragment extends Fragment {
                 mTask.setStatus("true");
                 FireBase f=FireBase.fireBase(getContext());
                 f.createTask(mTask);
+            }
+        });
+
+        mTaskPicture = (Button) v.findViewById(R.id.task_btn_add_picture);
+        mTaskPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
+
+                int permsRequestCode = 200;
+
+                requestPermissions(perms, permsRequestCode);
+
+                String file = dir+mTaskId+".jpg";
+                File newfile = new File(file);
+                try {
+                    newfile.createNewFile();
+                    Uri outputFileUri = FileProvider.getUriForFile(SMMainActivity.getAppContext(), SMMainActivity.getAppContext().getApplicationContext().getPackageName() + ".provider", newfile);
+
+                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+                    startActivityForResult(cameraIntent,1);
+                }
+                catch (IOException e) {
+                    Log.d(TAG,"not creating file "+e);
+                }
+
+
             }
         });
 
