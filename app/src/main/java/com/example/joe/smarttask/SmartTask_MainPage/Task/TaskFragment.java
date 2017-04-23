@@ -7,6 +7,7 @@ import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,8 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Fi
 
 import java.io.File;
 import java.io.IOException;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by joe on 14/03/2017.
@@ -64,7 +67,7 @@ public class TaskFragment extends Fragment {
 
 
     private  ListTask mList;
-    private String dir = "/smarttask/";
+    private String dir = Environment.getExternalStorageDirectory()+"/smarttask/";
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -139,6 +142,8 @@ public class TaskFragment extends Fragment {
         mTaskPoints =(TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
 
+        mTaskImageView =(ImageView) v.findViewById(R.id.task_imageview);
+
 //        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
 //        mTaskEdit.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -171,7 +176,12 @@ public class TaskFragment extends Fragment {
 
                 String file = dir+mTaskId+".jpg";
                 File newfile = new File(file);
+                File folder = new File(dir);
+                if(!folder.exists()){
+                    folder.mkdirs();
+                }
                 try {
+
                     newfile.createNewFile();
                     Uri outputFileUri = FileProvider.getUriForFile(SMMainActivity.getAppContext(), SMMainActivity.getAppContext().getApplicationContext().getPackageName() + ".provider", newfile);
 
@@ -197,5 +207,14 @@ public class TaskFragment extends Fragment {
         this.mTask=mList.getTask(mTaskId);
         super.onResume();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri u = data.getData();
+            Log.d(TAG, "Pic saved");
+            mTaskImageView.setImageURI(u);
+        }
+    }
 }
