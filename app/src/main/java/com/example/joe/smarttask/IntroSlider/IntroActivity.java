@@ -20,9 +20,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joe.smarttask.*;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
+import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 
 /**
  * Class handles the intro slides - slides inflate intro_activity.xml and are no layout.layouts.fragments (only one lifecycle)
@@ -162,7 +162,7 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, MainActivity.class);
+        intent = new Intent(this, SMMainActivity.class);
         startActivity(intent);
     }
 
@@ -177,9 +177,9 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         if (skipTutorial) {
-            ShowIntro showIntro = new ShowIntro(this);
+            SharedPrefs sharedPrefs = new SharedPrefs(this);
             //modify boolean showIntroAgain
-            showIntro.setSharedPreferencesIntro(!skipTutorial);
+            sharedPrefs.setSharedPreferencesIntro(!skipTutorial);
         }
         //run superclass method
         super.onPause();

@@ -2,7 +2,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.NewTask;
 
 import android.support.v4.app.Fragment;
 
-import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 /**
  * Created by joe on 20/04/2017.

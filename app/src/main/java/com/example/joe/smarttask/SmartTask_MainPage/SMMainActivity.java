@@ -1,6 +1,5 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,26 +8,18 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,33 +29,33 @@ import java.util.List;
  * Created by joe on 18/04/2017.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class SMMainActivity extends AppCompatActivity {
 
     private static final String TAG = "CL_MaAc";
-
+    private static Context context;
+    private static List<Fragment> sFragmentList;
+    private static boolean sStartActivity;
     // When requested, this adapter returns a Fragment,
     // representing an object in the collection.
     MainPagerAdapter mMainPagerAdapter;
-
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
-
-    private static Context context;
-
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-
     private FloatingActionButton mActionAdd;
 
-    private static List<Fragment> sFragmentList;
-    private static boolean sStartActivity;
+    public static Context getAppContext() {
+        return SMMainActivity.context;
+    }
 
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainActivity.context = getApplicationContext();
+        SMMainActivity.context = getApplicationContext();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -126,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(2);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -134,18 +123,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
     private void setupViewPager(ViewPager viewPager) {
         mMainPagerAdapter.addFragment(new CalendarFragment(), "Calendar");
         mMainPagerAdapter.addFragment(new ListFragment(), "Tasks");
 //        mMainPagerAdapter.addFragment(new MessengerFragment(), "Messenger");
         mViewPager.setAdapter(mMainPagerAdapter);
     }
-
-    public static Context getAppContext() {
-        return MainActivity.context;
-    }
-
 
     public class MainPagerAdapter extends FragmentPagerAdapter {
         private final List<String> mFragmentTitleList = new ArrayList<>();

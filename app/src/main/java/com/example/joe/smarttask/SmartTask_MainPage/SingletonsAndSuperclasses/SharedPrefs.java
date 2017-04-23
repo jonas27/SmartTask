@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.IntroSlider;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  * layout is inflated
  */
 
-public class ShowIntro {
+public class SharedPrefs {
 
     private static final String PREFS_NAME = "IntroDialog";
     private static final String SHOW_WELCOME = "ShowIntroDialog";
@@ -18,7 +18,7 @@ public class ShowIntro {
     private Context context;
 
     //constructor opens (or creates) shared preference file in editor (0 means it is private; can only be accessed by the calling application)
-    public ShowIntro(Context context) {
+    public SharedPrefs(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0);
         editor = sharedPreferences.edit();

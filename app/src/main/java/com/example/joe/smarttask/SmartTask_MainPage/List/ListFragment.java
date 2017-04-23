@@ -13,8 +13,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
@@ -30,21 +30,29 @@ public class ListFragment extends Fragment {
 
     //TAG for Logs
     private static final String TAG = "CL_ListFragment";
-
-
+    private static RecyclerView sListRecyclerView;
+    private static TaskAdapter sAdapter;
+    // [End: get Singletons]
+    private static Context sContext;
+    public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
     // [Start: get Singletons]
     private FireBase mFireBase;
     private ListTask mListTask;
-    // [End: get Singletons]
-
-
-
-    public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
-    private static RecyclerView sListRecyclerView;
-    private static TaskAdapter sAdapter;
     private List<TaskObject> mList;
 
-    private static Context sContext;
+    //    Use notifyDataSetChanged on all views as we do not know
+//    which View should be updated when changes on FireBase occur
+//    Is it possible to change that? Results in efficiency gain
+    public static void updateUI(List<TaskObject> mList) {
+//        Log.d("CLASS_LF", Integer.toString(mList.size()));
+//        Log.d("CLASS_LF", mList.get(0).getName());
+
+        if (sListRecyclerView != null) {
+            sAdapter = new TaskAdapter(mList);
+            sAdapter.notifyDataSetChanged();
+            sListRecyclerView.setAdapter(sAdapter);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,21 +77,6 @@ public class ListFragment extends Fragment {
         updateUI(mList);
         super.onResume();
     }
-
-//    Use notifyDataSetChanged on all views as we do not know
-//    which View should be updated when changes on FireBase occur
-//    Is it possible to change that? Results in efficiency gain
-    public static void updateUI(List<TaskObject> mList) {
-//        Log.d("CLASS_LF", Integer.toString(mList.size()));
-//        Log.d("CLASS_LF", mList.get(0).getName());
-
-        if(sListRecyclerView!=null){
-            sAdapter = new TaskAdapter(mList);
-            sAdapter.notifyDataSetChanged();
-            sListRecyclerView.setAdapter(sAdapter);
-        }
-    }
-
 
     // Provide a reference to the views for each data item
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -132,7 +125,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.getAppContext());
+            LayoutInflater layoutInflater = LayoutInflater.from(SMMainActivity.getAppContext());
             View view = layoutInflater.inflate(R.layout.fragment_list, parent, false);
             return new TaskHolder(view);
         }

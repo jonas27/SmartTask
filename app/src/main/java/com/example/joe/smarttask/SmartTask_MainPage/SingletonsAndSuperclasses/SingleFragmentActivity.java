@@ -1,10 +1,10 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.joe.smarttask.R;
 
@@ -12,7 +12,7 @@ import com.example.joe.smarttask.R;
  * Created by joe on 05/04/2017.
  */
 
-public abstract class SingleFragmentActivity extends FragmentActivity {
+public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "CLASS_FragmentActivity";
@@ -22,7 +22,15 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     * */
     private static Context context;
 
-    protected void initSingletons(){};
+    public static Context getAppContext() {
+        return SingleFragmentActivity.context;
+    }
+
+    ;
+
+    protected void initSingletons() {
+    }
+
     protected abstract Fragment createFragment();
 
     @Override
@@ -42,8 +50,5 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
-    }
-    public static Context getAppContext() {
-        return SingleFragmentActivity.context;
     }
 }
