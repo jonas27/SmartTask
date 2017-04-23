@@ -13,11 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
-import com.example.joe.smarttask.IntroSlider.ShowIntro;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
 import com.example.joe.smarttask.SignUp.SignUpActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -51,7 +51,7 @@ public class LogInActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 1;
     private Intent intent;
     // To check if introduction pages should be showed
-    private ShowIntro showIntro;
+    private SharedPrefs sharedPrefs;
     // [START Define Views]
     private Button logInButton;
     private Button signUpButton;
@@ -249,8 +249,8 @@ public class LogInActivity extends AppCompatActivity {
     //Intent needs activity line in manifest to access subpackage
     //Creates new Intent with IntroActivity and starts it
     private boolean checkShowIntro() {
-        showIntro = new ShowIntro(this);
-        return showIntro.getSharedPrefencesIntro();
+        sharedPrefs = new SharedPrefs(this);
+        return sharedPrefs.getSharedPrefencesIntro();
 
 
     }
@@ -359,6 +359,4 @@ public class LogInActivity extends AppCompatActivity {
             Toast.makeText(LogInActivity.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }

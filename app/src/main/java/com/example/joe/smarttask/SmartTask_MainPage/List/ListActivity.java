@@ -2,10 +2,8 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 import android.support.v4.app.Fragment;
 
-import com.example.joe.smarttask.SmartTask_MainPage.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-import com.example.joe.smarttask.SmartTask_MainPage.SingleFragmentActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 /**
  * Class written 100% by us.

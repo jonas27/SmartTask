@@ -3,7 +3,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.Calendar;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +17,8 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-import com.example.joe.smarttask.SmartTask_MainPage.MainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
-import com.google.android.gms.tasks.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,12 +51,11 @@ public class CalendarView extends LinearLayout
 
     // internal components
     private static LinearLayout header;
-    private ImageView btnPrev;
-    private ImageView btnNext;
     private static TextView txtDate;
     private static GridView grid;
-
     private static List<TaskObject> list;
+    private ImageView btnPrev;
+    private ImageView btnNext;
 
 
     public CalendarView(Context context)
@@ -78,6 +75,42 @@ public class CalendarView extends LinearLayout
     {
         super(context, attrs, defStyleAttr);
         initControl(context);
+    }
+
+    /**
+     * Display dates correctly in grid
+     */
+    public static void updateCalendar() {
+        updateCalendar(null);
+    }
+
+    /**
+     * Display dates correctly in grid
+     */
+    public static void updateCalendar(HashSet<Date> events) {
+        ArrayList<Date> cells = new ArrayList<>();
+        Calendar calendar = (Calendar) currentDate.clone();
+
+        // determine the cell for current month's beginning
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        int monthBeginningCell = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+
+        // move calendar backwards to the beginning of the week
+        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
+
+        // fill cells
+        while (cells.size() < DAYS_COUNT) {
+            cells.add(calendar.getTime());
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        // update grid
+        grid.setAdapter(new CalendarAdapter(SMMainActivity.getAppContext(), cells, events));
+
+        // update title
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        txtDate.setText(sdf.format(currentDate.getTime()));
+        header.setBackgroundColor(Color.parseColor("#03a9f4"));
     }
 
     /**
@@ -138,46 +171,6 @@ public class CalendarView extends LinearLayout
             }
         });
     }
-
-    /**
-     * Display dates correctly in grid
-     */
-    public static void updateCalendar()
-    {
-        updateCalendar(null);
-    }
-
-    /**
-     * Display dates correctly in grid
-     */
-    public static void updateCalendar(HashSet<Date> events)
-    {
-        ArrayList<Date> cells = new ArrayList<>();
-        Calendar calendar = (Calendar)currentDate.clone();
-
-        // determine the cell for current month's beginning
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int monthBeginningCell = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-
-        // move calendar backwards to the beginning of the week
-        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
-
-        // fill cells
-        while (cells.size() < DAYS_COUNT)
-        {
-            cells.add(calendar.getTime());
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
-        // update grid
-        grid.setAdapter(new CalendarAdapter(MainActivity.getAppContext(), cells, events));
-
-        // update title
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        txtDate.setText(sdf.format(currentDate.getTime()));
-        header.setBackgroundColor(Color.parseColor("#03a9f4"));
-    }
-
 
     private static class CalendarAdapter extends ArrayAdapter<Date>
     {

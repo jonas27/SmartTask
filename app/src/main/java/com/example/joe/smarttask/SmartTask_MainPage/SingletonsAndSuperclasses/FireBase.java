@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -28,17 +28,13 @@ public class FireBase extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "CL_FireBase";
-
+    public static boolean isAdmin;
     //private static final String TAG = "SmartTask_FireBase";
     // Singleton object of class itself
     private static FireBase sFireBase;
-
-    public static boolean isAdmin;
-
-    private Context context;
-
     private static ListTask mListTask;
-
+    private static DataSnapshot sDataSnapshot;
+    private Context context;
     // [Start declare Firebase variables]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -46,7 +42,6 @@ public class FireBase extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
-    private static DataSnapshot sDataSnapshot;
     // [End declare Firebase variables]
 
 

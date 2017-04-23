@@ -3,8 +3,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
-import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
@@ -16,7 +15,7 @@ import java.util.Map;
 
 /**
  * Singleton for handling the list of all tasks which is then displayed in the List fragment
- * It gets a  <p><font color="green"> FireBase {@link DataSnapshot} </font> from the {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} class when the this class is first created or on data change (on the server)
+ * It gets a  <p><font color="green"> FireBase {@link DataSnapshot} </font> from the {@link FireBase} class when the this class is first created or on data change (on the server)
  * The information from this DataSnapshot is then put into single TaskObject Objects {@link TaskObject} which are all stored in a ArrayList
  * <p><font color="red"> This class has a static method
  */
@@ -27,9 +26,9 @@ public class ListTask {
     private static final String TAG = "CL_ListTask";
 
     private static ListTask sListTask;
-    private Context context;
     private static List<TaskObject> sList;
     private static DataSnapshot sDataSnapshot;
+    private Context context;
 
 
     /**
@@ -66,9 +65,9 @@ public class ListTask {
     }
 
     /**
-     * This method is called by {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase} and creates List of tasks
+     * This method is called by {@link FireBase} and creates List of tasks
      * It then calls the recycler view in {@link ListFragment} to update itslef
-     * Static methods are used to ease the call backs from the OnDataChangeListener in {@link com.example.joe.smarttask.SmartTask_MainPage.FireBase}
+     * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
         if (sDataSnapshot != null) {
