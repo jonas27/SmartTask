@@ -1,6 +1,11 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Task;
 
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -59,6 +64,19 @@ public class TaskFragment extends Fragment {
         return fragment;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private String getDate(long milliSeconds, String dateFormat)
+    {
+
+        // Create a DateFormatter object for displaying date in specified format.
+        DateFormat formatter = new SimpleDateFormat(dateFormat);
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+        return formatter.format(calendar.getTime());
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +89,17 @@ public class TaskFragment extends Fragment {
         this.mTask=mList.getTask(mTaskId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
 
 
+
+
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
-        mTaskDate.setText(mTask.getDatetime());
+        mTaskDate.setText(getDate(Long.parseLong(mTask.getDatetime()),"yyyy/MM/dd  hh:mm"));
 
 
 
