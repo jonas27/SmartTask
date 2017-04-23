@@ -249,7 +249,7 @@ public class LogInActivity extends AppCompatActivity {
     //Intent needs activity line in manifest to access subpackage
     //Creates new Intent with IntroActivity and starts it
     private boolean checkShowIntro() {
-        sharedPrefs = new SharedPrefs(this);
+        sharedPrefs = SharedPrefs.getSharedPrefs(this);
         return sharedPrefs.getSharedPrefencesIntro();
 
 

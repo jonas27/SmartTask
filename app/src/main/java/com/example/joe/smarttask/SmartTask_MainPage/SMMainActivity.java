@@ -62,6 +62,7 @@ public class SMMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         SMMainActivity.context = getApplicationContext();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
