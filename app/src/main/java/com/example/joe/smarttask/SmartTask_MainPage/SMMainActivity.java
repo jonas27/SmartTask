@@ -21,6 +21,7 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SMSettingsActivity;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class SMMainActivity extends AppCompatActivity {
     private Menu subMenu;
     private Menu mMenuSettings;
     private Menu mMenuClose;
+    private Intent intent;
 
     public static Context getAppContext() {
         return SMMainActivity.context;
@@ -135,8 +137,11 @@ public class SMMainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                SMSettingsActivity mSettings = new SMSettingsActivity();
-                Intent intent = new Intent(getAppContext(), SMSettingsActivity.class);
+                intent = new Intent(getAppContext(), SMSettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_profile:
+                intent = new Intent(getAppContext(), ProfileActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -183,5 +188,6 @@ public class SMMainActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
 
 }

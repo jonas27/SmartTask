@@ -129,8 +129,41 @@ public class ListTask {
         return list;
     }
 
-    private List orderDate(List list) {
+    private List orderDate(List<TaskObject> list) {
+        List<TaskObject> orderedList = new ArrayList<>();
+        for (TaskObject i : list) {
+            //        TODO: add if
+        }
+        return orderedList;
+    }
+
+    private List<TaskObject> divideList(List<TaskObject> list) {
+        List<TaskObject> upperList = list;
+        List<TaskObject> bottomList = list;
+        if (list.size() == 1) {
+            return list;
+        } else {
+            int size = list.size();
+
+            for (int counter = 0; counter < size / 2; counter++) {
+                upperList.remove(0);
+            }
+            bottomList = divideList(bottomList);
+            for (int counter = size / 2; counter < size; counter++) {
+                upperList.remove(size / 2);
+            }
+            upperList = divideList(upperList);
+        }
+        List<TaskObject> newList = mergeList(bottomList, upperList);
+//        TODO: cahnge to real return
         return list;
+    }
+
+    private List<TaskObject> mergeList(List<TaskObject> bottom, List<TaskObject> upper) {
+        //        TODO: cahnge to real return
+        return bottom;
+
+
     }
 }
 
