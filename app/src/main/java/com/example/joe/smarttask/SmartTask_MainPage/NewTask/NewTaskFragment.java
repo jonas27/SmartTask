@@ -169,12 +169,15 @@ return v;
         } else {
             t.setCategories(mCategories.getText().toString());
         }
-        if(mDate.getText().toString().equals("")){Toast.makeText(getContext(),R.string.newtask_datetime, Toast.LENGTH_SHORT).show();sTaskChecked=false;} else if (mTime.getText().toString().equals("")) {
+        if (mDate.getText().toString().equals("")) {
+            Toast.makeText(getContext(), R.string.newtask_datetime, Toast.LENGTH_SHORT).show();
+            sTaskChecked = false;
+        } else if (mTime.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_datetime, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
             cal.add(Calendar.MINUTE, time);
-            datetime = cal.get(Calendar.MILLISECOND);
+            datetime = cal.getTimeInMillis();
             Log.d(TAG, Long.toString(datetime));
             t.setDatetime(Long.toString(datetime));
         }
