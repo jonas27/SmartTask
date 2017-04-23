@@ -3,7 +3,10 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SettingsHandler;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
@@ -28,6 +31,7 @@ public class ListTask {
     private static ListTask sListTask;
     private static List<TaskObject> sList;
     private static DataSnapshot sDataSnapshot;
+    private SharedPrefs sharedPrefs;
     private Context context;
 
 
@@ -40,6 +44,7 @@ public class ListTask {
         this.context = context;
         sList = new ArrayList<>();
         createList();
+        sharedPrefs = new SharedPrefs(SMMainActivity.getAppContext());
     }
 
 
@@ -107,11 +112,25 @@ public class ListTask {
     public TaskObject getTask(String mTaskId) {
         for (TaskObject t : sList) {
             if (mTaskId.equals(t.getId())) {
+                orderList(sList);
                 return t;
             }
         }
         return null;
     }
 
+    private List orderList(List list) {
 
+        switch (sharedPrefs.getSharedPrefencesListSort()) {
+            case SettingsHandler.LIST_SORTED_DATE: {
+                return orderDate(list);
+            }
+        }
+        return list;
+    }
+
+    private List orderDate(List list) {
+        return list;
+    }
 }
+

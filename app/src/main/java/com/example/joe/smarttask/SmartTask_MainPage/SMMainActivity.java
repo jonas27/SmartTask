@@ -66,6 +66,8 @@ public class SMMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+//        getSupportActionBar().setHomeButtonEnabled(true);
+
         mActionAdd = (FloatingActionButton) findViewById(R.id.fab);
         mActionAdd.setOnClickListener(new View.OnClickListener() {
             @Override

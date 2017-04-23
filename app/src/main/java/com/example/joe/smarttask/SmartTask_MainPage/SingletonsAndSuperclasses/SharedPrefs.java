@@ -12,6 +12,7 @@ public class SharedPrefs {
 
     private static final String PREFS_NAME = "IntroDialog";
     private static final String SHOW_WELCOME = "ShowIntroDialog";
+    private static final String LIST_ORDER = "ListSort";
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -35,5 +36,12 @@ public class SharedPrefs {
         return sharedPreferences.getBoolean(SHOW_WELCOME, true);
     }
 
+    public void setSharedPreferencesListSort(int listOrder) {
+        editor.putInt(LIST_ORDER, listOrder);
+        editor.commit();
+    }
 
+    public int getSharedPrefencesListSort() {
+        return sharedPreferences.getInt(LIST_ORDER, 1);
+    }
 }
