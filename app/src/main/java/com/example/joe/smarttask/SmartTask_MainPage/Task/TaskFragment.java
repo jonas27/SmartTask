@@ -67,7 +67,7 @@ public class TaskFragment extends Fragment {
 
 
     private  ListTask mList;
-    private String dir = Environment.getExternalStorageDirectory()+"/smarttask/";
+    private String dir = "/";
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -176,14 +176,12 @@ public class TaskFragment extends Fragment {
 
                 String file = dir+mTaskId+".jpg";
                 File newfile = new File(file);
-                File folder = new File(dir);
-                if(!folder.exists()){
-                    folder.mkdirs();
-                }
+                //File folder = new File(dir);
+                //folder.mkdirs();
                 try {
 
                     newfile.createNewFile();
-                    Uri outputFileUri = FileProvider.getUriForFile(SMMainActivity.getAppContext(), SMMainActivity.getAppContext().getApplicationContext().getPackageName() + ".provider", newfile);
+                    Uri outputFileUri = FileProvider.getUriForFile(SMMainActivity.getAppContext(), SMMainActivity.getAppContext().getPackageName() + ".provider", newfile);
 
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
