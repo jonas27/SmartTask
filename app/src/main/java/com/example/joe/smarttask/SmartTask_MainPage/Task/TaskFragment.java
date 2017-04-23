@@ -181,7 +181,7 @@ public class TaskFragment extends Fragment {
                 try {
 
                     newfile.createNewFile();
-                    Uri outputFileUri = FileProvider.getUriForFile(SMMainActivity.getAppContext(), SMMainActivity.getAppContext().getPackageName() + ".provider", newfile);
+                    Uri outputFileUri = FileProvider.getUriForFile(SMMainActivity.getAppContext(), SMMainActivity.getAppContext().getApplicationContext().getPackageName() + ".provider", newfile);
 
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);

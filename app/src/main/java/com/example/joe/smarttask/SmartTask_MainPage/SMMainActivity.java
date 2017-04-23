@@ -45,11 +45,6 @@ public class SMMainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private FloatingActionButton mActionAdd;
 
-    public static Context getAppContext() {
-        return SMMainActivity.context;
-    }
-
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +109,10 @@ public class SMMainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(2);
+    }
+
+    public static Context getAppContext() {
+        return SMMainActivity.context;
     }
 
     @Override
