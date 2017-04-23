@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -20,6 +21,8 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SMSettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,10 @@ public class SMMainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager mViewPager;
     private FloatingActionButton mActionAdd;
+    private Menu subMenu;
+    private Menu mMenuSettings;
+    private Menu mMenuClose;
+    private Intent intent;
 
     public static Context getAppContext() {
         return SMMainActivity.context;
@@ -61,6 +68,8 @@ public class SMMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+//        getSupportActionBar().setHomeButtonEnabled(true);
+
         mActionAdd = (FloatingActionButton) findViewById(R.id.fab);
         mActionAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +79,10 @@ public class SMMainActivity extends AppCompatActivity {
 //                    fm.beginTransaction()
 //                            .add(R.id.fragment_container, fragment)
 //                            .commit();
-                Intent intent= new Intent(getApplicationContext(), NewTaskActivity.class);
+                Intent intent = new Intent(getApplicationContext(), NewTaskActivity.class);
                 startActivity(intent);
             }
         });
-
-
 
 
         sFragmentList = new ArrayList<>();
@@ -109,19 +116,42 @@ public class SMMainActivity extends AppCompatActivity {
             }
         });
 
-
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(2);
     }
 
+//    [Start: Define Menu]
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+//        TODO: Add right maring to menu inflator
+        subMenu = (Menu) findViewById(R.id.menu_expand_menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                intent = new Intent(getAppContext(), SMSettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_profile:
+                intent = new Intent(getAppContext(), ProfileActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+//    [End: Define Menu]
+
 
     private void setupViewPager(ViewPager viewPager) {
         mMainPagerAdapter.addFragment(new CalendarFragment(), "Calendar");
@@ -158,5 +188,6 @@ public class SMMainActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
 
 }

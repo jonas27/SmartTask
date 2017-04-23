@@ -102,6 +102,7 @@
 
     <!-- Menu -->
     <string name="menu_settings">Settings</string>
+    <string name="menu_profile">Profile</string>
 
 
 </resources>

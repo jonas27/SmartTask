@@ -2,16 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miProfile"
         android:icon="@drawable/ic_more_vert_grey_24dp"
         android:title="Profile"
         app:showAsAction="ifRoom|withText">
-        <menu>
+        <menu android:id="@+id/menu_expand_menu">
             <item
-                android:id="@+id/create_new"
-                android:title="@string/menu_settings" />
+                android:id="@+id/menu_settings"
+                android:title="@string/menu_settings"></item>
             <item
-                android:id="@+id/open"
+                android:id="@+id/menu_profile"
+                android:title="@string/menu_profile"></item>
+            <item
+                android:id="@+id/menu_close"
                 android:title="@string/close" />
         </menu>
     </item>

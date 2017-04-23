@@ -3,7 +3,10 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SettingsHandler;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
@@ -28,6 +31,7 @@ public class ListTask {
     private static ListTask sListTask;
     private static List<TaskObject> sList;
     private static DataSnapshot sDataSnapshot;
+    private SharedPrefs sharedPrefs;
     private Context context;
 
 
@@ -40,6 +44,7 @@ public class ListTask {
         this.context = context;
         sList = new ArrayList<>();
         createList();
+        sharedPrefs = new SharedPrefs(SMMainActivity.getAppContext());
     }
 
 
@@ -107,11 +112,58 @@ public class ListTask {
     public TaskObject getTask(String mTaskId) {
         for (TaskObject t : sList) {
             if (mTaskId.equals(t.getId())) {
+                orderList(sList);
                 return t;
             }
         }
         return null;
     }
 
+    private List orderList(List list) {
 
+        switch (sharedPrefs.getSharedPrefencesListSort()) {
+            case SettingsHandler.LIST_SORTED_DATE: {
+                return orderDate(list);
+            }
+        }
+        return list;
+    }
+
+    private List orderDate(List<TaskObject> list) {
+        List<TaskObject> orderedList = new ArrayList<>();
+        for (TaskObject i : list) {
+            //        TODO: add if
+        }
+        return orderedList;
+    }
+
+    private List<TaskObject> divideList(List<TaskObject> list) {
+        List<TaskObject> upperList = list;
+        List<TaskObject> bottomList = list;
+        if (list.size() == 1) {
+            return list;
+        } else {
+            int size = list.size();
+
+            for (int counter = 0; counter < size / 2; counter++) {
+                upperList.remove(0);
+            }
+            bottomList = divideList(bottomList);
+            for (int counter = size / 2; counter < size; counter++) {
+                upperList.remove(size / 2);
+            }
+            upperList = divideList(upperList);
+        }
+        List<TaskObject> newList = mergeList(bottomList, upperList);
+//        TODO: cahnge to real return
+        return list;
+    }
+
+    private List<TaskObject> mergeList(List<TaskObject> bottom, List<TaskObject> upper) {
+        //        TODO: cahnge to real return
+        return bottom;
+
+
+    }
 }
+
