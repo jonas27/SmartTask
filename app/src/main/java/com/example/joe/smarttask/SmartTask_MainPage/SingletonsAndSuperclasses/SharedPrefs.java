@@ -14,15 +14,24 @@ public class SharedPrefs {
     private static final String SHOW_WELCOME = "ShowIntroDialog";
     private static final String LIST_ORDER = "ListSort";
 
+    private static SharedPrefs sharedPrefs;
+
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private Context context;
 
     //constructor opens (or creates) shared preference file in editor (0 means it is private; can only be accessed by the calling application)
-    public SharedPrefs(Context context) {
+    private SharedPrefs(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0);
         editor = sharedPreferences.edit();
+    }
+
+    public static SharedPrefs getSharedPrefs(Context context) {
+        if (sharedPrefs == null) {
+            sharedPrefs = new SharedPrefs(context);
+        }
+        return sharedPrefs;
     }
 
     //sets if Intro should show

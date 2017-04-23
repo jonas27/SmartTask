@@ -177,7 +177,7 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         if (skipTutorial) {
-            SharedPrefs sharedPrefs = new SharedPrefs(this);
+            SharedPrefs sharedPrefs = SharedPrefs.getSharedPrefs(this);
             //modify boolean showIntroAgain
             sharedPrefs.setSharedPreferencesIntro(!skipTutorial);
         }

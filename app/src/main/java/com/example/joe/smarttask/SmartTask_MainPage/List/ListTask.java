@@ -31,7 +31,7 @@ public class ListTask {
     private static ListTask sListTask;
     private static List<TaskObject> sList;
     private static DataSnapshot sDataSnapshot;
-    private SharedPrefs sharedPrefs;
+    private static SharedPrefs sharedPrefs;
     private Context context;
 
 
@@ -44,7 +44,6 @@ public class ListTask {
         this.context = context;
         sList = new ArrayList<>();
         createList();
-        sharedPrefs = new SharedPrefs(SMMainActivity.getAppContext());
     }
 
 
@@ -75,6 +74,7 @@ public class ListTask {
      * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
+        List<TaskObject> list = new ArrayList<>();
         if (sDataSnapshot != null) {
             Map<String, TaskObject> tasksMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
@@ -83,15 +83,17 @@ public class ListTask {
             }
 
             Log.d(TAG, String.valueOf(sDataSnapshot.getChildrenCount()));
-            sList.clear();
+
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 DataSnapshot current = i.next();
                 TaskObject mTask = tasksMap.get(current.getKey());
                 mTask = current.getValue(TaskObject.class);
                 mTask.setId(current.getKey());
-                sList.add(mTask);
+                list.add(mTask);
             }
             Log.d(TAG + "Tasks size ", String.valueOf(tasksMap.size()));
+            sList.clear();
+            sList = sortList(list);
             ListFragment.updateUI(sList);
         }
     }
@@ -99,6 +101,63 @@ public class ListTask {
     //    getter Method for List of Tasks
     public static List<TaskObject> getTaskList() {
         return sList;
+    }
+
+    private static List<TaskObject> sortList(List<TaskObject> list) {
+        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
+        switch (sharedPrefs.getSharedPrefencesListSort()) {
+            case SettingsHandler.LIST_SORTED_DATE: {
+                return sortDate(list);
+            }
+        }
+        return list;
+    }
+
+    //    [Start: Sort by Date (merge Sort)]
+//    leave creation of new List as not it is not working --> don't do: return divideList(list);
+//    TODO: why is that not working?
+    private static List sortDate(List<TaskObject> list) {
+        List<TaskObject> l = divideList(list);
+        return l;
+    }
+
+    private static List<TaskObject> divideList(List<TaskObject> list) {
+        List<TaskObject> upperList = new ArrayList<TaskObject>();
+        List<TaskObject> bottomList = list;
+        if (list.size() <= 1) {
+            return list;
+        } else {
+            for (int counter = 0; counter < list.size() / 2; counter++) {
+                upperList.add(0, list.get(counter));
+                bottomList.remove(0);
+            }
+            upperList = divideList(upperList);
+            bottomList = divideList(bottomList);
+        }
+        List<TaskObject> l = mergeList(bottomList, upperList);
+        return l;
+    }
+
+    private static List<TaskObject> mergeList(List<TaskObject> bottom, List<TaskObject> upper) {
+        List<TaskObject> newList = new ArrayList<>();
+        int size = (bottom.size() + upper.size());
+        for (int c = 0; c < size; c++) {
+            if (bottom.size() > 0 && upper.size() > 0 && Long.parseLong(bottom.get(0).getDatetime()) < Long.parseLong(upper.get(0).getDatetime())) {
+                newList.add(bottom.get(0));
+                bottom.remove(0);
+            } else if (bottom.size() == 0) {
+                newList.add(upper.get(0));
+                upper.remove(0);
+            } else if (upper.size() == 0) {
+                newList.add(bottom.get(0));
+                bottom.remove(0);
+            } else {
+                newList.add(upper.get(0));
+                upper.remove(0);
+            }
+            Log.d(TAG, "newList: " + Integer.toString(newList.size()));
+        }
+        return newList;
     }
 
     /**
@@ -112,58 +171,13 @@ public class ListTask {
     public TaskObject getTask(String mTaskId) {
         for (TaskObject t : sList) {
             if (mTaskId.equals(t.getId())) {
-                orderList(sList);
+//                sortList(sList);
                 return t;
             }
         }
         return null;
     }
+//    [End: Sort by Date]
 
-    private List orderList(List list) {
-
-        switch (sharedPrefs.getSharedPrefencesListSort()) {
-            case SettingsHandler.LIST_SORTED_DATE: {
-                return orderDate(list);
-            }
-        }
-        return list;
-    }
-
-    private List orderDate(List<TaskObject> list) {
-        List<TaskObject> orderedList = new ArrayList<>();
-        for (TaskObject i : list) {
-            //        TODO: add if
-        }
-        return orderedList;
-    }
-
-    private List<TaskObject> divideList(List<TaskObject> list) {
-        List<TaskObject> upperList = list;
-        List<TaskObject> bottomList = list;
-        if (list.size() == 1) {
-            return list;
-        } else {
-            int size = list.size();
-
-            for (int counter = 0; counter < size / 2; counter++) {
-                upperList.remove(0);
-            }
-            bottomList = divideList(bottomList);
-            for (int counter = size / 2; counter < size; counter++) {
-                upperList.remove(size / 2);
-            }
-            upperList = divideList(upperList);
-        }
-        List<TaskObject> newList = mergeList(bottomList, upperList);
-//        TODO: cahnge to real return
-        return list;
-    }
-
-    private List<TaskObject> mergeList(List<TaskObject> bottom, List<TaskObject> upper) {
-        //        TODO: cahnge to real return
-        return bottom;
-
-
-    }
 }
 
