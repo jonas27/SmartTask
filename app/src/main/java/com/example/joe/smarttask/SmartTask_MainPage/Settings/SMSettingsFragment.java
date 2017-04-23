@@ -23,7 +23,7 @@ public class SMSettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_new_task, container, false);
+        View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
         return v;
     }

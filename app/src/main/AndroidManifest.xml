@@ -27,6 +27,7 @@
         <activity android:name=".SmartTask_MainPage.Task.TaskPagerActivity" />
         <activity android:name=".SmartTask_MainPage.SMMainActivity" />
         <activity android:name=".SmartTask_MainPage.NewTask.NewTaskActivity" />
+        <activity android:name=".SmartTask_MainPage.Settings.SMSettingsActivity" />
         <activity android:name=".CreateProfile"></activity>
     </application>
 
