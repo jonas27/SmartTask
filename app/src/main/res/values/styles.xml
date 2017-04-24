@@ -2,12 +2,13 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <!-- Customize the theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="actionOverflowMenuStyle">@style/AppTheme.MenuOverflowBackground</item>
     </style>
 
 
@@ -32,6 +33,15 @@
         <item name="android:shadowColor">#7F000000</item>
         <item name="android:shadowDy">-3.5</item>
         <item name="android:shadowRadius">2</item>
+    </style>
+
+    <!-- Menu Bar -->
+    <style name="AppTheme.MenuOverflowBackground" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <!-- http://stackoverflow.com/questions/15852122/hex-transparency-in-colors -->
+        <item name="android:popupBackground">#E6E0E0E0</item>
+        <item name="android:dropDownHorizontalOffset">16dp</item>
+        <item name="android:dropDownVerticalOffset">56dp</item>
+
     </style>
 
 </resources>
