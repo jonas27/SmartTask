@@ -109,7 +109,6 @@ public class SMMainActivity extends AppCompatActivity {
                     mActionAdd.setVisibility(View.INVISIBLE);
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
