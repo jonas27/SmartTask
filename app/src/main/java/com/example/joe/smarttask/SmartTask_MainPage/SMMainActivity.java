@@ -47,7 +47,6 @@ public class SMMainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager mViewPager;
     private FloatingActionButton mActionAdd;
-    private Menu subMenu;
     private Menu mMenuSettings;
     private Menu mMenuClose;
     private Intent intent;
@@ -128,9 +127,13 @@ public class SMMainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-//        TODO: Add right maring to menu inflator
-        subMenu = (Menu) findViewById(R.id.menu_expand_menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+//        TODO: Add right maring to menu inflator
+//        Menu subMenu = (Menu) findViewById(R.id.menu_expand_menu);
+//        PopupMenu popupMenu = new PopupMenu(this,toolbar,Gravity.NO_GRAVITY,R.attr.popupMenuStyle,0);
+
+
         return true;
     }
 
