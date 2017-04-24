@@ -2,6 +2,8 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SettingsHandler;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 
@@ -19,13 +21,30 @@ public class SortList {
     private static SharedPrefs sharedPrefs;
 
 
-    public static synchronized List<TaskObject> sortList(List<TaskObject> list) {
+    public static List<TaskObject> sortList(List<TaskObject> list) {
         List<TaskObject> newList = list;
         return sortByDate(newList);
     }
 
+    private static List<TaskObject> determineSort(List<TaskObject> list) {
+        List<TaskObject> newList = new ArrayList<>();
+        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
+        switch (sharedPrefs.getSharedPrefencesListSort()) {
+            case SettingsHandler.LIST_SORTED_DATE: {
+                newList = (list);
+                break;
+            }
+            default: {
+                newList = list;
+            }
+        }
 
-    private static List<TaskObject> sortByDate(List<TaskObject> list) {
+
+        return newList;
+    }
+
+
+    private static synchronized List<TaskObject> sortByDate(List<TaskObject> list) {
         List<TaskObject> newList = list;
         List<TaskObject> sortedList = new ArrayList<>();
         int position = 0;
