@@ -26,7 +26,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Sh
 
 /**
  * Class handles the intro slides - slides inflate intro_activity.xml and are no layout.layouts.fragments (only one lifecycle)
- * Created on 07/02/2017.
+ * TODO: make it run in one layout not 5. This is unnecessary bloating of the layouts
  */
 
 public class IntroActivity extends AppCompatActivity {
