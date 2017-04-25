@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/settings_linear1"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="26dp"
         android:orientation="vertical"></LinearLayout>
 
     <ImageView
@@ -41,7 +41,7 @@
     <LinearLayout
         android:id="@+id/settings_linear2"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="26dp"
         android:layout_below="@id/settings_linear1"
         android:layout_marginTop="40dp"
         android:orientation="vertical"></LinearLayout>
@@ -76,7 +76,7 @@
     <LinearLayout
         android:id="@+id/settings_linear3"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="26dp"
         android:layout_below="@id/settings_linear2"
         android:layout_marginTop="40dp"
         android:orientation="vertical"></LinearLayout>
@@ -112,7 +112,7 @@
     <LinearLayout
         android:id="@+id/settings_linear4"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="26dp"
         android:layout_below="@id/settings_linear3"
         android:layout_marginTop="40dp"
         android:orientation="vertical"></LinearLayout>
@@ -144,5 +144,40 @@
         android:textColor="@color/settings_description_grey_lite"
         android:textSize="16sp" />
 
+
+    <LinearLayout
+        android:id="@+id/settings_linear5"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_below="@id/settings_linear4"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"></LinearLayout>
+
+    <ImageView
+        android:id="@+id/settings_feedback_ic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_linear5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_language_grey_24dp" />
+
+    <TextView
+        android:id="@+id/settings_feedback_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/settings_feedback_ic"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="-10dp"
+        android:text="@string/settings_reward_text"
+        android:textColor="@color/settings_titles_white"
+        android:textSize="22sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settings_feedback_title"
+        android:textColor="@color/settings_description_grey_lite"
+        android:textSize="16sp" />
 
 </RelativeLayout>
