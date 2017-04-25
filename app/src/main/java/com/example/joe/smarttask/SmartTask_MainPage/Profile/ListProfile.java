@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.List;
+package com.example.joe.smarttask.SmartTask_MainPage.Profile;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,9 +6,7 @@ import android.util.Log;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SettingsHandler;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
