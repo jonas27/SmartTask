@@ -111,6 +111,10 @@
 
     <!-- Settings fragment -->
     <string name="settings_toolbar_text">Settings</string>
+    <string name="settings_list_text">List</string>
+    <string name="settings_notifications_text">Notifications</string>
+    <string name="settings_language_text">Language</string>
+    <string name="settings_reward_text">Reward System</string>
 
 
 </resources>
