@@ -23,10 +23,10 @@ public class CreateProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_create_profile);
+        setContentView(R.layout.fragment_profile_create);
 
         ProfileName = (EditText) findViewById(R.id.ProfileName);
-        PinCode = (EditText) findViewById(R.id.Pincode);
+        PinCode = (EditText) findViewById(R.id.Score);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, PRIVILIGIES);
