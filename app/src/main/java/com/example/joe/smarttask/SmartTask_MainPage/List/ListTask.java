@@ -90,6 +90,7 @@ public class ListTask {
                 list.add(mTask);
             }
 
+//            sList=list;
             sList = SortList.sortList(list);
             ListFragment.updateUI(sList);
         }

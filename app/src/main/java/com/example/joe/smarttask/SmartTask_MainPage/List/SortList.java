@@ -1,13 +1,12 @@
 package com.example.joe.smarttask.SmartTask_MainPage.List;
 
-import android.util.Log;
-
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SettingsHandler;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,27 +15,53 @@ import java.util.List;
 
 public class SortList {
 
+    public static final String DRAW_LINE = "drawLine";
     private static final String TAG = "CL_SortList";
-
     private static SharedPrefs sharedPrefs;
 
 
     public static List<TaskObject> sortList(List<TaskObject> list) {
-        List<TaskObject> newList = list;
-        return sortByDate(newList);
+        return preferedSort(list);
     }
 
-    private static List<TaskObject> determineSort(List<TaskObject> list) {
-        List<TaskObject> newList = new ArrayList<>();
+    private static List<TaskObject> preferedSort(List<TaskObject> list) {
+        List<TaskObject> newList;
         sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
         switch (sharedPrefs.getSharedPrefencesListSort()) {
             case SettingsHandler.LIST_SORTED_DATE: {
-                newList = (list);
+                newList = sortByDate(list);
                 break;
             }
             default: {
-                newList = list;
+                newList = sortByDate(list);
             }
+        }
+
+        return splitList(newList);
+    }
+
+    private static List<TaskObject> splitList(List<TaskObject> list) {
+
+        List<TaskObject> newList = new ArrayList<>();
+
+        for (int c = 0; c < list.size(); c++) {
+            if (list.get(c).getStatus().equals("true")) {
+                newList.add(list.get(c));
+                list.remove(c);
+                c--;
+            }
+        }
+
+        TaskObject tO = new TaskObject();
+        tO.setStatus(DRAW_LINE);
+        tO.setId(DRAW_LINE);
+        tO.setDatetime("0");
+        tO.setPriority("0");
+        tO.setName("0");
+        newList.add(0, tO);
+
+        for (TaskObject t : list) {
+            newList.add(0, t);
         }
 
 
@@ -44,12 +69,11 @@ public class SortList {
     }
 
 
-    private static synchronized List<TaskObject> sortByDate(List<TaskObject> list) {
-        List<TaskObject> newList = list;
+    private static List<TaskObject> sortByDate(List<TaskObject> list) {
         List<TaskObject> sortedList = new ArrayList<>();
         int position = 0;
 
-        for (TaskObject t : newList) {
+        for (TaskObject t : list) {
             position = 0;
             for (int c = 0; c < sortedList.size(); c++) {
                 if (Long.parseLong(t.getDatetime()) > Long.parseLong(sortedList.get(c).getDatetime())) {
@@ -61,13 +85,9 @@ public class SortList {
             sortedList.add(position, t);
         }
 
-        for (TaskObject t : sortedList) {
-            Log.d(TAG, t.getName());
-        }
+        Collections.reverse(sortedList);
         return sortedList;
-
     }
-
 }
 
 

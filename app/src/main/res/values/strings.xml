@@ -104,5 +104,9 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_profile">Profile</string>
 
+    <!-- List -->
+    <string name="list_high_p">H</string>
+    <string name="list_middle_p">M</string>
+    <string name="list_low_p">L</string>
 
 </resources>
