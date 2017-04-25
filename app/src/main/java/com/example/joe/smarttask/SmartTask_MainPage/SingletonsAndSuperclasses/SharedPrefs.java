@@ -14,6 +14,7 @@ public class SharedPrefs {
     private static final String SHOW_WELCOME = "ShowIntroDialog";
     private static final String LIST_ORDER = "ListSort";
     private static final String NOTIFICATION_LEVEL = "NotificationLevel";
+    private static final String REWARD_ON_OFF = "RewardOnOff";
 
 
     private static SharedPrefs sharedPrefs;
@@ -66,6 +67,19 @@ public class SharedPrefs {
 
     private void setNewNotificationLevel(int i) {
         editor.putInt(NOTIFICATION_LEVEL, i);
+        editor.commit();
+    }
+
+    public int getRewardOnOff() {
+        return sharedPreferences.getInt(LIST_ORDER, 0);
+    }
+
+    public void setRewardOnOff(int i) {
+        setNewNotificationLevel(i);
+    }
+
+    private void setNewRewardOnOff(int i) {
+        editor.putInt(REWARD_ON_OFF, i);
         editor.commit();
     }
 

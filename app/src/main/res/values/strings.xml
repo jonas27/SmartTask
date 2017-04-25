@@ -116,7 +116,8 @@
     <string name="settings_list_sort_priority">Sort by priority</string>
     <string name="settings_notifications_title">Notifications</string>
     <string name="settings_notifications_all">All notifications</string>
-    <string name="settings_notifications_some">Some notifications</string>
+    <string name="settings_notifications_email">Some notifications</string>
+    <string name="settings_notifications_push">Some notifications</string>
     <string name="settings_notifications_none">No notifications</string>
     <string name="settings_language_title">Language</string>
     <string name="settings_reward_title">Reward System</string>

@@ -1,6 +1,10 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Settings;
 
-
+/**
+ * Create 100% by us.
+ * Defines the objects inside settings (the subcategories: i.e. list behaviour, language etc.)
+ * TODO: Wire this class up with sharedPrefs
+ */
 public class SettingsObject {
 
 
@@ -8,9 +12,8 @@ public class SettingsObject {
     private String mTitle;
     private String mDescription;
     private int mNumberInList;
-
-
     private int mNotificationSettings;
+    private int mRewardOnOff;
 
 //    [End: Define Variables which are shared among all objects]
 
@@ -53,6 +56,14 @@ public class SettingsObject {
 
     public void setmNotificationSettings(int mNotificationSettings) {
         this.mNotificationSettings = mNotificationSettings;
+    }
+
+    public int getmRewardOnOff() {
+        return mRewardOnOff;
+    }
+
+    public void setmRewardOnOff(int mRewardOnOff) {
+        this.mRewardOnOff = mRewardOnOff;
     }
 
 

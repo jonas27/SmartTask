@@ -26,23 +26,35 @@ public class SettingsList {
     public static final int REWARD_POSITION = 3;
     public static final int FEEDBACK_POSITION = 4;
     public static final int ABOUT_POSITION = 5;
+    //    [End: Ordering of objects in List (RecyclerView)]
+
+
+
+
     //    [Start: define list order]
     public static final int ORDER_BY_DATE = 0;
     public static final int ORDER_BY_PRIORITY = 1;
+    //    [End: define list order]
+
     //    [Start: define notification levels]
     public static final int NOTIFICATION_ALL = 0;
     public static final int NOTIFICATION_ONLY_EMAIL = 1;
     public static final int NOTIFICATION_ONLY_PUSH = 2;
+    //    [End: define notifiaction levels]
 
-    //    [End: Ordering of objects in List (RecyclerView)]
+    //    [Start: define reward on off -> push to firebase!!!]
+    public static final int REWARD_ON = 0;
+    public static final int REWARD_OFF = 1;
+    //    [End: define rewards on off]
+
     public static final int NOTIFICATION_NO = 1;
     private static final String TAG = "CL_SettL";
-    //    [End: define list order]
+
     private static List<SettingsObject> sList;
     private static SettingsList sSettingsList;
     private static Context sContext;
     private static SharedPrefs sharedPrefs;
-    //    [End: define list order]
+
 
 
     /**
@@ -76,6 +88,8 @@ public class SettingsList {
     protected void createList() {
         sList.add(0, createListOption());
         sList.add(1, createNotificationOption());
+        sList.add(2, createLanguageOption());
+        sList.add(3, createRewardOption());
 
     }
 
@@ -97,13 +111,39 @@ public class SettingsList {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_notifications_title));
         if (sharedPrefs.getPreferenceLevel() == NOTIFICATION_ALL) {
-            listSettings.setmTitle(sContext.getResources().getString(R.string.settings_list_sort_date));
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_all));
+        } else if (sharedPrefs.getSharedPrefencesListSort() == NOTIFICATION_ONLY_EMAIL) {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_email));
+        } else if (sharedPrefs.getSharedPrefencesListSort() == NOTIFICATION_ONLY_PUSH) {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_push));
         } else if (sharedPrefs.getSharedPrefencesListSort() == ORDER_BY_PRIORITY) {
-            listSettings.setmTitle(sContext.getResources().getString(R.string.settings_list_sort_priority));
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_none));
         }
-        listSettings.setmNumberInList(LIST_POSITION);
+        listSettings.setmNumberInList(NOTIFICATIONS_POSITION);
         return listSettings;
     }
+
+    //    Object for Notification
+    private SettingsObject createLanguageOption() {
+        SettingsObject listSettings = SettingsObject.getNewSettingsObject();
+        listSettings.setmTitle(sContext.getResources().getString(R.string.settings_language_title));
+        listSettings.setmNumberInList(LANGUAGE_POSITION);
+        return listSettings;
+    }
+
+    //    Object for Notification
+    private SettingsObject createRewardOption() {
+        SettingsObject listSettings = SettingsObject.getNewSettingsObject();
+        listSettings.setmTitle(sContext.getResources().getString(R.string.settings_reward_title));
+        if (sharedPrefs.getRewardOnOff() == REWARD_ON) {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_reward_enabled));
+        } else if (sharedPrefs.getSharedPrefencesListSort() == REWARD_OFF) {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_reward_disabled));
+        }
+        listSettings.setmNumberInList(REWARD_POSITION);
+        return listSettings;
+    }
+
 
     public int getListSize() {
         return sList.size();
