@@ -13,11 +13,13 @@ public class SharedPrefs {
     private static final String PREFS_NAME = "IntroDialog";
     private static final String SHOW_WELCOME = "ShowIntroDialog";
     private static final String LIST_ORDER = "ListSort";
+    private static final String NOTIFICATION_LEVEL = "NotificationLevel";
+
 
     private static SharedPrefs sharedPrefs;
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    private static SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
     private Context context;
 
     //constructor opens (or creates) shared preference file in editor (0 means it is private; can only be accessed by the calling application)
@@ -32,6 +34,10 @@ public class SharedPrefs {
             sharedPrefs = new SharedPrefs(context);
         }
         return sharedPrefs;
+    }
+
+    public static int getPreferenceLevel() {
+        return sharedPreferences.getInt(NOTIFICATION_LEVEL, 0);
     }
 
     //sets if Intro should show
@@ -51,6 +57,16 @@ public class SharedPrefs {
     }
 
     public int getSharedPrefencesListSort() {
-        return sharedPreferences.getInt(LIST_ORDER, 1);
+        return sharedPreferences.getInt(LIST_ORDER, 0);
     }
+
+    public void setNotificationLevel(int i) {
+        setNewNotificationLevel(i);
+    }
+
+    private void setNewNotificationLevel(int i) {
+        editor.putInt(NOTIFICATION_LEVEL, i);
+        editor.commit();
+    }
+
 }

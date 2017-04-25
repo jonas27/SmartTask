@@ -31,6 +31,8 @@
 
     <!--
 
+OLD CODE. For support please don't delete yet 24.04.2017
+
     <?xml version="1.0" encoding="utf-8"?>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"

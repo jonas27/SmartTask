@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
@@ -91,7 +90,6 @@ public class ListFragment extends Fragment {
     }
 
 
-
     // Provide a reference to the views for each data item
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -120,8 +118,6 @@ public class ListFragment extends Fragment {
             mViewSeparator = (View) itemView.findViewById(R.id.list_item_separator);
             mPriority = (RoundedLetterView) itemView.findViewById(R.id.rlv_name_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_date);
-
-
         }
 
         @Override
@@ -133,7 +129,6 @@ public class ListFragment extends Fragment {
                 sContext.startActivity(intent);
             }
         }
-
         public void bindTask(TaskObject task) {
             mTask = task;
             if (mTask.getName().toCharArray().length > 17) {
@@ -166,7 +161,6 @@ public class ListFragment extends Fragment {
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }
 
-
             mTitleTextView.setVisibility(View.VISIBLE);
             mDescriptionTextView.setVisibility(View.VISIBLE);
             mTaskUnsolved.setVisibility(View.VISIBLE);
@@ -175,12 +169,10 @@ public class ListFragment extends Fragment {
             mViewLine.setVisibility(View.INVISIBLE);
             mDateTextView.setVisibility(View.VISIBLE);
 
-
             if (mTask.getStatus().equals("true")) {
 //                sListRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(sContext));
                 mTaskUnsolved.setVisibility(View.INVISIBLE);
                 mTaskSolved.setVisibility(View.VISIBLE);
-
             } else if (mTask.getStatus().equals(SortList.DRAW_LINE)) {
                 mTitleTextView.setVisibility(View.INVISIBLE);
                 mDescriptionTextView.setVisibility(View.INVISIBLE);
