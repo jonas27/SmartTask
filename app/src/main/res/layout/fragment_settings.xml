@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/settings_background_blue_dark"
     android:orientation="vertical">
 
@@ -9,6 +9,8 @@
         android:id="@+id/settings_linear1"
         android:layout_width="match_parent"
         android:layout_height="26dp"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="vertical"></LinearLayout>
 
     <ImageView
@@ -25,15 +27,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/settings_list_ic"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="-10dp"
-        android:text="@string/settings_list_text"
         android:textColor="@color/settings_titles_white"
         android:textSize="22sp" />
 
     <TextView
+        android:id="@+id/settings_list_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/settings_list_title"
         android:layout_below="@id/settings_list_title"
         android:textColor="@color/settings_description_grey_lite"
         android:textSize="16sp" />
@@ -41,143 +44,10 @@
     <LinearLayout
         android:id="@+id/settings_linear2"
         android:layout_width="match_parent"
-        android:layout_height="26dp"
+        android:layout_height="20dp"
         android:layout_below="@id/settings_linear1"
         android:layout_marginTop="40dp"
         android:orientation="vertical"></LinearLayout>
 
-    <ImageView
-        android:id="@+id/settings_notifications_ic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_linear2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_notifications_grey_24dp" />
-
-    <TextView
-        android:id="@+id/settings_notifications_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/settings_notifications_ic"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="-10dp"
-        android:text="@string/settings_notifications_text"
-        android:textColor="@color/settings_titles_white"
-        android:textSize="22sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/settings_list_title"
-        android:textColor="@color/settings_description_grey_lite"
-        android:textSize="16sp" />
-
-    <LinearLayout
-        android:id="@+id/settings_linear3"
-        android:layout_width="match_parent"
-        android:layout_height="26dp"
-        android:layout_below="@id/settings_linear2"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical"></LinearLayout>
-
-    <ImageView
-        android:id="@+id/settings_language_ic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_linear3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_language_grey_24dp" />
-
-    <TextView
-        android:id="@+id/settings_language_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/settings_language_ic"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="-10dp"
-        android:text="@string/settings_language_text"
-        android:textColor="@color/settings_titles_white"
-        android:textSize="22sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/settings_list_title"
-        android:textColor="@color/settings_description_grey_lite"
-        android:textSize="16sp" />
-
-
-    <LinearLayout
-        android:id="@+id/settings_linear4"
-        android:layout_width="match_parent"
-        android:layout_height="26dp"
-        android:layout_below="@id/settings_linear3"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical"></LinearLayout>
-
-    <ImageView
-        android:id="@+id/settings_reward_ic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_linear4"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_language_grey_24dp" />
-
-    <TextView
-        android:id="@+id/settings_reward_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/settings_reward_ic"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="-10dp"
-        android:text="@string/settings_reward_text"
-        android:textColor="@color/settings_titles_white"
-        android:textSize="22sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/settings_list_title"
-        android:textColor="@color/settings_description_grey_lite"
-        android:textSize="16sp" />
-
-
-    <LinearLayout
-        android:id="@+id/settings_linear5"
-        android:layout_width="match_parent"
-        android:layout_height="26dp"
-        android:layout_below="@id/settings_linear4"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical"></LinearLayout>
-
-    <ImageView
-        android:id="@+id/settings_feedback_ic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_linear5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_language_grey_24dp" />
-
-    <TextView
-        android:id="@+id/settings_feedback_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/settings_feedback_ic"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="-10dp"
-        android:text="@string/settings_reward_text"
-        android:textColor="@color/settings_titles_white"
-        android:textSize="22sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/settings_feedback_title"
-        android:textColor="@color/settings_description_grey_lite"
-        android:textSize="16sp" />
 
 </RelativeLayout>
