@@ -22,7 +22,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SMSettingsActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +140,7 @@ public class SMMainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                intent = new Intent(getAppContext(), SMSettingsActivity.class);
+                intent = new Intent(getAppContext(), SettingsActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_profile:

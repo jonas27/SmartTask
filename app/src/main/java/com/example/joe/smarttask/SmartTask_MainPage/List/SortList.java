@@ -58,6 +58,7 @@ public class SortList {
         tO.setDatetime("0");
         tO.setPriority("0");
         tO.setName("0");
+        tO.setDescription("0");
         newList.add(0, tO);
 
         for (TaskObject t : list) {
