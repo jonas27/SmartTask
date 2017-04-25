@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
@@ -88,6 +89,8 @@ public class ListFragment extends Fragment {
         updateUI(mList);
         super.onResume();
     }
+
+
 
     // Provide a reference to the views for each data item
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

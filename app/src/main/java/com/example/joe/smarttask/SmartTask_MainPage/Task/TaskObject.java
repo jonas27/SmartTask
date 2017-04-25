@@ -167,6 +167,8 @@ public class TaskObject implements Serializable {
     public void setmCompleted(boolean mCompleted) {
         this.mCompleted = mCompleted;
     }
+
+
 //      [End: Getter and setters for variables]
 
 

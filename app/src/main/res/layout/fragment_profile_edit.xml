@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.joe.smarttask.CreateProfile">
+    <!-- layout for creating profiles -->
+
+
+    <ImageView
+        android:id="@+id/imageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/scrollView2"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="15dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/smlogo" />
+
+
+    <TextView
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1565C0"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/smarttask_create_profile_Headline"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp">
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="29dp">
+
+        <EditText
+            android:id="@+id/ProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="25"
+            android:hint="@string/smarttask_create_profile_name"
+            android:inputType="textPersonName"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ProfileName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="25"
+            android:hint="@string/smarttask_create_profile_pincode"
+            android:inputType="text|numberPassword"
+            android:textSize="20sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/Privilgies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Score"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="25"
+            android:hint="@string/smarttask_create_profile_privilgies"
+            android:inputType="text|numberPassword"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/CreateProfileDoneButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CreateProfileAddButton"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:background="#1565C0"
+            android:text="@string/smarttask_create_profile_done"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/CreateProfileAddButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Privilgies"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:background="#1565C0"
+            android:text="@string/smarttask_create_profile_Add"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/CreateProfileUploadButton"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/CreateProfileCameraButton"
+        android:layout_toEndOf="@+id/CreateProfileCameraButton"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <ImageButton
+        android:id="@+id/CreateProfileSavePictureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <ImageButton
+        android:id="@+id/CreateProfileCameraButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/CreateProfileSavePictureButton"
+        android:layout_toEndOf="@+id/CreateProfileSavePictureButton"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+
+</RelativeLayout>
+
+
+

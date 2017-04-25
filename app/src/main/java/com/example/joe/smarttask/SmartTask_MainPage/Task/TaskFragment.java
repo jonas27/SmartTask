@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -149,6 +150,8 @@ public class TaskFragment extends Fragment {
                 mTask.setStatus("true");
                 FireBase f=FireBase.fireBase(getContext());
                 f.createTask(mTask);
+                ProfileObject p = new ProfileObject("Steven","100","1234","1","","100");
+                f.createProfile(p);
             }
         });
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};

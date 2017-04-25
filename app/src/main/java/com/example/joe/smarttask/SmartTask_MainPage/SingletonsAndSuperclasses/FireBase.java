@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +36,7 @@ public class FireBase extends AppCompatActivity {
     private static FireBase sFireBase;
     private static ListTask mListTask;
     private static DataSnapshot sDataSnapshot;
+    private static DataSnapshot sPDataSnapshot;
     private Context context;
     // [Start declare Firebase variables]
     private FirebaseAuth mAuth;
@@ -41,7 +44,9 @@ public class FireBase extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseDatabase mDatabase;
     private ValueEventListener postListener;
+    private ValueEventListener PpostListener;
     private DatabaseReference mPostReference;
+    private DatabaseReference mPostReference2;
     // [End declare Firebase variables]
 
 
@@ -50,6 +55,7 @@ public class FireBase extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         pull();
+        pull2();
     }
 
 
@@ -75,18 +81,15 @@ public class FireBase extends AppCompatActivity {
 //        Log.d(TAG, key);
         if(mTaskObject.getId().equals("")){
             String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
-        mTaskObject.setId(key);
-        mPostReference.child(key).setValue(mTaskObject);
+            mTaskObject.setId(key);
+            mPostReference.child(key).setValue(mTaskObject);
         }
         else{
             mPostReference.child(mTaskObject.getId()).setValue(mTaskObject);
         }
     }
-//    [start: create a new Task]
 
-
-
-    private void push(Map<String, String> map, String root) {
+    public void push(Map<String, String> map, String root) {
         /*
             Information should be pushed as a map with String destination on firebase server,value.
          */
@@ -141,6 +144,51 @@ public class FireBase extends AppCompatActivity {
         ListTask.setDataSnapshot(mDataSnapshot);
         CalendarView.updateCalendar();
     }
+
+//     [start: create a new Profile]
+    public void createProfile(ProfileObject mProfileObject) {
+        createNewProfile(mProfileObject);
+    }
+
+    private void createNewProfile(ProfileObject mProfileObject) {
+        mPostReference2 = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("profile");
+//        Log.d(TAG, key);
+        if(mProfileObject.getPid().equals("")){
+            String key = mPostReference2.child("User/" + user.getUid() + "/profile").push().getKey();
+            Log.d(TAG,"key "+key);
+            mProfileObject.setPid(key);
+            mPostReference2.child(key).setValue(mProfileObject);
+        }
+        else{
+            mPostReference2.child(mProfileObject.getPid()).setValue(mProfileObject);
+        }
+    }
+    public DataSnapshot getDataSnapshot2() {
+        return sDataSnapshot;
+    }
+
+    private void pull2() {
+        Log.d(TAG, mAuth.getCurrentUser().toString());
+        mPostReference2 = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("profile");
+        PpostListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot mPDataSnapshot) {
+                callback2(mPDataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mPostReference2.addValueEventListener(PpostListener);
+        //       mPostReference2.addValueEventListener(postListener);
+    }
+
+    private void callback2(DataSnapshot mPDataSnapshot) {
+        ListProfile.setDataSnapshot(mPDataSnapshot);
+        }
 
 
 }

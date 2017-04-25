@@ -23,8 +23,9 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
-
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -47,6 +48,7 @@ public class SMMainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager mViewPager;
     private FloatingActionButton mActionAdd;
+    private Menu subMenu;
     private Menu mMenuSettings;
     private Menu mMenuClose;
     private Intent intent;
@@ -60,7 +62,6 @@ public class SMMainActivity extends AppCompatActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         SMMainActivity.context = getApplicationContext();
 
@@ -109,6 +110,7 @@ public class SMMainActivity extends AppCompatActivity {
                     mActionAdd.setVisibility(View.INVISIBLE);
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -126,13 +128,9 @@ public class SMMainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
 //        TODO: Add right maring to menu inflator
-//        Menu subMenu = (Menu) findViewById(R.id.menu_expand_menu);
-//        PopupMenu popupMenu = new PopupMenu(this,toolbar,Gravity.NO_GRAVITY,R.attr.popupMenuStyle,0);
-
-
+        subMenu = (Menu) findViewById(R.id.menu_expand_menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
