@@ -120,7 +120,27 @@ public class ListTask {
         }
         return null;
     }
-//    [End: Sort by Date]
+
+    /**
+     * return a task for single view
+     * TODO: change name into UID
+     *
+     * @param mTaskId is a unique id identifying a task
+     * @return position of object with given id in list
+     * *
+     */
+    public int getTaskNumber(String mTaskId) {
+        for (int c = 0; c < sList.size(); c++) {
+            if (mTaskId.equals(sList.get(c).getId())) {
+                return c;
+            }
+        }
+        return 0;
+    }
+
+
+
+
 
 }
 

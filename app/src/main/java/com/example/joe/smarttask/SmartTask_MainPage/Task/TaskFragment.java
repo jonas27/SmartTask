@@ -3,7 +3,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,31 +11,25 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,8 +49,6 @@ public class TaskFragment extends Fragment {
     private static final String TAG = "CL_TaskFragment";
 
     private static final String TASK_ID = "task_id";
-
-    private Toolbar toolbar;
 
     private TaskObject mTask;
     private String mTaskId;
@@ -92,6 +83,7 @@ public class TaskFragment extends Fragment {
         return fragment;
     }
 
+    //TODO: We are targeting 19. Please Use something else eg. Gregorian Calendar; But this can't stay
     @RequiresApi(api = Build.VERSION_CODES.N)
     private String getDate(long milliSeconds, String dateFormat) {
 // Create a DateFormatter object for displaying date in specified format.
@@ -106,24 +98,27 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_task);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
         mTaskId = (String) getArguments().getSerializable(TASK_ID);
         mList = ListTask.list(getContext());
         this.mTask = mList.getTask(mTaskId);
+
+
     }
 
+    //TODO: We are targeting 19. If fotos isn't doable for under 24 than control for it with if statment
+    //TODO: and don't implement for <24
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
 
+
+        storageRef = FirebaseStorage.getInstance().getReference();
+
+
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
         mTaskDate.setText(getDate(Long.parseLong(mTask.getDatetime()),"dd MMM yyyy  hh:mm"));
-        storageRef = FirebaseStorage.getInstance().getReference();
 
         mTaskSolved = (ImageView) v.findViewById(R.id.task_check);
 

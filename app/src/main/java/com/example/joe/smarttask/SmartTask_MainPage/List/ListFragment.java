@@ -204,8 +204,8 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
-
             TaskObject task = mListTasks.get(position);
+
             holder.bindTask(task);
         }
 

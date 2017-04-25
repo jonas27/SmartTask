@@ -1,8 +1,10 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Profile;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 
 
 /**
@@ -23,6 +26,8 @@ public class ProfileFragment extends Fragment {
 
     private static final String TAG = "CL_ProfileFragment";
     private static final String PROFILE_ID = "profile_id";
+
+    private static Context sContext;
 
     private Toolbar toolbar;
     private ProfileObject mProfile;
@@ -49,10 +54,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sContext = SMMainActivity.getAppContext();
 
         Log.d(TAG,"so far so good");
-
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_task);
 
 //        mProfileId = (String) getArguments().getSerializable(PROFILE_ID);
   //      mListProfile = mListProfile.list(getContext());
@@ -63,6 +67,11 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.fragment_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mProfile.getPname());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         mViewProfileName = (TextView) v.findViewById(R.id.view_profile_name);
         mViewProfileName.setText(mProfile.getPname());

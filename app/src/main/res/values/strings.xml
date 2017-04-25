@@ -70,15 +70,13 @@
     <string name="newtask_responsible">Please specify the responsible persons.</string>
 
 
-    <!-- SmartTask View Task -->
+    <!-- Task fragment -->
     <string name="ViewTaskHeadline">Task Viewer</string>
     <string name="ViewTaskEditButton">Edit</string>
     <string name="ViewTaskDoneButton">Task Complete</string>
     <string name="ViewTaskAddPictureButton">Upload Picture</string>
     <string name="ViewTaskConfirmButton">Task Confirmed</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <string name="open">open</string>
