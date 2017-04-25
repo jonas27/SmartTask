@@ -35,5 +35,8 @@
     <color name="list_grey_light">#9E9E9E</color>
     <color name="list_separator_pink">#95F06292</color>
 
+    <!-- Settings fragment -->
+    <color name="settings_background_blue_dark">#1A237E</color>
+
 
 </resources>

@@ -37,6 +37,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SingleFragmentActivity.context = getApplicationContext();
+
+//        add the activity for fragment
         setContentView(R.layout.activity_fragment);
         initSingletons();
 
