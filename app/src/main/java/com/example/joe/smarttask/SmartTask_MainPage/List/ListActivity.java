@@ -34,6 +34,7 @@ public class ListActivity extends SingleFragmentActivity {
     protected void initSingletons(){
         mFireBase = FireBase.fireBase(this);
         mListTask = ListTask.list(this);
+
     }
 
 }

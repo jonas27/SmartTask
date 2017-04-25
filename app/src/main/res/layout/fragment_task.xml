@@ -4,24 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="900dp"
+    android:layout_height="wrap_content"
     android:baselineAligned="false">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="700dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignStart="@+id/task_btn_confirm"
-            android:layout_alignTop="@+id/task_responsible"
-            android:layout_marginStart="8dp"
             android:src="@drawable/ic_person_black_24dp"
             tools:layout_editor_absoluteX="19dp"
-            tools:layout_editor_absoluteY="119dp" />
+            tools:layout_editor_absoluteY="119dp"
+            android:layout_alignTop="@+id/task_responsible"
+            android:layout_alignStart="@+id/task_btn_add_picture" />
 
         <ImageView
             android:id="@+id/imageView9"
@@ -37,7 +36,7 @@
             android:id="@+id/imageView5"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignStart="@+id/imageView4"
+            android:layout_alignStart="@+id/imageView9"
             android:layout_below="@+id/task_date"
             android:src="@drawable/ic_description_black_24dp"
             tools:layout_editor_absoluteX="19dp"
@@ -47,11 +46,11 @@
             android:id="@+id/imageView6"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignStart="@+id/imageView5"
-            android:layout_below="@+id/task_description"
             android:src="@drawable/ic_place_black_24dp"
             tools:layout_editor_absoluteX="19dp"
-            tools:layout_editor_absoluteY="224dp" />
+            tools:layout_editor_absoluteY="224dp"
+            android:layout_below="@+id/space4"
+            android:layout_alignStart="@+id/imageView5" />
 
         <ImageView
             android:id="@+id/imageView7"
@@ -92,15 +91,15 @@
 
         <TextView
             android:id="@+id/task_responsible"
-            android:layout_width="280dp"
+            android:layout_width="300dp"
             android:layout_height="35dp"
-            android:layout_alignEnd="@+id/task_imageview"
-            android:layout_below="@+id/task_btn_edit"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:text="Responsible"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="119dp" />
+            tools:layout_editor_absoluteY="119dp"
+            android:layout_below="@+id/task_name"
+            android:layout_alignEnd="@+id/task_imageview" />
 
         <TextView
             android:id="@+id/task_date"
@@ -119,67 +118,64 @@
             android:id="@+id/task_description"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/task_date"
-            android:layout_alignStart="@+id/task_date"
-            android:layout_below="@+id/task_date"
+            android:layout_weight="2"
             android:text="Description"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="189dp" />
+            tools:layout_editor_absoluteY="189dp"
+            android:layout_below="@+id/task_date"
+            android:layout_alignStart="@+id/task_date" />
 
         <TextView
             android:id="@+id/task_category"
-            android:layout_width="295dp"
+            android:layout_width="300dp"
             android:layout_height="35dp"
-            android:layout_alignEnd="@+id/task_description"
-            android:layout_alignStart="@+id/task_description"
-            android:layout_below="@+id/task_description"
             android:text="Category"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="224dp" />
+            tools:layout_editor_absoluteY="224dp"
+            android:layout_below="@+id/space4"
+            android:layout_alignStart="@+id/task_description" />
 
         <TextView
             android:id="@+id/task_priority"
             android:layout_width="300dp"
             android:layout_height="35dp"
-            android:layout_alignEnd="@+id/task_category"
-            android:layout_alignStart="@+id/task_category"
-            android:layout_below="@+id/task_category"
             android:text="Priority"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="259dp" />
+            tools:layout_editor_absoluteY="259dp"
+            android:layout_below="@+id/task_category"
+            android:layout_alignStart="@+id/task_category" />
 
         <TextView
             android:id="@+id/task_points"
-            android:layout_width="301dp"
+            android:layout_width="300dp"
             android:layout_height="35dp"
-            android:layout_alignEnd="@+id/task_priority"
-            android:layout_alignStart="@+id/task_priority"
-            android:layout_below="@+id/task_priority"
             android:text="Points"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="294dp" />
+            tools:layout_editor_absoluteY="294dp"
+            android:layout_below="@+id/task_priority"
+            android:layout_alignStart="@+id/task_priority" />
 
         <TextView
             android:id="@+id/task_status"
-            android:layout_width="295dp"
+            android:layout_width="300dp"
             android:layout_height="35dp"
-            android:layout_alignEnd="@+id/task_points"
-            android:layout_alignStart="@+id/task_points"
-            android:layout_below="@+id/task_points"
             android:text="Status"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="329dp" />
+            tools:layout_editor_absoluteY="329dp"
+            android:layout_below="@+id/task_points"
+            android:layout_alignStart="@+id/task_points" />
 
         <Button
             android:id="@+id/task_btn_edit"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="88dp"
             android:layout_height="48dp"
+            android:layout_alignBottom="@+id/task_name"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:text="@string/ViewTaskEditButton"
@@ -190,69 +186,82 @@
         <Button
             android:id="@+id/task_btn_confirm"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/task_btn_add_picture"
-            android:layout_below="@+id/task_status"
-            android:layout_marginTop="24dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
             android:text="@string/ViewTaskConfirmButton"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="451dp" />
+            tools:layout_editor_absoluteY="451dp"
+            android:layout_below="@+id/task_btn_done"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="11dp" />
 
         <Button
             android:id="@+id/task_btn_add_picture"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/task_imageview"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="14dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
             android:text="@string/ViewTaskAddPictureButton"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="403dp" />
+            tools:layout_editor_absoluteY="403dp"
+            android:layout_below="@+id/task_status"
+            android:layout_alignStart="@+id/task_btn_done" />
 
         <Button
             android:id="@+id/task_btn_done"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="344dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/task_btn_add_picture"
-            android:layout_below="@+id/task_imageview"
-            android:layout_marginTop="11dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
             android:text="@string/ViewTaskDoneButton"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="499dp" />
+            android:layout_below="@+id/task_btn_add_picture"
+            android:layout_alignStart="@+id/task_btn_confirm" />
 
         <ImageView
             android:id="@+id/task_imageview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignEnd="@+id/task_btn_done"
-            android:layout_below="@+id/task_status"
-            android:layout_marginEnd="7dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginEnd="20dp"
             android:src="@mipmap/smlogo"
+            app:srcCompat="@drawable/ic_group_work_black_24dp"
             tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="374dp" />
+            tools:layout_editor_absoluteY="374dp"
+            android:layout_below="@+id/task_status"
+            android:layout_alignParentEnd="true" />
 
         <ImageView
             android:id="@+id/task_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/task_uncheck"
+            android:layout_alignTop="@+id/task_uncheck"
             android:src="@drawable/ic_check_box_black_24dp"
             tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="374dp"
-            android:layout_alignTop="@+id/task_uncheck"
-            android:layout_alignStart="@+id/task_uncheck" />
+            tools:layout_editor_absoluteY="374dp" />
 
         <ImageView
             android:id="@+id/task_uncheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageView2"
+            android:layout_below="@+id/task_points"
             android:src="@drawable/ic_check_box_outline_blank_black_24dp"
             tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="374dp"
-            android:layout_below="@+id/task_points"
-            android:layout_alignStart="@+id/imageView2" />
+            tools:layout_editor_absoluteY="374dp" />
 
-       </RelativeLayout>
+        <Space
+            android:id="@+id/space3"
+            android:layout_width="400dp"
+            android:layout_height="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/task_btn_confirm"
+            android:layout_marginTop="51dp" />
+
+        <Space
+            android:id="@+id/space4"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/task_description"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
 </ScrollView>

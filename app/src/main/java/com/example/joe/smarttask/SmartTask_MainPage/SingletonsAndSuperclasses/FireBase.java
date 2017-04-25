@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListProfile;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;

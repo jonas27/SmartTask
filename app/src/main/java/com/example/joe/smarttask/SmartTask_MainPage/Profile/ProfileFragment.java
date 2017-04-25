@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListProfile;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 
 
 /**

@@ -10,8 +10,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListProfile;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 import java.util.List;
 
