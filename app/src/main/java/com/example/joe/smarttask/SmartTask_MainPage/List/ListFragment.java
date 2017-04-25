@@ -2,7 +2,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +20,9 @@ import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,10 +100,10 @@ public class ListFragment extends Fragment {
         private ImageView mTaskUnsolved;
         private View mViewLine;
         private View mViewSeparator;
-        private ImageView mImageCircle;
-        private GradientDrawable gd;
+        private TextView mDateTextView;
 
         private TaskObject mTask;
+        private GregorianCalendar cal;
 
         public TaskHolder(View itemView) {
             super(itemView);
@@ -114,6 +116,8 @@ public class ListFragment extends Fragment {
             mTaskSolved = (ImageView) itemView.findViewById(R.id.list_task_check);
             mViewSeparator = (View) itemView.findViewById(R.id.list_item_separator);
             mPriority = (RoundedLetterView) itemView.findViewById(R.id.rlv_name_view);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_date);
+
 
         }
 
@@ -134,8 +138,11 @@ public class ListFragment extends Fragment {
             } else {
                 mTitleTextView.setText(mTask.getName());
             }
-
             mDescriptionTextView.setText(mTask.getDescription());
+
+            cal = new GregorianCalendar();
+            cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+            mDateTextView.setText(new SimpleDateFormat("MMM").format(cal.getTime()) + " " + cal.get(Calendar.DAY_OF_MONTH));
 
 
 //            change rounded layout view priority
@@ -158,6 +165,7 @@ public class ListFragment extends Fragment {
             mViewSeparator.setVisibility(View.VISIBLE);
             mTaskSolved.setVisibility(View.INVISIBLE);
             mViewLine.setVisibility(View.INVISIBLE);
+            mDateTextView.setVisibility(View.VISIBLE);
 
 
             if (mTask.getStatus().equals("true")) {
@@ -173,6 +181,7 @@ public class ListFragment extends Fragment {
                 mViewLine.setVisibility(View.VISIBLE);
                 mViewSeparator.setVisibility(View.VISIBLE);
                 mPriority.setVisibility(View.INVISIBLE);
+                mDateTextView.setVisibility(View.INVISIBLE);
             }
 
         }

@@ -30,6 +30,8 @@
     <color name="list_high_p_c">#FF4081</color>
     <color name="list_middle_p_c">#FFCC80</color>
     <color name="list_low_p_c">#C5E1A5</color>
+    <color name="list_grey_dark">#616161</color>
+    <color name="list_grey_light">#9E9E9E</color>
 
 
 </resources>
