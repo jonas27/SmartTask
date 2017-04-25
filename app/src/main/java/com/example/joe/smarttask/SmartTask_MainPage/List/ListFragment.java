@@ -133,12 +133,17 @@ public class ListFragment extends Fragment {
 
         public void bindTask(TaskObject task) {
             mTask = task;
-            if (mTask.getName().toCharArray().length > 18) {
-                mTitleTextView.setText(mTask.getName().substring(0, 17) + "...");
+            if (mTask.getName().toCharArray().length > 17) {
+                mTitleTextView.setText(mTask.getName().substring(0, 16) + "...");
             } else {
                 mTitleTextView.setText(mTask.getName());
             }
-            mDescriptionTextView.setText(mTask.getDescription());
+            if (mTask.getDescription().toCharArray().length > 60) {
+                mDescriptionTextView.setText(mTask.getDescription().substring(0, 59) + "...");
+            } else {
+                mDescriptionTextView.setText(mTask.getDescription());
+            }
+
 
             cal = new GregorianCalendar();
             cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
@@ -149,13 +154,13 @@ public class ListFragment extends Fragment {
             if (Integer.parseInt(mTask.getPriority()) == 1) {
                 String s = Integer.toString(R.string.list_high_p);
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_high_p));
-                mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_high_p_c));
+                mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_high_p_red));
             } else if (Integer.parseInt(mTask.getPriority()) == 2) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_middle_p));
-                mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_middle_p_c));
+                mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_middle_p_orange));
             } else if (Integer.parseInt(mTask.getPriority()) == 3) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_low_p));
-                mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_c));
+                mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }
 
 

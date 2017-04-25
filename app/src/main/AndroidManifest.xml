@@ -29,7 +29,7 @@
         <activity android:name=".SmartTask_MainPage.Task.TaskPagerActivity" />
         <activity android:name=".SmartTask_MainPage.NewTask.NewTaskActivity" />
         <activity android:name=".SmartTask_MainPage.SMMainActivity" />
-        <activity android:name=".SmartTask_MainPage.Settings.SMSettingsActivity" />
+        <activity android:name=".SmartTask_MainPage.Settings.SettingsActivity" />
         <activity android:name=".SmartTask_MainPage.Profile.ProfileActivity" />
         <!--
              <activity

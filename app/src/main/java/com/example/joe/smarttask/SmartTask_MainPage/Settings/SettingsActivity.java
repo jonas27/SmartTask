@@ -8,9 +8,9 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  * Created by joe on 23/04/2017.
  */
 
-public class SMSettingsActivity extends SingleFragmentActivity {
+public class SettingsActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        return new SMSettingsFragment();
+        return new SettingsFragment();
     }
 }
