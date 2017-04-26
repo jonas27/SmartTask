@@ -165,6 +165,7 @@ public class IntroActivity extends AppCompatActivity {
         intent = new Intent(this, SMMainActivity.class);
         startActivity(intent);
         finish();
+        return;
     }
 
 
