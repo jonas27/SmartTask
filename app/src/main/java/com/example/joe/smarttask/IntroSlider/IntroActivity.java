@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
@@ -31,18 +32,20 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Sh
 
 public class IntroActivity extends AppCompatActivity {
 
+    private static final int numberOfPages = 5;
+
     //Intent
     private Intent intent;
 
     //ViewPager allows flipping through pages
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    private IntroColors introColors;
 
     //array for intro slides which inflate intro_activity.xml
     private int[] intro_layouts;
 
     //define Elements (Buttons, Views...)
+    private RelativeLayout relativeLayout;
     private TextView[] circles;
     private LinearLayout boxCircles;
     private Button skipBtn, nextBtn, gotitBtn;
@@ -58,6 +61,10 @@ public class IntroActivity extends AppCompatActivity {
         intent = getIntent();
         super.onCreate(savedInstanceState);
 
+//        initialize Context for helper class
+        IntroColors.sContext = getApplicationContext();
+
+
         //set's the content (layout)
         setContentView(R.layout.intro_view_menu);
 
@@ -68,8 +75,6 @@ public class IntroActivity extends AppCompatActivity {
         boxCircles = (LinearLayout) findViewById(R.id.boxCircles);
         showIntroAgain = (CheckBox) findViewById(R.id.showAgain);
 
-        //create Object for Colors
-        introColors = new IntroColors();
 
         //add inflating layouts before pageview as it gives nullpointer exception
         intro_layouts = new int[]{
@@ -107,7 +112,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 //last page
-                if (position == intro_layouts.length - 1) {
+                if (position == numberOfPages - 1) {
                     nextBtn.setText(R.string.intro_got_it);
                 }
                 //else
@@ -115,6 +120,7 @@ public class IntroActivity extends AppCompatActivity {
                     nextBtn.setText(R.string.intro_next);
                 }
                 addCircles(position);
+                setBackgrounColor(position);
 
             }
 
@@ -136,7 +142,7 @@ public class IntroActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
+                if (viewPager.getCurrentItem() == numberOfPages - 1) {
                     openApp();
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
@@ -150,15 +156,23 @@ public class IntroActivity extends AppCompatActivity {
 
     private void addCircles(int position) {
         boxCircles.removeAllViews();
-        circles = new TextView[intro_layouts.length];
-        for (int counter = 0; counter < intro_layouts.length; counter++) {
+        circles = new TextView[numberOfPages];
+        for (int counter = 0; counter < numberOfPages; counter++) {
             circles[counter] = new TextView(this);
+//              sets circle
             circles[counter].setText(Html.fromHtml("&#8226;"));
             circles[counter].setTextSize(35);
-            circles[counter].setTextColor(introColors.chooseColor(position, counter));
+            circles[counter].setTextColor(IntroColors.getColorCircles(position, counter));
             boxCircles.addView(circles[counter]);
         }
     }
+
+    private void setBackgrounColor(int position) {
+        relativeLayout = (RelativeLayout) findViewById(R.id.intro_rel_layout);
+        relativeLayout.setBackgroundColor(IntroColors.getBackgroundColor(position));
+    }
+
+
 
     //opens main app
     private void openApp() {
@@ -211,7 +225,7 @@ public class IntroActivity extends AppCompatActivity {
         //Return the number of views available (#numbers of inflating pages)
         @Override
         public int getCount() {
-            return intro_layouts.length;
+            return numberOfPages;
         }
 
         //???no idea what it does :D maybe checks if the current view is really an object???

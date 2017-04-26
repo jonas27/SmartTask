@@ -1,6 +1,8 @@
 package com.example.joe.smarttask.IntroSlider;
 
-import android.graphics.Color;
+import android.content.Context;
+
+import com.example.joe.smarttask.R;
 
 /**
  * Sets the colors for the circles
@@ -9,56 +11,100 @@ import android.graphics.Color;
 
 public class IntroColors {
 
+    protected static Context sContext;
 
-    //counter==position: active sheet/circle
-    //counter!=position: not active sheet
-    //page colors 0: Light Blue      1: Pink     2: Orange      3: Yellow       4: Light Green
-    protected int chooseColor(int position, int counter) {
+    //    helper class is not supposed to instantiated
+    private IntroColors() {
+    }
+
+    /**
+     * @param position is the current page displayed in the slider
+     * @param counter  is the current circle for which the color needs to be set
+     *                 counter==position: active sheet/circle
+     *                 counter!=position: not active sheet
+     *                 page colors 0: Light Blue      1: Pink     2: Orange      3: Yellow       4: Light Green
+     */
+    public static int getColorCircles(int position, int counter) {
+        return getColor(position, counter);
+    }
+
+    private static int getColor(int position, int counter) {
         int color = 0;
         switch (position) {
             case 0: {
                 if (counter == position) {
-                    color = Color.parseColor("#01579B");
+                    color = sContext.getResources().getColor(R.color.intro_0_circle_active);
                 } else {
-                    color = Color.parseColor("#B3E5FC");
+                    color = sContext.getResources().getColor(R.color.intro_0_circle_inactive);
                 }
                 break;
             }
             case 1: {
                 if (counter == position) {
-                    color = Color.parseColor("#880E4F");
+                    color = sContext.getResources().getColor(R.color.intro_1_circle_active);
                 } else {
-                    color = Color.parseColor("#F8BBD0");
+                    color = sContext.getResources().getColor(R.color.intro_1_circle_inactive);
                 }
                 break;
             }
             case 2: {
                 if (counter == position) {
-                    color = Color.parseColor("#E65100");
+                    color = sContext.getResources().getColor(R.color.intro_2_circle_active);
                 } else {
-                    color = Color.parseColor("#FFE0B2");
+                    color = sContext.getResources().getColor(R.color.intro_2_circle_inactive);
                 }
                 break;
             }
             case 3: {
                 if (counter == position) {
-                    color = Color.parseColor("#FFD600");
+                    color = sContext.getResources().getColor(R.color.intro_3_circle_active);
                 } else {
-                    color = Color.parseColor("#FFF9C4");
+                    color = sContext.getResources().getColor(R.color.intro_3_circle_inactive);
                 }
                 break;
             }
             case 4: {
                 if (counter == position) {
-                    color = Color.parseColor("#33691E");
+                    color = sContext.getResources().getColor(R.color.intro_4_circle_active);
                 } else {
-                    color = Color.parseColor("#DCEDC8");
+                    color = sContext.getResources().getColor(R.color.intro_4_circle_inactive);
                 }
                 break;
             }
         }
+        return color;
+    }
 
 
+    public static int getBackgroundColor(int position) {
+        return getNewBackgroundColor(position);
+    }
+
+    private static int getNewBackgroundColor(int position) {
+        int color = 0;
+        switch (position) {
+            case 0: {
+                color = sContext.getResources().getColor(R.color.intro_0_background);
+                break;
+            }
+            case 1: {
+                color = sContext.getResources().getColor(R.color.intro_1_background);
+                break;
+            }
+            case 2: {
+                color = sContext.getResources().getColor(R.color.intro_2_background);
+                break;
+            }
+            case 3: {
+                color = sContext.getResources().getColor(R.color.intro_3_background);
+                break;
+            }
+            case 4: {
+                color = sContext.getResources().getColor(R.color.intro_4_background);
+                break;
+            }
+
+        }
         return color;
     }
 

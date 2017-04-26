@@ -25,6 +25,23 @@
     <color name="winter">#44a1c1da</color>
     <color name="spring">#448da64b</color>
 
+    <!-- Intro Slider -->
+    <color name="intro_0_background">#03A9F4</color>
+    <color name="intro_0_circle_active">#01579B</color>
+    <color name="intro_0_circle_inactive">#B3E5FC</color>
+    <color name="intro_1_background">#E91E63</color>
+    <color name="intro_1_circle_active">#880E4F</color>
+    <color name="intro_1_circle_inactive">#F8BBD0</color>
+    <color name="intro_2_background">#FF9800</color>
+    <color name="intro_2_circle_active">#E65100</color>
+    <color name="intro_2_circle_inactive">#FFE0B2</color>
+    <color name="intro_3_background">#FFEB3B</color>
+    <color name="intro_3_circle_active">#FFD600</color>
+    <color name="intro_3_circle_inactive">#FFF9C4</color>
+    <color name="intro_4_background">#8BC34A</color>
+    <color name="intro_4_circle_active">#33691E</color>
+    <color name="intro_4_circle_inactive">#DCEDC8</color>
+
 
     <!-- List Fragment -->
     <color name="list_high_p_red">#EF5350</color>
