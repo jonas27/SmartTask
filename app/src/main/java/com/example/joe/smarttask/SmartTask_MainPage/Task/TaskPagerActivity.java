@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
@@ -18,12 +20,13 @@ import java.util.List;
  * Created by joe on 07/04/2017.
  */
 
-public class TaskPagerActivity extends FragmentActivity {
+public class TaskPagerActivity extends AppCompatActivity {
 
     public static final String TASK_ID = "com.example.joe.smarttask.task_id";
 
     private ViewPager mViewPager;
     private List<TaskObject> mTasksList;
+    private Toolbar toolbar;
 
     public static Intent newIntent(Context packageContext, String mId) {
         Intent intent = new Intent(packageContext, TaskPagerActivity.class);
@@ -38,6 +41,9 @@ public class TaskPagerActivity extends FragmentActivity {
 
         String mId = (String) getIntent().getSerializableExtra(TASK_ID);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar_task);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager_task);
         mTasksList = ListTask.getTaskList();
@@ -46,9 +52,17 @@ public class TaskPagerActivity extends FragmentActivity {
             @Override
             public Fragment getItem(int position) {
                 TaskObject task = mTasksList.get(position);
+
+//                set the title of action bar to the title of the item clicked
+//                -1 as viewpager loads the next page in memory and would set the the title to -1
+                if (position > 0) {
+                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
+                }
+
                 return TaskFragment.newInstance(task.getId());
 //                return TaskFragment.newInstance(,task.getId());
             }
+
             @Override
             public int getCount() {
                 return mTasksList.size();
@@ -58,8 +72,26 @@ public class TaskPagerActivity extends FragmentActivity {
         for (int i = 0; i < mTasksList.size(); i++) {
             if (mTasksList.get(i).getId().equals(mId)) {
                 mViewPager.setCurrentItem(i);
-                break; }
+                break;
+            }
         }
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            //Listener for when new page is selected
+            @Override
+            public void onPageSelected(int position) {
+                getSupportActionBar().setTitle(mTasksList.get(position).getName());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 }

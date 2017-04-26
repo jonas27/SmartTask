@@ -66,7 +66,6 @@ public class TaskFragment extends Fragment {
     private TextView mTaskDate;
     private ImageView mTaskSolved;
     private Button mTaskEdit;
-    private TextView mTaskName;
     private TextView mTaskResponsible;
     private TextView mTaskDescription;
     private TextView mTaskCategory;
@@ -130,9 +129,6 @@ public class TaskFragment extends Fragment {
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
 
         mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
-
-        mTaskName = (TextView) v.findViewById(R.id.task_name);
-        mTaskName.setText(mTask.getName());
 
         mTaskResponsible = (TextView) v.findViewById(R.id.task_responsible);
         mTaskResponsible.setText(mTask.getResponsible());

@@ -73,21 +73,6 @@
             tools:layout_editor_absoluteX="19dp"
             tools:layout_editor_absoluteY="294dp" />
 
-        <TextView
-            android:id="@+id/task_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="#1565C0"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:text="@string/ViewTaskHeadline"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
 
         <TextView
             android:id="@+id/task_responsible"
