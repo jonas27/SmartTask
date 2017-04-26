@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -23,7 +22,7 @@ import java.util.List;
 public class TaskPagerActivity extends AppCompatActivity {
 
     public static final String TASK_ID = "com.example.joe.smarttask.task_id";
-
+    private static final String TAG = "CL_PrAc";
     private ViewPager mViewPager;
     private List<TaskObject> mTasksList;
     private Toolbar toolbar;
@@ -37,7 +36,7 @@ public class TaskPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.activity_viewpager);
 
         String mId = (String) getIntent().getSerializableExtra(TASK_ID);
 
@@ -45,7 +44,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_task);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_activity);
         mTasksList = ListTask.getTaskList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
@@ -55,7 +54,15 @@ public class TaskPagerActivity extends AppCompatActivity {
 
 //                set the title of action bar to the title of the item clicked
 //                -1 as viewpager loads the next page in memory and would set the the title to -1
-                if (position > 0) {
+                if (mTasksList.size() == 1) {
+                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
+                }
+//                else if (position == mTasksList.size()-1 && mTasksList.size()>2) {
+//                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
+//                    lastPageSelected=true;
+//                    Log.d(TAG,"exc");
+//                }
+                else if (position > 0) {
                     getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
                 }
 
@@ -82,6 +89,7 @@ public class TaskPagerActivity extends AppCompatActivity {
             }
 
             //Listener for when new page is selected
+//            set action bar title to task title
             @Override
             public void onPageSelected(int position) {
                 getSupportActionBar().setTitle(mTasksList.get(position).getName());
@@ -93,5 +101,4 @@ public class TaskPagerActivity extends AppCompatActivity {
             }
         });
     }
-
 }

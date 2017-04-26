@@ -17,15 +17,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -144,6 +145,13 @@ public class SMMainActivity extends AppCompatActivity {
             case R.id.menu_profile:
                 intent = new Intent(getAppContext(), ProfileActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.menu_logout:
+                FireBase fireBase = FireBase.fireBase(this);
+                fireBase.logout();
+                intent = new Intent(getAppContext(), LogInActivity.class);
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

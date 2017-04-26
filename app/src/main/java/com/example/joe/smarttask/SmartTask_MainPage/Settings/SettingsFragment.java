@@ -83,7 +83,6 @@ public class SettingsFragment extends Fragment {
     }
 
     private void initSingletons() {
-        mSettingsList = SettingsList.getSettingsList();
     }
 
     @Override
@@ -138,6 +137,14 @@ public class SettingsFragment extends Fragment {
                 }
                 case 3: {
                     icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_monetization_on_grey_24dp));
+                    break;
+                }
+                case 4: {
+                    icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_feedback_grey_24dp));
+                    break;
+                }
+                case 5: {
+                    icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_about_grey_24dp));
                     break;
                 }
                 default: {

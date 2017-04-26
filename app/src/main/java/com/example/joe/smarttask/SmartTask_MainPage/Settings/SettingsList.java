@@ -29,8 +29,6 @@ public class SettingsList {
     //    [End: Ordering of objects in List (RecyclerView)]
 
 
-
-
     //    [Start: define list order]
     public static final int ORDER_BY_DATE = 0;
     public static final int ORDER_BY_PRIORITY = 1;
@@ -47,6 +45,11 @@ public class SettingsList {
     public static final int REWARD_OFF = 1;
     //    [End: define rewards on off]
 
+    //    [Start: define reward on off -> push to firebase!!!]
+    public static final int FEEDBACK_ON = 0;
+    public static final int FEEDBACK_OFF = 1;
+    //    [End: define rewards on off]
+
     public static final int NOTIFICATION_NO = 1;
     private static final String TAG = "CL_SettL";
 
@@ -58,43 +61,36 @@ public class SettingsList {
 
 
     /**
-     * private Constructors means no inheritance and no composition
+     * Helper class (private Constructors means no inheritance and no composition)
      */
     private SettingsList() {
-        sContext = SMMainActivity.getAppContext();
-        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
     }
 
-
-    //    Class can fully be static --> no objects retrival needed
-    protected static SettingsList getSettingsList() {
-        if (sSettingsList == null) {
-            sSettingsList = new SettingsList();
-            sList = new ArrayList<>();
-            sSettingsList.createList();
-            return sSettingsList;
-        }
-        return sSettingsList;
-    }
 
     /**
      * Attention: could return a null List
      * Make sure to first get the Object reference
      */
     protected static List<SettingsObject> getList() {
+        sContext = SMMainActivity.getAppContext();
+        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
+        sList = new ArrayList<>();
+        createList();
         return sList;
     }
 
-    protected void createList() {
+    private static void createList() {
         sList.add(0, createListOption());
         sList.add(1, createNotificationOption());
         sList.add(2, createLanguageOption());
         sList.add(3, createRewardOption());
+        sList.add(4, createFeedbackOption());
+        sList.add(5, createAboutOption());
 
     }
 
     //    Object for List behaviour
-    private SettingsObject createListOption() {
+    private static SettingsObject createListOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_list_title));
         if (sharedPrefs.getSharedPrefencesListSort() == ORDER_BY_DATE) {
@@ -107,10 +103,10 @@ public class SettingsList {
     }
 
     //    Object for Notification
-    private SettingsObject createNotificationOption() {
+    private static SettingsObject createNotificationOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_notifications_title));
-        if (sharedPrefs.getPreferenceLevel() == NOTIFICATION_ALL) {
+        if (sharedPrefs.getNotificationLevel() == NOTIFICATION_ALL) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_all));
         } else if (sharedPrefs.getSharedPrefencesListSort() == NOTIFICATION_ONLY_EMAIL) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_email));
@@ -123,16 +119,16 @@ public class SettingsList {
         return listSettings;
     }
 
-    //    Object for Notification
-    private SettingsObject createLanguageOption() {
+    //    Object for Language
+    private static SettingsObject createLanguageOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_language_title));
         listSettings.setmNumberInList(LANGUAGE_POSITION);
         return listSettings;
     }
 
-    //    Object for Notification
-    private SettingsObject createRewardOption() {
+    //    Object for Reward
+    private static SettingsObject createRewardOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_reward_title));
         if (sharedPrefs.getRewardOnOff() == REWARD_ON) {
@@ -144,8 +140,32 @@ public class SettingsList {
         return listSettings;
     }
 
+    //    Object for Feedback
+    private static SettingsObject createFeedbackOption() {
+        SettingsObject listSettings = SettingsObject.getNewSettingsObject();
+        listSettings.setmTitle(sContext.getResources().getString(R.string.settings_feedback_title));
+        if (sharedPrefs.getFeedback() == FEEDBACK_ON) {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_feedback_on));
+        } else {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_feedback_off));
+        }
+        listSettings.setmNumberInList(FEEDBACK_POSITION);
+        return listSettings;
+    }
 
-    public int getListSize() {
+    //    Object for About
+    private static SettingsObject createAboutOption() {
+        SettingsObject listSettings = SettingsObject.getNewSettingsObject();
+        listSettings.setmTitle(sContext.getResources().getString(R.string.settings_about_title));
+        if (sharedPrefs.getFeedback() == FEEDBACK_ON) {
+            listSettings.setmDescription(sContext.getResources().getString(R.string.settings_about_version));
+        }
+        listSettings.setmNumberInList(ABOUT_POSITION);
+        return listSettings;
+    }
+
+
+    public static int getListSize() {
         return sList.size();
     }
 

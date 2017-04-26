@@ -164,6 +164,7 @@ public class IntroActivity extends AppCompatActivity {
     private void openApp() {
         intent = new Intent(this, SMMainActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
