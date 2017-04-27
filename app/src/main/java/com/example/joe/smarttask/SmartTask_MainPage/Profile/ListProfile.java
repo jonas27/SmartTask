@@ -29,7 +29,7 @@ public class ListProfile {
 
     private static ListProfile sListProfile;
     private static List<ProfileObject> sPlist;
-    private static DataSnapshot sDataSnapshot;
+    private static DataSnapshot sProfileSnapshot;
     private SharedPrefs sharedPrefs;
     private Context context;
 
@@ -61,8 +61,8 @@ public class ListProfile {
     }
 
 
-    public static void setDataSnapshot(DataSnapshot mDataSnapshot) {
-        sDataSnapshot = mDataSnapshot;
+    public static void setDataSnapshot(DataSnapshot mProfileSnapshot) {
+        sProfileSnapshot = mProfileSnapshot;
         if (sPlist != null) {
             createList();
         }
@@ -74,16 +74,16 @@ public class ListProfile {
      * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
-        if (sDataSnapshot != null) {
+        if (sProfileSnapshot != null) {
             Map<String, ProfileObject> ProfilesMap = new HashMap<>();
-            for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
+            for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 ProfileObject profile = new ProfileObject();
                 ProfilesMap.put(i.next().getKey(), profile);
             }
 
-            Log.d(TAG, String.valueOf(sDataSnapshot.getChildrenCount()));
+            Log.d(TAG, String.valueOf(sProfileSnapshot.getChildrenCount()));
             sPlist.clear();
-            for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
+            for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 DataSnapshot current = i.next();
                 ProfileObject mProfile = ProfilesMap.get(current.getKey());
                 mProfile = current.getValue(ProfileObject.class);
