@@ -3,7 +3,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,25 +17,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -115,6 +109,7 @@ public class TaskFragment extends Fragment {
         this.mTask = mList.getTask(mTaskId);
     }
 
+    //TODO: WHy API N?
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,7 +120,7 @@ public class TaskFragment extends Fragment {
         mTaskDate.setText(getDate(Long.parseLong(mTask.getDatetime()),"dd MMM yyyy  hh:mm"));
         storageRef = FirebaseStorage.getInstance().getReference();
 
-        mTaskSolved = (ImageView) v.findViewById(R.id.task_check);
+        mTaskSolved = (ImageView) v.findViewById(R.id.task_check_image);
 
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
 

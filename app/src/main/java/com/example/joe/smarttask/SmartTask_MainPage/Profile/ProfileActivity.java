@@ -32,12 +32,12 @@ public class ProfileActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_viewpager);
 
         final String mPid = (String) getIntent().getSerializableExtra(PROFILE_ID);
 
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_profile);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_activity);
         mProfileList = ListProfile.getProfileList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
