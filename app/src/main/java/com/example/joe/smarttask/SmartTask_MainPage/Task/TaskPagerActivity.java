@@ -8,10 +8,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsObject;
 
 import java.util.List;
 
@@ -55,7 +63,7 @@ public class TaskPagerActivity extends AppCompatActivity {
 //                set the title of action bar to the title of the item clicked
 //                -1 as viewpager loads the next page in memory and would set the the title to -1
                 if (mTasksList.size() == 1) {
-                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
+//                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
                 }
 //                else if (position == mTasksList.size()-1 && mTasksList.size()>2) {
 //                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
@@ -63,7 +71,7 @@ public class TaskPagerActivity extends AppCompatActivity {
 //                    Log.d(TAG,"exc");
 //                }
                 else if (position > 0) {
-                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
+//                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
                 }
 
                 return TaskFragment.newInstance(task.getId());
@@ -100,5 +108,63 @@ public class TaskPagerActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private static class Adapter extends RecyclerView.Adapter<Holder> {
+        private List<SettingsObject> mListSettings;
+
+        public Adapter(List<SettingsObject> mListSettings) {
+            this.mListSettings = mListSettings;
+        }
+
+        @Override
+        public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(SMMainActivity.getAppContext());
+            View view = layoutInflater.inflate(R.layout.fragment_settings, parent, false);
+            return new Holder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(Holder holder, int position) {
+
+            SettingsObject mObject = mListSettings.get(position);
+            holder.bindTask(mObject);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mListSettings.size();
+        }
+    }
+
+    // Provide a reference to the views for each data item
+    private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView title;
+        TextView describtion;
+        ImageView icon;
+
+
+        //        bind views here
+        public Holder(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        //    specify individual tasks behaviour on layout
+        public void bindTask(SettingsObject mObject) {
+            title.setText(mObject.getmTitle());
+            describtion.setText(mObject.getmDescription());
+
+        }
+
+
     }
 }
