@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -77,6 +78,7 @@ public class TaskFragment extends Fragment {
     private ListTask mList;
     private String dir = "/storage/emulated/0/smarttask/";
     private StorageReference storageRef;
+    private GregorianCalendar td;
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -86,15 +88,7 @@ public class TaskFragment extends Fragment {
         return fragment;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private String getDate(long milliSeconds, String dateFormat) {
-// Create a DateFormatter object for displaying date in specified format.
-        DateFormat formatter = new SimpleDateFormat(dateFormat);
-// Create a calendar object that will convert the date and time value in milliseconds to date.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
-        return formatter.format(calendar.getTime());
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,15 +103,13 @@ public class TaskFragment extends Fragment {
         this.mTask = mList.getTask(mTaskId);
     }
 
-    //TODO: WHy API N?
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
 
-        mTaskDate = (TextView) v.findViewById(R.id.task_date);
-        mTaskDate.setText(getDate(Long.parseLong(mTask.getDatetime()),"dd MMM yyyy  hh:mm"));
         storageRef = FirebaseStorage.getInstance().getReference();
 
         mTaskSolved = (ImageView) v.findViewById(R.id.task_check_image);
@@ -143,6 +135,11 @@ public class TaskFragment extends Fragment {
 
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
+
+        mTaskDate = (TextView) v.findViewById(R.id.task_date);
+        td = new GregorianCalendar();
+        td.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+        mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
 
 //        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
 //        mTaskEdit.setOnClickListener(new View.OnClickListener() {
