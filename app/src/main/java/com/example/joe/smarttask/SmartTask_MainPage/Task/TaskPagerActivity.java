@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,16 @@ public class TaskPagerActivity extends AppCompatActivity {
         mTasksList = ListTask.getTaskList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+
+            private boolean skip = false;
             @Override
             public Fragment getItem(int position) {
                 TaskObject task = mTasksList.get(position);
+                Log.d(TAG,"positiion "+position);
+                if(task.getPriority()=="-1"||skip){
+                    skip = true;
+                    task = mTasksList.get(position+1);
+                }
 
 //                set the title of action bar to the title of the item clicked
 //                -1 as viewpager loads the next page in memory and would set the the title to -1
@@ -80,7 +88,7 @@ public class TaskPagerActivity extends AppCompatActivity {
 
             @Override
             public int getCount() {
-                return mTasksList.size();
+                return mTasksList.size()-1;
             }
 
             @Override
@@ -90,7 +98,7 @@ public class TaskPagerActivity extends AppCompatActivity {
 
         });
 
-        for (int i = 0; i < mTasksList.size(); i++) {
+        for (int i = 0; i < mTasksList.size()-1; i++) {
             if (mTasksList.get(i).getId().equals(mId)) {
                 mViewPager.setCurrentItem(i);
                 break;
@@ -141,7 +149,7 @@ public class TaskPagerActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return mListSettings.size();
+            return mListSettings.size()-1;
         }
     }
 

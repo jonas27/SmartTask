@@ -262,7 +262,7 @@ public class TaskFragment extends Fragment {
             StorageReference fileUpload = storageRef.child("images/" + uriFile.getLastPathSegment());
             uploadTask = fileUpload.putFile(uriFile);
 
-// Register observers to listen for when the download is done or if it fails
+            // Register observers to listen for when the download is done or if it fails
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {

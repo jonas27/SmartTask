@@ -1,6 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Calendar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
@@ -27,6 +29,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity.getAppContext;
 
 /**
  * Created by Jones on 04/12/17.
@@ -56,11 +60,13 @@ public class CalendarView extends LinearLayout
     private static List<TaskObject> list;
     private ImageView btnPrev;
     private ImageView btnNext;
+    private Context context;
 
 
     public CalendarView(Context context)
     {
         super(context);
+        this.context = context;
     }
 
     public CalendarView(Context context, AttributeSet attrs)
@@ -105,7 +111,7 @@ public class CalendarView extends LinearLayout
         }
 
         // update grid
-        grid.setAdapter(new CalendarAdapter(SMMainActivity.getAppContext(), cells, events));
+        grid.setAdapter(new CalendarAdapter(getAppContext(), cells, events));
 
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
@@ -167,7 +173,9 @@ public class CalendarView extends LinearLayout
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView current = (TextView) view.findViewById(R.id.tasknumber);
-
+                SingleDayActivity day = new SingleDayActivity(Long.parseLong(current.getHint().toString()));
+                Intent intent = new Intent(context, day.getClass());
+                context.startActivity(intent);
             }
         });
     }
@@ -232,6 +240,7 @@ public class CalendarView extends LinearLayout
                 Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
 
+                taskNumber.setHint(Long.toString(cDate.getTime()));
                 if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
                     counter++;
                 }

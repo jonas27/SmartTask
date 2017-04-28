@@ -23,6 +23,7 @@
         android:gravity="center"
         android:minHeight="35dp"
         android:text=""
+        android:hint=""
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Small"
         android:textColor="#FFFFFF"

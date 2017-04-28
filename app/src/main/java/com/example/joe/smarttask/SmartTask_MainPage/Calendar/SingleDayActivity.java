@@ -1,7 +1,11 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Calendar;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
+import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 /**
@@ -9,6 +13,19 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  */
 
 public class SingleDayActivity extends SingleFragmentActivity {
+
+
+    private static final String TAG = "SingleDay";
+
+    public SingleDayActivity() {
+        super();
+    }
+
+    public SingleDayActivity(Long date) {
+        super();
+        Log.d(TAG,"date "+date);
+    }
+
     @Override
     protected Fragment createFragment() {
         return new SingleDayFragment();
