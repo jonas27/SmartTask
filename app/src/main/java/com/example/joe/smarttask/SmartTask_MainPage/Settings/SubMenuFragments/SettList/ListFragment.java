@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments;
+package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -44,5 +44,33 @@ public class ListFragment extends Fragment {
         return v;
     }
 
+
+//    Purpose of the Addapter is to provide the data items for the recycler view (or more general the AdapterView)
+    /*private static class Adapter extends RecyclerView.Adapter<Holder> {
+        private List<SubSettingsListObject> list;
+
+        public Adapter(List<SubSettingsListObject> list) {
+            this.list = list;
+        }
+
+        @Override
+        public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(SMMainActivity.getAppContext());
+            View view = layoutInflater.inflate(R.layout.fragment_settings_list, parent, false);
+            return new Holder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(Holder holder, int position) {
+            Object task = list.get(position);
+            holder.bind(task);
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+    }
+*/
 
 }
