@@ -31,7 +31,7 @@
         <activity android:name=".SmartTask_MainPage.SMMainActivity" />
         <activity android:name=".SmartTask_MainPage.Settings.SettingsActivity" />
         <activity android:name=".SmartTask_MainPage.Profile.ProfileActivity" />
-        <activity android:name=".SmartTask_MainPage.Settings.SubMenuActivity" />
+        <activity android:name=".SmartTask_MainPage.Settings.SubMenuFragments.SubMenuActivity" />
         <!--
              <activity
             android:hardwareAccelerated="true" />
