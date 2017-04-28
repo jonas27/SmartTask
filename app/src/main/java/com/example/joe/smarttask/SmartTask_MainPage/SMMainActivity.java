@@ -17,12 +17,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class SMMainActivity extends AppCompatActivity {
     private static Context context;
     private static List<Fragment> sFragmentList;
     private static boolean sStartActivity;
-    // When requested, this adapter returns a LFragment,
+    // When requested, this adapter returns a Fragment,
     // representing an object in the collection.
     MainPagerAdapter mMainPagerAdapter;
     private ListView mDrawerList;
@@ -75,7 +77,7 @@ public class SMMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                FragmentManager fm = getSupportFragmentManager();
-//                    LFragment fragment = new NewTaskFragment();
+//                    Fragment fragment = new NewTaskFragment();
 //                    fm.beginTransaction()
 //                            .add(R.id.fragment_container, fragment)
 //                            .commit();
@@ -143,6 +145,13 @@ public class SMMainActivity extends AppCompatActivity {
             case R.id.menu_profile:
                 intent = new Intent(getAppContext(), ProfileActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.menu_logout:
+                FireBase fireBase = FireBase.fireBase(this);
+                fireBase.logout();
+                intent = new Intent(getAppContext(), LogInActivity.class);
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

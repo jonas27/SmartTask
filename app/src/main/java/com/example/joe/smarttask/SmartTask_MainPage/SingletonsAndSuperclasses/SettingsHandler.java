@@ -1,7 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
 
 /**
- * Created by joe on 23/04/2017.
+ *TODO: Class is obsolete, use SettingsList
  */
 
 public class SettingsHandler {

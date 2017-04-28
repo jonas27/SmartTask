@@ -103,6 +103,7 @@
     <!-- Menu fragment -->
     <string name="menu_settings">Settings</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_logout">Logout</string>
 
     <!-- List fragment -->
     <string name="list_high_p">H</string>
@@ -123,6 +124,10 @@
     <string name="settings_reward_title">Reward System</string>
     <string name="settings_reward_enabled">Enabled</string>
     <string name="settings_reward_disabled">Disabled</string>
-
+    <string name="settings_feedback_title">Feedback</string>
+    <string name="settings_feedback_on">Thanks for helping us!</string>
+    <string name="settings_feedback_off">Feedback off</string>
+    <string name="settings_about_title">About</string>
+    <string name="settings_about_version">Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  </string>
 
 </resources>

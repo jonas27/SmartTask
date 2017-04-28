@@ -17,10 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
@@ -32,11 +36,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -77,6 +84,7 @@ public class TaskFragment extends Fragment {
     private ListTask mList;
     private String dir = "/storage/emulated/0/smarttask/";
     private StorageReference storageRef;
+    private GregorianCalendar td;
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -86,15 +94,7 @@ public class TaskFragment extends Fragment {
         return fragment;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private String getDate(long milliSeconds, String dateFormat) {
-// Create a DateFormatter object for displaying date in specified format.
-        DateFormat formatter = new SimpleDateFormat(dateFormat);
-// Create a calendar object that will convert the date and time value in milliseconds to date.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
-        return formatter.format(calendar.getTime());
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,17 +110,15 @@ public class TaskFragment extends Fragment {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
 
-        mTaskDate = (TextView) v.findViewById(R.id.task_date);
-        mTaskDate.setText(getDate(Long.parseLong(mTask.getDatetime()),"dd MMM yyyy  hh:mm"));
         storageRef = FirebaseStorage.getInstance().getReference();
 
-        mTaskSolved = (ImageView) v.findViewById(R.id.task_check);
+        mTaskSolved = (ImageView) v.findViewById(R.id.task_check_image);
 
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
 
@@ -143,6 +141,11 @@ public class TaskFragment extends Fragment {
 
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
+
+        mTaskDate = (TextView) v.findViewById(R.id.task_date);
+        td = new GregorianCalendar();
+        td.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+        mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
 
 //        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
 //        mTaskEdit.setOnClickListener(new View.OnClickListener() {
@@ -237,13 +240,9 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onResume() {
+        mList = ListTask.list(getContext());
         this.mTask = mList.getTask(mTaskId);
         super.onResume();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override

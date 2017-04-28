@@ -15,7 +15,7 @@ public class SharedPrefs {
     private static final String LIST_ORDER = "ListSort";
     private static final String NOTIFICATION_LEVEL = "NotificationLevel";
     private static final String REWARD_ON_OFF = "RewardOnOff";
-
+    private static final String FEEDBACK = "Feedback";
 
     private static SharedPrefs sharedPrefs;
 
@@ -37,8 +37,12 @@ public class SharedPrefs {
         return sharedPrefs;
     }
 
-    public static int getPreferenceLevel() {
+    public static int getNotificationLevel() {
         return sharedPreferences.getInt(NOTIFICATION_LEVEL, 0);
+    }
+
+    public void setNotificationLevel(int i) {
+        setNewNotificationLevel(i);
     }
 
     //sets if Intro should show
@@ -61,17 +65,13 @@ public class SharedPrefs {
         return sharedPreferences.getInt(LIST_ORDER, 0);
     }
 
-    public void setNotificationLevel(int i) {
-        setNewNotificationLevel(i);
-    }
-
     private void setNewNotificationLevel(int i) {
         editor.putInt(NOTIFICATION_LEVEL, i);
         editor.commit();
     }
 
     public int getRewardOnOff() {
-        return sharedPreferences.getInt(LIST_ORDER, 0);
+        return sharedPreferences.getInt(REWARD_ON_OFF, 0);
     }
 
     public void setRewardOnOff(int i) {
@@ -80,6 +80,19 @@ public class SharedPrefs {
 
     private void setNewRewardOnOff(int i) {
         editor.putInt(REWARD_ON_OFF, i);
+        editor.commit();
+    }
+
+    public int getFeedback() {
+        return sharedPreferences.getInt(FEEDBACK, 0);
+    }
+
+    public void setFeedback(int i) {
+        setNewFeedback(i);
+    }
+
+    private void setNewFeedback(int i) {
+        editor.putInt(FEEDBACK, i);
         editor.commit();
     }
 

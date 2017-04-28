@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
@@ -189,6 +189,10 @@ public class FireBase extends AppCompatActivity {
     private void callback2(DataSnapshot mPDataSnapshot) {
         ListProfile.setDataSnapshot(mPDataSnapshot);
         }
+
+    public void logout() {
+        mAuth.signOut();
+    }
 
 
 }
