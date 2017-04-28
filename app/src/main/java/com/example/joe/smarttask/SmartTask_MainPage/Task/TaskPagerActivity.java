@@ -48,11 +48,11 @@ public class TaskPagerActivity extends AppCompatActivity {
 
         String mId = (String) getIntent().getSerializableExtra(TASK_ID);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_task);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_activity);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTasksList = ListTask.getTaskList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
@@ -62,26 +62,32 @@ public class TaskPagerActivity extends AppCompatActivity {
 
 //                set the title of action bar to the title of the item clicked
 //                -1 as viewpager loads the next page in memory and would set the the title to -1
-                if (mTasksList.size() == 1) {
-//                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
+//                CODE DOES NOT WORK PROPERLY AS THE VIEWPAGER LOADS MORE THAN FRAGMENT AT ONCE
+                /*if (mTasksList.size() == 1) {
+                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
                 }
-//                else if (position == mTasksList.size()-1 && mTasksList.size()>2) {
-//                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
-//                    lastPageSelected=true;
-//                    Log.d(TAG,"exc");
-//                }
+                else if (position == mTasksList.size()-1 && mTasksList.size()>2) {
+                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
+                    lastPageSelected=true;
+                    Log.d(TAG,"exc");
+                }
                 else if (position > 0) {
-//                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
-                }
+                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
+                }*/
 
                 return TaskFragment.newInstance(task.getId());
-//                return TaskFragment.newInstance(,task.getId());
             }
 
             @Override
             public int getCount() {
                 return mTasksList.size();
             }
+
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+
         });
 
         for (int i = 0; i < mTasksList.size(); i++) {

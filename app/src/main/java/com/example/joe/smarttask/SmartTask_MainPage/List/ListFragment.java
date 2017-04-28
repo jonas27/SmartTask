@@ -34,7 +34,7 @@ import java.util.Map;
 public class ListFragment extends Fragment {
 
     //TAG for Logs
-    private static final String TAG = "CL_ListFragment";
+    private static final String TAG = "CL_ListFr";
     private static RecyclerView sListRecyclerView;
     private static TaskAdapter sAdapter;
     // [End: get Singletons]
@@ -53,18 +53,19 @@ public class ListFragment extends Fragment {
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
-    public static void updateUI(List<TaskObject> mList) {
+    public static void updateUI(List<TaskObject> list) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
         if (sListRecyclerView != null) {
-            mList = ListTask.getTaskList();
-            sAdapter = new TaskAdapter(mList);
+            list = ListTask.getTaskList();
+            sAdapter = new TaskAdapter(list);
             sAdapter.notifyDataSetChanged();
             sListRecyclerView.setAdapter(sAdapter);
         }
     }
 
+    //    specifies what is initialized when the view is created
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_list, container, false);
@@ -78,6 +79,7 @@ public class ListFragment extends Fragment {
         return view;
     }
 
+
     private void initSingletons() {
         mFireBase = FireBase.fireBase(getContext());
         mListTask = ListTask.list(getContext());
@@ -90,7 +92,7 @@ public class ListFragment extends Fragment {
     }
 
 
-    // Provide a reference to the views for each data item
+    // Provide a reference to the views for each item in the list
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitleTextView;
@@ -129,7 +131,8 @@ public class ListFragment extends Fragment {
                 sContext.startActivity(intent);
             }
         }
-        public void bindTask(TaskObject task) {
+
+        private void bindTask(TaskObject task) {
             mTask = task;
             if (mTask.getName().toCharArray().length > 17) {
                 mTitleTextView.setText(mTask.getName().substring(0, 16) + "...");
@@ -142,11 +145,9 @@ public class ListFragment extends Fragment {
                 mDescriptionTextView.setText(mTask.getDescription());
             }
 
-
             cal = new GregorianCalendar();
             cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
             mDateTextView.setText(new SimpleDateFormat("MMM").format(cal.getTime()) + " " + cal.get(Calendar.DAY_OF_MONTH));
-
 
 //            change rounded layout view priority
             if (Integer.parseInt(mTask.getPriority()) == 1) {
@@ -204,7 +205,6 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
-
             TaskObject task = mListTasks.get(position);
             holder.bindTask(task);
         }

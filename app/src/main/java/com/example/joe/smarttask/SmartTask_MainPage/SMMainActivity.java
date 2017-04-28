@@ -92,7 +92,7 @@ public class SMMainActivity extends AppCompatActivity {
         // ViewPager and its adapters use support library
         // layout.layouts.fragments, so use getSupportFragmentManager.
         mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_main);
         setupViewPager(mViewPager);
 //        mViewPager.setAdapter(mMainPagerAdapter);
 

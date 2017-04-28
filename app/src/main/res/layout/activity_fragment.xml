@@ -25,6 +25,12 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </android.support.design.widget.CoordinatorLayout>
 
@@ -46,7 +52,7 @@ OLD CODE. For support please don't delete yet 24.04.2017
     This is used for the SingleFragmentActivity
 
     Explanation of Fragments:
-    A Fragment is "more or less" a view with its on logic and existence, but it leaves inside an activity.
+    A ListFragment is "more or less" a view with its on logic and existence, but it leaves inside an activity.
     In order to launch a fragment on a new page the new page must first be created by an activity.
 
     -->

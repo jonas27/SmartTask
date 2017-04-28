@@ -78,7 +78,7 @@
         android:layout_alignBottom="@+id/list_item_text_separator"
         android:background="@color/greyed_out" />
 
-    <TextView
+    <View
         android:id="@+id/list_item_text_separator"
         android:layout_width="match_parent"
         android:layout_height="20dp"

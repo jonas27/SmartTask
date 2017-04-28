@@ -10,10 +10,10 @@
     <color name="grey_lite">#9E9E9E</color>
 
 
-    <!-- Intro Activity -->
+    <!-- Intro SubMenuActivity -->
 
 
-    <!-- SmartTask Activity -->
+    <!-- SmartTask SubMenuActivity -->
     <color name="smartask_sliding_main">#1976D2</color>
     <color name="smartask_sliding_background">#90CAF9</color>
 

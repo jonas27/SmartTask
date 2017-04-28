@@ -30,6 +30,8 @@ public class ListTask {
     private static List<TaskObject> sList;
     private static DataSnapshot sDataSnapshot;
 
+    private static TaskObject sTaskObject;
+
     private Context context;
 
 
@@ -121,6 +123,30 @@ public class ListTask {
         return null;
     }
 //    [End: Sort by Date]
+
+
+//    Reodering of the first three elements of the Recylcerview is hard/not possible as it caches them in an arraylist which cannot be altered
+//    For more infos see http://stackoverflow.com/questions/12510404/reorder-pages-in-fragmentstatepageradapter-using-getitempositionobject-object
+//    TODO: review if this is really true (until then donÄt use methods below)
+//    [Start: Add and remove taskholder in List for serparator line]
+/*    public static void removeSeparator(){
+        for(int c=0; c<sList.size();c++){
+            if(sList.get(c).getStatus().equals(SortList.DRAW_LINE)){
+                sList.remove(c);
+            }
+        }
+    }
+    public static void addSeparator(){
+        for(int c=0; c<sList.size();c++){
+            if(sList.get(c).getStatus().equals("true")){
+                sList.add(c-1,sTaskObject);
+                return;
+            }
+        }
+
+    }
+    */
+//    [End: Add and remove taskholder in List for serparator line]
 
 }
 

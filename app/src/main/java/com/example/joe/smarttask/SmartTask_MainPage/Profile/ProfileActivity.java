@@ -37,7 +37,7 @@ public class ProfileActivity extends FragmentActivity {
         final String mPid = (String) getIntent().getSerializableExtra(PROFILE_ID);
 
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_activity);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mProfileList = ListProfile.getProfileList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
