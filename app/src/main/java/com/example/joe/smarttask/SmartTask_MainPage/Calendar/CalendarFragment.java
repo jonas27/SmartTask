@@ -36,11 +36,8 @@ public class  CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-        HashSet<Date> events = new HashSet<>();
-        events.add(new Date());
 
-        CalendarView cv = ((CalendarView)view.findViewById(R.id.calendar_view));
-        cv.updateCalendar(events);
+        CalendarView calendar = ((CalendarView)view.findViewById(R.id.calendar_view));
 
         // assign event handler
         /*
@@ -55,9 +52,8 @@ public class  CalendarFragment extends Fragment {
             }
         });
         */
-        cv.updateCalendar();
+        calendar.updateCalendar();
         return view;
     }
-
 
 }

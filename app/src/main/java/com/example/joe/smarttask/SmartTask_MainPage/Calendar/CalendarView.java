@@ -73,13 +73,13 @@ public class CalendarView extends LinearLayout
     {
         super(context, attrs);
         list = ListTask.getTaskList();
-        Log.d(TAG,"init");
         initControl(context);
     }
 
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
+        list = ListTask.getTaskList();
         initControl(context);
     }
 
@@ -87,13 +87,7 @@ public class CalendarView extends LinearLayout
      * Display dates correctly in grid
      */
     public static void updateCalendar() {
-        updateCalendar(null);
-    }
-
-    /**
-     * Display dates correctly in grid
-     */
-    public static void updateCalendar(HashSet<Date> events) {
+        list = ListTask.getTaskList();
         ArrayList<Date> cells = new ArrayList<>();
         Calendar calendar = (Calendar) currentDate.clone();
 
@@ -111,7 +105,7 @@ public class CalendarView extends LinearLayout
         }
 
         // update grid
-        grid.setAdapter(new CalendarAdapter(getAppContext(), cells, events));
+        grid.setAdapter(new CalendarAdapter(getAppContext(), cells));
 
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
@@ -122,6 +116,7 @@ public class CalendarView extends LinearLayout
     /**
      * Load control xml layout
      */
+
     private void initControl(Context context)
     {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -182,16 +177,12 @@ public class CalendarView extends LinearLayout
 
     private static class CalendarAdapter extends ArrayAdapter<Date>
     {
-        // days with events
-        private HashSet<Date> eventDays;
-
         // for view inflation
         private LayoutInflater inflater;
 
-        public CalendarAdapter(Context context, ArrayList<Date> days, HashSet<Date> eventDays)
+        public CalendarAdapter(Context context, ArrayList<Date> days)
         {
             super(context, R.layout.control_calendar_day, days);
-            this.eventDays = eventDays;
             inflater = LayoutInflater.from(context);
         }
 

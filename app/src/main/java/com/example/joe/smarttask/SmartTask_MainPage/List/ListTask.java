@@ -3,6 +3,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
@@ -95,6 +96,7 @@ public class ListTask {
 //            sList=list;
             sList = SortList.sortList(list);
             ListFragment.updateUI(sList);
+            CalendarView.updateCalendar();
         }
     }
 
