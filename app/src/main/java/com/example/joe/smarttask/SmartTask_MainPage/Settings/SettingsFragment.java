@@ -1,6 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Settings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -36,8 +37,6 @@ public class SettingsFragment extends Fragment {
 
     private List<SettingsObject> mList;
 
-    private SettingsObject mSettingsObject;
-
     public static void updateUI(List<SettingsObject> mList) {
 
         if (sRecyclerView != null) {
@@ -51,15 +50,16 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sContext = SMMainActivity.getAppContext();
-
+//        sContext = SMMainActivity.getAppContext();
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Pass layout xml to the inflater and assign it to View v.
         View v = inflater.inflate(R.layout.recycler_list, container, false);
+        sContext = v.getContext(); // Assign your v to context
 
 //        Set background color to blue
         FrameLayout frameLayout = (FrameLayout) getActivity().findViewById(R.id.fragment_container);
@@ -97,9 +97,9 @@ public class SettingsFragment extends Fragment {
         TextView title;
         TextView describtion;
         ImageView icon;
+        private SettingsObject mSettingsObject;
 
-
-        //        bind views here
+        //        bind views here (The Holder defines one list item, which are then coppied)
         public Holder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
@@ -108,16 +108,20 @@ public class SettingsFragment extends Fragment {
             icon = (ImageView) itemView.findViewById(R.id.settings_list_ic);
         }
 
+        //        specify what happens when click on a list item
         @Override
         public void onClick(View v) {
 
+            Intent intent = SubMenuActivity.newIntent(sContext, mSettingsObject.getmTitle());
+            sContext.startActivity(intent);
         }
 
-        //    specify individual tasks behaviour on layout
-        public void bindTask(SettingsObject mObject) {
-            title.setText(mObject.getmTitle());
-            describtion.setText(mObject.getmDescription());
-            setIcon(mObject.getmNumberInList());
+        //    specify individual settings behaviour on layout
+        private void bindSetting(SettingsObject settingsObject) {
+            mSettingsObject = settingsObject;
+            title.setText(mSettingsObject.getmTitle());
+            describtion.setText(mSettingsObject.getmDescription());
+            setIcon(mSettingsObject.getmNumberInList());
 
         }
 
@@ -174,8 +178,8 @@ public class SettingsFragment extends Fragment {
         @Override
         public void onBindViewHolder(SettingsFragment.Holder holder, int position) {
 
-            SettingsObject mObject = mListSettings.get(position);
-            holder.bindTask(mObject);
+            SettingsObject settingsObject = mListSettings.get(position);
+            holder.bindSetting(settingsObject);
         }
 
         @Override

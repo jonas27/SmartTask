@@ -26,7 +26,7 @@
     <string name="intro_dont_show_again">Show tutorial on next start?</string>
 
 
-    <!-- SmartTask LActivity Rework -->
+    <!-- SmartTask SubMenuActivity Rework -->
     <string name="smarttask_activity_tasks">Tasks</string>
     <string name="smarttask_activity_calendar">Calendar</string>
     <string name="smarttask_activity_messages">Messages</string>

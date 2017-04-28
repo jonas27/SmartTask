@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +65,7 @@ public class ListFragment extends Fragment {
         }
     }
 
+    //    specifies what is initialized when the view is created
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_list, container, false);
@@ -73,7 +73,6 @@ public class ListFragment extends Fragment {
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList = ListTask.getTaskList();
-        Log.d(TAG, "size of taskList: " + Integer.toString(mList.size()));
         updateUI(mList);
         sContext = this.getContext();
 
@@ -93,7 +92,7 @@ public class ListFragment extends Fragment {
     }
 
 
-    // Provide a reference to the views for each data item
+    // Provide a reference to the views for each item in the list
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitleTextView;
@@ -146,11 +145,9 @@ public class ListFragment extends Fragment {
                 mDescriptionTextView.setText(mTask.getDescription());
             }
 
-
             cal = new GregorianCalendar();
             cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
             mDateTextView.setText(new SimpleDateFormat("MMM").format(cal.getTime()) + " " + cal.get(Calendar.DAY_OF_MONTH));
-
 
 //            change rounded layout view priority
             if (Integer.parseInt(mTask.getPriority()) == 1) {
