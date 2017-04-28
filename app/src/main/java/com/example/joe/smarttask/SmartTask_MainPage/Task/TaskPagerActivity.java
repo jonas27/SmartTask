@@ -22,7 +22,7 @@ public class TaskPagerActivity extends FragmentActivity {
 
     public static final String TASK_ID = "com.example.joe.smarttask.task_id";
 
-    private ViewPager mViewPager;
+    private static ViewPager mViewPager;
     private List<TaskObject> mTasksList;
 
     public static Intent newIntent(Context packageContext, String mId) {
@@ -34,12 +34,12 @@ public class TaskPagerActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.activity_viewpager);
 
         String mId = (String) getIntent().getSerializableExtra(TASK_ID);
 
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_task);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTasksList = ListTask.getTaskList();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
@@ -53,6 +53,12 @@ public class TaskPagerActivity extends FragmentActivity {
             public int getCount() {
                 return mTasksList.size();
             }
+
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+
         });
 
         for (int i = 0; i < mTasksList.size(); i++) {
@@ -61,5 +67,4 @@ public class TaskPagerActivity extends FragmentActivity {
                 break; }
         }
     }
-
 }

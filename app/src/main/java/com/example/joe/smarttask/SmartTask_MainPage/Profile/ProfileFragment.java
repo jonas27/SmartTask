@@ -52,7 +52,7 @@ public class ProfileFragment extends Fragment {
 
         Log.d(TAG,"so far so good");
 
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_task);
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
 //        mProfileId = (String) getArguments().getSerializable(PROFILE_ID);
   //      mListProfile = mListProfile.list(getContext());

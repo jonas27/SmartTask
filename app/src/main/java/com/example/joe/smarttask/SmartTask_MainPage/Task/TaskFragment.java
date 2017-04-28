@@ -3,7 +3,6 @@ package com.example.joe.smarttask.SmartTask_MainPage.Task;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,25 +17,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -107,13 +101,14 @@ public class TaskFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_task);
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         mTaskId = (String) getArguments().getSerializable(TASK_ID);
         mList = ListTask.list(getContext());
         this.mTask = mList.getTask(mTaskId);
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -242,9 +237,13 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onResume() {
-        mList = ListTask.list(getContext());
         this.mTask = mList.getTask(mTaskId);
         super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     @Override

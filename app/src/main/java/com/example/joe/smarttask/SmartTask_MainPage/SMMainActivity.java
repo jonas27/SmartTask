@@ -23,9 +23,8 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -39,7 +38,7 @@ public class SMMainActivity extends AppCompatActivity {
     private static Context context;
     private static List<Fragment> sFragmentList;
     private static boolean sStartActivity;
-    // When requested, this adapter returns a Fragment,
+    // When requested, this adapter returns a LFragment,
     // representing an object in the collection.
     MainPagerAdapter mMainPagerAdapter;
     private ListView mDrawerList;
@@ -76,7 +75,7 @@ public class SMMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                FragmentManager fm = getSupportFragmentManager();
-//                    Fragment fragment = new NewTaskFragment();
+//                    LFragment fragment = new NewTaskFragment();
 //                    fm.beginTransaction()
 //                            .add(R.id.fragment_container, fragment)
 //                            .commit();
@@ -91,7 +90,7 @@ public class SMMainActivity extends AppCompatActivity {
         // ViewPager and its adapters use support library
         // layout.layouts.fragments, so use getSupportFragmentManager.
         mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_main);
         setupViewPager(mViewPager);
 //        mViewPager.setAdapter(mMainPagerAdapter);
 

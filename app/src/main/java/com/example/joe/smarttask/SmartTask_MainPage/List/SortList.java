@@ -10,7 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by joe on 24/04/2017.
+ * This is a helper class to implement different sortings for the List in the main view
+ * We implemented a bubble sort algorithm (bigO(n^2).
+ * Merge sort was not 100 functional
+ * TODO: Sort by priority
  */
 
 public class SortList {
@@ -56,7 +59,7 @@ public class SortList {
         tO.setStatus(DRAW_LINE);
         tO.setId(DRAW_LINE);
         tO.setDatetime("1092595149661");
-        tO.setPriority("0");
+        tO.setPriority("-1");
         tO.setName("0");
         tO.setDescription("0");
         newList.add(0, tO);
@@ -97,7 +100,6 @@ public class SortList {
 //
 //    //    [Start: Sort by Date (merge Sort)]
 ////    leave creation of new List as not it is not working --> don't do: return divideList(list);
-////    TODO: Implement merge sort correctly. Maybe....
 //
 //    protected static synchronized List<TaskObject>  sortedList(List<TaskObject> list){
 //        List<TaskObject> newList=list;

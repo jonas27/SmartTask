@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ import java.util.Map;
 public class ListFragment extends Fragment {
 
     //TAG for Logs
-    private static final String TAG = "CL_ListFragment";
+    private static final String TAG = "CL_ListFr";
     private static RecyclerView sListRecyclerView;
     private static TaskAdapter sAdapter;
     // [End: get Singletons]
@@ -53,13 +54,13 @@ public class ListFragment extends Fragment {
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
-    public static void updateUI(List<TaskObject> mList) {
+    public static void updateUI(List<TaskObject> list) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
         if (sListRecyclerView != null) {
-            mList = ListTask.getTaskList();
-            sAdapter = new TaskAdapter(mList);
+            list = ListTask.getTaskList();
+            sAdapter = new TaskAdapter(list);
             sAdapter.notifyDataSetChanged();
             sListRecyclerView.setAdapter(sAdapter);
         }
@@ -72,11 +73,13 @@ public class ListFragment extends Fragment {
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList = ListTask.getTaskList();
+        Log.d(TAG, "size of taskList: " + Integer.toString(mList.size()));
         updateUI(mList);
         sContext = this.getContext();
 
         return view;
     }
+
 
     private void initSingletons() {
         mFireBase = FireBase.fireBase(getContext());
@@ -129,7 +132,8 @@ public class ListFragment extends Fragment {
                 sContext.startActivity(intent);
             }
         }
-        public void bindTask(TaskObject task) {
+
+        private void bindTask(TaskObject task) {
             mTask = task;
             if (mTask.getName().toCharArray().length > 17) {
                 mTitleTextView.setText(mTask.getName().substring(0, 16) + "...");
@@ -204,7 +208,6 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
-
             TaskObject task = mListTasks.get(position);
             holder.bindTask(task);
         }
