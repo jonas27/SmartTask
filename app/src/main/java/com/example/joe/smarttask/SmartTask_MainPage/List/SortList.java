@@ -63,7 +63,7 @@ public class SortList {
         tO.setStatus(DRAW_LINE);
         tO.setId(DRAW_LINE);
             tO.setDatetime("1111111111111");
-            tO.setPriority("0");
+            tO.setPriority("-1");
         tO.setName("0");
         tO.setDescription("0");
         newList.add(0, tO);

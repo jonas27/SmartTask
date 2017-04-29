@@ -53,6 +53,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTasksList = ListTask.getTaskList();
@@ -133,10 +134,10 @@ public class TaskPagerActivity extends AppCompatActivity {
     }
 
     private static class Adapter extends RecyclerView.Adapter<Holder> {
-        private List<SettingsObject> mListSettings;
+        private List<SettingsObject> mTaskList;
 
-        public Adapter(List<SettingsObject> mListSettings) {
-            this.mListSettings = mListSettings;
+        public Adapter(List<SettingsObject> mTaskList) {
+            this.mTaskList = mTaskList;
         }
 
         @Override
@@ -149,13 +150,13 @@ public class TaskPagerActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(Holder holder, int position) {
 
-            SettingsObject mObject = mListSettings.get(position);
+            SettingsObject mObject = mTaskList.get(position);
             holder.bindTask(mObject);
         }
 
         @Override
         public int getItemCount() {
-            return mListSettings.size()-1;
+            return mTaskList.size() - 1;
         }
     }
 

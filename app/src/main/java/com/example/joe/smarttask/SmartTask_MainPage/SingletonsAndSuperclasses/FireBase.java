@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
@@ -193,6 +192,7 @@ public class FireBase extends AppCompatActivity {
         }
 
     public void logout() {
+        FirebaseAuth.getInstance().signOut();
         mAuth.signOut();
     }
 
