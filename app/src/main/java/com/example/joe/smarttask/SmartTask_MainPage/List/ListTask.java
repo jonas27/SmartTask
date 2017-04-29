@@ -29,6 +29,8 @@ public class ListTask {
 
     private static ListTask sListTask;
     private static List<TaskObject> sList;
+    private static List<TaskObject> sSortedList;
+
     private static DataSnapshot sDataSnapshot;
 
     private static TaskObject sTaskObject;
@@ -75,7 +77,8 @@ public class ListTask {
      * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
-        List<TaskObject> list = new ArrayList<>();
+        sList = new ArrayList<>();
+        sSortedList = new ArrayList<>();
         if (sDataSnapshot != null) {
             Map<String, TaskObject> tasksMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
@@ -90,22 +93,24 @@ public class ListTask {
                 TaskObject mTask = tasksMap.get(current.getKey());
                 mTask = current.getValue(TaskObject.class);
                 mTask.setId(current.getKey());
-                list.add(mTask);
+                sList.add(mTask);
             }
 
-//            sList=list;
-            sList = SortList.sortList(list);
-            ListFragment.updateUI(sList);
+
+            sSortedList = SortList.sortList(sList);
+            ListFragment.updateUI(sSortedList);
             CalendarView.updateCalendar();
         }
     }
 
     //    getter Method for List of Tasks
     public static List<TaskObject> getTaskList() {
-        return sList;
+        return sSortedList;
     }
 
-
+    public static void sortList() {
+        sSortedList = SortList.sortList(sList);
+    }
 
 
     /**
@@ -117,7 +122,7 @@ public class ListTask {
      * *
      */
     public TaskObject getTask(String mTaskId) {
-        for (TaskObject t : sList) {
+        for (TaskObject t : sSortedList) {
             if (mTaskId.equals(t.getId())) {
                 return t;
             }
@@ -125,30 +130,6 @@ public class ListTask {
         return null;
     }
 //    [End: Sort by Date]
-
-
-//    Reodering of the first three elements of the Recylcerview is hard/not possible as it caches them in an arraylist which cannot be altered
-//    For more infos see http://stackoverflow.com/questions/12510404/reorder-pages-in-fragmentstatepageradapter-using-getitempositionobject-object
-//    TODO: review if this is really true (until then donÄt use methods below)
-//    [Start: Add and remove taskholder in List for serparator line]
-/*    public static void removeSeparator(){
-        for(int c=0; c<sList.size();c++){
-            if(sList.get(c).getStatus().equals(SortList.DRAW_LINE)){
-                sList.remove(c);
-            }
-        }
-    }
-    public static void addSeparator(){
-        for(int c=0; c<sList.size();c++){
-            if(sList.get(c).getStatus().equals("true")){
-                sList.add(c-1,sTaskObject);
-                return;
-            }
-        }
-
-    }
-    */
-//    [End: Add and remove taskholder in List for serparator line]
 
 }
 

@@ -21,6 +21,7 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsObject;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 
 import java.util.List;
 
@@ -86,9 +87,14 @@ public class TaskPagerActivity extends AppCompatActivity {
                 return TaskFragment.newInstance(task.getId());
             }
 
+            //            minus one because of separator line
             @Override
             public int getCount() {
-                return mTasksList.size()-1;
+                if (SharedPrefs.getShowPastItems() == true) {
+                    return mTasksList.size() - 1;
+                } else {
+                    return mTasksList.size();
+                }
             }
 
             @Override

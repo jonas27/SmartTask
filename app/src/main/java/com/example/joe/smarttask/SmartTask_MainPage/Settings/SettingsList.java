@@ -93,9 +93,9 @@ public class SettingsList {
     private static SettingsObject createListOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_list_title));
-        if (sharedPrefs.getSharedPrefencesListSort() == ORDER_BY_DATE) {
+        if (SharedPrefs.getPreferredOrder() == ORDER_BY_DATE) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_list_sort_date));
-        } else if (sharedPrefs.getSharedPrefencesListSort() == ORDER_BY_PRIORITY) {
+        } else if (sharedPrefs.getPreferredOrder() == ORDER_BY_PRIORITY) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_list_sort_priority));
         }
         listSettings.setmNumberInList(LIST_POSITION);
@@ -106,13 +106,13 @@ public class SettingsList {
     private static SettingsObject createNotificationOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_notifications_title));
-        if (sharedPrefs.getNotificationLevel() == NOTIFICATION_ALL) {
+        if (SharedPrefs.getNotificationLevel() == NOTIFICATION_ALL) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_all));
-        } else if (sharedPrefs.getSharedPrefencesListSort() == NOTIFICATION_ONLY_EMAIL) {
+        } else if (SharedPrefs.getPreferredOrder() == NOTIFICATION_ONLY_EMAIL) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_email));
-        } else if (sharedPrefs.getSharedPrefencesListSort() == NOTIFICATION_ONLY_PUSH) {
+        } else if (SharedPrefs.getPreferredOrder() == NOTIFICATION_ONLY_PUSH) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_push));
-        } else if (sharedPrefs.getSharedPrefencesListSort() == ORDER_BY_PRIORITY) {
+        } else if (SharedPrefs.getPreferredOrder() == ORDER_BY_PRIORITY) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_notifications_none));
         }
         listSettings.setmNumberInList(NOTIFICATIONS_POSITION);
@@ -131,9 +131,9 @@ public class SettingsList {
     private static SettingsObject createRewardOption() {
         SettingsObject listSettings = SettingsObject.getNewSettingsObject();
         listSettings.setmTitle(sContext.getResources().getString(R.string.settings_reward_title));
-        if (sharedPrefs.getRewardOnOff() == REWARD_ON) {
+        if (SharedPrefs.getRewardOnOff() == REWARD_ON) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_reward_enabled));
-        } else if (sharedPrefs.getSharedPrefencesListSort() == REWARD_OFF) {
+        } else if (SharedPrefs.getPreferredOrder() == REWARD_OFF) {
             listSettings.setmDescription(sContext.getResources().getString(R.string.settings_reward_disabled));
         }
         listSettings.setmNumberInList(REWARD_POSITION);

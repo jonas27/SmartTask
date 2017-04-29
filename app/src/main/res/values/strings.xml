@@ -130,4 +130,13 @@
     <string name="settings_about_title">About</string>
     <string name="settings_about_version">Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  </string>
 
+    <!-- Settings fragment -->
+    <string name="subsettings_list_title_date">Sort by date</string>
+    <string name="subsettings_list_description_date">Sort by date</string>
+    <string name="subsettings_list_title_priority">Sort by priority</string>
+    <string name="subsettings_list_description_priority">Your list will show your tasks in order of their priority</string>
+    <string name="subsettings_list_title_pastitems">Show completed tasks</string>
+    <string name="subsettings_list_description_pastitems">Your list will only show open tasks if set to false</string>
+
+
 </resources>
