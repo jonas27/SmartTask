@@ -44,8 +44,6 @@ public class TimePickerFragment extends DialogFragment {
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_time_picker, null);
 
-//        calendar.setTime(date);
-
         mTimePicker = (TimePicker) v.findViewById(R.id.dialog_time_time_picker);
         mTimePicker.setIs24HourView(true);
 

@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/settings_background_blue_dark">
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"></LinearLayout>
 
 
     <TextView
+        android:id="@+id/subsettings_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear1"
+        android:layout_marginLeft="@dimen/list_margin_left"
+        android:text="Title"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/subsettings_list_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="halllllo"
-        android:textSize="40sp" />
+        android:layout_alignLeft="@+id/subsettings_list_title"
+        android:layout_below="@+id/subsettings_list_title"
+        android:layout_marginRight="60dp"
+        android:text="Description"
+        android:textColor="@color/grey_lite"
+        android:textSize="16sp" />
 
+    <ImageView
+        android:id="@+id/subsettings_box_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/subsettings_list_title"
+        android:layout_alignTop="@id/subsettings_list_title"
+        android:layout_marginRight="@dimen/icon_margin_right"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_on_grey_24dp" />
+
+    <ImageView
+        android:id="@+id/subsettings_box_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/subsettings_list_title"
+        android:layout_alignTop="@id/subsettings_list_title"
+        android:layout_marginRight="@dimen/icon_margin_right"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_off_grey_24dp" />
+
+    <Switch
+        android:id="@+id/subsettings_toggle"
+        style="@style/Theme.Design.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/subsettings_box_on"
+        android:layout_alignTop="@id/subsettings_list_title"
+        android:layout_marginTop="10dp"
+        android:clickable="false" />
+
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/subsettings_list_description"
+        android:orientation="vertical"></LinearLayout>
+
+    <View
+        android:id="@+id/list_item_separator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/linear2"
+        android:background="@color/greyed_out" />
 
 </RelativeLayout>

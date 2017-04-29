@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -66,10 +65,11 @@ public class SettingsFragment extends Fragment {
         FrameLayout frameLayout = (FrameLayout) getActivity().findViewById(R.id.fragment_container);
         frameLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.settings_background_blue_dark));
 
-        toolbar = (Toolbar) getActivity().findViewById(R.id.fragment_toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(sContext.getResources().getString(R.string.settings_toolbar));
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+//        toolbar = (Toolbar) getActivity().findViewById(R.id.fragment_toolbar);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(sContext.getResources().getString(R.string.settings_toolbar));
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initSingletons();
 
@@ -115,6 +115,7 @@ public class SettingsFragment extends Fragment {
 
             Intent intent = SubMenuActivity.newIntent(sContext, mSettingsObject.getmTitle());
             sContext.startActivity(intent);
+
         }
 
         //    specify individual settings behaviour on layout
