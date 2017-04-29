@@ -3,7 +3,6 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,7 +21,9 @@ import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
@@ -60,15 +61,10 @@ public class SMMainActivity extends AppCompatActivity {
     }
 
 
-    @LayoutRes
-    protected int getLayoutResId() {
-        return R.layout.activity_masterdetail;
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResId());
+        setContentView(R.layout.activity_main);
 
         SMMainActivity.context = getApplicationContext();
 
@@ -82,11 +78,11 @@ public class SMMainActivity extends AppCompatActivity {
         mActionAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FragmentManager fm = getSupportFragmentManager();
-//                    Fragment fragment = new NewTaskFragment();
-//                    fm.beginTransaction()
-//                            .add(R.id.fragment_container, fragment)
-//                            .commit();
+                FragmentManager fm = getSupportFragmentManager();
+                Fragment fragment = new NewTaskFragment();
+                fm.beginTransaction()
+                        .add(R.id.fragment_container, fragment)
+                        .commit();
                 Intent intent = new Intent(getApplicationContext(), NewTaskActivity.class);
                 startActivity(intent);
             }
@@ -155,7 +151,7 @@ public class SMMainActivity extends AppCompatActivity {
             case R.id.menu_logout:
                 FireBase fireBase = FireBase.fireBase(this);
                 fireBase.logout();
-
+                ListTask.setListToNull();
                 intent = new Intent(getAppContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();

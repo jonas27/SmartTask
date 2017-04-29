@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -194,6 +195,17 @@ public class FireBase extends AppCompatActivity {
     public void logout() {
         FirebaseAuth.getInstance().signOut();
         mAuth.signOut();
+        ListTask.getTaskList();
+
+//        CLear cache for logout
+        File cacheDir = context.getCacheDir();
+        File[] files = cacheDir.listFiles();
+        Log.d(TAG, Integer.toString(files.length));
+        if (files != null) {
+            for (File file : files)
+                file.delete();
+        }
+        Log.d(TAG, Integer.toString(files.length));
     }
 
 

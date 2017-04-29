@@ -32,7 +32,7 @@ import java.util.List;
 public class TaskPagerActivity extends AppCompatActivity {
 
     public static final String TASK_ID = "com.example.joe.smarttask.task_id";
-    private static final String TAG = "CL_PrAc";
+    private static final String TAG = "CL_TaPagerAc";
     private ViewPager mViewPager;
     private List<TaskObject> mTasksList;
     private Toolbar toolbar;

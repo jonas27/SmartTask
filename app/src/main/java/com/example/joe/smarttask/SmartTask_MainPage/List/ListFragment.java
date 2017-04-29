@@ -50,6 +50,25 @@ public class ListFragment extends Fragment {
     private List<TaskObject> mList;
 
 
+    /**
+     * Required interface for hosting activities.
+     */
+//    public interface Callbacks {
+//        void onCrimeSelected(TaskObject task);
+//    }
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        mCallbacks = (Callbacks) activity;
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        mCallbacks = null;
+//    }
+
+
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
