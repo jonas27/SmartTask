@@ -1,6 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,8 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsList;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsObject;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.List;
 
@@ -45,6 +48,13 @@ public class ListFragment extends Fragment {
             sAdapter.notifyDataSetChanged();
             sRecyclerView.setAdapter(sAdapter);
         }
+    }
+
+
+    public static Intent newIntent(Context packageContext, String mId) {
+        Intent intent = new Intent(packageContext, TaskPagerActivity.class);
+        intent.putExtra("Settings", mId);
+        return intent;
     }
 
     @Override
@@ -81,6 +91,11 @@ public class ListFragment extends Fragment {
     public void onStop() {
         super.onStop();
         ListTask.sortList();
+    }
+
+    //    Adds a callback to update the Settings list view
+    public interface Callbacks {
+        void onSubSettingsUpdated(SettingsObject settingsObject);
     }
 
     // Setup the views for the items

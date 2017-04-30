@@ -28,7 +28,7 @@ public class SharedPrefs {
     private int preferredOrder;
 
     //constructor opens (or creates) shared preference file in editor (0 means it is private; can only be accessed by the calling application)
-    public SharedPrefs(Context context) {
+    private SharedPrefs(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0);
         editor = sharedPreferences.edit();
