@@ -25,8 +25,13 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
 
     @Override
     protected Fragment createFragment() {
+        return new SettingsFragment();
+    }
 
-//        initialise toolbar
+    @Override
+    public void onResume() {
+        super.onResume();
+        //        initialise toolbar
         toolbar = (Toolbar) findViewById(R.id.fragment_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -36,8 +41,6 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
         View v = findViewById(R.id.coordinator);
         View root = v.getRootView();
         root.setBackgroundColor(getResources().getColor(R.color.settings_background_blue_dark));
-
-        return new SettingsFragment();
     }
 
     //    Set Toolbar back button action equal to system back button

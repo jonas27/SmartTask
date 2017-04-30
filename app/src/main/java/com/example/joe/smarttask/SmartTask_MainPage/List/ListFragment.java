@@ -94,6 +94,11 @@ public class ListFragment extends Fragment {
         updateUI(sList);
         sContext = this.getContext();
 
+//        Fragment taskFragment = new TaskFragment();
+//        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//        transaction.add(R.id.coordinator, taskFragment).commit();
+
+
         return view;
     }
 
