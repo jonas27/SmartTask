@@ -1,7 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Settings;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SubMenuActivity;
 
 import java.util.List;
 
@@ -31,8 +30,8 @@ public class SettingsFragment extends Fragment {
     private static RecyclerView sRecyclerView;
     private static SettingsFragment.Adapter sAdapter;
     private static Context sContext;
+    private static Callbacks sCallbacks;
     private SettingsList mSettingsList;
-
     private Toolbar toolbar;
 
     private List<SettingsObject> mList;
@@ -45,6 +44,18 @@ public class SettingsFragment extends Fragment {
             sAdapter.notifyDataSetChanged();
             sRecyclerView.setAdapter(sAdapter);
         }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        sCallbacks = (Callbacks) activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        sCallbacks = null;
     }
 
     @Override
@@ -92,6 +103,13 @@ public class SettingsFragment extends Fragment {
         super.onResume();
     }
 
+    /**
+     * Hosting activities must also implement Callbacks!
+     */
+    public interface Callbacks {
+        void onItemSelected(SettingsObject settingsObject);
+    }
+
     // Provide a reference to the views for each data item
     private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -113,8 +131,9 @@ public class SettingsFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
-            Intent intent = SubMenuActivity.newIntent(sContext, mSettingsObject.getmTitle());
-            sContext.startActivity(intent);
+//            Intent intent = SubMenuActivity.newIntent(sContext, mSettingsObject.getmTitle());
+//            sContext.startActivity(intent);
+            sCallbacks.onItemSelected(mSettingsObject);
 
         }
 

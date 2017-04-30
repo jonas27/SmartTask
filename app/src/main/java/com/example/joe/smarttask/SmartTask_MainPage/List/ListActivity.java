@@ -2,6 +2,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 
 import android.support.v4.app.Fragment;
 
+import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
@@ -21,7 +22,10 @@ public class ListActivity extends SingleFragmentActivity {
     // [End: get Singletons]
 
 
-
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_twopane;
+    }
 
     @Override
     protected Fragment createFragment() {

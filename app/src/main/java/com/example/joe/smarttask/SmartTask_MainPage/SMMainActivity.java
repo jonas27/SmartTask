@@ -20,12 +20,13 @@ import android.widget.ListView;
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,8 @@ public class SMMainActivity extends AppCompatActivity {
 
         SMMainActivity.context = getApplicationContext();
 
+        SharedPrefs.getSharedPrefs(this);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -77,11 +80,6 @@ public class SMMainActivity extends AppCompatActivity {
         mActionAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FragmentManager fm = getSupportFragmentManager();
-//                    Fragment fragment = new NewTaskFragment();
-//                    fm.beginTransaction()
-//                            .add(R.id.fragment_container, fragment)
-//                            .commit();
                 Intent intent = new Intent(getApplicationContext(), NewTaskActivity.class);
                 startActivity(intent);
             }
@@ -150,6 +148,7 @@ public class SMMainActivity extends AppCompatActivity {
             case R.id.menu_logout:
                 FireBase fireBase = FireBase.fireBase(this);
                 fireBase.logout();
+                ListTask.setListToNull();
                 intent = new Intent(getAppContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();

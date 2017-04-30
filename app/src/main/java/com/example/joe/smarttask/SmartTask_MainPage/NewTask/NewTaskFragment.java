@@ -79,7 +79,7 @@ public class NewTaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(TAG, "cl_ So far so good");
     }
 
 
@@ -87,6 +87,7 @@ public class NewTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_task, container, false);
+
         fireBase = FireBase.fireBase(getContext());
         t = new TaskObject();
         sTaskChecked = true;

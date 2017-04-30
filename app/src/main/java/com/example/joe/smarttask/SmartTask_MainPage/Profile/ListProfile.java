@@ -43,7 +43,7 @@ public class ListProfile {
         this.context = context;
         sPlist = new ArrayList<>();
         createList();
-        sharedPrefs = new SharedPrefs(SMMainActivity.getAppContext());
+        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
     }
 
 

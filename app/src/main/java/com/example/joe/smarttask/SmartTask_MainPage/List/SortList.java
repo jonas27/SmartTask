@@ -56,6 +56,11 @@ public class SortList {
             }
         }
 
+        //reverse because of controlling for false --> can be deleted if (TODO controll on false) is implement
+        Collections.reverse(newList);
+
+
+
         //        Add completed items if set in settings
         if (SharedPrefs.getShowPastItems() == true) {
 //        define separator line
@@ -63,7 +68,7 @@ public class SortList {
         tO.setStatus(DRAW_LINE);
         tO.setId(DRAW_LINE);
             tO.setDatetime("1111111111111");
-            tO.setPriority("0");
+            tO.setPriority("-1");
         tO.setName("0");
         tO.setDescription("0");
         newList.add(0, tO);
@@ -72,7 +77,7 @@ public class SortList {
                 newList.add(0, t);
             }
         }
-//reverse because of controlling for false --> can be deleted if TODO is implement
+//reverse because of controlling for false --> can be deleted if (TODO controll on false) is implement
         Collections.reverse(newList);
 
         return newList;

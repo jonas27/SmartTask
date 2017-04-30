@@ -61,6 +61,10 @@ public class SubsettingsListList {
         return o;
     }
 
+    public static SubSettingsListObject getSubSettingsObject(int position) {
+        return list.get(position);
+    }
+
     private void SubSettingsListList() {
     }
 

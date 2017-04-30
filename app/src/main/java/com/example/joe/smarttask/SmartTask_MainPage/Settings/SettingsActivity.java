@@ -1,18 +1,27 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Settings;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SubMenuActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 /**
  * Created by joe on 23/04/2017.
  */
 
-public class SettingsActivity extends SingleFragmentActivity {
+public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks {
     Toolbar toolbar;
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_masterdetail;
+    }
 
     @Override
     protected Fragment createFragment() {
@@ -22,6 +31,11 @@ public class SettingsActivity extends SingleFragmentActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        set background color
+        View v = findViewById(R.id.coordinator);
+        View root = v.getRootView();
+        root.setBackgroundColor(getResources().getColor(R.color.settings_background_blue_dark));
 
         return new SettingsFragment();
     }
@@ -34,5 +48,25 @@ public class SettingsActivity extends SingleFragmentActivity {
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public void onItemSelected(SettingsObject settingsObject) {
+        if (findViewById(R.id.detail_fragment_container) == null) {
+            Intent intent = SubMenuActivity.newIntent(this, settingsObject.getmTitle());
+            startActivity(intent);
+        } else {
+            Fragment newDetail;
+            if (settingsObject.getmTitle().equals(getResources().getString(R.string.settings_list_title))) {
+                newDetail = new ListFragment();
+            } else {
+                newDetail = new SettingsFragment();
+            }
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail_fragment_container, newDetail)
+                    .commit();
+
+        }
     }
 }

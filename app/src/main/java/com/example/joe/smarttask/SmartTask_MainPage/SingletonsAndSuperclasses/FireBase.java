@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
@@ -18,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -143,7 +142,8 @@ public class FireBase extends AppCompatActivity {
 
     private void callback(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
-        CalendarView.updateCalendar();
+        //            TODO check if calendar has been initialized or initialize calendar before calling update
+//        CalendarView.updateCalendar();
 
     }
 
@@ -193,7 +193,19 @@ public class FireBase extends AppCompatActivity {
         }
 
     public void logout() {
+        FirebaseAuth.getInstance().signOut();
         mAuth.signOut();
+        ListTask.getTaskList();
+
+//        CLear cache for logout
+        File cacheDir = context.getCacheDir();
+        File[] files = cacheDir.listFiles();
+        Log.d(TAG, Integer.toString(files.length));
+        if (files != null) {
+            for (File file : files)
+                file.delete();
+        }
+        Log.d(TAG, Integer.toString(files.length));
     }
 
 
