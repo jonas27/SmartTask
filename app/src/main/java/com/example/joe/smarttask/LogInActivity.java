@@ -240,10 +240,10 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     //Starts a new sign up activity
-    private void signUp() {
-        intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }
+//    private void signUp() {
+//        intent = new Intent(this, SignUpActivity.class);
+//        startActivity(intent);
+//    }
 
     //starts new intro activity
     private void introShow() {
@@ -257,8 +257,6 @@ public class LogInActivity extends AppCompatActivity {
     private boolean checkShowIntro() {
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
         return sharedPrefs.getSharedPrefencesIntro();
-
-
     }
 
     //opens main app and disconnects

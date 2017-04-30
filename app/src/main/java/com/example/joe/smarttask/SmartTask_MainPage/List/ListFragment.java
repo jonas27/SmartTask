@@ -48,24 +48,6 @@ public class ListFragment extends Fragment {
     private FireBase mFireBase;
     private ListTask mListTask;
 
-    /**
-     * Required interface for hosting activities.
-     */
-//    public interface Callbacks {
-//        void onCrimeSelected(TaskObject task);
-//    }
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        mCallbacks = (Callbacks) activity;
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mCallbacks = null;
-//    }
-
 
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
@@ -74,8 +56,7 @@ public class ListFragment extends Fragment {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
-        list = ListTask.getTaskList();
-        sList = list;
+        sList = ListTask.getTaskList();
         if (sListRecyclerView != null) {
             sAdapter = new TaskAdapter(list);
             sAdapter.notifyDataSetChanged();
