@@ -143,6 +143,7 @@ public class SMMainActivity extends AppCompatActivity {
             case R.id.menu_settings:
                 intent = new Intent(getAppContext(), SettingsActivity.class);
                 startActivity(intent);
+                finish();
                 return true;
             case R.id.menu_profile:
                 intent = new Intent(getAppContext(), ProfileActivity.class);
@@ -152,6 +153,7 @@ public class SMMainActivity extends AppCompatActivity {
                 FireBase fireBase = FireBase.fireBase(this);
                 fireBase.logout();
                 SharedPrefs.editor.clear().commit();
+                LogInActivity.introWasShown=false;
                 intent = new Intent(getAppContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();

@@ -67,6 +67,7 @@ public class LogInActivity extends AppCompatActivity {
     // [Google Login]
     private SignInButton mGoogleButton;
     private DatabaseReference mDatabase;
+    public static boolean introWasShown=false;
 
 
     @Override
@@ -355,7 +356,8 @@ public class LogInActivity extends AppCompatActivity {
 
     public void isVerified(FirebaseUser user) {
         if (user.isEmailVerified()) {
-            if (checkShowIntro()) {
+            if (checkShowIntro() && introWasShown==false) {
+                introWasShown=true;
                 introShow();
             } else {
                 openApp();
