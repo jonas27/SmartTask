@@ -15,7 +15,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  * Created by joe on 23/04/2017.
  */
 
-public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks {
+public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks, ListFragment.Callbacks {
     Toolbar toolbar;
 
     @Override
@@ -25,8 +25,13 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
 
     @Override
     protected Fragment createFragment() {
+        return new SettingsFragment();
+    }
 
-//        initialise toolbar
+    @Override
+    public void onResume() {
+        super.onResume();
+        //        initialise toolbar
         toolbar = (Toolbar) findViewById(R.id.fragment_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -36,8 +41,6 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
         View v = findViewById(R.id.coordinator);
         View root = v.getRootView();
         root.setBackgroundColor(getResources().getColor(R.color.settings_background_blue_dark));
-
-        return new SettingsFragment();
     }
 
     //    Set Toolbar back button action equal to system back button
@@ -61,12 +64,19 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
             if (settingsObject.getmTitle().equals(getResources().getString(R.string.settings_list_title))) {
                 newDetail = new ListFragment();
             } else {
-                newDetail = new SettingsFragment();
+                newDetail = new ListFragment();
             }
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail_fragment_container, newDetail)
                     .commit();
 
         }
+    }
+
+    public void onSubSettingsUpdated() {
+        SettingsFragment listFragment = (SettingsFragment)
+                getSupportFragmentManager()
+                        .findFragmentById(R.id.fragment_container);
+        listFragment.updateUI();
     }
 }

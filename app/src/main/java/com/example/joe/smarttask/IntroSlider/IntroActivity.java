@@ -48,6 +48,9 @@ public class IntroActivity extends AppCompatActivity {
     private Button skipBtn, nextBtn, gotitBtn;
     private CheckBox showIntroAgain;
 
+    //    for SharedPrefs instance
+    private SharedPrefs sharedPrefs;
+
     //boolean to show tutorial again
     private boolean skipTutorial;
 
@@ -57,7 +60,11 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         intent = getIntent();
         super.onCreate(savedInstanceState);
-
+//        get sharedPrefs instance
+        sharedPrefs = SharedPrefs.getSharedPrefs(this);
+        if (sharedPrefs.getSharedPrefencesIntro() == false) {
+            openApp();
+        }
         //set's the content (layout)
         setContentView(R.layout.intro_view_menu);
 
@@ -131,6 +138,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openApp();
+                finish();
             }
         });
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +146,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
                     openApp();
+                    finish();
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 }
@@ -179,7 +188,7 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         if (skipTutorial) {
-            SharedPrefs sharedPrefs = SharedPrefs.getSharedPrefs(this);
+            sharedPrefs = SharedPrefs.getSharedPrefs(this);
             //modify boolean showIntroAgain
             sharedPrefs.setSharedPreferencesIntro(!skipTutorial);
         }

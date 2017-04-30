@@ -215,6 +215,4 @@ public class NewTaskFragment extends Fragment {
         t.setId("");
         t.setTask("not used (legacy)");
     }
-
-
 }

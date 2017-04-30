@@ -31,16 +31,15 @@ public class SettingsFragment extends Fragment {
     private static SettingsFragment.Adapter sAdapter;
     private static Context sContext;
     private static Callbacks sCallbacks;
+    private static List<SettingsObject> sList;
     private SettingsList mSettingsList;
     private Toolbar toolbar;
 
-    private List<SettingsObject> mList;
-
-    public static void updateUI(List<SettingsObject> mList) {
+    public static void updateUI() {
 
         if (sRecyclerView != null) {
-            mList = SettingsList.getList();
-            sAdapter = new Adapter(mList);
+            sList = SettingsList.getList();
+            sAdapter = new Adapter(sList);
             sAdapter.notifyDataSetChanged();
             sRecyclerView.setAdapter(sAdapter);
         }
@@ -72,6 +71,8 @@ public class SettingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.recycler_list, container, false);
         sContext = v.getContext(); // Assign your v to context
 
+        sList = SettingsList.getList();
+
 //        Set background color to blue
         FrameLayout frameLayout = (FrameLayout) getActivity().findViewById(R.id.fragment_container);
         frameLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.settings_background_blue_dark));
@@ -99,7 +100,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onResume() {
-        updateUI(mList);
+        updateUI();
         super.onResume();
     }
 
@@ -133,6 +134,7 @@ public class SettingsFragment extends Fragment {
 
 //            Intent intent = SubMenuActivity.newIntent(sContext, mSettingsObject.getmTitle());
 //            sContext.startActivity(intent);
+            updateUI();
             sCallbacks.onItemSelected(mSettingsObject);
 
         }

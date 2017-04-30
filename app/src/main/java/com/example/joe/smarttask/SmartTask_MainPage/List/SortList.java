@@ -20,7 +20,11 @@ public class SortList {
 
 
     public static List<TaskObject> sortList(List<TaskObject> list) {
-        return preferedSort(list);
+        if (list != null) {
+            return preferedSort(list);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     private static List<TaskObject> preferedSort(List<TaskObject> list) {

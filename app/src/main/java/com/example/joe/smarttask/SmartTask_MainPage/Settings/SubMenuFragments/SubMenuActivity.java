@@ -14,7 +14,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  * Created by joe on 27/04/2017.
  */
 
-public class SubMenuActivity extends SingleFragmentActivity {
+public class SubMenuActivity extends SingleFragmentActivity implements ListFragment.Callbacks {
 
     //Specify parameter for Intent
     public static final String SETTINGS_OPTION = "Settings_Option";
@@ -62,4 +62,8 @@ public class SubMenuActivity extends SingleFragmentActivity {
         return true;
     }
 
+    @Override
+    public void onSubSettingsUpdated() {
+
+    }
 }

@@ -103,17 +103,13 @@ public class ListTask {
         }
     }
 
-    public static void setListToNull() {
-        sList = null;
-        sSortedList = null;
-    }
-
     //    getter Method for List of Tasks
     public static List<TaskObject> getTaskList() {
         return sSortedList;
     }
 
     public static void sortList() {
+        sSortedList = null;
         sSortedList = SortList.sortList(sList);
     }
 

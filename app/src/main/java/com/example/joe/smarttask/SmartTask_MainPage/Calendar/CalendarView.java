@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -226,14 +222,16 @@ public class CalendarView extends LinearLayout
             }
             int counter = 0;
 
-            for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
-                TaskObject current = i.next();
-                Date cDate = new Date(Long.parseLong(current.getDatetime()));
+            if (list != null) {
+                for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
+                    TaskObject current = i.next();
+                    Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
 
-                taskNumber.setHint(Long.toString(cDate.getTime()));
-                if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
-                    counter++;
+                    taskNumber.setHint(Long.toString(cDate.getTime()));
+                    if (day == cDate.getDate() && month == cDate.getMonth() && year == cDate.getYear()) {
+                        counter++;
+                    }
                 }
             }
             if(counter>0){

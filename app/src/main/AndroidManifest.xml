@@ -10,7 +10,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_logo"
+        android:icon="@mipmap/ic_logo_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,15 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp.SignUpActivity" />
+        <activity android:name=".SmartTask_MainPage.SMMainActivity" />
         <activity
             android:name=".IntroSlider.IntroActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".SmartTask_MainPage.List.ListActivity" />
         <activity android:name=".SmartTask_MainPage.Calendar.SingleDayActivity" />
         <activity android:name=".SmartTask_MainPage.Task.TaskPagerActivity" />
         <activity android:name=".SmartTask_MainPage.NewTask.NewTaskActivity" />
-        <activity android:name=".SmartTask_MainPage.SMMainActivity" />
         <activity android:name=".SmartTask_MainPage.Settings.SettingsActivity" />
         <activity android:name=".SmartTask_MainPage.Profile.ProfileActivity" />
         <activity android:name=".SmartTask_MainPage.Settings.SubMenuFragments.SubMenuActivity" />
