@@ -42,13 +42,11 @@ public class ListFragment extends Fragment {
 
     //    sets the seperating bar in the recycler view
     private static boolean firstCompletedTask = true;
-
+    private static List<TaskObject> sList;
     public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
     // [Start: get Singletons]
     private FireBase mFireBase;
     private ListTask mListTask;
-    private List<TaskObject> mList;
-
 
     /**
      * Required interface for hosting activities.
@@ -76,8 +74,9 @@ public class ListFragment extends Fragment {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
+        list = ListTask.getTaskList();
+        sList = list;
         if (sListRecyclerView != null) {
-            list = ListTask.getTaskList();
             sAdapter = new TaskAdapter(list);
             sAdapter.notifyDataSetChanged();
             sListRecyclerView.setAdapter(sAdapter);
@@ -91,8 +90,8 @@ public class ListFragment extends Fragment {
         initSingletons();
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mList = ListTask.getTaskList();
-        updateUI(mList);
+        sList = ListTask.getTaskList();
+        updateUI(sList);
         sContext = this.getContext();
 
         return view;
@@ -106,12 +105,17 @@ public class ListFragment extends Fragment {
 
     @Override
     public void onResume() {
-        updateUI(mList);
+        updateUI(sList);
         super.onResume();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 
-    // Provide a reference to the views for each item in the list
+
+    // Holder describes and provides access to the views for each item in the list
     private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitleTextView;
@@ -208,6 +212,7 @@ public class ListFragment extends Fragment {
     }
 
 
+    //    Adapter converts an object at a certain position into a list row item which will then be inserted
     private static class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
         private List<TaskObject> mListTasks;
 
@@ -230,7 +235,11 @@ public class ListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return mListTasks.size();
+            if (mListTasks != null) {
+                return mListTasks.size();
+            } else {
+                return 0;
+            }
         }
     }
 }

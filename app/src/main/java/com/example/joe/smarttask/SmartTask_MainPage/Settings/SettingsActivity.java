@@ -15,7 +15,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  * Created by joe on 23/04/2017.
  */
 
-public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks {
+public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks, ListFragment.Callbacks {
     Toolbar toolbar;
 
     @Override
@@ -61,12 +61,19 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
             if (settingsObject.getmTitle().equals(getResources().getString(R.string.settings_list_title))) {
                 newDetail = new ListFragment();
             } else {
-                newDetail = new SettingsFragment();
+                newDetail = new ListFragment();
             }
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail_fragment_container, newDetail)
                     .commit();
 
         }
+    }
+
+    public void onSubSettingsUpdated() {
+        SettingsFragment listFragment = (SettingsFragment)
+                getSupportFragmentManager()
+                        .findFragmentById(R.id.fragment_container);
+        listFragment.updateUI();
     }
 }

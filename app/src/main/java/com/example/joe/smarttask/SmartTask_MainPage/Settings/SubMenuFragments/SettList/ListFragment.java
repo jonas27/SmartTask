@@ -18,7 +18,6 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsList;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.List;
@@ -36,8 +35,8 @@ public class ListFragment extends Fragment {
     private static RecyclerView sRecyclerView;
     private static RecyclerView.Adapter sAdapter;
     private static Context sContext;
+    private static Callbacks mCallbacks;
     private SettingsList mSettingsList;
-
     private List<SubSettingsListObject> list;
 
     public static void updateUI(List<SubSettingsListObject> list) {
@@ -55,6 +54,11 @@ public class ListFragment extends Fragment {
         Intent intent = new Intent(packageContext, TaskPagerActivity.class);
         intent.putExtra("Settings", mId);
         return intent;
+    }
+
+    //    update the description to current selection
+    private static void updateSettings() {
+        mCallbacks.onSubSettingsUpdated();
     }
 
     @Override
@@ -93,9 +97,26 @@ public class ListFragment extends Fragment {
         ListTask.sortList();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    /**
+     * Required interface for hosting activities.
+     */
+
+
     //    Adds a callback to update the Settings list view
     public interface Callbacks {
-        void onSubSettingsUpdated(SettingsObject settingsObject);
+        void onSubSettingsUpdated();
     }
 
     // Setup the views for the items
@@ -134,11 +155,14 @@ public class ListFragment extends Fragment {
             }
 
             if (listObject.getTitle().equals(sContext.getResources().getString(R.string.subsettings_list_title_pastitems))) {
+                ListTask.sortList();
                 listObject.setShowPastItems(!listObject.isShowPastItems());
             }
 
 
             sAdapter.notifyDataSetChanged();
+//            update the description on SettingsActivity
+            updateSettings();
         }
 
 
@@ -169,7 +193,6 @@ public class ListFragment extends Fragment {
 
 
     }
-
 
     //    Purpose of the Addapter is to provide the data items for the recycler view (or more general the AdapterView)
     private static class Adapter extends RecyclerView.Adapter<Holder> {

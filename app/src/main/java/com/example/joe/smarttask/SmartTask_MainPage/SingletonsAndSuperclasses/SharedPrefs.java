@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 
 public class SharedPrefs {
 
-    private static final String PREFS_NAME = "IntroDialog";
+    public static final String PREFS_NAME = "MyPrefs";
     private static final String SHOW_WELCOME = "ShowIntroDialog";
     private static final String LIST_ORDER = "ListSort";
     private static final String NOTIFICATION_LEVEL = "NotificationLevel";
@@ -18,11 +18,9 @@ public class SharedPrefs {
     private static final String REWARD_ON_OFF = "RewardOnOff";
     private static final String FEEDBACK = "Feedback";
     private static final String SHOW_PAST_ITEMS = "ShowPastItems";
-
+    public static SharedPreferences.Editor editor;
     private static SharedPrefs sharedPrefs;
-
     private static SharedPreferences sharedPreferences;
-    private static SharedPreferences.Editor editor;
     private static Context context;
 
     private int preferredOrder;

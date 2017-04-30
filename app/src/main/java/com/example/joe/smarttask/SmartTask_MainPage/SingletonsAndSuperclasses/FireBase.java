@@ -192,10 +192,13 @@ public class FireBase extends AppCompatActivity {
         ListProfile.setDataSnapshot(mPDataSnapshot);
         }
 
+
+    //        [Start: logout]
     public void logout() {
         FirebaseAuth.getInstance().signOut();
         mAuth.signOut();
         ListTask.getTaskList();
+        sFireBase = null;
 
 //        CLear cache for logout
         File cacheDir = context.getCacheDir();
@@ -207,6 +210,5 @@ public class FireBase extends AppCompatActivity {
         }
         Log.d(TAG, Integer.toString(files.length));
     }
-
 
 }

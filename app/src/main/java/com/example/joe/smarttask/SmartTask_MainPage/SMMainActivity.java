@@ -33,7 +33,8 @@ import java.util.List;
 
 
 /**
- * Created by joe on 18/04/2017.
+ * Class written 100% by us.
+ * This is the entry point for the main app
  */
 
 public class SMMainActivity extends AppCompatActivity {
@@ -69,6 +70,8 @@ public class SMMainActivity extends AppCompatActivity {
         SMMainActivity.context = getApplicationContext();
 
         SharedPrefs.getSharedPrefs(this);
+
+        ListTask.sortList();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -148,7 +151,7 @@ public class SMMainActivity extends AppCompatActivity {
             case R.id.menu_logout:
                 FireBase fireBase = FireBase.fireBase(this);
                 fireBase.logout();
-                ListTask.setListToNull();
+                SharedPrefs.editor.clear().commit();
                 intent = new Intent(getAppContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();

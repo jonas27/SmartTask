@@ -67,6 +67,7 @@ public class SubSettingsListObject {
 
 
     public boolean isShowPastItems() {
+        showPastItems = SharedPrefs.getShowPastItems();
         return showPastItems;
     }
 

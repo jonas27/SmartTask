@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
 import com.example.joe.smarttask.SignUp.SignUpActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.auth.api.Auth;
@@ -46,30 +46,36 @@ import com.google.firebase.database.FirebaseDatabase;
 public class LogInActivity extends AppCompatActivity {
 
     //TAG for Logs
-    private static final String TAG = "LogInActivity";
+    private static final String TAG = "CL_LogInActivity";
 
     private static final int RC_SIGN_IN = 1;
+    public static GoogleApiClient mGoogleApiClient;
     private Intent intent;
     // To check if introduction pages should be showed
     private SharedPrefs sharedPrefs;
     // [START Define Views]
     private Button logInButton;
-    private Button signUpButton;
     // [END Define Views]
-
+    private Button signUpButton;
     private EditText email, password;
-
     // [Start declare Firebase Auth, Auth listener and User]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
-    private FireBase mFireBase;
     // [End declare Firebase auth]
-
+    private FireBase mFireBase;
     // [Google Login]
     private SignInButton mGoogleButton;
-    private GoogleApiClient mGoogleApiClient;
     private DatabaseReference mDatabase;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (user != null) {
+            Log.d(TAG, user.getUid());
+        }
+    }
 
 
 /*
@@ -158,7 +164,6 @@ public class LogInActivity extends AppCompatActivity {
                                             }
                                         }
         );
-
 
         //Googelogin buttons
         mGoogleButton =(SignInButton) findViewById(R.id.googleButton);
@@ -255,9 +260,9 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-    //opens main app
+    //opens main app and disconnects
     private void openApp() {
-        intent = new Intent(this, ListActivity.class);
+        intent = new Intent(this, SMMainActivity.class);
         startActivity(intent);
     }
 
@@ -360,3 +365,4 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 }
+
