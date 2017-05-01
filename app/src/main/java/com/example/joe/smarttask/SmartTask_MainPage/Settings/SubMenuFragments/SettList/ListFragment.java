@@ -119,7 +119,7 @@ public class ListFragment extends Fragment {
         void onSubSettingsUpdatedList();
     }
 
-    // Setup the views for the items
+    // Setup the views for the items | Provides a reference for the views of each data item
     private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         SubSettingsListObject listObject;
         TextView title;

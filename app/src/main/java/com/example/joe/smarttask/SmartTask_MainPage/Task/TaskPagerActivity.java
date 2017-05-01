@@ -22,6 +22,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class TaskPagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<TaskObject> mTasksList;
     private Toolbar toolbar;
+
+    public static int separatorPosition;
 
     public static Intent newIntent(Context packageContext, String mId) {
         Intent intent = new Intent(packageContext, TaskPagerActivity.class);
@@ -57,6 +60,16 @@ public class TaskPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTasksList = ListTask.getTaskList();
+        if(SharedPrefs.getProUser()==false){
+            for(int c=0; c<mTasksList.size();c++){
+                if(mTasksList.get(c).getPriority().equals("-1")){
+                    mTasksList.remove(c);
+                    separatorPosition=c;
+                    break;
+                }
+            }
+        }
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
@@ -65,10 +78,10 @@ public class TaskPagerActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 TaskObject task = mTasksList.get(position);
                 Log.d(TAG,"positiion "+position);
-                if(task.getPriority()=="-1"||skip){
-                    skip = true;
-                    task = mTasksList.get(position+1);
-                }
+//                if(task.getPriority()=="-1"||skip){
+//                    skip = true;
+//                    task = mTasksList.get(position+1);
+//                }
 
 //                set the title of action bar to the title of the item clicked
 //                -1 as viewpager loads the next page in memory and would set the the title to -1
@@ -91,11 +104,7 @@ public class TaskPagerActivity extends AppCompatActivity {
             //            minus one because of separator line
             @Override
             public int getCount() {
-                if (SharedPrefs.getShowPastItems() == true) {
-                    return mTasksList.size() - 1;
-                } else {
                     return mTasksList.size();
-                }
             }
 
             @Override
@@ -105,7 +114,7 @@ public class TaskPagerActivity extends AppCompatActivity {
 
         });
 
-        for (int i = 0; i < mTasksList.size()-1; i++) {
+        for (int i = 0; i < mTasksList.size(); i++) {
             if (mTasksList.get(i).getId().equals(mId)) {
                 mViewPager.setCurrentItem(i);
                 break;
@@ -121,7 +130,11 @@ public class TaskPagerActivity extends AppCompatActivity {
 //            set action bar title to task title
             @Override
             public void onPageSelected(int position) {
-                getSupportActionBar().setTitle(mTasksList.get(position).getName());
+                if(position>separatorPosition) {
+                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
+                }else{
+                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
+                }
             }
 
             @Override
@@ -134,10 +147,17 @@ public class TaskPagerActivity extends AppCompatActivity {
     }
 
     private static class Adapter extends RecyclerView.Adapter<Holder> {
-        private List<SettingsObject> mTaskList;
+        private List<TaskObject> mTaskList;
 
-        public Adapter(List<SettingsObject> mTaskList) {
+        public Adapter(List<TaskObject> mTaskList) {
             this.mTaskList = mTaskList;
+            for(int c=0; c<mTaskList.size();c++){
+                if(mTaskList.get(c).getPriority().equals("-1")){
+                    mTaskList.remove(c);
+                    separatorPosition=c;
+                    break;
+                }
+            }
         }
 
         @Override
@@ -150,13 +170,14 @@ public class TaskPagerActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(Holder holder, int position) {
 
-            SettingsObject mObject = mTaskList.get(position);
+            TaskObject mObject = mTaskList.get(position);
             holder.bindTask(mObject);
         }
 
         @Override
         public int getItemCount() {
-            return mTaskList.size() - 1;
+//            return mTaskList.size() - 1;
+            return mTaskList.size();
         }
     }
 
@@ -180,9 +201,9 @@ public class TaskPagerActivity extends AppCompatActivity {
         }
 
         //    specify individual tasks behaviour on layout
-        public void bindTask(SettingsObject mObject) {
-            title.setText(mObject.getmTitle());
-            describtion.setText(mObject.getmDescription());
+        public void bindTask(TaskObject mObject) {
+            title.setText(mObject.getName());
+            describtion.setText(mObject.getDescription());
 
         }
 

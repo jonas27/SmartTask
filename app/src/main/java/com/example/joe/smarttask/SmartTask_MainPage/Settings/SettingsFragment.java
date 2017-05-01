@@ -111,7 +111,7 @@ public class SettingsFragment extends Fragment {
         void onItemSelected(SettingsObject settingsObject);
     }
 
-    // Provide a reference to the views for each data item
+    // Provides a reference to the views for each data item
     private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
@@ -188,6 +188,7 @@ public class SettingsFragment extends Fragment {
 
     }
 
+    //    Purpose of the Addapter is to provide the data items for the recycler view (or more general the AdapterView)
     private static class Adapter extends RecyclerView.Adapter<Holder> {
         private List<SettingsObject> mListSubSettings;
 

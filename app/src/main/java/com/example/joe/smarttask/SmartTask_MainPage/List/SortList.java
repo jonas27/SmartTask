@@ -64,7 +64,6 @@ public class SortList {
         Collections.reverse(newList);
 
 
-
         //        Add completed items if set in settings
         if (SharedPrefs.getShowPastItems() == true) {
 //        define separator line

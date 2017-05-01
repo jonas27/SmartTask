@@ -31,26 +31,28 @@ public class SubMenuActivity extends SingleFragmentActivity implements ListFragm
     }
 
 
+//    this is for phones only as fragments get added to this activity and don't need a new host
+//    method opens new activity with one subsettings fragment as only client/view
     @Override
     protected Fragment createFragment() {
-
         sContext = getAppContext();
-
 //        initialise toolbar
         toolbar = (Toolbar) findViewById(R.id.fragment_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        Get string from Intent and
+//        Get string from Intent to determine which fragment should be opened
         String mTitle = (String) getIntent().getSerializableExtra(SETTINGS_OPTION);
-
 
         if (mTitle.equals(getResources().getString(R.string.settings_list_title))) {
             return new ListFragment();
         } else if (mTitle.equals(getResources().getString(R.string.settings_notifications_title))) {
             return new NotificationFragment();
-        } else {
+        } else if (mTitle.equals(getResources().getString(R.string.settings_prouser_title))) {
+            return new ProUserFragment();
+        }
+        else {
             return new ListFragment();
         }
 
