@@ -32,42 +32,42 @@ public class ListTask {
 
     private static DataSnapshot sDataSnapshot;
 
-    private static TaskObject sTaskObject;
-
-    private Context context;
-
-
-    /**
-     * Creates a new ArrayList where all the TaskObject object are going to be stored
-     *
-     * @param context global information on application environment
-     */
-    private ListTask(Context context) {
-        this.context = context;
-        sList = Collections.synchronizedList(new ArrayList<TaskObject>());
+    public static void setDataSnapshot(DataSnapshot mDataSnapshot) {
+        sDataSnapshot = mDataSnapshot;
+        sList = new ArrayList<TaskObject>();
         createList();
     }
 
-
-    /**
-     * Static factory method for singleton
-     *
-     * @param context global information on application environment
-     * @return THE single Object of this class
-     */
-    public static ListTask list(Context context) {
-        if (sListTask == null) {
-            sListTask = new ListTask(context);
-        }
-        return sListTask;
+    //    getter Method for List of Tasks
+    public static List<TaskObject> getTaskList() {
+        return sSortedList;
     }
 
+//    resorts the list with a given list and returns a sorted list
+    public static List<TaskObject> sortList() {
+        sSortedList = null;
+        sSortedList = SortList.sortList(sList);
+        return sSortedList;
+    }
 
-    public static void setDataSnapshot(DataSnapshot mDataSnapshot) {
-        sDataSnapshot = mDataSnapshot;
-        if (sList != null) {
-            createList();
+    /**
+     * return a task for single view
+     * TODO: change name into UID
+     *
+     * @param mTaskId is a unique id identifying a task
+     * @return the object with the id or null if the task id was not found
+     * *
+     */
+    public static TaskObject getTask(String mTaskId) {
+        sSortedList=sortList();
+        Log.d(TAG, "size of sortedlist: " + Integer.toString(sSortedList.size()) );
+        for (TaskObject t : sSortedList) {
+            Log.d(TAG, "Name of sortedlist items: " + t.getId() );
+            if (mTaskId.equals(t.getId())) {
+                return t;
+            }
         }
+        return null;
     }
 
     /**
@@ -97,40 +97,10 @@ public class ListTask {
 
 
             sSortedList = SortList.sortList(sList);
-            ListFragment.updateUI(sSortedList);
+//            ListFragment.updateUI(sSortedList);
 //            TODO check if calendar has been initialized or intialize calendar before calling update
 //            CalendarView.updateCalendar();
         }
     }
-
-    //    getter Method for List of Tasks
-    public static List<TaskObject> getTaskList() {
-        return sSortedList;
-    }
-
-    public static void sortList() {
-        sSortedList = null;
-        sSortedList = SortList.sortList(sList);
-    }
-
-
-    /**
-     * return a task for single view
-     * TODO: change name into UID
-     *
-     * @param mTaskId is a unique id identifying a task
-     * @return the object with the id or null if the task id was not found
-     * *
-     */
-    public TaskObject getTask(String mTaskId) {
-        for (TaskObject t : sSortedList) {
-            if (mTaskId.equals(t.getId())) {
-                return t;
-            }
-        }
-        return null;
-    }
-//    [End: Sort by Date]
-
 }
 

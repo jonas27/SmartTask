@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,13 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Fi
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,11 +56,19 @@ public class ListFragment extends Fragment {
     private FireBase mFireBase;
     private ListTask mListTask;
 
+//    FireBase stuff
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser user;
+    private FirebaseDatabase mDatabase;
+    private ValueEventListener postListener;
+    private DatabaseReference mPostReference;
+
 
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
-    public static void updateUI(List<TaskObject> list) {
+    public void updateUI(List<TaskObject> list) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
@@ -68,12 +84,24 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_list, container, false);
-        initSingletons();
+//        initSingletons();
+        sContext = this.getContext();
+
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        //        Firebase stuff
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        pull();
+
+
         sList = ListTask.getTaskList();
         updateUI(sList);
-        sContext = this.getContext();
+
+
+
 
 //        Fragment taskFragment = new TaskFragment();
 //        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
@@ -84,10 +112,9 @@ public class ListFragment extends Fragment {
     }
 
 
-    private void initSingletons() {
-        mFireBase = FireBase.fireBase(getContext());
-        mListTask = ListTask.list(getContext());
-    }
+//    private void initSingletons() {
+//        mFireBase = FireBase.fireBase(getContext());
+//    }
 
     @Override
     public void onResume() {
@@ -102,7 +129,7 @@ public class ListFragment extends Fragment {
 
 
     // Holder describes and provides access to the views for each item in the list
-    private static class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mDescriptionTextView;
@@ -199,7 +226,7 @@ public class ListFragment extends Fragment {
 
 
     //    Adapter converts an object at a certain position into a list row item which will then be inserted
-    private static class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
+    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
         private List<TaskObject> mListTasks;
 
         public TaskAdapter(List<TaskObject> mListTasks) {
@@ -228,4 +255,44 @@ public class ListFragment extends Fragment {
             }
         }
     }
+
+
+
+
+
+    private void pull() {
+        Log.d(TAG, mAuth.getCurrentUser().toString());
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
+        postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot mDataSnapshot) {
+                callback(mDataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mPostReference.addValueEventListener(postListener);
+        sList=ListTask.getTaskList();
+        if(sAdapter!=null) {
+            sAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void callback(DataSnapshot mDataSnapshot) {
+        ListTask.setDataSnapshot(mDataSnapshot);
+        sList=ListTask.getTaskList();
+
+        Log.d(TAG, sList.get(2).getName());
+        updateUI(sList);
+
+        //            TODO check if calendar has been initialized or initialize calendar before calling update
+//        CalendarView.updateCalendar();
+
+
+    }
+
 }

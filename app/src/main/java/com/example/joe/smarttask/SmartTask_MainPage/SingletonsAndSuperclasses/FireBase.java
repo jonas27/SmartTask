@@ -54,7 +54,7 @@ public class FireBase extends AppCompatActivity {
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        pull();
+//        pull();
         pull2();
     }
 
@@ -122,30 +122,30 @@ public class FireBase extends AppCompatActivity {
         return sDataSnapshot;
     }
 
-    private void pull() {
-        Log.d(TAG, mAuth.getCurrentUser().toString());
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
-        postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot mDataSnapshot) {
-                callback(mDataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        mPostReference.addValueEventListener(postListener);
-    }
-
-    private void callback(DataSnapshot mDataSnapshot) {
-        ListTask.setDataSnapshot(mDataSnapshot);
-        //            TODO check if calendar has been initialized or initialize calendar before calling update
-//        CalendarView.updateCalendar();
-
-    }
+//    private void pull() {
+//        Log.d(TAG, mAuth.getCurrentUser().toString());
+//        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
+//        postListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot mDataSnapshot) {
+//                callback(mDataSnapshot);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Getting Post failed, log a message
+//                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+//            }
+//        };
+//        mPostReference.addValueEventListener(postListener);
+//    }
+//
+//    private void callback(DataSnapshot mDataSnapshot) {
+//        ListTask.setDataSnapshot(mDataSnapshot);
+//        //            TODO check if calendar has been initialized or initialize calendar before calling update
+////        CalendarView.updateCalendar();
+//
+//    }
 
 //     [start: create a new Profile]
     public void createProfile(ProfileObject mProfileObject) {

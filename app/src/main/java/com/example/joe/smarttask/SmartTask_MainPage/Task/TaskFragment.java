@@ -100,13 +100,12 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         mTaskId = (String) getArguments().getSerializable(TASK_ID);
-        mList = ListTask.list(getContext());
-        this.mTask = mList.getTask(mTaskId);
+//        mList = ListTask.list(getContext());
+//        this.mTask = ListTask.getTask(mTaskId);
     }
 
 
@@ -115,6 +114,8 @@ public class TaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
+
+        this.mTask = ListTask.getTask(mTaskId);
 
         storageRef = FirebaseStorage.getInstance().getReference();
 
@@ -240,8 +241,8 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onResume() {
-        mList = ListTask.list(getContext());
-        this.mTask = mList.getTask(mTaskId);
+//        mList = ListTask.list(getContext());
+        this.mTask = ListTask.getTask(mTaskId);
         super.onResume();
     }
 
