@@ -20,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
@@ -62,7 +63,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        get sharedPrefs instance
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
-        if (sharedPrefs.getSharedPrefencesIntro() == false) {
+        if (sharedPrefs.getSharedPrefencesIntro() == false || LogInActivity.introWasShown) {
             openApp();
         }
         //set's the content (layout)

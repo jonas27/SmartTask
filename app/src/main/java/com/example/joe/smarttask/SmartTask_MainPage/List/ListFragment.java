@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
@@ -56,6 +59,13 @@ public class ListFragment extends Fragment {
     private FireBase mFireBase;
     private ListTask mListTask;
 
+
+    private static FrameLayout detailView;
+    private Fragment taskFragment;
+
+//    Show first item in list view
+    private boolean firstTime=true;
+
 //    FireBase stuff
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -78,18 +88,22 @@ public class ListFragment extends Fragment {
             sAdapter.notifyDataSetChanged();
             sListRecyclerView.setAdapter(sAdapter);
         }
+
     }
 
     //    specifies what is initialized when the view is created
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycler_list, container, false);
+        View view = inflater.inflate(R.layout.recycler_masterdetail, container, false);
 //        initSingletons();
         sContext = this.getContext();
 
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //        bind detailView for two pane tablet mode
+
+        detailView = (FrameLayout) view.findViewById(R.id.detail_fragment_container);
 
         //        Firebase stuff
         mAuth = FirebaseAuth.getInstance();
@@ -101,11 +115,16 @@ public class ListFragment extends Fragment {
         updateUI(sList);
 
 
+        if(detailView!=null && sList.size()>0) {
+//              @param getId: Create new Fragment with first TaskObject in list
+            taskFragment = TaskFragment.newInstance(sList.get(0).getId());
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
 
 
-//        Fragment taskFragment = new TaskFragment();
-//        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-//        transaction.add(R.id.coordinator, taskFragment).commit();
 
 
         return view;
@@ -162,9 +181,19 @@ public class ListFragment extends Fragment {
         public void onClick(View v) {
             if (mTask.getStatus().equals(SortList.DRAW_LINE)) {
 //                divisor line, no action on click
-            } else {
+            } else{
+//                Check for tablet mode
+            if(detailView==null) {
                 Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId());
                 sContext.startActivity(intent);
+            }else {
+//               @param getId: Create new Fragment with TaskObject with given id
+                taskFragment = TaskFragment.newInstance(mTask.getId());
+                FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
             }
         }
 
@@ -280,6 +309,7 @@ public class ListFragment extends Fragment {
         if(sAdapter!=null) {
             sAdapter.notifyDataSetChanged();
         }
+
     }
 
     private void callback(DataSnapshot mDataSnapshot) {
@@ -288,6 +318,16 @@ public class ListFragment extends Fragment {
 
         Log.d(TAG, sList.get(2).getName());
         updateUI(sList);
+
+        if(detailView!=null && firstTime) {
+//              @param getId: Create new Fragment with first TaskObject in list
+            taskFragment = TaskFragment.newInstance(sList.get(0).getId());
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            firstTime=false;
+        }
 
         //            TODO check if calendar has been initialized or initialize calendar before calling update
 //        CalendarView.updateCalendar();
