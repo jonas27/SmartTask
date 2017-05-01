@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class TaskPagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<TaskObject> mTasksList;
     private Toolbar toolbar;
+    private TaskObject separator;
 
     public static int separatorPosition;
 
@@ -51,6 +53,12 @@ public class TaskPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
 
+        //        initialise toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         String mId = (String) getIntent().getSerializableExtra(TASK_ID);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,11 +68,14 @@ public class TaskPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTasksList = ListTask.getTaskList();
-        if(SharedPrefs.getProUser()==false){
-            for(int c=0; c<mTasksList.size();c++){
-                if(mTasksList.get(c).getPriority().equals("-1")){
+
+        //                if pro user remove ads (separator line)
+        if (SharedPrefs.getProUser()) {
+            for (int c = 0; c < mTasksList.size(); c++) {
+                if (mTasksList.get(c).getPriority().equals("-1")) {
+                    separator = mTasksList.get(c);
                     mTasksList.remove(c);
-                    separatorPosition=c;
+                    separatorPosition = c;
                     break;
                 }
             }
@@ -73,38 +84,25 @@ public class TaskPagerActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
-            private boolean skip = false;
+
             @Override
             public Fragment getItem(int position) {
-                TaskObject task = mTasksList.get(position);
-                Log.d(TAG,"positiion "+position);
-//                if(task.getPriority()=="-1"||skip){
-//                    skip = true;
-//                    task = mTasksList.get(position+1);
+Log.d(TAG, Integer.toString(position));
+                TaskObject task;
+//                if (position > separatorPosition && separatorPosition != 0 && !SharedPrefs.getProUser()) {
+//                    task = mTasksList.get(position - 1);
+//                } else {
+                    task = mTasksList.get(position);
 //                }
-
-//                set the title of action bar to the title of the item clicked
-//                -1 as viewpager loads the next page in memory and would set the the title to -1
-//                CODE DOES NOT WORK PROPERLY AS THE VIEWPAGER LOADS MORE THAN FRAGMENT AT ONCE
-                /*if (mTasksList.size() == 1) {
-                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
-                }
-                else if (position == mTasksList.size()-1 && mTasksList.size()>2) {
-                    getSupportActionBar().setTitle(mTasksList.get(position).getName());
-                    lastPageSelected=true;
-                    Log.d(TAG,"exc");
-                }
-                else if (position > 0) {
-                    getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
-                }*/
-
+//                    TaskObject task = mTasksList.get(position);
+                Log.d(TAG, "positiion " + position);
                 return TaskFragment.newInstance(task.getId());
             }
 
             //            minus one because of separator line
             @Override
             public int getCount() {
-                    return mTasksList.size();
+                return mTasksList.size();
             }
 
             @Override
@@ -113,13 +111,6 @@ public class TaskPagerActivity extends AppCompatActivity {
             }
 
         });
-
-        for (int i = 0; i < mTasksList.size(); i++) {
-            if (mTasksList.get(i).getId().equals(mId)) {
-                mViewPager.setCurrentItem(i);
-                break;
-            }
-        }
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -130,9 +121,10 @@ public class TaskPagerActivity extends AppCompatActivity {
 //            set action bar title to task title
             @Override
             public void onPageSelected(int position) {
-                if(position>separatorPosition) {
+                if (position > separatorPosition && separatorPosition != 0 && !SharedPrefs.getProUser()) {
                     getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
-                }else{
+                } else {
+                    Log.d(TAG, "pageselected " + position);
                     getSupportActionBar().setTitle(mTasksList.get(position).getName());
                 }
             }
@@ -143,70 +135,30 @@ public class TaskPagerActivity extends AppCompatActivity {
             }
         });
 
-
-    }
-
-    private static class Adapter extends RecyclerView.Adapter<Holder> {
-        private List<TaskObject> mTaskList;
-
-        public Adapter(List<TaskObject> mTaskList) {
-            this.mTaskList = mTaskList;
-            for(int c=0; c<mTaskList.size();c++){
-                if(mTaskList.get(c).getPriority().equals("-1")){
-                    mTaskList.remove(c);
-                    separatorPosition=c;
-                    break;
-                }
+//        Set the Object for the clicked holder
+//        the intent puts in the Task id and this get search in the list
+        for (int i = 0; i < mTasksList.size(); i++) {
+            if (mTasksList.get(i).getId().equals(mId)) {
+                mViewPager.setCurrentItem(i);
+                break;
             }
         }
 
-        @Override
-        public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(SMMainActivity.getAppContext());
-            View view = layoutInflater.inflate(R.layout.fragment_settings, parent, false);
-            return new Holder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(Holder holder, int position) {
-
-            TaskObject mObject = mTaskList.get(position);
-            holder.bindTask(mObject);
-        }
-
-        @Override
-        public int getItemCount() {
-//            return mTaskList.size() - 1;
-            return mTaskList.size();
-        }
     }
 
-    // Provide a reference to the views for each data item
-    private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        TextView title;
-        TextView describtion;
-        ImageView icon;
-
-
-        //        bind views here
-        public Holder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
+    //    Set Toolbar back button action equal to system back button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
-
-        @Override
-        public void onClick(View v) {
-
-        }
-
-        //    specify individual tasks behaviour on layout
-        public void bindTask(TaskObject mObject) {
-            title.setText(mObject.getName());
-            describtion.setText(mObject.getDescription());
-
-        }
-
-
+        return false;
     }
+
+//    add the separator again for consistency. I had some weird errors when this was not there
+//    public void onStop() {
+//        super.onStop();
+//        mTasksList.add(separatorPosition,separator);
+//    }
 }

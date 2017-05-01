@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,8 +57,6 @@ public class TaskFragment extends Fragment {
 
     private static final String TASK_ID = "task_id";
 
-    private Toolbar toolbar;
-
     private TaskObject mTask;
     private String mTaskId;
 
@@ -95,19 +92,12 @@ public class TaskFragment extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
         mTaskId = (String) getArguments().getSerializable(TASK_ID);
-//        mList = ListTask.list(getContext());
-//        this.mTask = ListTask.getTask(mTaskId);
     }
-
 
 
     @Override
@@ -148,15 +138,6 @@ public class TaskFragment extends Fragment {
         td.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
         mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
 
-//        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
-//        mTaskEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mTask.setStatus("true");
-//                FireBase f=FireBase.fireBase(getContext());
-//                f.createTask(mTask);
-//            }
-//        });
 
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +216,27 @@ public class TaskFragment extends Fragment {
             }
         }
 
+//        if separator (list item to show adds)
+        if (mTask.getPriority().equals("-1")) {
+            mTaskDate.setVisibility(View.INVISIBLE);
+            mTaskSolved.setVisibility(View.INVISIBLE);
+            mTaskEdit.setVisibility(View.INVISIBLE);
+            mTaskName.setVisibility(View.INVISIBLE);
+            mTaskResponsible.setVisibility(View.INVISIBLE);
+            mTaskDescription.setVisibility(View.INVISIBLE);
+            mTaskCategory.setVisibility(View.INVISIBLE);
+            mTaskPriority.setVisibility(View.INVISIBLE);
+            mTaskPoints.setVisibility(View.INVISIBLE);
+//            mTaskStatus.setVisibility(View.INVISIBLE);
+//            mTaskDone.setVisibility(View.INVISIBLE);
+            mTaskPicture.setVisibility(View.INVISIBLE);
+            mTaskConfirm.setVisibility(View.INVISIBLE);
+            mTaskImageView.setVisibility(View.INVISIBLE);
+        }
+//        else disable views for add
+        else{
+
+        }
 
         return v;
     }

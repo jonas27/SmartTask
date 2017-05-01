@@ -113,10 +113,7 @@ public class ListFragment extends Fragment {
         user = mAuth.getCurrentUser();
         pull();
 
-
         sList = ListTask.getTaskList();
-//        updateUI(sList);
-
 
         if(detailView!=null && sList.size()>0) {
 //              @param getId: Create new Fragment with first TaskObject in list
@@ -183,6 +180,7 @@ public class ListFragment extends Fragment {
 //                divisor line, no action on click
             } else{
 //                Check for tablet mode
+//                if it has a detailed view it is a tablet
             if(detailView==null) {
                 Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId());
                 sContext.startActivity(intent);
