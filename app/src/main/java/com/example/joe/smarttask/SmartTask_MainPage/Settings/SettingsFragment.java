@@ -35,8 +35,8 @@ public class SettingsFragment extends Fragment {
     private SettingsList mSettingsList;
     private Toolbar toolbar;
 
-    public static void updateUI() {
 
+    public static void updateUI() {
         if (sRecyclerView != null) {
             sList = SettingsList.getList();
             sAdapter = new Adapter(sList);
@@ -167,10 +167,14 @@ public class SettingsFragment extends Fragment {
                     break;
                 }
                 case 4: {
-                    icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_feedback_grey_24dp));
+                    icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_grade_grey_24dp));
                     break;
                 }
                 case 5: {
+                    icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_feedback_grey_24dp));
+                    break;
+                }
+                case 6: {
                     icon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_about_grey_24dp));
                     break;
                 }
@@ -185,10 +189,10 @@ public class SettingsFragment extends Fragment {
     }
 
     private static class Adapter extends RecyclerView.Adapter<Holder> {
-        private List<SettingsObject> mListSettings;
+        private List<SettingsObject> mListSubSettings;
 
         public Adapter(List<SettingsObject> mListSettings) {
-            this.mListSettings = mListSettings;
+            this.mListSubSettings = mListSettings;
         }
 
         @Override
@@ -200,14 +204,13 @@ public class SettingsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SettingsFragment.Holder holder, int position) {
-
-            SettingsObject settingsObject = mListSettings.get(position);
+            SettingsObject settingsObject = mListSubSettings.get(position);
             holder.bindSetting(settingsObject);
         }
 
         @Override
         public int getItemCount() {
-            return mListSettings.size();
+            return mListSubSettings.size();
         }
     }
     

@@ -16,6 +16,7 @@ public class SharedPrefs {
     private static final String NOTIFICATION_LEVEL = "NotificationLevel";
     private static final String LANGUAGE = "Language";
     private static final String REWARD_ON_OFF = "RewardOnOff";
+    private static final String PRO_USER = "ProUser";
     private static final String FEEDBACK = "Feedback";
     private static final String SHOW_PAST_ITEMS = "ShowPastItems";
     public static SharedPreferences.Editor editor;
@@ -83,6 +84,18 @@ public class SharedPrefs {
         editor.putInt(REWARD_ON_OFF, i);
         editor.commit();
     }
+
+    public static boolean getProUser() {
+        return sharedPreferences.getBoolean(PRO_USER, true);
+    }
+
+    public static void setProUser(boolean b) {
+        editor.putBoolean(PRO_USER, b);
+        editor.commit();
+    }
+
+
+
 
     //sets if Intro should show
     public void setSharedPreferencesIntro(boolean skipTurorial) {

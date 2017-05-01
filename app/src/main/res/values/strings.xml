@@ -124,13 +124,18 @@
     <string name="settings_reward_title">Reward System</string>
     <string name="settings_reward_enabled">Enabled</string>
     <string name="settings_reward_disabled">Disabled</string>
+
+    <string name="settings_prouser_title">Pro User</string>
+    <string name="settings_prouser_on">You are a Pro User!</string>
+    <string name="settings_prouser_off">No Pro :(</string>
+
     <string name="settings_feedback_title">Feedback</string>
     <string name="settings_feedback_on">Thanks for helping us!</string>
     <string name="settings_feedback_off">Feedback off</string>
     <string name="settings_about_title">About</string>
     <string name="settings_about_version">Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  </string>
 
-    <!-- Settings fragment -->
+    <!-- SubSettings List fragment -->
     <string name="subsettings_list_title_date">Sort by date</string>
     <string name="subsettings_list_description_date">Sort by date</string>
     <string name="subsettings_list_title_priority">Sort by priority</string>
@@ -138,5 +143,8 @@
     <string name="subsettings_list_title_pastitems">Show completed tasks</string>
     <string name="subsettings_list_description_pastitems">Your list will only show open tasks if set to false</string>
 
+    <!-- SubSettings Pro fragment -->
+    <string name="subsettings_prouser_title">Pro User</string>
+    <string name="subsettings_prouser_description">As pro user you don\'t see adds!</string>
 
 </resources>

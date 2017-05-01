@@ -3,6 +3,8 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,6 +77,7 @@ public class ListFragment extends Fragment {
     private DatabaseReference mPostReference;
 
 
+
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
@@ -124,9 +127,6 @@ public class ListFragment extends Fragment {
             fragmentTransaction.commit();
         }
 
-
-
-
         return view;
     }
 
@@ -137,7 +137,7 @@ public class ListFragment extends Fragment {
 
     @Override
     public void onResume() {
-        updateUI(sList);
+//        updateUI(sList);
         super.onResume();
     }
 
@@ -191,7 +191,7 @@ public class ListFragment extends Fragment {
                 taskFragment = TaskFragment.newInstance(mTask.getId());
                 FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
-                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
             }

@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList;
+package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettProUser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,16 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsList;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.List;
 
 /**
- * Created by joe on 27/04/2017.
+ * Created by joe on 01/05/2017.
  */
 
-public class ListFragment extends Fragment {
-
+public class ProUserFragment extends Fragment{
     //TAG for Logs
     private static final String TAG = "CL_SettF";
 
@@ -37,12 +38,12 @@ public class ListFragment extends Fragment {
     private static Context sContext;
     private static Callbacks mCallbacks;
     private SettingsList mSettingsList;
-    private List<SubSettingsListObject> list;
+    private List<SubProUserObject> list;
 
-    public static void updateUI(List<SubSettingsListObject> list) {
+    public static void updateUI(List<SubProUserObject> list) {
 
         if (sRecyclerView != null) {
-            list = SubsettingsListList.getList();
+            list = SubProUserList.getList();
             sAdapter = new Adapter(list);
             sAdapter.notifyDataSetChanged();
             sRecyclerView.setAdapter(sAdapter);
@@ -58,14 +59,14 @@ public class ListFragment extends Fragment {
 
     //    update the description to current selection
     private static void updateSettings() {
-        mCallbacks.onSubSettingsUpdatedList();
+        mCallbacks.onSubSettingsUpdatedProUser();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sContext = SMMainActivity.getAppContext();
-        SubsettingsListList.setsContext(getContext());
+        SubProUserList.setsContext(getContext());
 
     }
 
@@ -116,12 +117,12 @@ public class ListFragment extends Fragment {
 
     //    Adds a callback to update the Settings list view
     public interface Callbacks {
-        void onSubSettingsUpdatedList();
+        void onSubSettingsUpdatedProUser();
     }
 
     // Setup the views for the items
     private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        SubSettingsListObject listObject;
+        SubProUserObject listObject;
         TextView title;
         TextView describtion;
         ImageView boxOn;
@@ -143,23 +144,10 @@ public class ListFragment extends Fragment {
         //        Define behaviour for click on item (it's possible to do different actions for different items
         @Override
         public void onClick(View v) {
-            switch (listObject.getOrder()) {
-                case SubSettingsListObject.ORDER_BY_DATE: {
-                    SubSettingsListObject.setPreferredOrder(SubSettingsListObject.ORDER_BY_DATE);
-                    break;
-                }
-                case SubSettingsListObject.ORER_BY_PRIORITY: {
-                    SubSettingsListObject.setPreferredOrder(SubSettingsListObject.ORER_BY_PRIORITY);
-                    break;
-                }
-            }
 
-            if (listObject.getTitle().equals(sContext.getResources().getString(R.string.subsettings_list_title_pastitems))) {
-                ListTask.sortList();
-                listObject.setShowPastItems(!listObject.isShowPastItems());
-            }
-
-
+            Log.d("CL_PRO", Boolean.toString(listObject.isProUser()));
+            listObject.setProUser(!listObject.isProUser());
+            Log.d("CL_PRO", Boolean.toString(listObject.isProUser()));
             sAdapter.notifyDataSetChanged();
 //            update the description on SettingsActivity
             updateSettings();
@@ -167,38 +155,23 @@ public class ListFragment extends Fragment {
 
 
         //        define views in the layout file for each Object
-        private void setViews(SubSettingsListObject o) {
+        private void setViews(SubProUserObject o) {
             listObject = o;
             title.setText(o.getTitle());
             describtion.setText(o.getDescription());
-            toggle.setChecked(o.isShowPastItems());
+            toggle.setChecked(o.isProUser());
 
-
-            if (o.getOrder() == SubSettingsListObject.getPreferredOrder()) {
-                boxOn.setVisibility(View.VISIBLE);
-            } else if (o.getOrder() == SubSettingsListObject.getPreferredOrder()) {
-                boxOn.setVisibility(View.VISIBLE);
-            } else {
-                boxOn.setVisibility(View.INVISIBLE);
-            }
-
-            if (o.getTitle().equals(sContext.getResources().getString(R.string.subsettings_list_title_pastitems))) {
-                toggle.setVisibility(View.VISIBLE);
+             toggle.setVisibility(View.VISIBLE);
                 boxOn.setVisibility(View.INVISIBLE);
                 boxOff.setVisibility(View.INVISIBLE);
-            } else {
-                toggle.setVisibility(View.INVISIBLE);
-            }
         }
-
-
     }
 
     //    Purpose of the Addapter is to provide the data items for the recycler view (or more general the AdapterView)
     private static class Adapter extends RecyclerView.Adapter<Holder> {
-        private List<SubSettingsListObject> list;
+        private List<SubProUserObject> list;
 
-        public Adapter(List<SubSettingsListObject> list) {
+        public Adapter(List<SubProUserObject> list) {
             this.list = list;
         }
 
@@ -211,7 +184,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(Holder holder, int position) {
-            SubSettingsListObject o = list.get(position);
+            SubProUserObject o = list.get(position);
             holder.setViews(o);
         }
 
@@ -220,6 +193,5 @@ public class ListFragment extends Fragment {
             return list.size();
         }
     }
-
 
 }

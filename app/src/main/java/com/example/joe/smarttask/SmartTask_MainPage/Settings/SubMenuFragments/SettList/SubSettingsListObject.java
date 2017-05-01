@@ -8,14 +8,18 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Sh
  */
 
 public class SubSettingsListObject {
+
+//    for settings
     public static final int ORDER_BY_DATE = 0;
     public static final int ORER_BY_PRIORITY = 1;
     public static final int NO_ORDER_ITEM = -1;
     private static int preferredOrder;
-    private static int preferredNotification;
-    private static int preferredLanguage;
-    private static int preferredReward;
+//    private static int preferredNotification;
+//    private static int preferredLanguage;
+//    private static int preferredReward;
     private static boolean showPastItems;
+
+//    for text
     private String title;
     private String description;
     private int order;
@@ -26,9 +30,9 @@ public class SubSettingsListObject {
     public SubSettingsListObject() {
         this.preferredOrder = SharedPrefs.getPreferredOrder();
         this.showPastItems = SharedPrefs.getShowPastItems();
-        this.preferredNotification = SharedPrefs.getNotificationLevel();
-        this.preferredLanguage = SharedPrefs.getPreferredLanguage();
-        this.preferredReward = SharedPrefs.getRewardOnOff();
+//        this.preferredNotification = SharedPrefs.getNotificationLevel();
+//        this.preferredLanguage = SharedPrefs.getPreferredLanguage();
+//        this.preferredReward = SharedPrefs.getRewardOnOff();
     }
 
 

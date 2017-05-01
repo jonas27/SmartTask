@@ -8,13 +8,14 @@ import android.view.MenuItem;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettProUser.ProUserFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 /**
  * Created by joe on 27/04/2017.
  */
 
-public class SubMenuActivity extends SingleFragmentActivity implements ListFragment.Callbacks {
+public class SubMenuActivity extends SingleFragmentActivity implements ListFragment.Callbacks, ProUserFragment.Callbacks {
 
     //Specify parameter for Intent
     public static final String SETTINGS_OPTION = "Settings_Option";
@@ -63,7 +64,12 @@ public class SubMenuActivity extends SingleFragmentActivity implements ListFragm
     }
 
     @Override
-    public void onSubSettingsUpdated() {
+    public void onSubSettingsUpdatedList() {
+
+    }
+
+    @Override
+    public void onSubSettingsUpdatedProUser() {
 
     }
 }
