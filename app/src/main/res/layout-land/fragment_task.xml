@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/task_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="20dp"
+            android:text="Title"
+            android:textColor="@color/grey_dark"
+            android:textSize="26dp" />
+
+        <Button
+            android:id="@+id/task_btn_edit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/ViewTaskEditButton"
+            android:textSize="8sp" />
+
+
+        <ImageView
+            android:id="@+id/task_responsible_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/task_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_person_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_date_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_responsible_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_access_time_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_description_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_date_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_description_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_category_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_description_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_place_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_priority_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_category_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_priority_high_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_points_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_priority_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_stars_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_check_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_points_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_check_box_black_24dp" />
+
+        <ImageView
+            android:id="@+id/task_uncheck_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/task_responsible_image"
+            android:layout_below="@+id/task_points_image"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_check_box_outline_blank_black_24dp" />
+
+
+        <TextView
+            android:id="@+id/task_responsible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_responsible_image"
+            android:layout_alignEnd="@+id/task_imageview"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Responsible"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/task_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_date_image"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Timeleft"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/task_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_description_image"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Description"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/task_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_category_image"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Category"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/task_priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_priority_image"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Priority"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/task_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_points_image"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Points"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:id="@+id/task_btn_add_picture"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/task_btn_done"
+            android:layout_below="@+id/task_status"
+            android:layout_marginTop="40dp"
+            android:text="@string/ViewTaskAddPictureButton" />
+
+        <TextView
+            android:id="@+id/task_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/task_check_image"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/task_responsible_image"
+            android:text="Status"
+            android:textSize="20dp" />
+
+
+
+        <Button
+            android:id="@+id/task_btn_confirm"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/task_btn_done"
+            android:layout_marginStart="11dp"
+            android:text="@string/ViewTaskConfirmButton" />
+
+
+        <Button
+            android:id="@+id/task_btn_done"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/task_btn_confirm"
+            android:layout_below="@+id/task_btn_add_picture"
+            android:text="@string/ViewTaskDoneButton" />
+
+        <ImageView
+            android:id="@+id/task_imageview"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/task_status"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@mipmap/smlogo"
+            app:srcCompat="@drawable/ic_group_work_black_24dp" />
+
+        <Space
+            android:id="@+id/space3"
+            android:layout_width="400dp"
+            android:layout_height="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/task_btn_confirm"
+            android:layout_marginTop="51dp" />
+
+
+    </RelativeLayout>
+</ScrollView>

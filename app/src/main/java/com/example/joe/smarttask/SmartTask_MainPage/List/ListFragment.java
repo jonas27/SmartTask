@@ -112,7 +112,7 @@ public class ListFragment extends Fragment {
 
 
         sList = ListTask.getTaskList();
-        updateUI(sList);
+//        updateUI(sList);
 
 
         if(detailView!=null && sList.size()>0) {
