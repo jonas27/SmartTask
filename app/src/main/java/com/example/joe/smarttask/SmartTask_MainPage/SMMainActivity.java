@@ -78,8 +78,8 @@ public class SMMainActivity extends AppCompatActivity {
 
         ListTask.sortList();
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
-        new FetchPicture().execute();
+    //    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+    //    new FetchPicture().execute();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

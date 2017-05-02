@@ -16,6 +16,7 @@ public class SingleDayActivity extends SingleFragmentActivity {
 
 
     private static final String TAG = "SingleDay";
+    private static long date;
 
     public SingleDayActivity() {
         super();
@@ -23,11 +24,16 @@ public class SingleDayActivity extends SingleFragmentActivity {
 
     public SingleDayActivity(Long date) {
         super();
+        this.date = date;
         Log.d(TAG,"date "+date);
     }
 
     @Override
     protected Fragment createFragment() {
         return new SingleDayFragment();
+    }
+
+    public static long getDate(){
+        return date;
     }
 }
