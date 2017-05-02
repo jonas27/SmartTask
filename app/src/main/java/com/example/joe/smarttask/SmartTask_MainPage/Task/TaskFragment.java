@@ -250,6 +250,7 @@ public class TaskFragment extends Fragment {
             mTaskSolved.setVisibility(View.INVISIBLE);
             mTaskEdit.setVisibility(View.INVISIBLE);
             mTaskDelete.setVisibility(View.INVISIBLE);
+
             mTaskName.setVisibility(View.INVISIBLE);
             mTaskResponsible.setVisibility(View.INVISIBLE);
             mTaskDescription.setVisibility(View.INVISIBLE);
