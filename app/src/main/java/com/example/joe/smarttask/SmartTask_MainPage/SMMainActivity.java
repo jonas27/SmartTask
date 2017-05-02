@@ -82,6 +82,8 @@ public class SMMainActivity extends AppCompatActivity {
     //    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
     //    new FetchPicture().execute();
 
+        FireBase.fireBase(getAppContext());
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);

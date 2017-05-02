@@ -55,6 +55,7 @@ public class FireBase extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 //        pull();
+        Log.d(TAG,"Starting up firebase");
         pull2();
     }
 
@@ -152,6 +153,7 @@ public class FireBase extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot mPDataSnapshot) {
                 callback2(mPDataSnapshot);
+                Log.d(TAG,"Getting profiles"+mPDataSnapshot.getChildren().toString());
             }
 
             @Override
@@ -166,6 +168,7 @@ public class FireBase extends AppCompatActivity {
 
     private void callback2(DataSnapshot mPDataSnapshot) {
         ListProfile.setDataSnapshot(mPDataSnapshot);
+        Log.d(TAG,"getprofile "+ListProfile.getProfile("-KfmBqV5WFckSNcqrTCV"));
         }
 
 
