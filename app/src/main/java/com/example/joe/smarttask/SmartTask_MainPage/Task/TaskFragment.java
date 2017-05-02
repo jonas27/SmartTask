@@ -66,6 +66,7 @@ public class TaskFragment extends Fragment {
     private TextView mTaskDate;
     private ImageView mTaskSolved;
     private Button mTaskEdit;
+    private Button mTaskDelete;
     private TextView mTaskName;
     private TextView mTaskResponsible;
     private TextView mTaskDescription;
@@ -148,6 +149,17 @@ public class TaskFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        mTaskDelete = (Button) v.findViewById(R.id.task_btn_delete);
+        mTaskDelete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                FireBase fireBase =FireBase.fireBase(getContext());
+                fireBase.deleteTask(mTask.getId());
+                getActivity().finish();
+            }
+        });
+
 
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {

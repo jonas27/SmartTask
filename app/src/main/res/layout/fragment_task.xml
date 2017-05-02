@@ -23,7 +23,7 @@
             android:textSize="26dp" />
 
         <Button
-            android:id="@+id/task_btn_delete"
+            android:id="@+id/task_btn_edit"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,18 +31,17 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/ViewTask_delete_btn"
+            android:text="@string/ViewTaskEditButton"
             android:textSize="8sp" />
 
         <Button
-            android:id="@+id/task_btn_edit"
+            android:id="@+id/task_btn_delete"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/task_btn_delete"
-            android:layout_toLeftOf="@+id/task_btn_delete"
-            android:layout_marginRight="10dp"
-            android:text="@string/ViewTaskEditButton"
+            android:layout_below="@+id/task_btn_edit"
+            android:layout_alignLeft="@id/task_btn_edit"
+            android:text="@string/ViewTask_delete_btn"
             android:textSize="8sp" />
 
 

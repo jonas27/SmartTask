@@ -171,8 +171,8 @@ public class FireBase extends AppCompatActivity {
 
 //        delete a task
     public boolean deleteTask(String id){
-//add method here
-
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child(("task/")+ id);
+        mPostReference.removeValue();
 
         return false;
     }
