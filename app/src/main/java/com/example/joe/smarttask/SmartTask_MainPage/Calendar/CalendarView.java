@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
+
+import org.apache.http.cookie.SM;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -164,9 +170,12 @@ public class CalendarView extends LinearLayout
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView current = (TextView) view.findViewById(R.id.tasknumber);
-                SingleDayActivity day = new SingleDayActivity(Long.parseLong(current.getHint().toString()));
-                Intent intent = new Intent(context, day.getClass());
-                context.startActivity(intent);
+                Log.d(TAG,"hint "+current.getHint()+" "+current.getHint().length());
+                if(current.getHint().length()>1){
+                    SingleDayActivity day = new SingleDayActivity(Long.parseLong(current.getHint().toString()));
+                    Intent intent = new Intent(SMMainActivity.getAppContext(), day.getClass());
+                    SMMainActivity.getAppContext().startActivity(intent);
+                }
             }
         });
     }
@@ -221,22 +230,20 @@ public class CalendarView extends LinearLayout
                 textDay.setTextColor(Color.parseColor("#4b82ff"));
             }
             int counter = 0;
+            Date ccDate = null;
+            for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
+                TaskObject current = i.next();
+                Date cDate = new Date(Long.parseLong(current.getDatetime()));
 
-            if (list != null) {
-                for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
-                    TaskObject current = i.next();
-                    Date cDate = new Date(Long.parseLong(current.getDatetime()));
-
-
-                    taskNumber.setHint(Long.toString(cDate.getTime()));
-                    if (day == cDate.getDate() && month == cDate.getMonth() && year == cDate.getYear()) {
-                        counter++;
-                    }
+                if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
+                    counter++;
+                    ccDate = cDate;
                 }
             }
             if(counter>0){
                 taskNumber.setText(String.valueOf(counter)+" Tasks");
                 taskNumber.setVisibility(VISIBLE);
+                taskNumber.setHint(Long.toString(ccDate.getTime()));
             }
             // set text
             textDay.setText(String.valueOf(date.getDate()));
