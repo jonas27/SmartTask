@@ -21,6 +21,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.Widgets.TimePickerFragment;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by joe on 18/04/2017.
@@ -98,6 +99,11 @@ public class NewTaskFragment extends Fragment {
         mPoints.setText(taskObject.getPoints());
         mPriority.setText(taskObject.getPriority());
         mResponsible.setText(taskObject.getResponsible());
+
+        cal = new GregorianCalendar();
+        cal.setTimeInMillis(Long.parseLong(taskObject.getDatetime()));
+        mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
+        mTime.setText(String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))) ;
     }
 
     @Override
@@ -117,9 +123,6 @@ public class NewTaskFragment extends Fragment {
         mPriority = (EditText) v.findViewById(R.id.newtask_priority);
         mResponsible = (EditText) v.findViewById(R.id.newtask_responsible);
 
-        if(taskObject!=null){
-            setParameters();
-        }
 
 
         mTime = (Button) v.findViewById(R.id.newtask_time);
@@ -152,12 +155,17 @@ public class NewTaskFragment extends Fragment {
             public void onClick(View v) {
                 createNewTask();
                 if (sTaskChecked) {
-                    Log.d(TAG, "THIS SHOULD FINISH");
                     fireBase.createTask(t);
                     getActivity().finish();
                 }
             }
         });
+
+
+        if(taskObject!=null){
+            setParameters();
+        }
+
         return v;
     }
 
@@ -235,7 +243,9 @@ public class NewTaskFragment extends Fragment {
             t.setPoints(mPoints.getText().toString());
         }
         t.setStatus("false");
-        t.setId("");
+        if(taskObject!=null){
+            t.setId(taskObject.getId());
+        }else{t.setId("");}
         t.setTask("not used (legacy)");
     }
 
