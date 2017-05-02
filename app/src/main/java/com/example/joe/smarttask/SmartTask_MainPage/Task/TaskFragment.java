@@ -65,6 +65,7 @@ public class TaskFragment extends Fragment {
     //    [Start: Define views for task]
     private TextView mTaskDate;
     private ImageView mTaskSolved;
+    private ImageView mTaskUnSolved;
     private Button mTaskEdit;
     private TextView mTaskName;
     private TextView mTaskResponsible;
@@ -109,11 +110,15 @@ public class TaskFragment extends Fragment {
 
         this.mTask = ListTask.getTask(mTaskId);
 
+
         storageRef = FirebaseStorage.getInstance().getReference();
 
         mTaskSolved = (ImageView) v.findViewById(R.id.task_check_image);
+        mTaskUnSolved = (ImageView) v.findViewById(R.id.task_uncheck_image);
+
 
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
+
 
         mTaskName = (TextView) v.findViewById(R.id.task_name);
         mTaskName.setText(mTask.getName());
@@ -133,11 +138,11 @@ public class TaskFragment extends Fragment {
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
 
+
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
         td = new GregorianCalendar();
         td.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
         mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
-
 
         mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
         mTaskEdit.setOnClickListener(new View.OnClickListener(){
@@ -146,8 +151,13 @@ public class TaskFragment extends Fragment {
                 NewTaskFragment.taskObject=mTask;
                 Intent intent = new Intent(getContext(), NewTaskActivity.class);
                 startActivity(intent);
+
+
             }
         });
+
+
+
 
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +258,9 @@ public class TaskFragment extends Fragment {
 
 
         }
+        if(mTask.getStatus().toString().equals("true")){mTaskSolved.setVisibility(View.VISIBLE);mTaskUnSolved.setVisibility(View.INVISIBLE);
+        }else{mTaskSolved.setVisibility(View.INVISIBLE);mTaskUnSolved.setVisibility(View.VISIBLE);}
+
 
         return v;
     }
