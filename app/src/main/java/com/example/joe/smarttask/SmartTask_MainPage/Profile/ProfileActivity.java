@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 import java.util.List;
 
@@ -17,16 +18,28 @@ import java.util.List;
  * Created by joe on 23/04/2017.
  */
 
-public class ProfileActivity extends FragmentActivity {
+public class ProfileActivity extends SingleFragmentActivity {
     public static final String PROFILE_ID = "com.example.joe.smarttask.profile_id";
 
     private ViewPager mViewPager;
     private List<ProfileObject> mProfileList;
 
-    public static Intent newIntent(Context packageContext, String mId) {
+    @Override
+    protected Fragment createFragment() {
+        return ProfileFragment.newInstance("-KiuIi1TydBOxFU1hoim");
+    }
+
+
+
+    /*public static Intent newIntent(Context packageContext, String mId) {
         Intent intent = new Intent(packageContext, ProfileActivity.class);
         intent.putExtra(PROFILE_ID, mId);
         return intent;
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        return new ProfileFragment();
     }
 
     @Override
@@ -69,7 +82,7 @@ public class ProfileActivity extends FragmentActivity {
                 mViewPager.setCurrentItem(i);
                 break; }
         }
-    }
+*/    }
 
 
-}
+
