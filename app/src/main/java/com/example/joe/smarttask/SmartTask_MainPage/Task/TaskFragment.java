@@ -236,6 +236,7 @@ public class TaskFragment extends Fragment {
 //        else disable views for add
         else{
 
+
         }
 
         return v;
@@ -282,4 +283,5 @@ public class TaskFragment extends Fragment {
             });
         }
     }
+
 }
