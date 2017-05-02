@@ -280,4 +280,5 @@ public class TaskFragment extends Fragment {
             });
         }
     }
+
 }

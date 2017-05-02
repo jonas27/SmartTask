@@ -59,12 +59,15 @@ public class ProfileFragment extends Fragment {
     //    this.mProfile = mListProfile.getProfile(mProfileId);
     }
 
-    @Override
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
+         View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
+       mListProfile = ListProfile.list(getContext());
+       this.mProfile=mListProfile.getProfile(mProfileId);
 
         mViewProfileName = (TextView) v.findViewById(R.id.view_profile_name);
+        Log.d(TAG, mProfile.getPname());
         mViewProfileName.setText(mProfile.getPname());
 
         mViewProfileScore = (TextView) v.findViewById(R.id.view_profile_score);
@@ -87,4 +90,5 @@ public class ProfileFragment extends Fragment {
         this.mProfile=mListProfile.getProfile(mProfileId);
         super.onResume();
         }
+
 }
