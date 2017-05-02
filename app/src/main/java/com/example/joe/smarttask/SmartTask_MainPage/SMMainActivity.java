@@ -32,6 +32,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Fi
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -162,6 +163,14 @@ public class SMMainActivity extends AppCompatActivity {
                 fireBase.logout();
                 SharedPrefs.editor.clear().commit();
                 LogInActivity.introWasShown=false;
+                //        CLear cache for logout
+                File cacheDir = context.getCacheDir();
+                File[] files = cacheDir.listFiles();
+                Log.d(TAG, Integer.toString(files.length));
+                if (files != null) {
+                    for (File file : files)
+                        file.delete();
+                }
                 intent = new Intent(getAppContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();

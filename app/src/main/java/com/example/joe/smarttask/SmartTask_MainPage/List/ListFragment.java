@@ -314,14 +314,13 @@ public class ListFragment extends Fragment {
         ListTask.setDataSnapshot(mDataSnapshot);
         sList=ListTask.getTaskList();
 
-        Log.d(TAG, sList.get(2).getName());
         updateUI(sList);
 
         if(detailView!=null && firstTime) {
 //              @param getId: Create new Fragment with first TaskObject in list
             taskFragment = TaskFragment.newInstance(sList.get(0).getId());
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
+            fragmentTransaction.add(R.id.detail_fragment_container, taskFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             firstTime=false;

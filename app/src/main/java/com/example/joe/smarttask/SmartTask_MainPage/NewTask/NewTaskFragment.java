@@ -34,6 +34,9 @@ public class NewTaskFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private static boolean sTaskChecked;
+
+    public static TaskObject taskObject;
+
     Date mDateNumber;
     //    [Start: define Views]
     EditText mCategories;
@@ -74,13 +77,28 @@ public class NewTaskFragment extends Fragment {
     private String task;
 
     private Calendar cal;
+    public static NewTaskFragment newInstance(TaskObject taskObject) {
+        NewTaskFragment.taskObject=taskObject;
+        NewTaskFragment fragment = new NewTaskFragment();
+        return fragment;
+    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
+    public void setParameters(){
+        mCategories.setText(taskObject.getCategories());
+        mDescription.setText(taskObject.getDescription());
+        mFrequency.setText(taskObject.getFrequency());
+        mName.setText(taskObject.getName());
+        mPoints.setText(taskObject.getPoints());
+        mPriority.setText(taskObject.getPriority());
+        mResponsible.setText(taskObject.getResponsible());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +116,11 @@ public class NewTaskFragment extends Fragment {
         mPoints = (EditText) v.findViewById(R.id.newtask_points);
         mPriority = (EditText) v.findViewById(R.id.newtask_priority);
         mResponsible = (EditText) v.findViewById(R.id.newtask_responsible);
+
+        if(taskObject!=null){
+            setParameters();
+        }
+
 
         mTime = (Button) v.findViewById(R.id.newtask_time);
         mTime.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +152,7 @@ public class NewTaskFragment extends Fragment {
             public void onClick(View v) {
                 createNewTask();
                 if (sTaskChecked) {
+                    Log.d(TAG, "THIS SHOULD FINISH");
                     fireBase.createTask(t);
                     getActivity().finish();
                 }
@@ -214,4 +238,11 @@ public class NewTaskFragment extends Fragment {
         t.setId("");
         t.setTask("not used (legacy)");
     }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        taskObject=null;
+    }
+
 }

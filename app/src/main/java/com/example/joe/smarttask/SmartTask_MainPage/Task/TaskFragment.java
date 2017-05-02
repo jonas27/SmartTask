@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
@@ -113,8 +115,6 @@ public class TaskFragment extends Fragment {
 
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
 
-        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
-
         mTaskName = (TextView) v.findViewById(R.id.task_name);
         mTaskName.setText(mTask.getName());
 
@@ -138,6 +138,16 @@ public class TaskFragment extends Fragment {
         td.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
         mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
 
+
+        mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
+        mTaskEdit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                NewTaskFragment.taskObject=mTask;
+                Intent intent = new Intent(getContext(), NewTaskActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {

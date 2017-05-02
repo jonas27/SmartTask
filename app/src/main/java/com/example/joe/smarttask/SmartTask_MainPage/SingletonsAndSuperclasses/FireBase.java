@@ -169,22 +169,23 @@ public class FireBase extends AppCompatActivity {
         }
 
 
+//        delete a task
+    public boolean deleteTask(String id){
+
+
+
+        return false;
+    }
+
+
+
+
     //        [Start: logout]
     public void logout() {
         FirebaseAuth.getInstance().signOut();
         mAuth.signOut();
-        ListTask.getTaskList();
+//        ListTask.getTaskList();
         sFireBase = null;
-
-//        CLear cache for logout
-        File cacheDir = context.getCacheDir();
-        File[] files = cacheDir.listFiles();
-        Log.d(TAG, Integer.toString(files.length));
-        if (files != null) {
-            for (File file : files)
-                file.delete();
-        }
-        Log.d(TAG, Integer.toString(files.length));
     }
 
 }
