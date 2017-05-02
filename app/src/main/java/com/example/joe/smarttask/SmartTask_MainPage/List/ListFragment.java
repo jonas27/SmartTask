@@ -314,7 +314,7 @@ public class ListFragment extends Fragment {
         ListTask.setDataSnapshot(mDataSnapshot);
         sList=ListTask.getTaskList();
 
-        Log.d(TAG, sList.get(2).getName());
+//        Log.d(TAG, sList.get(2).getName());
         updateUI(sList);
 
         if(detailView!=null && firstTime) {

@@ -173,8 +173,8 @@ public class CalendarView extends LinearLayout
                 Log.d(TAG,"hint "+current.getHint()+" "+current.getHint().length());
                 if(current.getHint().length()>1){
                     SingleDayActivity day = new SingleDayActivity(Long.parseLong(current.getHint().toString()));
-                    Intent intent = new Intent(SMMainActivity.getAppContext(), day.getClass());
-                    SMMainActivity.getAppContext().startActivity(intent);
+                    Intent intent = new Intent(getContext(), day.getClass());
+                    getContext().startActivity(intent);
                 }
             }
         });
