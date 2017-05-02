@@ -249,6 +249,7 @@ public class TaskFragment extends Fragment {
             mTaskDate.setVisibility(View.INVISIBLE);
             mTaskSolved.setVisibility(View.INVISIBLE);
             mTaskEdit.setVisibility(View.INVISIBLE);
+            mTaskDelete.setVisibility(View.INVISIBLE);
             mTaskName.setVisibility(View.INVISIBLE);
             mTaskResponsible.setVisibility(View.INVISIBLE);
             mTaskDescription.setVisibility(View.INVISIBLE);
@@ -260,6 +261,18 @@ public class TaskFragment extends Fragment {
             mTaskPicture.setVisibility(View.INVISIBLE);
             mTaskConfirm.setVisibility(View.INVISIBLE);
             mTaskImageView.setVisibility(View.INVISIBLE);
+            mTaskSolved.setVisibility(View.INVISIBLE);
+            mTaskUnSolved.setVisibility(View.INVISIBLE);
+            ImageView iconResponsible= (ImageView) v.findViewById(R.id.task_responsible_image);
+            iconResponsible.setVisibility(View.INVISIBLE);
+            ImageView iconDate= (ImageView) v.findViewById(R.id.task_date_image);
+            iconDate.setVisibility(View.INVISIBLE);
+            ImageView iconDescription= (ImageView) v.findViewById(R.id.task_description_image);
+            iconDescription.setVisibility(View.INVISIBLE);
+            ImageView iconCategory= (ImageView) v.findViewById(R.id.task_category_image);
+            iconCategory.setVisibility(View.INVISIBLE);
+            ImageView iconPoints= (ImageView) v.findViewById(R.id.task_points_image);
+            iconPoints.setVisibility(View.INVISIBLE);
         }
 //        else disable views for add
         else{
