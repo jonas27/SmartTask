@@ -45,6 +45,7 @@ public class SingleDayFragment extends Fragment {
     private RecyclerView sListRecyclerView;
     private static SingleDayFragment.TaskAdapter sAdapter;
     private String TAG = "sDayFragment";
+    private List<TaskObject> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class SingleDayFragment extends Fragment {
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         sList = ListTask.getTaskList();
-        List<TaskObject> list = new ArrayList<TaskObject>();
+        list = new ArrayList<TaskObject>();
 
         Date ccDate = new Date(SingleDayActivity.getDate());
         for (Iterator<TaskObject> i = sList.iterator(); i.hasNext(); ) {
@@ -111,14 +112,8 @@ public class SingleDayFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-//                Check for tablet mode
-//                if it has a detailed view it is a tablet
-                    taskFragment = TaskFragment.newInstance(mTask.getId());
-                    FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
-//                fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
+            Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId(),list);
+            sContext.startActivity(intent);
         }
 
         private void bindTask(TaskObject task) {

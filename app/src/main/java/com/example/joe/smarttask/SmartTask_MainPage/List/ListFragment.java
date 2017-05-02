@@ -182,7 +182,7 @@ public class ListFragment extends Fragment {
 //                Check for tablet mode
 //                if it has a detailed view it is a tablet
             if(detailView==null) {
-                Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId());
+                Intent intent = TaskPagerActivity.newIntent(sContext, mTask.getId(),sList);
                 sContext.startActivity(intent);
             }else {
 //               @param getId: Create new Fragment with TaskObject with given id

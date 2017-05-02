@@ -36,14 +36,15 @@ public class TaskPagerActivity extends AppCompatActivity {
     public static final String TASK_ID = "com.example.joe.smarttask.task_id";
     private static final String TAG = "CL_TaPagerAc";
     private ViewPager mViewPager;
-    private List<TaskObject> mTasksList;
+    private static List<TaskObject> mTasksList;
     private Toolbar toolbar;
     private TaskObject separator;
 
     public static int separatorPosition;
 
-    public static Intent newIntent(Context packageContext, String mId) {
+    public static Intent newIntent(Context packageContext, String mId,List<TaskObject> list) {
         Intent intent = new Intent(packageContext, TaskPagerActivity.class);
+        mTasksList = list;
         intent.putExtra(TASK_ID, mId);
         return intent;
     }
@@ -67,7 +68,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTasksList = ListTask.getTaskList();
+        //mTasksList = ListTask.getTaskList();
 
         //                if pro user remove ads (separator line)
         if (SharedPrefs.getProUser()) {
