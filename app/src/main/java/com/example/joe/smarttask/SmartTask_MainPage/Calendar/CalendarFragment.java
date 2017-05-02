@@ -38,20 +38,6 @@ public class  CalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         CalendarView calendar = ((CalendarView)view.findViewById(R.id.calendar_view));
-
-        // assign event handler
-        /*
-        cv.setEventHandler(new CalendarView.EventHandler()
-        {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(Date date)
-            {
-                // show returned day
-                DateFormat df = SimpleDateFormat.getDateInstance();
-            }
-        });
-        */
         calendar.updateCalendar();
         return view;
     }
