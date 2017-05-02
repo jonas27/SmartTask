@@ -2,6 +2,7 @@ package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +27,12 @@ import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FetchAdds;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +77,9 @@ public class SMMainActivity extends AppCompatActivity {
         SharedPrefs.getSharedPrefs(this);
 
         ListTask.sortList();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        new FetchPicture().execute();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -202,6 +210,21 @@ public class SMMainActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
+
+
+
+
+
+
+//    Start new thread to download adds
+private class FetchPicture extends AsyncTask<Void,Void,Void> {
+    @Override
+    protected Void doInBackground(Void... params) {
+            new FetchAdds().saveImage(FetchAdds.URL_ADDRESS);
+        return null;
+    }
+}
 
 
 }
