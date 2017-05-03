@@ -39,31 +39,25 @@ public class ListProfile {
      *
      * @param context global information on application environment
      */
-    private ListProfile(Context context) {
-        this.context = context;
-        sPlist = new ArrayList<>();
-        createList();
-        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
-    }
+    public ListProfile(Context context) {
 
+    }
 
     /**
      * Static factory method for singleton
      *
-     * @param context global information on application environment
      * @return THE single Object of this class
      */
-    public static ListProfile list(Context context) {
-        if (sListProfile == null) {
-            sListProfile = new ListProfile(context);
-        }
+    public static ListProfile list() {
+
         return sListProfile;
     }
 
 
     public static void setDataSnapshot(DataSnapshot mProfileSnapshot) {
+        sPlist = new ArrayList<>();
         sProfileSnapshot = mProfileSnapshot;
-        if (sPlist != null) {
+        if (sPlist.isEmpty()) {
             createList();
         }
     }
@@ -91,6 +85,7 @@ public class ListProfile {
                 sPlist.add(mProfile);
             }
             Log.d(TAG + "profiles size ", String.valueOf(ProfilesMap.size()));
+            Log.d(TAG + "profiles size ", ""+sPlist.size());
         }
     }
 
@@ -98,9 +93,14 @@ public class ListProfile {
     public static List<ProfileObject> getProfileList() {
         return sPlist;
     }
-    public ProfileObject getProfile(String mProfileId) {
+
+    public static ProfileObject getProfile(String mProfileId) {
         for (ProfileObject t : sPlist) {
+            Log.d(TAG," pid: "+t.getPid());
+            Log.d(TAG," name: "+t.getPname());
+            Log.d(TAG," mp: "+mProfileId);
             if (mProfileId.equals(t.getPid())) {
+                Log.d(TAG,"should return");
                 return t;
             }
         }

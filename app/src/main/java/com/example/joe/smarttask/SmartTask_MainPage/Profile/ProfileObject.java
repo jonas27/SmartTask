@@ -19,7 +19,7 @@ public class ProfileObject implements Serializable {
     private String pname;
     private String pscore;
     private String pprivileges;
-    private String pid;
+    private String id;
     private String ptotalscore;
     private String ppincode;
 //    [End: Variables of a task]
@@ -32,12 +32,12 @@ public class ProfileObject implements Serializable {
     }
 
     public ProfileObject(String pname, String pscore, String ppincode,
-                         String pprivileges, String pid, String ptotalscore) {
+                         String pprivileges, String id, String ptotalscore) {
         super();
         this.pscore = pscore;
         this.pprivileges = pprivileges;
         this.pname = pname;
-        this.pid = pid;
+        this.id = id;
         this.ptotalscore = ptotalscore;
         this.ppincode = ppincode;
 
@@ -48,7 +48,7 @@ public class ProfileObject implements Serializable {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("pscore", pscore);
-        result.put("pid", pid);
+        result.put("id", id);
         result.put("pname", pname);
         result.put("pprivileges", pprivileges);
         result.put("ptotalscore", ptotalscore);
@@ -69,9 +69,9 @@ public class ProfileObject implements Serializable {
         this.pname = pname;
     }
     public String getPid() {
-        return pid;
+        return id;
     }
-    public void setPid(String id) {this.pid = pid;}
+    public void setPid(String id) {this.id = id;}
     public String getPtotalscore() {return ptotalscore;}
     public void setPtotalscore(String ptotalscore) {this.ptotalscore = ptotalscore;}
     public String getPpincode() {return ppincode;}
