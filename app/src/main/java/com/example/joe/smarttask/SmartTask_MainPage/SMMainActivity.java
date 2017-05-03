@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.SingleDayActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
@@ -198,8 +199,8 @@ public class SMMainActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d(TAG,"clicked "+ListProfile.getProfileList().get(position).getPid());
-
+                        Toast.makeText(context, "Changed profile, but not rly :)", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
                     }
                 });
 
