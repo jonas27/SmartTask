@@ -97,5 +97,4 @@
         app:rlv_titleSize="30dp"
         app:rlv_titleText="A" />
 
-
 </RelativeLayout>

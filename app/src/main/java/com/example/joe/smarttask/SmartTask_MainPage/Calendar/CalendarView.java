@@ -208,9 +208,6 @@ public class CalendarView extends LinearLayout
                 view = inflater.inflate(R.layout.control_calendar_day, parent, false);
             }
 
-            // if this day has an event, specify event image
-            view.setBackgroundResource(0);
-
             TextView textDay = (TextView) view.findViewById(R.id.day);
             TextView taskNumber = (TextView) view.findViewById(R.id.tasknumber);
 

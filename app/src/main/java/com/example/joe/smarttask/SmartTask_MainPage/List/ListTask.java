@@ -98,7 +98,7 @@ public class ListTask {
 
 
             sSortedList = SortList.sortList(sList);
-            CalendarView.updateCalendar();
+//            CalendarView.updateCalendar();
         }
     }
 }

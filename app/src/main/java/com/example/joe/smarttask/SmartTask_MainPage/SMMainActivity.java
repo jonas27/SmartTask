@@ -1,5 +1,6 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,11 +14,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
@@ -25,7 +34,9 @@ import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FetchAdds;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
@@ -156,6 +167,32 @@ public class SMMainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
+            case R.id.menu_change_profile:
+                Dialog dialog = new Dialog(SMMainActivity.this);
+                dialog.setContentView(R.layout.change_profile);
+                dialog.setTitle("Change profile");
+                dialog.setCancelable(true);
+
+                GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
+                Log.d(TAG,"Number of collums "+grid.getNumColumns());
+
+                grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
+
+                //set up button
+                Button button = (Button) dialog.findViewById(R.id.close);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+
+
+
+
+                //now that the dialog is set up, it's time to show it
+                dialog.show();
+                return true;
             case R.id.menu_profile:
                 intent = new Intent(getAppContext(), ProfileActivity.class);
                 startActivity(intent);
@@ -238,4 +275,25 @@ private class FetchPicture extends AsyncTask<Void,Void,Void> {
 }
 
 
+    private static class ProfileAdapter extends ArrayAdapter<ProfileObject> {
+        private LayoutInflater inflater;
+
+        public ProfileAdapter(Context context, ArrayList<ProfileObject> profiles) {
+            super(context, R.layout.control_calendar_day,profiles);
+            inflater = LayoutInflater.from(context);
+        }
+        @Override
+        public View getView(int position, View view, ViewGroup parent)
+        {
+            view = inflater.inflate(R.layout.profile_square, parent, false);
+            ProfileObject current = getItem(position);
+            TextView name = (TextView) view.findViewById(R.id.name);
+            name.setText(current.getPname());
+
+            TextView score = (TextView) view.findViewById(R.id.score);
+            score.setText(current.getPscore());
+
+            return view;
+        }
+    }
 }

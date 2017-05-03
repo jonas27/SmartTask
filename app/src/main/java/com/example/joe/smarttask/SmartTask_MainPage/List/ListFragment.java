@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskFragment;
@@ -75,7 +77,6 @@ public class ListFragment extends Fragment {
     private FirebaseDatabase mDatabase;
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
-
 
 
     //    Use notifyDataSetChanged on all views as we do not know
@@ -251,7 +252,6 @@ public class ListFragment extends Fragment {
         }
     }
 
-
     //    Adapter converts an object at a certain position into a list row item which will then be inserted
     private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
         private List<TaskObject> mListTasks;
@@ -328,7 +328,7 @@ public class ListFragment extends Fragment {
         }
 
         //            TODO check if calendar has been initialized or initialize calendar before calling update
-//        CalendarView.updateCalendar();
+        CalendarView.updateCalendar();
 
 
     }

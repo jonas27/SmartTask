@@ -28,7 +28,7 @@ public class ListProfile {
     private static final String TAG = "CL_ListProfile";
 
     private static ListProfile sListProfile;
-    private static List<ProfileObject> sPlist;
+    private static ArrayList<ProfileObject> sPlist;
     private static DataSnapshot sProfileSnapshot;
     private SharedPrefs sharedPrefs;
     private Context context;
@@ -90,17 +90,13 @@ public class ListProfile {
     }
 
     //    getter Method for List of profiles
-    public static List<ProfileObject> getProfileList() {
+    public static ArrayList<ProfileObject> getProfileList() {
         return sPlist;
     }
 
     public static ProfileObject getProfile(String mProfileId) {
         for (ProfileObject t : sPlist) {
-            Log.d(TAG," pid: "+t.getPid());
-            Log.d(TAG," name: "+t.getPname());
-            Log.d(TAG," mp: "+mProfileId);
             if (mProfileId.equals(t.getPid())) {
-                Log.d(TAG,"should return");
                 return t;
             }
         }

@@ -95,6 +95,7 @@
     <!-- Menu fragment -->
     <string name="menu_settings">Settings</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_change_profile">Change profile</string>
     <string name="menu_logout">Logout</string>
 
     <!-- List fragment -->
