@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SmartTask</string>
-    <string name="menu_logout">Logout</string>
+    <string name="menu_logout">Abmelden</string>
     <string name="menu_profile">Profil</string>
     <string name="menu_settings">Einstellungen</string>
     <string name="open">öffnen</string>
@@ -93,7 +93,7 @@
     <string name="list_high_p">H</string>
     <string name="list_low_p">N</string>
     <string name="list_middle_p">M</string>
-    <string name="main_log_in">Anmelden</string>
+    <string name="main_log_in">Einloggen</string>
     <string name="main_log_in_email">Deine Email</string>
     <string name="main_log_in_pw">Dein Passwort</string>
     <string name="main_sign_up">Anmelden</string>
