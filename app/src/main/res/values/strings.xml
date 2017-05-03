@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartTask</string>
+    <string name="app_name" translatable="false">SmartTask</string>
 
     <!--- LogInActivity -->
     <string name="main_sign_up">Sign up</string>
