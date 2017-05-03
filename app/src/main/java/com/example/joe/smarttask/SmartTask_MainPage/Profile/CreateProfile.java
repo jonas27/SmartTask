@@ -1,4 +1,4 @@
-package com.example.joe.smarttask;
+package com.example.joe.smarttask.SmartTask_MainPage.Profile;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.joe.smarttask.R;
 
 public class CreateProfile extends AppCompatActivity {
 

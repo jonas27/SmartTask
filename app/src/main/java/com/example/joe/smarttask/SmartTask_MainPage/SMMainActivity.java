@@ -19,15 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.joe.smarttask.SmartTask_MainPage.Calendar.SingleDayActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarFragment;
@@ -41,10 +41,8 @@ import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FetchAdds;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,27 +166,42 @@ public class SMMainActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_change_profile:
-                Dialog dialog = new Dialog(SMMainActivity.this);
+                final Dialog dialog = new Dialog(SMMainActivity.this);
                 dialog.setContentView(R.layout.change_profile);
                 dialog.setTitle("Change profile");
                 dialog.setCancelable(true);
 
                 GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
-                Log.d(TAG,"Number of collums "+grid.getNumColumns());
-
                 grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
 
                 //set up button
-                Button button = (Button) dialog.findViewById(R.id.close);
-                button.setOnClickListener(new View.OnClickListener() {
+                Button close = (Button) dialog.findViewById(R.id.close);
+                close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+
+                Button add= (Button) dialog.findViewById(R.id.add_profile);
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent(getAppContext(), CreateProfile.class);
+                        startActivity(intent);
+                        dialog.cancel();
                         finish();
                     }
                 });
 
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d(TAG,"clicked "+ListProfile.getProfileList().get(position).getPid());
 
-
+                    }
+                });
 
                 //now that the dialog is set up, it's time to show it
                 dialog.show();

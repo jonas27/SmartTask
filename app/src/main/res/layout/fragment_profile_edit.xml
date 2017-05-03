@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.joe.smarttask.CreateProfile">
+    tools:context="com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile">
     <!-- layout for creating profiles -->
 
 

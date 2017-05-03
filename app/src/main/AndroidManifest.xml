@@ -35,7 +35,7 @@
              <activity
             android:hardwareAccelerated="true" />
         -->
-        <activity android:name=".CreateProfile"></activity>
+        <activity android:name=".SmartTask_MainPage.Profile.CreateProfile"></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"

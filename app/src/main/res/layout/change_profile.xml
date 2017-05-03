@@ -2,24 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
-
-
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dp">
     <GridView
         android:id="@+id/profile_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="50dp"
         android:minHeight="50px"
         android:numColumns="2" />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/justtoalign"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
     <Button
         android:id="@+id/close"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_below="@id/profile_grid"
+        android:layout_toRightOf="@id/justtoalign"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:text="@string/close" />
+    <Button
+        android:id="@+id/add_profile"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/close"
+        android:text="@string/add_profile" />
+</LinearLayout>
 
 </RelativeLayout>

@@ -139,5 +139,6 @@
     <!-- SubSettings Pro fragment -->
     <string name="subsettings_prouser_title">Pro User</string>
     <string name="subsettings_prouser_description">As pro user you don\'t see adds!</string>
+    <string name="add_profile">add+</string>
 
 </resources>

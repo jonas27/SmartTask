@@ -19,6 +19,7 @@ public class SharedPrefs {
     private static final String PRO_USER = "ProUser";
     private static final String FEEDBACK = "Feedback";
     private static final String SHOW_PAST_ITEMS = "ShowPastItems";
+    private static final String CURRENT_PROFILE = "CurrentProfile";
     public static SharedPreferences.Editor editor;
     private static SharedPrefs sharedPrefs;
     private static SharedPreferences sharedPreferences;
@@ -46,6 +47,15 @@ public class SharedPrefs {
 
     public static void setPreferredOrder(int listOrder) {
         editor.putInt(LIST_ORDER, listOrder);
+        editor.commit();
+    }
+
+    public static String getCurrentProfile() {
+        return sharedPreferences.getString(CURRENT_PROFILE, "");
+    }
+
+    public static void setCurrentProfile(String id) {
+        editor.putString(CURRENT_PROFILE, id);
         editor.commit();
     }
 
@@ -93,8 +103,6 @@ public class SharedPrefs {
         editor.putBoolean(PRO_USER, b);
         editor.commit();
     }
-
-
 
 
     //sets if Intro should show
