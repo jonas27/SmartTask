@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name" translatable="false">SmartTask</string>
 
+    <!--- MainScreen Task List and Calendar -->
+    <string name="main_screen_tasks">Tasks</string>
+    <string name="main_screen_calendar">Calendar</string>
+
     <!--- LogInActivity -->
     <string name="main_sign_up">Sign up</string>
     <string name="main_log_in">Log in</string>

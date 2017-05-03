@@ -9,7 +9,7 @@
     <string name="NewTaskName">Navnet på opgaven</string>
     <string name="NewTaskPoints">Angiv Points</string>
     <string name="NewTaskPriority">Angiv prioritet</string>
-    <string name="NewTaskResponsible">Opgaven tildel til</string>
+    <string name="NewTaskResponsible">Tildel opgaven til</string>
     <string name="NewTaskTime">Vælg Tid</string>
     <string name="NewTask_Headline">Definere opgaven</string>
     <string name="ViewTaskAddPictureButton">Upload billede</string>
@@ -54,7 +54,7 @@
     <string name="settings_notifications_email">Nogle notifikation</string>
     <string name="settings_notifications_none">Ingen notifikation</string>
     <string name="settings_notifications_push">Nogle notifikation</string>
-    <string name="settings_notifications_title">notifikation</string>
+    <string name="settings_notifications_title">Notifikation</string>
     <string name="settings_notifications_all">Alle notifikation</string>
     <string name="settings_prouser_off">Pro er slået fra</string>
     <string name="settings_prouser_on">Pro er slået til</string>
@@ -92,10 +92,12 @@
     <string name="subsettings_list_title_date">Sorter efter dato</string>
     <string name="subsettings_list_title_pastitems">Vis afsluttede opgaver</string>
     <string name="subsettings_list_title_priority">Sorter efter prioritet</string>
-    <string name="subsettings_prouser_description">Som probruger vil du ikke se reklamer.</string>
+    <string name="subsettings_prouser_description">Som Pro bruger vil du ikke se reklamer.</string>
     <string name="list_high_p">H</string>
     <string name="list_low_p">L</string>
     <string name="list_middle_p">M</string>
     <string name="subsettings_prouser_title">Pro Bruger</string>
     <string name="time_picker_title">Tid for opgaven</string>
+    <string name="main_screen_calendar">Kalender</string>
+    <string name="main_screen_tasks">Opgaver</string>
 </resources>

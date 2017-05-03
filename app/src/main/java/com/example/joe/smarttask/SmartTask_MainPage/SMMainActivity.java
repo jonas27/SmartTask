@@ -187,8 +187,8 @@ public class SMMainActivity extends AppCompatActivity {
 
 
     private void setupViewPager(ViewPager viewPager) {
-        mMainPagerAdapter.addFragment(new CalendarFragment(), "Calendar");
-        mMainPagerAdapter.addFragment(new ListFragment(), "Tasks");
+        mMainPagerAdapter.addFragment(new CalendarFragment(), getString(R.string.main_screen_calendar));
+        mMainPagerAdapter.addFragment(new ListFragment(), getString(R.string.main_screen_tasks));
 //        mMainPagerAdapter.addFragment(new MessengerFragment(), "Messenger");
         mViewPager.setAdapter(mMainPagerAdapter);
     }
