@@ -46,7 +46,7 @@
     <string name="smarttask_create_profile_Add">Add User</string>
 
     <!-- SmartTask Create Tasks -->
-    <string name="NewTask_Headline">Define The task</string>
+    <string name="NewTask_Headline">Define the task</string>
     <string name="NewTaskCategory">Room/Area?</string>
     <string name="smarttask_create_task_colour">Choose colour for task</string>
     <string name="NewTaskPoints">Define Points</string>
