@@ -78,22 +78,9 @@
     <string name="ViewTaskAddPictureButton">Upload Picture</string>
     <string name="ViewTaskConfirmButton">Task Confirmed</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
     <string name="open">open</string>
     <string name="close">close</string>
-
-    <string name="cardview_contents">This is a CardView widget. CardView widgets can have
-        shadows and rounded corners.
-        \n\nTo create a card with a shadow, use the <font fgcolor="#FFFFFFFF">android:elevation</font>
-        attribute.
-        \n\nTo set the corner radius in your layouts, use the <font
-            fgcolor="#FFFFFFFF">card_view:cardCornerRadius</font> attribute.
-    </string>
-    <string name="cardview_radius_seekbar_text">Radius</string>
-    <string name="cardview_elevation_seekbar_text">Elevation</string>
 
 
     <!-- DatePicker and TimePicker -->
@@ -118,8 +105,8 @@
     <string name="settings_list_sort_priority">Sort by priority</string>
     <string name="settings_notifications_title">Notifications</string>
     <string name="settings_notifications_all">All notifications</string>
-    <string name="settings_notifications_email">Some notifications</string>
-    <string name="settings_notifications_push">Some notifications</string>
+    <string name="settings_notifications_email">Email notifications</string>
+    <string name="settings_notifications_push">Push notifications</string>
     <string name="settings_notifications_none">No notifications</string>
     <string name="settings_language_title">Language</string>
     <string name="settings_reward_title">Reward System</string>
@@ -134,7 +121,7 @@
     <string name="settings_feedback_on">Thanks for helping us!</string>
     <string name="settings_feedback_off">Feedback off</string>
     <string name="settings_about_title">About</string>
-    <string name="settings_about_version">Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  </string>
+    <string name="settings_about_version" translatable="false">Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  </string>
 
     <!-- SubSettings List fragment -->
     <string name="subsettings_list_title_date">Sort by date</string>
