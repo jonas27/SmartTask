@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -168,7 +169,7 @@ public class FireBase extends AppCompatActivity {
 
     private void callback2(DataSnapshot mPDataSnapshot) {
         ListProfile.setDataSnapshot(mPDataSnapshot);
-        Log.d(TAG,"getprofile "+ListProfile.getProfile("-KfmBqV5WFckSNcqrTCV"));
+        SMMainActivity.firebaseLoaded();
         }
 
 

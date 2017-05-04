@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class ProfileActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return ProfileFragment.newInstance("-KiuIi1TydBOxFU1hoim");
+        return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile());
     }
 
 

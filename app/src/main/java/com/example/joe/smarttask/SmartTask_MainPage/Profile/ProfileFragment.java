@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 
 
 /**
@@ -62,12 +63,11 @@ public class ProfileFragment extends Fragment {
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
-       Log.d(TAG,"Profile id "+mProfileId);
-       mProfile = ListProfile.getProfile("-Kiu3GoaYtFqyBzIoPK6");
+        View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
 
-       mViewProfileName = (TextView) v.findViewById(R.id.view_profile_name);
-       Log.d(TAG, mProfile.getPname());
+        mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+
+        mViewProfileName = (TextView) v.findViewById(R.id.view_profile_name);
         mViewProfileName.setText(mProfile.getPname());
 
         mViewProfileScore = (TextView) v.findViewById(R.id.view_profile_score);
@@ -87,7 +87,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume(){
         mListProfile = ListProfile.list();
-        this.mProfile=mListProfile.getProfile("-Kiu3GoaYtFqyBzIoPK6");
+        this.mProfile=mListProfile.getProfile(mProfileId);
         super.onResume();
         }
 

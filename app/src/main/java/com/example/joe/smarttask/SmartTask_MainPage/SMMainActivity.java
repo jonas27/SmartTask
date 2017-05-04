@@ -27,7 +27,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.SingleDayActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
@@ -59,6 +58,7 @@ public class SMMainActivity extends AppCompatActivity {
     private static Context context;
     private static List<Fragment> sFragmentList;
     private static boolean sStartActivity;
+    private static SMMainActivity instance;
     // When requested, this adapter returns a Fragment,
     // representing an object in the collection.
     MainPagerAdapter mMainPagerAdapter;
@@ -71,7 +71,7 @@ public class SMMainActivity extends AppCompatActivity {
     private Menu subMenu;
     private Menu mMenuSettings;
     private Menu mMenuClose;
-    private Intent intent;
+    private static Intent intent;
 
     public static Context getAppContext() {
         return SMMainActivity.context;
@@ -82,10 +82,9 @@ public class SMMainActivity extends AppCompatActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.instance = this;
 
-        SMMainActivity.context = getApplicationContext();
-
-        SharedPrefs.getSharedPrefs(this);
+        context = getApplicationContext();
 
         ListTask.sortList();
 
@@ -158,6 +157,60 @@ public class SMMainActivity extends AppCompatActivity {
         return true;
     }
 
+    public static void firebaseLoaded(){
+        Log.d(TAG,"CURRENT PROFILE "+SharedPrefs.getCurrentProfile());
+
+        if(SharedPrefs.getCurrentProfile()==""){
+            showProfiles(true);
+        }
+    }
+
+    //show profile selector dialog, with or without close button
+    public static void showProfiles(boolean c){
+        final Dialog dialog = new Dialog(instance);
+        dialog.setContentView(R.layout.change_profile);
+        dialog.setTitle("Change profile");
+        dialog.setCancelable(true);
+
+        GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
+        grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
+
+        //set up button
+        Button close = (Button) dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        if(c){
+            close.setVisibility(View.INVISIBLE);
+        }
+
+        Button add= (Button) dialog.findViewById(R.id.add_profile);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(context, CreateProfile.class);
+                context.startActivity(intent);
+                dialog.cancel();
+            }
+        });
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, "Changed profile, but not rly :)", Toast.LENGTH_SHORT).show();
+                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
+                dialog.cancel();
+            }
+        });
+
+        //now that the dialog is set up, it's time to show it
+        dialog.show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -167,45 +220,7 @@ public class SMMainActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_change_profile:
-                final Dialog dialog = new Dialog(SMMainActivity.this);
-                dialog.setContentView(R.layout.change_profile);
-                dialog.setTitle("Change profile");
-                dialog.setCancelable(true);
-
-                GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
-                grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
-
-                //set up button
-                Button close = (Button) dialog.findViewById(R.id.close);
-                close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                    }
-                });
-
-                Button add= (Button) dialog.findViewById(R.id.add_profile);
-                add.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        intent = new Intent(getAppContext(), CreateProfile.class);
-                        startActivity(intent);
-                        dialog.cancel();
-                        finish();
-                    }
-                });
-
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(context, "Changed profile, but not rly :)", Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
-                    }
-                });
-
-                //now that the dialog is set up, it's time to show it
-                dialog.show();
+                showProfiles(false);
                 return true;
             case R.id.menu_profile:
                 intent = new Intent(getAppContext(), ProfileActivity.class);

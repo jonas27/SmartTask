@@ -96,7 +96,7 @@ public class ListProfile {
 
     public static ProfileObject getProfile(String mProfileId) {
         for (ProfileObject t : sPlist) {
-            if (mProfileId.equals(t.getPid())) {
+            if (t.getPid().equals(mProfileId)) {
                 return t;
             }
         }
