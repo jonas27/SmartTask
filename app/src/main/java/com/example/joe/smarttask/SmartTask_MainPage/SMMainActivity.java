@@ -201,7 +201,7 @@ public class SMMainActivity extends AppCompatActivity {
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "Changed profile, but not rly :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
                 SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
                 dialog.cancel();
             }

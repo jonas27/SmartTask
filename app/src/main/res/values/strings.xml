@@ -43,7 +43,7 @@
     <!-- SmartTask Create  Profile-->
     <string name="smarttask_create_profile_Headline">Profile</string>
     <string name="smarttask_create_profile_name">Enter your profile name</string>
-    <string name="smarttask_create_profile_pincode">Enter Pin-code (4-digit)</string>
+    <string name="smarttask_create_profile_pincode">Enter Pin-code (4-digit)(Optional)</string>
     <string name="smarttask_create_profile_privilgies">Define access level</string>
     <string name="smarttask_create_profile_picture">Click to add picture</string>
     <string name="smarttask_create_profile_done">Done</string>
