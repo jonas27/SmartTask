@@ -312,7 +312,7 @@ private class FetchPicture extends AsyncTask<Void,Void,Void> {
         private LayoutInflater inflater;
 
         public ProfileAdapter(Context context, ArrayList<ProfileObject> profiles) {
-            super(context, R.layout.control_calendar_day,profiles);
+            super(context, R.layout.profile_square,profiles);
             inflater = LayoutInflater.from(context);
         }
         @Override
