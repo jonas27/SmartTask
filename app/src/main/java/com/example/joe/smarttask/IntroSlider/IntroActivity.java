@@ -84,6 +84,7 @@ public class IntroActivity extends AppCompatActivity {
 
     //boolean to show tutorial again
     private boolean skipTutorial;
+    private static boolean introWasShown;
 
 
     @Override
@@ -96,7 +97,15 @@ public class IntroActivity extends AppCompatActivity {
         else if(userAdded && taskAdded){
             Intent intent= new Intent(this, SMMainActivity.class);
             startActivity(intent);
+            finish();
         }
+
+        if(introWasShown){
+            Intent intent= new Intent(this, SMMainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         super.onResume();
     }
 
@@ -109,10 +118,7 @@ public class IntroActivity extends AppCompatActivity {
 
         //        get sharedPrefs instance and open app if set to skip intro
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
-        if(!SharedPrefs.getSharedPrefencesIntro()){
-            Intent intent= new Intent(this, SMMainActivity.class);
-            startActivity(intent);
-        }
+
 
 //        get Firebase user
         mAuth = FirebaseAuth.getInstance();
@@ -230,7 +236,7 @@ public class IntroActivity extends AppCompatActivity {
             taskAdded=false;
             Intent intent = new Intent(this, CreateProfile.class);
             startActivity(intent);
-//            finish();
+
 //            return;
         }else if(loadedList  && pList.size()>0 && !taskAdded){
             intent = new Intent(this, NewTaskActivity.class);
@@ -240,7 +246,7 @@ public class IntroActivity extends AppCompatActivity {
             Log.d(TAG, "profiles are there: " + loadedList);
             intent = new Intent(this, SMMainActivity.class);
             startActivity(intent);
-
+            finish();
         }
     }
 
@@ -253,14 +259,14 @@ public class IntroActivity extends AppCompatActivity {
 
     //If activity goes into pause, it writes preference of showing tutorial again in file.
     @Override
-    public void onPause() {
+    public void onStop() {
         if (skipTutorial) {
             sharedPrefs = SharedPrefs.getSharedPrefs(this);
             //modify boolean showIntroAgain
             sharedPrefs.setSharedPreferencesIntro(!skipTutorial);
         }
-        //run superclass method
-        super.onPause();
+        introWasShown=true;
+        super.onStop();
     }
 
 

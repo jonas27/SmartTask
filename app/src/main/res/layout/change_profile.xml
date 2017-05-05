@@ -14,29 +14,37 @@
         android:numColumns="2" />
 </LinearLayout>
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_alignParentBottom="true"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    >
+    <!--
     <Button
         android:id="@+id/justtoalign"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="" />
+    -->
     <Button
         android:id="@+id/close"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/justtoalign"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/close" />
+        android:text="@string/close"
+        android:layout_weight="1"
+        />
     <Button
         android:id="@+id/add_profile"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/close"
-        android:text="@string/add_profile" />
+        android:text="@string/add_profile"
+        android:layout_weight="1"
+        />
 </LinearLayout>
 
 </RelativeLayout>
