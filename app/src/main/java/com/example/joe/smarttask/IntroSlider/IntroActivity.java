@@ -12,6 +12,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,22 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 /**
  * Class handles the intro slides - slides inflate intro_activity.xml and are no layout.layouts.fragments (only one lifecycle)
@@ -31,6 +46,16 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Sh
  */
 
 public class IntroActivity extends AppCompatActivity {
+
+    //TAG for Logs
+    private static final String TAG = "CL_IntroActivity";
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private ValueEventListener postListener;
+    private DatabaseReference mPostReference;
+    private List<ProfileObject> pList;
+    private static boolean loadedList;
 
     //Intent
     private Intent intent;
@@ -52,20 +77,51 @@ public class IntroActivity extends AppCompatActivity {
     //    for SharedPrefs instance
     private SharedPrefs sharedPrefs;
 
+
+//    new user created, go to main
+    public static boolean userAdded=false;
+    public static boolean taskAdded=true;
+
     //boolean to show tutorial again
     private boolean skipTutorial;
+
+
+    @Override
+    public void onResume(){
+
+        if(userAdded && !taskAdded){
+            Intent intent= new Intent(this, NewTaskActivity.class);
+            startActivity(intent);
+        }
+        else if(userAdded && taskAdded){
+            Intent intent= new Intent(this, SMMainActivity.class);
+            startActivity(intent);
+        }
+        super.onResume();
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        intent = getIntent();
+//        intent = getIntent();
         super.onCreate(savedInstanceState);
-//        get sharedPrefs instance
+
+        //        get sharedPrefs instance and open app if set to skip intro
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
-        if (sharedPrefs.getSharedPrefencesIntro() == false || LogInActivity.introWasShown) {
-            openApp();
+        if(!SharedPrefs.getSharedPrefencesIntro()){
+            Intent intent= new Intent(this, SMMainActivity.class);
+            startActivity(intent);
         }
+
+//        get Firebase user
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        loadedList = false;
+        pullProfiles();
+
+
         //set's the content (layout)
         setContentView(R.layout.intro_view_menu);
 
@@ -139,7 +195,6 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openApp();
-                finish();
             }
         });
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +202,6 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
                     openApp();
-                    finish();
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 }
@@ -172,10 +226,22 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        intent = new Intent(this, SMMainActivity.class);
-        startActivity(intent);
-        finish();
-        return;
+        if(SharedPrefs.getCurrentProfile()=="" && loadedList && pList.size()==0 && !userAdded){
+            taskAdded=false;
+            Intent intent = new Intent(this, CreateProfile.class);
+            startActivity(intent);
+//            finish();
+//            return;
+        }else if(loadedList  && pList.size()>0 && !taskAdded){
+            intent = new Intent(this, NewTaskActivity.class);
+            startActivity(intent);
+        }
+        else if(loadedList && pList.size()>0 && taskAdded){
+            Log.d(TAG, "profiles are there: " + loadedList);
+            intent = new Intent(this, SMMainActivity.class);
+            startActivity(intent);
+
+        }
     }
 
 
@@ -239,5 +305,39 @@ public class IntroActivity extends AppCompatActivity {
             container.removeView(view);
         }
     }
+
+
+
+
+
+//    Firebase loads profiles to check if new user
+private void pullProfiles() {
+//    Log.d(TAG, mAuth.getCurrentUser().toString());
+    mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("profile");
+    postListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot mDataSnapshot) {
+            callback(mDataSnapshot);
+            Log.d(TAG,"Getting profiles"+mDataSnapshot.getChildren().toString());
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            // Getting Post failed, log a message
+            Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+        }
+    };
+    mPostReference.addValueEventListener(postListener);
+    //       mPostReference2.addValueEventListener(postListener);
+}
+
+
+    private void callback(DataSnapshot mDataSnapshot) {
+        ListProfile.setDataSnapshot(mDataSnapshot);
+        pList=ListProfile.getProfileList();
+        loadedList=true;
+
+    }
+
 
 }

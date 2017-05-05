@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 
@@ -59,6 +60,7 @@ public class CreateProfileFragment extends Fragment {
                 createNewProfile();
                 if (sTaskChecked) {
                     fireBase.createProfile(t);
+                    IntroActivity.userAdded=true;
                     getActivity().finish();
                 }
             }
