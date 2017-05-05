@@ -51,4 +51,14 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <!-- spinner Font size -->
+    <style name="spinnerDialogItemStyle">
+         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="spinnerItemStyle">
+         <item name="android:textSize">20sp</item>
+
+    </style>
+
 </resources>

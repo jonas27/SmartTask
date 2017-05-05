@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
@@ -198,11 +200,13 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FireBase fireBase = FireBase.fireBase(getContext());
+                Toast.makeText(getContext(),R.string.ViewTaskConfirmButton,Toast.LENGTH_SHORT).show();
                 switch (mTaskFrequency.getText().toString()) {
                     case "0": {
                         mTask.setStatus("true");
                         fireBase.createTask(mTask);
                         getActivity().finish();
+                        Toast.makeText(getContext(),"case 0",Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "1": {
@@ -212,6 +216,7 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
+                        Toast.makeText(getContext(),"case 1",Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "2": {
@@ -221,6 +226,7 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
+                        Toast.makeText(getContext(),"case 2",Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "3": {
@@ -230,6 +236,7 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
+                        Toast.makeText(getContext(),"case 3",Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "4": {
@@ -239,11 +246,12 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
+                        Toast.makeText(getContext(),"case 4",Toast.LENGTH_LONG).show();
                         break;
                     }
 
                 }
-
+                mTask.setStatus("true");
                 fireBase.createTask(mTask);
                 }
         });

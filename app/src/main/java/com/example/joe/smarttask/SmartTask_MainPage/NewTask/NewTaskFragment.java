@@ -62,7 +62,7 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
     EditText mName;
     EditText mOwner;
     EditText mPoints;
-    EditText mPriority;
+    Spinner mPriority;
     Spinner mResponsible;
     EditText mStatus;
     EditText mId;
@@ -115,7 +115,7 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
 //        mFrequencySpinner.setText(taskObject.getFrequency());
         mName.setText(taskObject.getName());
         mPoints.setText(taskObject.getPoints());
-        mPriority.setText(taskObject.getPriority());
+//        mPriority.setOnItemSelectedListener(taskObject.getPriority());
 //        mResponsible.setText(taskObject.getResponsible());
 
         cal = new GregorianCalendar();
@@ -135,7 +135,13 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
         mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mName = (EditText) v.findViewById(R.id.newtask_name);
         mPoints = (EditText) v.findViewById(R.id.newtask_points);
-        mPriority = (EditText) v.findViewById(R.id.newtask_priority);
+
+        mPriority = (Spinner) v.findViewById(R.id.newtask_priority);
+        mPriority.setPrompt(getString(R.string.newtask_priority));
+        String [] taskpriority={"1","2","3"};
+        ArrayAdapter adapterPriority = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,taskpriority);
+        mPriority.setAdapter(adapterPriority);
+
         mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
 
 //      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
@@ -253,11 +259,11 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
             t.setName(mName.getText().toString());
         }
         t.setOwner("Owner is admin");
-        if (mPriority.getText().toString().equals("")) {
+        if (mPriority.getSelectedItem().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_priority, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            t.setPriority(mPriority.getText().toString());
+            t.setPriority(mPriority.getSelectedItem().toString());
         }
         if (mPoints.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_points, Toast.LENGTH_SHORT).show();
