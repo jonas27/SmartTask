@@ -124,7 +124,6 @@ public class IntroActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
-        loadedList = false;
         pullProfiles();
 
 

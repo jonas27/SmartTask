@@ -3,6 +3,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.Profile;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
@@ -30,6 +31,17 @@ public class ProfileActivity extends SingleFragmentActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile());
+    }
+
+    //    Set Toolbar back button action equal to system back button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            finish();
+            return true;
+        }
+        return false;
     }
 
 
