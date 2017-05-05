@@ -245,9 +245,7 @@ public class TaskFragment extends Fragment {
                 }
 
                 fireBase.createTask(mTask);
-                ProfileObject p = new ProfileObject("Steven", "100", "1234", "1", "", "100");
-                fireBase.createProfile(p);
-            }
+                }
         });
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
 

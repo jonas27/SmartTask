@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
@@ -22,14 +23,12 @@ public class CreateProfileFragment extends Fragment {
 
 
     private static final String TAG = "CreateProfile";
-    private static final String[] PRIVILIGIES = new String[]{
-            "admin", "user", "child"
-    };
     private Button CreateProfileDoneButton;
     private Button CreateProfileAddButton;
     private Button CreateProfileUploadButton;
     private Button CreateProfileSavePictureButton;
     private Button CreateProfileCameraButton;
+    private Spinner Privilgies;
     private EditText ProfileName, PinCode;
     ProfileObject t;
     private static boolean sTaskChecked;
@@ -41,6 +40,7 @@ public class CreateProfileFragment extends Fragment {
         fireBase = FireBase.fireBase(getContext());
         t = new ProfileObject();
         sTaskChecked = true;
+
     }
 
     @Override
@@ -49,8 +49,12 @@ public class CreateProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile_create, container, false);
 
         ProfileName = (EditText) v.findViewById(R.id.ProfileName);
-
         PinCode = (EditText) v.findViewById(R.id.Score);
+        Privilgies = (Spinner) v.findViewById(R.id.Privilgies);
+        String [] userpriv={"admin", "user","kid"};
+        ArrayAdapter adapterpriv = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,userpriv);
+        Privilgies.setAdapter(adapterpriv);
+
 
         CreateProfileAddButton = (Button) v.findViewById(R.id.CreateProfileAddButton);
         CreateProfileAddButton.setOnClickListener(new View.OnClickListener() {
@@ -64,11 +68,7 @@ public class CreateProfileFragment extends Fragment {
             }
         });
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-//                android.R.layout.simple_dropdown_item_1line, PRIVILIGIES);
-//        AutoCompleteTextView textView = (AutoCompleteTextView)
-//                v.findViewById(R.id.Privilgies);
-//        textView.setAdapter(adapter);
+
         return v;
     }
 
@@ -85,7 +85,10 @@ public class CreateProfileFragment extends Fragment {
         } else {
             t.setPpincode(PinCode.getText().toString());
         }
+        t.setPscore("0");
+        t.setPprivileges(Privilgies.getSelectedItem().toString());
         t.setPid("");
+        t.setPtotalscore("0");
 
 
     }

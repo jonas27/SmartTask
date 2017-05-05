@@ -63,16 +63,13 @@
             android:inputType="text|numberPassword"
             android:textSize="20sp" />
 
-        <AutoCompleteTextView
+        <Spinner
             android:id="@+id/Privilgies"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Score"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:visibility="invisible"
+            android:layout_alignStart="@+id/Score"
+            android:layout_below="@+id/Score"
+            android:layout_marginTop="17dp"
             android:ems="25"
             android:hint="@string/smarttask_create_profile_privilgies"
             android:inputType="text|numberPassword"

@@ -61,7 +61,11 @@ public class ProfileObject implements Serializable {
     public String getPscore() {return pscore; }
     public void setPscore(String score) {this.pscore = score;}
     public String getPprivileges() {return pprivileges;}
-    public void setPrivileges(String privileges) {this.pprivileges = pprivileges;}
+
+    public void setPprivileges(String pprivileges) {
+        this.pprivileges = pprivileges;
+    }
+
     public String getPname() {
         return pname;
     }
