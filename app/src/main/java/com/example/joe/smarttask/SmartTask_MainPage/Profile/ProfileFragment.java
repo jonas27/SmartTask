@@ -95,13 +95,13 @@ public class ProfileFragment extends Fragment {
         mViewProfileName.setText(mProfile.getPname());
 
         mViewProfileScore = (TextView) v.findViewById(R.id.view_profile_score);
-        mViewProfileScore.setText(mProfile.getPscore());
+        mViewProfileScore.setText(mProfile.getPscore() + getString(R.string.view_profile_addtext_points));
 
         mViewProfilePrivileges = (TextView) v.findViewById(R.id.view_profile_privileges);
-        mViewProfilePrivileges.setText(mProfile.getPprivileges());
+        mViewProfilePrivileges.setText(mProfile.getPprivileges() + getString(R.string.view_profile_addtext_levek));
 
         mViewProfileTotalTask = (TextView) v.findViewById(R.id.view_profile_total_task);
-        mViewProfileTotalTask.setText(mProfile.getPtotalscore());
+        mViewProfileTotalTask.setText(mProfile.getPtotalscore() + getString(R.string.view_profile_addtext_completed_task));
 
        getActivity().setTitle(mProfile.getPname());
 

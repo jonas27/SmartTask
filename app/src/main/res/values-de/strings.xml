@@ -111,4 +111,7 @@
     <string name="smarttask_create_profile_spinner_admin">Admin</string>
     <string name="smarttask_create_profile_spinner_kid">Kind</string>
     <string name="smarttask_create_profile_spinner_user">Benutzer</string>
+    <string name="view_profile_addtext_completed_task">" Abgeschlossene Aufgaben"</string>
+    <string name="view_profile_addtext_levek">" level"</string>
+    <string name="view_profile_addtext_points">" punkte"</string>
 </resources>
