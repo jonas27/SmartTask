@@ -1,13 +1,8 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Profile;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
@@ -22,11 +17,18 @@ import java.util.List;
 public class ProfileActivity extends SingleFragmentActivity {
     public static final String PROFILE_ID = "com.example.joe.smarttask.profile_id";
 
+    private Toolbar toolbar;
     private ViewPager mViewPager;
     private List<ProfileObject> mProfileList;
 
     @Override
     protected Fragment createFragment() {
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile());
     }
 

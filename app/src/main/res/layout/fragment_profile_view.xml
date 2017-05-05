@@ -23,17 +23,6 @@
         android:layout_alignStart="@+id/imageView3" />
 
 
-    <TextView
-        android:id="@+id/bar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#1565C0"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:text="@string/smarttask_create_profile_Headline"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"

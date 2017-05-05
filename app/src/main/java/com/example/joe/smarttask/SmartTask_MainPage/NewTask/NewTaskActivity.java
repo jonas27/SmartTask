@@ -19,7 +19,7 @@ public class NewTaskActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
 
         //        initialise toolbar
-        toolbar = (Toolbar) findViewById(R.id.fragment_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

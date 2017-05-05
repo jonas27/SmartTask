@@ -53,7 +53,6 @@ public class ProfileFragment extends Fragment {
 
         Log.d(TAG,"so far so good");
 
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
 //        mProfileId = (String) getArguments().getSerializable(PROFILE_ID);
   //      mListProfile = mListProfile.list(getContext());
@@ -78,6 +77,10 @@ public class ProfileFragment extends Fragment {
 
         mViewProfileTotalTask = (TextView) v.findViewById(R.id.view_profile_total_task);
         mViewProfileTotalTask.setText(mProfile.getPtotalscore());
+
+//       toolbar = (Toolbar)
+//               getActivity().getActionBar().setTitle(mProfile.getPname());
+//       toolbar.setTitle(mProfile.getPname());
 
         return v;
     }
