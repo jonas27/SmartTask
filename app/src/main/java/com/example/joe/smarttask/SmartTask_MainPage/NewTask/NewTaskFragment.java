@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
@@ -179,6 +180,7 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
                 createNewTask();
                 if (sTaskChecked) {
                     fireBase.createTask(t);
+                    IntroActivity.taskAdded=true;
                     getActivity().finish();
                 }
             }

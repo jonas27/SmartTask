@@ -57,9 +57,10 @@ public class ListProfile {
     public static void setDataSnapshot(DataSnapshot mProfileSnapshot) {
         sPlist = new ArrayList<>();
         sProfileSnapshot = mProfileSnapshot;
-        if (sPlist.isEmpty()) {
-            createList();
-        }
+//        if (sPlist.isEmpty()) {
+//            createList();
+//        }
+        createList();
     }
 
     /**

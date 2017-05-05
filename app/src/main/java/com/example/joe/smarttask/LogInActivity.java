@@ -263,7 +263,7 @@ public class LogInActivity extends AppCompatActivity {
 
     //opens main app and disconnects
     private void openApp() {
-        intent = new Intent(this, SMMainActivity.class);
+        intent = new Intent(this, IntroActivity.class);
         startActivity(intent);
     }
 

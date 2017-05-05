@@ -74,9 +74,11 @@ public class SMMainActivity extends AppCompatActivity {
     private Menu mMenuClose;
     private static Intent intent;
 
+
     public static Context getAppContext() {
         return SMMainActivity.context;
     }
+
 
 
     @Override
@@ -161,9 +163,9 @@ contextMain=this;
     public static void firebaseLoaded(){
 //        Log.d(TAG,"CURRENT PROFILE "+SharedPrefs.getCurrentProfile());
 
-        if(SharedPrefs.getCurrentProfile()==""){
-            showProfiles(true);
-        }
+//        if(SharedPrefs.getCurrentProfile()==""){
+//            showProfiles(true);
+//        }
     }
 
     //show profile selector dialog, with or without close button
