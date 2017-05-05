@@ -158,7 +158,7 @@ public class SMMainActivity extends AppCompatActivity {
     }
 
     public static void firebaseLoaded(){
-        Log.d(TAG,"CURRENT PROFILE "+SharedPrefs.getCurrentProfile());
+//        Log.d(TAG,"CURRENT PROFILE "+SharedPrefs.getCurrentProfile());
 
         if(SharedPrefs.getCurrentProfile()==""){
             showProfiles(true);

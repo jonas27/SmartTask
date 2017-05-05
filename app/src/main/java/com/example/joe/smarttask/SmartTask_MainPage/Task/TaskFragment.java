@@ -133,24 +133,28 @@ public class TaskFragment extends Fragment {
         mTaskPriority.setText(mTask.getPriority());
 
         mTaskFrequency = (TextView) v.findViewById(R.id.task_frequency);
-        switch (mTask.getFrequency()){
-            case "0":{
-                mTaskFrequency.setText(R.string.newtask_spinner_once);
-            }
-            case "1":{
-                mTaskFrequency.setText(R.string.newtask_spinner_daily);
-            }
-            case "2":{
-                mTaskFrequency.setText(R.string.newtask_spinner_weekly);
-            }
-            case "3":{
-                mTaskFrequency.setText(R.string.newtask_spinner_monthly);
-            }
-            case "4":{
+            switch (mTask.getFrequency()) {
+                case "0": {
+                    mTaskFrequency.setText("Once");
+                    break;
+                }
+                case "1": {
+                    mTaskFrequency.setText(R.string.newtask_spinner_daily);
+                    break;
+                }
+                case "2": {
+                    mTaskFrequency.setText(R.string.newtask_spinner_weekly);
+                    break;
+                }
+                case "3": {
+                    mTaskFrequency.setText(R.string.newtask_spinner_monthly);
+                    break;
+                }
+                case "4": {
                 mTaskFrequency.setText(R.string.newtask_spinner_yearly);
+                    break;
+                }
             }
-        }
-        mTaskFrequency.setText(mTask.getFrequency());
 
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
@@ -187,11 +191,11 @@ public class TaskFragment extends Fragment {
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FireBase f = FireBase.fireBase(getContext());
+                FireBase fireBase = FireBase.fireBase(getContext());
                 switch (mTaskFrequency.getText().toString()){
                     case "0":{
                         mTask.setStatus("true");
-                        f.createTask(mTask);
+                        fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
@@ -200,7 +204,7 @@ public class TaskFragment extends Fragment {
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
                         cal.add(Calendar.DAY_OF_YEAR,1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
-                        f.createTask(mTask);
+                        fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
@@ -209,7 +213,7 @@ public class TaskFragment extends Fragment {
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
                         cal.add(Calendar.WEEK_OF_YEAR,1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
-                        f.createTask(mTask);
+                        fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
@@ -218,7 +222,7 @@ public class TaskFragment extends Fragment {
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
                         cal.add(Calendar.MONTH,1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
-                        f.createTask(mTask);
+                        fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }case "4":{
@@ -226,16 +230,16 @@ public class TaskFragment extends Fragment {
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
                         cal.add(Calendar.YEAR,1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
-                        f.createTask(mTask);
+                        fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
 
                 }
 
-                f.createTask(mTask);
+                fireBase.createTask(mTask);
                 ProfileObject p = new ProfileObject("Steven", "100", "1234", "1", "", "100");
-                f.createProfile(p);
+                fireBase.createProfile(p);
             }
         });
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
