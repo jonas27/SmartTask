@@ -130,12 +130,13 @@ public class TaskFragment extends Fragment {
         mTaskCategory.setText(mTask.getCategories());
 
         mTaskPriority = (TextView) v.findViewById(R.id.task_priority);
-        switch (mTask.getPriority()){
+        switch (mTask.getPriority()) {
 //            case "1": mTaskPriority.setText(R.string.);
         }
         mTaskPriority.setText(mTask.getPriority());
 
         mTaskFrequency = (TextView) v.findViewById(R.id.task_frequency);
+        if (mTask.getFrequency() != null) {
             switch (mTask.getFrequency()) {
                 case "0": {
                     mTaskFrequency.setText("Once");
@@ -154,10 +155,12 @@ public class TaskFragment extends Fragment {
                     break;
                 }
                 case "4": {
-                mTaskFrequency.setText(R.string.newtask_spinner_yearly);
+                    mTaskFrequency.setText(R.string.newtask_spinner_yearly);
                     break;
                 }
             }
+        }
+
 
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
@@ -170,20 +173,20 @@ public class TaskFragment extends Fragment {
 
 
         mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
-        mTaskEdit.setOnClickListener(new View.OnClickListener(){
+        mTaskEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewTaskFragment.taskObject=mTask;
+                NewTaskFragment.taskObject = mTask;
                 Intent intent = new Intent(getContext(), NewTaskActivity.class);
                 startActivity(intent);
             }
         });
 
         mTaskDelete = (Button) v.findViewById(R.id.task_btn_delete);
-        mTaskDelete.setOnClickListener(new View.OnClickListener(){
+        mTaskDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FireBase fireBase =FireBase.fireBase(getContext());
+                FireBase fireBase = FireBase.fireBase(getContext());
                 fireBase.deleteTask(mTask.getId());
                 getActivity().finish();
             }
@@ -195,43 +198,44 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FireBase fireBase = FireBase.fireBase(getContext());
-                switch (mTaskFrequency.getText().toString()){
-                    case "0":{
+                switch (mTaskFrequency.getText().toString()) {
+                    case "0": {
                         mTask.setStatus("true");
                         fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
-                    case "1":{
-                        GregorianCalendar cal=new GregorianCalendar();
+                    case "1": {
+                        GregorianCalendar cal = new GregorianCalendar();
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
-                        cal.add(Calendar.DAY_OF_YEAR,1);
+                        cal.add(Calendar.DAY_OF_YEAR, 1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
-                    case "2":{
-                        GregorianCalendar cal=new GregorianCalendar();
+                    case "2": {
+                        GregorianCalendar cal = new GregorianCalendar();
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
-                        cal.add(Calendar.WEEK_OF_YEAR,1);
+                        cal.add(Calendar.WEEK_OF_YEAR, 1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
                     }
-                    case "3":{
-                        GregorianCalendar cal=new GregorianCalendar();
+                    case "3": {
+                        GregorianCalendar cal = new GregorianCalendar();
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
-                        cal.add(Calendar.MONTH,1);
+                        cal.add(Calendar.MONTH, 1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
-                    }case "4":{
-                        GregorianCalendar cal=new GregorianCalendar();
+                    }
+                    case "4": {
+                        GregorianCalendar cal = new GregorianCalendar();
                         cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
-                        cal.add(Calendar.YEAR,1);
+                        cal.add(Calendar.YEAR, 1);
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
@@ -331,24 +335,29 @@ public class TaskFragment extends Fragment {
             mTaskImageView.setVisibility(View.INVISIBLE);
             mTaskSolved.setVisibility(View.INVISIBLE);
             mTaskUnSolved.setVisibility(View.INVISIBLE);
-            ImageView iconResponsible= (ImageView) v.findViewById(R.id.task_responsible_image);
+            ImageView iconResponsible = (ImageView) v.findViewById(R.id.task_responsible_image);
             iconResponsible.setVisibility(View.INVISIBLE);
-            ImageView iconDate= (ImageView) v.findViewById(R.id.task_date_image);
+            ImageView iconDate = (ImageView) v.findViewById(R.id.task_date_image);
             iconDate.setVisibility(View.INVISIBLE);
-            ImageView iconDescription= (ImageView) v.findViewById(R.id.task_description_image);
+            ImageView iconDescription = (ImageView) v.findViewById(R.id.task_description_image);
             iconDescription.setVisibility(View.INVISIBLE);
-            ImageView iconCategory= (ImageView) v.findViewById(R.id.task_category_image);
+            ImageView iconCategory = (ImageView) v.findViewById(R.id.task_category_image);
             iconCategory.setVisibility(View.INVISIBLE);
-            ImageView iconPoints= (ImageView) v.findViewById(R.id.task_points_image);
+            ImageView iconPoints = (ImageView) v.findViewById(R.id.task_points_image);
             iconPoints.setVisibility(View.INVISIBLE);
         }
 //        else disable views for add
-        else{
+        else {
 
 
         }
-        if(mTask.getStatus().toString().equals("true")){mTaskSolved.setVisibility(View.VISIBLE);mTaskUnSolved.setVisibility(View.INVISIBLE);
-        }else{mTaskSolved.setVisibility(View.INVISIBLE);mTaskUnSolved.setVisibility(View.VISIBLE);}
+        if (mTask.getStatus().toString().equals("true")) {
+            mTaskSolved.setVisibility(View.VISIBLE);
+            mTaskUnSolved.setVisibility(View.INVISIBLE);
+        } else {
+            mTaskSolved.setVisibility(View.INVISIBLE);
+            mTaskUnSolved.setVisibility(View.VISIBLE);
+        }
 
 
         return v;
