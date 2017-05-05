@@ -321,7 +321,7 @@ public class LogInActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, "Account already exists!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LogInActivity.this, "Account created. Please verify your email.", Toast.LENGTH_SHORT).show();
                             sendVerificationEmail();
@@ -341,12 +341,10 @@ public class LogInActivity extends AppCompatActivity {
                             // email sent
                             // after email is sent just logout the user and finish this activity
                             FirebaseAuth.getInstance().signOut();
-                            finish();
                         } else {
                             // email not sent, so display message and restart the activity or do whatever you wish to do
                             //restart this activity
                             overridePendingTransition(0, 0);
-                            finish();
 //                            overridePendingTransition(0, 0);
 //                            startActivity(getIntent());
                         }
