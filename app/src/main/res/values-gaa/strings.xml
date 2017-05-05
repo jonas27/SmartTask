@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="NewTaskCategory">⌂</string>
+    <string name="NewTaskCreateTaskButton">💾</string>
+    <string name="NewTaskDate">⌗</string>
+    <string name="NewTaskDescription"></string>
+    <string name="NewTaskFrequency"></string>
+    <string name="NewTaskName"></string>
+    <string name="NewTaskPoints"></string>
+    <string name="NewTaskPriority"></string>
+    <string name="NewTaskResponsible"></string>
+    <string name="NewTaskTime">⏲</string>
+    <string name="NewTask_Headline"></string>
+    <string name="ViewTaskAddPictureButton">📷</string>
+    <string name="ViewTaskDoneButton">🌟</string>
+    <string name="ViewTaskEditButton"></string>
+    <string name="ViewTaskHeadline"></string>
+    <string name="ViewTask_delete_btn"></string>
+    <string name="close">🗷</string>
+    <string name="date_picker_title">⌗</string>
+    <string name="intro_dont_show_again"></string>
+    <string name="intro_got_it"></string>
+    <string name="intro_next"></string>
+    <string name="intro_skip"></string>
+    <string name="list_high_p">😆</string>
+    <string name="list_low_p">😄</string>
+    <string name="list_middle_p">😃</string>
+    <string name="main_log_in"></string>
+    <string name="main_log_in_email"></string>
+    <string name="main_log_in_pw"></string>
+    <string name="main_screen_calendar">📆</string>
+    <string name="main_screen_tasks">🗹</string>
+    <string name="main_sign_up"></string>
+    <string name="menu_logout">🗷</string>
+    <string name="menu_profile">😇</string>
+    <string name="menu_settings">☸</string>
+</resources>

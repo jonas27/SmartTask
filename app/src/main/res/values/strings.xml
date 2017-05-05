@@ -48,6 +48,8 @@
     <string name="smarttask_create_profile_picture">Click to add picture</string>
     <string name="smarttask_create_profile_done">Done</string>
     <string name="smarttask_create_profile_Add">Add User</string>
+    <string name="smarttask_create_profile_name_toast">Please enter your profile name</string>
+    <string name="smarttask_create_profile_pincode_toast">Please enter Pin-code (4-digit)</string>
 
     <!-- SmartTask Create Tasks -->
     <string name="NewTask_Headline">Define the task</string>
@@ -145,7 +147,7 @@
     <!-- SubSettings Pro fragment -->
     <string name="subsettings_prouser_title">Pro User</string>
     <string name="subsettings_prouser_description">As pro user you don\'t see adds!</string>
-    <string name="add_profile">add+</string>
+    <string name="add_profile">Add profile</string>
 
 
 

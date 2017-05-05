@@ -12,15 +12,12 @@
     <string name="NewTaskResponsible">Tildel opgaven til</string>
     <string name="NewTaskTime">Vælg Tid</string>
     <string name="NewTask_Headline">Definere opgaven</string>
-    <string name="ViewTaskAddPictureButton">Upload billede</string>
-    <string name="ViewTaskConfirmButton">Godkend Opgaven</string>
     <string name="ViewTaskDoneButton">Opgaven færdig</string>
     <string name="ViewTaskEditButton">Ret</string>
     <string name="ViewTaskHeadline">Opgaver</string>
     <string name="ViewTask_delete_btn">Slet</string>
     <string name="close">Luk</string>
     <string name="date_picker_title">Dato for opgaven</string>
-    <string name="hello_blank_fragment">Hej</string>
     <string name="intro_dont_show_again">Vis vejledning ved næste start?</string>
     <string name="intro_got_it">Forstået</string>
     <string name="intro_next">Næste</string>
@@ -100,4 +97,15 @@
     <string name="time_picker_title">Tid for opgaven</string>
     <string name="main_screen_calendar">Kalender</string>
     <string name="main_screen_tasks">Opgaver</string>
+    <string name="ViewTaskConfirmButton">Godkend Opgaven</string>
+    <string name="ViewTaskAddPictureButton">Upload billede</string>
+    <string name="newtask_spinner_daily">Daglig</string>
+    <string name="newtask_spinner_monthly">Månedlig</string>
+    <string name="newtask_spinner_once">En gang</string>
+    <string name="newtask_spinner_weekly">Ugentlig</string>
+    <string name="newtask_spinner_yearly">årlig</string>
+    <string name="add_profile">Tilføj profil</string>
+    <string name="menu_change_profile">Skift profil</string>
+    <string name="smarttask_create_profile_name_toast">Indtast venligst dit profilnavn</string>
+    <string name="smarttask_create_profile_pincode_toast">Indtast venligst PIN-kode (4 cifre)</string>
 </resources>

@@ -6,7 +6,7 @@
     <string name="menu_settings">Einstellungen</string>
     <string name="open">öffnen</string>
     <string name="settings_about_title">Über uns</string>
-    <string name="settings_about_version"></string>
+    <string name="settings_about_version">"Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  "</string>
     <string name="settings_feedback_on">Danke für deine Hilfe!</string>
     <string name="settings_language_title">Sprache</string>
     <string name="settings_list_sort_date">Ordne nach Datum</string>
@@ -100,4 +100,12 @@
     <string name="main_screen_calendar">Kalender</string>
     <string name="main_screen_tasks">Aufgabe</string>
     <string name="menu_change_profile">Profil ändern</string>
+    <string name="newtask_spinner_daily">Täglich</string>
+    <string name="newtask_spinner_monthly">Monatlich</string>
+    <string name="newtask_spinner_once">Einmalich</string>
+    <string name="newtask_spinner_weekly">Wöchentlich</string>
+    <string name="newtask_spinner_yearly">Jährlich</string>
+    <string name="add_profile">Profil hinzufügen</string>
+    <string name="smarttask_create_profile_name_toast">Bitte geben Sie Ihren Profilnamen ein</string>
+    <string name="smarttask_create_profile_pincode_toast">Bitte Pin-Code eingeben (4-stellig)</string>
 </resources>

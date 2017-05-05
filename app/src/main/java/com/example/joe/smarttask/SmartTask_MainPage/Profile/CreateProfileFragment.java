@@ -9,8 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 
 /**
  * Created by joe on 04/05/2017.
@@ -29,8 +31,17 @@ public class CreateProfileFragment extends Fragment {
     private Button CreateProfileSavePictureButton;
     private Button CreateProfileCameraButton;
     private EditText ProfileName, PinCode;
+    ProfileObject t;
+    private static boolean sTaskChecked;
+    FireBase fireBase;
 
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        fireBase = FireBase.fireBase(getContext());
+        t = new ProfileObject();
+        sTaskChecked = true;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +49,20 @@ public class CreateProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile_create, container, false);
 
         ProfileName = (EditText) v.findViewById(R.id.ProfileName);
+
         PinCode = (EditText) v.findViewById(R.id.Score);
+
+        CreateProfileAddButton = (Button) v.findViewById(R.id.CreateProfileAddButton);
+        CreateProfileAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewProfile();
+                if (sTaskChecked) {
+                    fireBase.createProfile(t);
+                    getActivity().finish();
+                }
+            }
+        });
 
 //        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
 //                android.R.layout.simple_dropdown_item_1line, PRIVILIGIES);
@@ -48,9 +72,21 @@ public class CreateProfileFragment extends Fragment {
         return v;
     }
 
+    private void createNewProfile() {
+        if (ProfileName.getText().toString().equals("")) {
+            Toast.makeText(getContext(), R.string.smarttask_create_profile_name_toast, Toast.LENGTH_SHORT).show();
+            sTaskChecked = false;
+        } else {
+            t.setPname(ProfileName.getText().toString());
+        }
+        if (PinCode.getText().toString().equals("")) {
+            Toast.makeText(getContext(), R.string.smarttask_create_profile_pincode_toast, Toast.LENGTH_SHORT).show();
+            sTaskChecked = false;
+        } else {
+            t.setPpincode(PinCode.getText().toString());
+        }
+        t.setPid("");
 
 
-
-
-
+    }
 }
