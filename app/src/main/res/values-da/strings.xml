@@ -108,4 +108,7 @@
     <string name="menu_change_profile">Skift profil</string>
     <string name="smarttask_create_profile_name_toast">Indtast venligst dit profilnavn</string>
     <string name="smarttask_create_profile_pincode_toast">Indtast venligst PIN-kode (4 cifre)</string>
+    <string name="smarttask_create_profile_spinner_admin">Admin</string>
+    <string name="smarttask_create_profile_spinner_user">Bruger</string>
+    <string name="smarttask_create_profile_spinner_kid">Barn</string>
 </resources>

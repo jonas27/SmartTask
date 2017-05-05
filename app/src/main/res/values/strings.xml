@@ -50,6 +50,9 @@
     <string name="smarttask_create_profile_Add">Add User</string>
     <string name="smarttask_create_profile_name_toast">Please enter your profile name</string>
     <string name="smarttask_create_profile_pincode_toast">Please enter Pin-code (4-digit)</string>
+    <string name="smarttask_create_profile_spinner_admin">Admin</string>
+    <string name="smarttask_create_profile_spinner_user">User</string>
+    <string name="smarttask_create_profile_spinner_kid">Kid</string>
 
     <!-- SmartTask Create Tasks -->
     <string name="NewTask_Headline">Define the task</string>

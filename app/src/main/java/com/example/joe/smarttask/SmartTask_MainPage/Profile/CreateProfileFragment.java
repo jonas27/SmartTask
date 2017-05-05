@@ -52,7 +52,7 @@ public class CreateProfileFragment extends Fragment {
         ProfileName = (EditText) v.findViewById(R.id.ProfileName);
         PinCode = (EditText) v.findViewById(R.id.Score);
         Privilgies = (Spinner) v.findViewById(R.id.Privilgies);
-        String [] userpriv={"admin", "user","kid"};
+        String [] userpriv={getString(R.string.smarttask_create_profile_spinner_admin), getString(R.string.smarttask_create_profile_spinner_user),getString(R.string.smarttask_create_profile_spinner_kid)};
         ArrayAdapter adapterpriv = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,userpriv);
         Privilgies.setAdapter(adapterpriv);
 

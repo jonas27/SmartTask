@@ -108,4 +108,7 @@
     <string name="add_profile">Profil hinzufügen</string>
     <string name="smarttask_create_profile_name_toast">Bitte geben Sie Ihren Profilnamen ein</string>
     <string name="smarttask_create_profile_pincode_toast">Bitte Pin-Code eingeben (4-stellig)</string>
+    <string name="smarttask_create_profile_spinner_admin">Admin</string>
+    <string name="smarttask_create_profile_spinner_kid">Kind</string>
+    <string name="smarttask_create_profile_spinner_user">Benutzer</string>
 </resources>

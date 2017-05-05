@@ -13,12 +13,13 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="21dp"
         android:adjustViewBounds="false"
         android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:scaleType="fitCenter"
         app:srcCompat="@mipmap/smlogo"
-        android:layout_marginBottom="14dp"
+        android:layout_alignTop="@+id/scrollView2"
+        android:layout_alignParentStart="true"
         android:layout_above="@+id/relativeLayout" />
 
 
@@ -33,27 +34,29 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/imageView">
+        android:layout_height="200dp"
+        android:layout_marginBottom="74dp"
+        android:layout_above="@+id/view_profile_done"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/view_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_marginLeft="15dp"
+            android:layout_toEndOf="@+id/imageView3"
             android:ems="25"
             android:text="view_profile_name"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="13dp"
             app:srcCompat="@drawable/ic_person_black_24dp" />
 
         <TextView
@@ -62,17 +65,18 @@
             android:layout_height="wrap_content"
             android:ems="25"
             android:text="view_profile_score"
-            android:textSize="20sp"
-            android:layout_below="@+id/imageView3"
+            android:textSize="25dp"
+            android:layout_alignTop="@+id/imageView8"
             android:layout_alignStart="@+id/view_profile_name" />
 
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="30dp"
+            android:layout_marginTop="10dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_stars_black_24dp"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/imageView3"
-            android:layout_alignParentStart="true" />
+            app:srcCompat="@drawable/ic_stars_black_24dp" />
 
         <TextView
             android:id="@+id/view_profile_privileges"
@@ -80,36 +84,38 @@
             android:layout_height="wrap_content"
             android:ems="25"
             android:text="view_profile_privileges"
-            android:textSize="20sp"
-            android:layout_below="@+id/imageView8"
+            android:textSize="25dp"
+            android:layout_alignTop="@+id/imageView10"
             android:layout_alignStart="@+id/view_profile_score" />
 
         <ImageView
             android:id="@+id/imageView10"
             android:layout_width="30dp"
+            android:layout_marginTop="10dp"
             android:layout_height="30dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/view_profile_privileges"
-            app:srcCompat="@drawable/ic_school_black_24dp" />
+            app:srcCompat="@drawable/ic_school_black_24dp"
+            android:layout_below="@+id/imageView8"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/view_profile_total_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@+id/view_profile_privileges"
+            android:layout_below="@+id/imageView10"
             android:ems="25"
             android:text="view_profile_total_task"
-            android:textSize="20sp"
-            android:layout_below="@+id/imageView10"
-            android:layout_alignStart="@+id/view_profile_privileges" />
+            android:textSize="25dp" />
 
         <ImageView
             android:id="@+id/imageView11"
             android:layout_width="30dp"
             android:layout_height="30dp"
-
-            app:srcCompat="@drawable/ic_playlist_add_check_black_24dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/imageView10"
-            android:layout_alignParentStart="true" />
+            app:srcCompat="@drawable/ic_check_black_24dp" />
 
 
     </RelativeLayout>
