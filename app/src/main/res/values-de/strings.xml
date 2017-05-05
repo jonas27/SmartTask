@@ -99,4 +99,5 @@
     <string name="main_sign_up">Anmelden</string>
     <string name="main_screen_calendar">Kalender</string>
     <string name="main_screen_tasks">Aufgabe</string>
+    <string name="menu_change_profile">Profil ändern</string>
 </resources>

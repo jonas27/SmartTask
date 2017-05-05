@@ -9,25 +9,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.DatePickerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.TimePickerFragment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * Created by joe on 18/04/2017.
+ * 100% created by us
+ * Class has 2 functions: Create a Task and edit a task
+ * Both functions create a new TaskObject and initialize the layout.
+ * However, a new task sets all fields to default, whereas editing a tasks takes the values from the old TaskObject
  */
 
-public class NewTaskFragment extends Fragment {
+public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "CL_NTF";
     private static final String DIALOG_DATE = "DialogDate";
@@ -37,6 +48,7 @@ public class NewTaskFragment extends Fragment {
     private static boolean sTaskChecked;
 
     public static TaskObject taskObject;
+    public static List<ProfileObject> profileObjectList;
 
     Date mDateNumber;
     //    [Start: define Views]
@@ -45,12 +57,12 @@ public class NewTaskFragment extends Fragment {
     Button mTime;
     Button mDate;
     EditText mDescription;
-    EditText mFrequency;
+    Spinner mFrequencySpinner;
     EditText mName;
     EditText mOwner;
     EditText mPoints;
     EditText mPriority;
-    EditText mResponsible;
+    Spinner mResponsible;
     EditText mStatus;
     EditText mId;
     EditText mTask;
@@ -67,7 +79,7 @@ public class NewTaskFragment extends Fragment {
     private long datetime;
     private String description;
     private String frequency;
-    private String name;
+    private String mNameResponsible;
     private String owner;
     private String points;
     private String priority;
@@ -78,8 +90,9 @@ public class NewTaskFragment extends Fragment {
     private String task;
 
     private Calendar cal;
+
     public static NewTaskFragment newInstance(TaskObject taskObject) {
-        NewTaskFragment.taskObject=taskObject;
+        NewTaskFragment.taskObject = taskObject;
         NewTaskFragment fragment = new NewTaskFragment();
         return fragment;
     }
@@ -88,41 +101,53 @@ public class NewTaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        fireBase = FireBase.fireBase(getContext());
+        t = new TaskObject();
+        sTaskChecked = true;
     }
 
-    public void setParameters(){
+    //    This is for editing tasks.
+//    The old task is initialized as a new task with the values from the old task
+    public void setParameters() {
         mCategories.setText(taskObject.getCategories());
         mDescription.setText(taskObject.getDescription());
-        mFrequency.setText(taskObject.getFrequency());
+//        mFrequencySpinner.setText(taskObject.getFrequency());
         mName.setText(taskObject.getName());
         mPoints.setText(taskObject.getPoints());
         mPriority.setText(taskObject.getPriority());
-        mResponsible.setText(taskObject.getResponsible());
+//        mResponsible.setText(taskObject.getResponsible());
 
         cal = new GregorianCalendar();
         cal.setTimeInMillis(Long.parseLong(taskObject.getDatetime()));
         mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
-        mTime.setText(String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))) ;
+        mTime.setText(String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
     }
 
+    //    Connect the variables to their respective layouts and initializes spinners
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_task, container, false);
 
-        fireBase = FireBase.fireBase(getContext());
-        t = new TaskObject();
-        sTaskChecked = true;
-
         mCategories = (EditText) v.findViewById(R.id.newtask_category);
         mDescription = (EditText) v.findViewById(R.id.newtask_description);
-        mFrequency = (EditText) v.findViewById(R.id.newtask_frequency);
+        mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mName = (EditText) v.findViewById(R.id.newtask_name);
         mPoints = (EditText) v.findViewById(R.id.newtask_points);
         mPriority = (EditText) v.findViewById(R.id.newtask_priority);
-        mResponsible = (EditText) v.findViewById(R.id.newtask_responsible);
+        mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
 
+//      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
+        mFrequencySpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mFrequencySpinner.setAdapter(spinnerAdapter);
+
+//      Set click listener to Spinner for names, define its strings and connect it to the Adapter (Adapter provides access to the data items)
+        mResponsible.setOnItemSelectedListener(this);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getProfileNames());
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mResponsible.setAdapter(dataAdapter);
 
 
         mTime = (Button) v.findViewById(R.id.newtask_time);
@@ -137,8 +162,6 @@ public class NewTaskFragment extends Fragment {
         });
 
         mDate = (Button) v.findViewById(R.id.newtask_date);
-//        Log.d(TAG,"Date: "+ t.getDatetime());
-//        mDateNumber= new Date(Long.parseLong(t.getDatetime()));
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,9 +183,7 @@ public class NewTaskFragment extends Fragment {
                 }
             }
         });
-
-
-        if(taskObject!=null){
+        if (taskObject != null) {
             setParameters();
         }
 
@@ -203,7 +224,6 @@ public class NewTaskFragment extends Fragment {
             datetime = cal.getTimeInMillis();
             Log.d(TAG, Long.toString(datetime));
             t.setDatetime(Long.toString(datetime));
-
         }
         if (mDescription.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_description, Toast.LENGTH_SHORT).show();
@@ -211,12 +231,19 @@ public class NewTaskFragment extends Fragment {
         } else {
             t.setDescription(mDescription.getText().toString());
         }
-        if (mFrequency.getText().toString().equals("")) {
+        if (frequency == "") {
             Toast.makeText(getContext(), R.string.newtask_frequency, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            t.setFrequency(mFrequency.getText().toString());
+            t.setFrequency(frequency);
         }
+        if (mNameResponsible == "") {
+            Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
+            sTaskChecked = false;
+        } else {
+            t.setResponsible(mNameResponsible);
+        }
+
         if (mName.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_name, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
@@ -230,12 +257,6 @@ public class NewTaskFragment extends Fragment {
         } else {
             t.setPriority(mPriority.getText().toString());
         }
-        if (mResponsible.getText().toString().equals("")) {
-            Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
-            sTaskChecked = false;
-        } else {
-            t.setResponsible(mResponsible.getText().toString());
-        }
         if (mPoints.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_points, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
@@ -243,16 +264,77 @@ public class NewTaskFragment extends Fragment {
             t.setPoints(mPoints.getText().toString());
         }
         t.setStatus("false");
-        if(taskObject!=null){
+        if (taskObject != null) {
             t.setId(taskObject.getId());
-        }else{t.setId("");}
+        } else {
+            t.setId("");
+        }
         t.setTask("not used (legacy)");
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
-        taskObject=null;
+        taskObject = null;
     }
+
+
+    /**
+     * This defines the onclick behaviour of the spinner
+     */
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        Spinner spinnerParent = (Spinner) parent;
+        if (spinnerParent.getId() == R.id.newtask_frequency) {
+            switch (pos) {
+//            sets frequency
+                case 0: {
+                    frequency = "0";
+                    break;
+                }
+                case 1: {
+                    frequency = "1";
+                    break;
+                }
+                case 2: {
+                    frequency = "2";
+                    break;
+                }
+                case 3: {
+                    frequency = "3";
+                    break;
+                }
+                case 4: {
+                    frequency = "4";
+                    break;
+                }
+                case 5: {
+                    frequency = "5";
+                    break;
+                }
+            }
+        } else if (spinnerParent.getId() == R.id.newtask_responsible) {
+//            sets responsible
+            mNameResponsible = getName(pos);
+        }
+    }
+
+    public ArrayList<String> getProfileNames() {
+        profileObjectList = ListProfile.getProfileList();
+        ArrayList<String> list = new ArrayList<>();
+        Iterator<ProfileObject> itr = profileObjectList.iterator();
+        while (itr.hasNext()) {
+            list.add(itr.next().getPname());
+        }
+        return list;
+    }
+
+    public String getName(int position) {
+        return profileObjectList.get(position).getPname();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
 
 }

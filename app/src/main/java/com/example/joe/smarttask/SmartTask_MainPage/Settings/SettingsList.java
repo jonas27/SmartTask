@@ -78,7 +78,6 @@ public class SettingsList {
      */
     protected static List<SettingsObject> getList() {
         sContext = SMMainActivity.getAppContext();
-        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
         sList = new ArrayList<>();
         createList();
         return sList;

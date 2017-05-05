@@ -20,6 +20,7 @@ public class SharedPrefs {
     private static final String FEEDBACK = "Feedback";
     private static final String SHOW_PAST_ITEMS = "ShowPastItems";
     private static final String CURRENT_PROFILE = "CurrentProfile";
+    private static final String CURRENT_USER = "CurrentUser";
     public static SharedPreferences.Editor editor;
     private static SharedPrefs sharedPrefs;
     private static SharedPreferences sharedPreferences;
@@ -42,7 +43,7 @@ public class SharedPrefs {
     }
 
     public static int getPreferredOrder() {
-        return sharedPreferences.getInt(LIST_ORDER, 0);
+         return sharedPreferences.getInt(LIST_ORDER, 0);
     }
 
     public static void setPreferredOrder(int listOrder) {
@@ -56,6 +57,15 @@ public class SharedPrefs {
 
     public static void setCurrentProfile(String id) {
         editor.putString(CURRENT_PROFILE, id);
+        editor.commit();
+    }
+
+    public static String getCurrentUser() {
+        return sharedPreferences.getString(CURRENT_USER, "");
+    }
+
+    public static void setCurrentUser(String id) {
+        editor.putString(CURRENT_USER, id);
         editor.commit();
     }
 
@@ -106,21 +116,21 @@ public class SharedPrefs {
 
 
     //sets if Intro should show
-    public void setSharedPreferencesIntro(boolean skipTurorial) {
+    public static void setSharedPreferencesIntro(boolean skipTurorial) {
         editor.putBoolean(SHOW_WELCOME, skipTurorial);
         editor.commit();
     }
 
     //returns the boolean value of SHOW_WELCOME in file PREFS_NAME (if no value it returns true)
-    public boolean getSharedPrefencesIntro() {
+    public static boolean getSharedPrefencesIntro() {
         return sharedPreferences.getBoolean(SHOW_WELCOME, true);
     }
 
-    public int getFeedback() {
+    public static int getFeedback() {
         return sharedPreferences.getInt(FEEDBACK, 0);
     }
 
-    public void setFeedback(int i) {
+    public static void setFeedback(int i) {
         editor.putInt(FEEDBACK, i);
         editor.commit();
     }

@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -16,9 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,7 +70,7 @@ public class TaskFragment extends Fragment {
     private TextView mTaskCategory;
     private TextView mTaskPriority;
     private TextView mTaskPoints;
-    private TextView mTaskStatus;
+    private TextView mTaskFrequency;
     private Button mTaskDone;
     private Button mTaskPicture;
     private Button mTaskConfirm;
@@ -136,6 +132,26 @@ public class TaskFragment extends Fragment {
         mTaskPriority = (TextView) v.findViewById(R.id.task_priority);
         mTaskPriority.setText(mTask.getPriority());
 
+        mTaskFrequency = (TextView) v.findViewById(R.id.task_frequency);
+        switch (mTask.getFrequency()){
+            case "0":{
+                mTaskFrequency.setText(R.string.newtask_spinner_once);
+            }
+            case "1":{
+                mTaskFrequency.setText(R.string.newtask_spinner_daily);
+            }
+            case "2":{
+                mTaskFrequency.setText(R.string.newtask_spinner_weekly);
+            }
+            case "3":{
+                mTaskFrequency.setText(R.string.newtask_spinner_monthly);
+            }
+            case "4":{
+                mTaskFrequency.setText(R.string.newtask_spinner_yearly);
+            }
+        }
+        mTaskFrequency.setText(mTask.getFrequency());
+
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
         mTaskPoints.setText(mTask.getPoints());
 
@@ -171,8 +187,52 @@ public class TaskFragment extends Fragment {
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTask.setStatus("true");
                 FireBase f = FireBase.fireBase(getContext());
+                switch (mTaskFrequency.getText().toString()){
+                    case "0":{
+                        mTask.setStatus("true");
+                        f.createTask(mTask);
+                        getActivity().finish();
+                        break;
+                    }
+                    case "1":{
+                        GregorianCalendar cal=new GregorianCalendar();
+                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.add(Calendar.DAY_OF_YEAR,1);
+                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        f.createTask(mTask);
+                        getActivity().finish();
+                        break;
+                    }
+                    case "2":{
+                        GregorianCalendar cal=new GregorianCalendar();
+                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.add(Calendar.WEEK_OF_YEAR,1);
+                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        f.createTask(mTask);
+                        getActivity().finish();
+                        break;
+                    }
+                    case "3":{
+                        GregorianCalendar cal=new GregorianCalendar();
+                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.add(Calendar.MONTH,1);
+                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        f.createTask(mTask);
+                        getActivity().finish();
+                        break;
+                    }case "4":{
+                        GregorianCalendar cal=new GregorianCalendar();
+                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.add(Calendar.YEAR,1);
+                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        f.createTask(mTask);
+                        getActivity().finish();
+                        break;
+                    }
+
+                }
+
                 f.createTask(mTask);
                 ProfileObject p = new ProfileObject("Steven", "100", "1234", "1", "", "100");
                 f.createProfile(p);

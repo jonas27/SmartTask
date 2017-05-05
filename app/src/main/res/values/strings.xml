@@ -72,6 +72,12 @@
     <string name="newtask_points">Please specify how many points this task is worth.</string>
     <string name="newtask_priority">Please specify a priority.</string>
     <string name="newtask_responsible">Please specify the responsible persons.</string>
+    <!--Spinner-->
+    <string name="newtask_spinner_once">Once</string>
+    <string name="newtask_spinner_daily">Daily</string>
+    <string name="newtask_spinner_weekly">Weekly</string>
+    <string name="newtask_spinner_monthly">Monthly</string>
+    <string name="newtask_spinner_yearly">Yearly</string>
 
 
     <!-- SmartTask View Task -->
@@ -95,7 +101,7 @@
     <!-- Menu fragment -->
     <string name="menu_settings">Settings</string>
     <string name="menu_profile">Profile</string>
-    <string name="menu_change_profile">Change profile</string>
+    <string name="menu_change_profile"> change profile</string>
     <string name="menu_logout">Logout</string>
 
     <!-- List fragment -->
@@ -140,5 +146,7 @@
     <string name="subsettings_prouser_title">Pro User</string>
     <string name="subsettings_prouser_description">As pro user you don\'t see adds!</string>
     <string name="add_profile">add+</string>
+
+
 
 </resources>

@@ -87,6 +87,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sharedPrefs = SharedPrefs.getSharedPrefs(this);
 
 
         // add Views
@@ -160,7 +161,6 @@ public class LogInActivity extends AppCompatActivity {
                                             public void onClick(View v) {
                                                 if (CheckSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
                                                     createAccount(email.getText().toString(), password.getText().toString());
-                                                    sendVerificationEmail();
                                                 }
                                             }
                                         }
@@ -190,8 +190,10 @@ public class LogInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, " Button working");
                 signIn();
+
             }
         });
+
     }
 
     // Sign in via google

@@ -71,7 +71,7 @@ public class SMMainActivity extends AppCompatActivity {
     private Menu subMenu;
     private Menu mMenuSettings;
     private Menu mMenuClose;
-    private static Intent intent;
+    private Intent intent;
 
     public static Context getAppContext() {
         return SMMainActivity.context;
@@ -191,7 +191,7 @@ public class SMMainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(context, CreateProfile.class);
+                Intent intent = new Intent(context, CreateProfile.class);
                 context.startActivity(intent);
                 dialog.cancel();
             }
@@ -203,6 +203,7 @@ public class SMMainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
                 SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
+                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
                 dialog.cancel();
             }
         });

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="newtask_spinner_array">
+        <item>@string/newtask_spinner_once</item>
+        <item>@string/newtask_spinner_daily</item>
+        <item>@string/newtask_spinner_weekly</item>
+        <item>@string/newtask_spinner_monthly</item>
+        <item>@string/newtask_spinner_yearly</item>
+    </string-array>
+</resources>

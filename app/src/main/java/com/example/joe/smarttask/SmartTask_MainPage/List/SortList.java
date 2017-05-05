@@ -1,11 +1,13 @@
 package com.example.joe.smarttask.SmartTask_MainPage.List;
 
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,23 +30,44 @@ public class SortList {
     }
 
     private static List<TaskObject> preferedSort(List<TaskObject> list) {
-        List<TaskObject> newList;
+//        list=deleteNonUserTasks(list);
         switch (SharedPrefs.getPreferredOrder()) {
             case SubSettingsListObject.ORDER_BY_DATE: {
-                newList = sortByDate(list);
+                list = sortByDate(list);
                 break;
             }
             case SubSettingsListObject.ORER_BY_PRIORITY: {
-                newList = sortByPriority(list);
+                list = sortByPriority(list);
                 break;
             }
             default: {
-                newList = sortByDate(list);
+                list = sortByDate(list);
             }
         }
 
-        return splitList(newList);
+        return splitList(list);
     }
+/*
+
+//    if user is no admin only the users tasks should show
+    private static List<TaskObject> deleteNonUserTasks(List<TaskObject> list){
+        if(ListProfile.getProfile(SharedPrefs.getCurrentProfile()).getPprivileges().equals("true")){
+//            nothing, show all tasks
+        }else {
+            Iterator<TaskObject> itr = list.iterator();
+            while(itr.hasNext()){
+                TaskObject t=itr.next();
+                if(t.getResponsible().equals(SharedPrefs.getCurrentUser())){
+//                    leave task
+                }
+                else{
+                    list.remove(t);
+                }
+            }
+        }
+        return list;
+    }
+*/
 
     private static List<TaskObject> splitList(List<TaskObject> list) {
 
