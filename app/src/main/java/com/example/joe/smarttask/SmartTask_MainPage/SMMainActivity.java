@@ -56,6 +56,7 @@ public class SMMainActivity extends AppCompatActivity {
 
     private static final String TAG = "CL_MaAc";
     private static Context context;
+    private static Context contextMain;
     private static List<Fragment> sFragmentList;
     private static boolean sStartActivity;
     private static SMMainActivity instance;
@@ -71,7 +72,7 @@ public class SMMainActivity extends AppCompatActivity {
     private Menu subMenu;
     private Menu mMenuSettings;
     private Menu mMenuClose;
-    private Intent intent;
+    private static Intent intent;
 
     public static Context getAppContext() {
         return SMMainActivity.context;
@@ -85,7 +86,7 @@ public class SMMainActivity extends AppCompatActivity {
         this.instance = this;
 
         context = getApplicationContext();
-
+contextMain=this;
         ListTask.sortList();
 
     //    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
@@ -191,8 +192,8 @@ public class SMMainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CreateProfile.class);
-                context.startActivity(intent);
+                intent = new Intent(contextMain, CreateProfile.class);
+                contextMain.startActivity(intent);
                 dialog.cancel();
             }
         });
