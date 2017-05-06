@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.joe.smarttask.ChooseProfile.ChooseProfileActivity;
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
@@ -242,7 +243,7 @@ public class IntroActivity extends AppCompatActivity {
         }
         else if(loadedList && pList.size()>0 && taskAdded){
             Log.d(TAG, "profiles are there: " + loadedList);
-            intent = new Intent(this, SMMainActivity.class);
+            intent = new Intent(this, ChooseProfileActivity.class);
             startActivity(intent);
             finish();
         }

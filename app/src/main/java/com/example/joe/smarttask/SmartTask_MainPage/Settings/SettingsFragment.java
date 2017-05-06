@@ -27,6 +27,7 @@ public class SettingsFragment extends Fragment {
 
     //TAG for Logs
     private static final String TAG = "CL_SettF";
+
     private static RecyclerView sRecyclerView;
     private static SettingsFragment.Adapter sAdapter;
     private static Context sContext;
@@ -57,12 +58,6 @@ public class SettingsFragment extends Fragment {
         sCallbacks = null;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        sContext = SMMainActivity.getAppContext();
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,25 +72,10 @@ public class SettingsFragment extends Fragment {
         FrameLayout frameLayout = (FrameLayout) getActivity().findViewById(R.id.fragment_container);
         frameLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.settings_background_blue_dark));
 
-//        toolbar = (Toolbar) getActivity().findViewById(R.id.fragment_toolbar);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(sContext.getResources().getString(R.string.settings_toolbar));
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        initSingletons();
-
-//        get list and update
-//        mList = Settings.getSettingsList();
-//        updateUI(mList);
-
         sRecyclerView = (RecyclerView) v.findViewById(R.id.list_recycler_view);
         sRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return v;
-    }
-
-    private void initSingletons() {
     }
 
     @Override

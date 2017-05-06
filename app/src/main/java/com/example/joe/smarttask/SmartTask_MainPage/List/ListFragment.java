@@ -72,9 +72,7 @@ public class ListFragment extends Fragment {
 
 //    FireBase stuff
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
-    private FirebaseDatabase mDatabase;
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
 

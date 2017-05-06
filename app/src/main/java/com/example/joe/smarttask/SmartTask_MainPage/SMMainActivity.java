@@ -209,7 +209,7 @@ public class SMMainActivity extends AppCompatActivity {
     }
 
     //show profile selector dialog, with or without close button
-    public static void showProfiles(boolean c) {
+    public void showProfiles(boolean c) {
         final Dialog dialog = new Dialog(instance);
         dialog.setContentView(R.layout.change_profile);
         dialog.setTitle("Change profile");
@@ -248,6 +248,7 @@ public class SMMainActivity extends AppCompatActivity {
                 SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
                 SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
                 dialog.cancel();
+                finish();
             }
         });
 
@@ -338,21 +339,13 @@ public class SMMainActivity extends AppCompatActivity {
     }
 
     private static void setIconToolbar(){
-
-
         File mProfilePicture;
         String userID=SharedPrefs.getCurrentProfile();
-
-        Log.d(TAG, userID);
-
         if(userID!="0"){
         File profileImage = new File(dir + userID + ".jpg");
         if (profileImage.exists()) {
-
             Log.d(TAG, "Picture exists for: " + userID);
-//           Bitmap bitmap = BitmapFactory.decodeFile(profileImage.getAbsolutePath());
             Bitmap bitmap= PictureScale.getScaledBitmap(dir + userID + ".jpg",44,44,10);
-//            Drawable d = new BitmapDrawable(context.getResources(), bitmap);
             mTollbarIcon.setImageBitmap(bitmap);
         } else {
             Log.d(TAG, "Getting from firebase");
@@ -369,9 +362,7 @@ public class SMMainActivity extends AppCompatActivity {
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Log.d(TAG, "Picture exist");
                         bitmap= PictureScale.getScaledBitmap(finalLocalFile.getAbsolutePath(),44,44,10);
-                        Drawable d = new BitmapDrawable(getAppContext().getResources(), bitmap);
-
-
+                        mTollbarIcon.setImageBitmap(bitmap);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -393,14 +384,14 @@ public class SMMainActivity extends AppCompatActivity {
     }
 
 
-    //    Start new thread to download adds
-    private class FetchPicture extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            new FetchAdds().saveImage(FetchAdds.URL_ADDRESS);
-            return null;
-        }
-    }
+//    //    Start new thread to download adds
+//    private class FetchPicture extends AsyncTask<Void, Void, Void> {
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            new FetchAdds().saveImage(FetchAdds.URL_ADDRESS);
+//            return null;
+//        }
+//    }
 
 
     private static class ProfileAdapter extends ArrayAdapter<ProfileObject> {
@@ -411,9 +402,8 @@ public class SMMainActivity extends AppCompatActivity {
             inflater = LayoutInflater.from(context);
         }
 
-
-//        Adapter is bad loads as it loads all the titles on the view in memory.
-//        This means it renders 12 profile pictures which crashed the programm
+//        Adapter loads all the titles on the view in memory.
+//        This means it renders 12 profile pictures which crashed the programm+
 //        Maybe switch to recycler view
         @Override
         public View getView(int position, View view, ViewGroup parent) {
