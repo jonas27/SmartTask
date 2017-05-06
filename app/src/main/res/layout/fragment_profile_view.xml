@@ -8,54 +8,50 @@
     <!-- layout for creating profiles -->
 
 
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:adjustViewBounds="false"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
-        android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/smlogo"
-        android:layout_alignTop="@+id/scrollView2"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/relativeLayout" />
-
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="30dp">
 
-    </ScrollView>
+
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="74dp"
-        android:layout_above="@+id/view_profile_done"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="false"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/smlogo"
+            android:layout_alignParentStart="true"
+            />
 
         <TextView
             android:id="@+id/view_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView3"
-            android:layout_marginLeft="15dp"
-            android:layout_toEndOf="@+id/imageView3"
+            android:layout_below="@id/profile_image"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="80dp"
             android:ems="25"
             android:text="view_profile_name"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/profil_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="13dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignTop="@id/view_profile_name"
             app:srcCompat="@drawable/ic_person_black_24dp" />
 
         <TextView
@@ -65,16 +61,16 @@
             android:ems="25"
             android:text="view_profile_score"
             android:textSize="25dp"
-            android:layout_alignTop="@+id/imageView8"
-            android:layout_alignStart="@+id/view_profile_name" />
+            android:layout_alignStart="@id/view_profile_name"
+            android:layout_below="@id/view_profile_name"
+            android:layout_marginTop="20dp"/>
 
         <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="30dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imageView3"
+            android:id="@+id/score_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@id/profil_icon"
+            android:layout_alignTop="@id/view_profile_score"
             app:srcCompat="@drawable/ic_stars_black_24dp" />
 
         <TextView
@@ -84,52 +80,77 @@
             android:ems="25"
             android:text="view_profile_privileges"
             android:textSize="25dp"
-            android:layout_alignTop="@+id/imageView10"
-            android:layout_alignStart="@+id/view_profile_score" />
+            android:layout_alignStart="@id/view_profile_name"
+            android:layout_below="@id/view_profile_score"
+            android:layout_marginTop="20dp"/>
 
         <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="30dp"
+            android:id="@+id/priviliges_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/ic_school_black_24dp"
-            android:layout_below="@+id/imageView8"
-            android:layout_alignParentStart="true" />
+            android:layout_alignStart="@id/profil_icon"
+            android:layout_alignTop="@id/view_profile_privileges" />
 
         <TextView
             android:id="@+id/view_profile_total_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_alignStart="@+id/view_profile_privileges"
-            android:layout_below="@+id/imageView10"
+            android:layout_alignStart="@id/view_profile_name"
+            android:layout_below="@id/view_profile_privileges"
+            android:layout_marginTop="20dp"
             android:ems="25"
             android:text="view_profile_total_task"
             android:textSize="25dp" />
 
         <ImageView
             android:id="@+id/imageView11"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imageView10"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@id/profil_icon"
+            android:layout_alignTop="@id/view_profile_total_task"
             app:srcCompat="@drawable/ic_check_black_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/view_profile_total_task"
+            android:weightSum="3"
+            android:layout_centerHorizontal="true"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/view_profile_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/smarttask_create_profile_done"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
 
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/view_profile_done"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#1565C0"
-        android:text="@string/smarttask_create_profile_done"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+    </ScrollView>
+
+
 
 
 </RelativeLayout>

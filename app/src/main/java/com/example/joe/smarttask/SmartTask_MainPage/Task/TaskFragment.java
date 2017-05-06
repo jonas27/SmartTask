@@ -286,7 +286,6 @@ public class TaskFragment extends Fragment {
         });
 
         File taskImage = new File(dir + mTaskId + ".jpg");
-
         if (taskImage.exists()) {
             Bitmap bitmap = BitmapFactory.decodeFile(taskImage.getAbsolutePath());
             mTaskImageView.setImageBitmap(bitmap);

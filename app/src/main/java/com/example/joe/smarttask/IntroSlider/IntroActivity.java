@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
@@ -235,8 +236,6 @@ public class IntroActivity extends AppCompatActivity {
             taskAdded=false;
             Intent intent = new Intent(this, CreateProfile.class);
             startActivity(intent);
-
-//            return;
         }else if(loadedList  && pList.size()>0 && !taskAdded){
             intent = new Intent(this, NewTaskActivity.class);
             startActivity(intent);
@@ -246,6 +245,9 @@ public class IntroActivity extends AppCompatActivity {
             intent = new Intent(this, SMMainActivity.class);
             startActivity(intent);
             finish();
+        }
+        else{
+            Toast.makeText(this, "Waiting for a connection!", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -16,11 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureScale;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -72,8 +75,6 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG,"so far so good");
-
 
 //        mProfileId = (String) getArguments().getSerializable(PROFILE_ID);
   //      mListProfile = mListProfile.list(getContext());
@@ -86,7 +87,8 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
 
 //        on logout shared prefs are deleted and user should sign into profile again
-       mProfile = ListProfile.getProfileList().get(0);
+//       mProfile = ListProfile.getProfileList().get(0);
+       mProfile=ListProfile.getProfile(SharedPrefs.getCurrentProfile());
        this.mProfileId=mProfile.getPid();
        Log.d(TAG, "Profile id: " + mProfileId);
        storageRef = FirebaseStorage.getInstance().getReference();
@@ -137,9 +139,12 @@ public class ProfileFragment extends Fragment {
            }
        });
 
-       File taskImage = new File(dir + mProfileId + ".jpg");
-       if (taskImage.exists()) {
-           Bitmap bitmap = BitmapFactory.decodeFile(taskImage.getAbsolutePath());
+       File profileImage = new File(dir + mProfileId + ".jpg");
+       if (profileImage.exists()) {
+
+           Log.d(TAG, "Picture exists for: " + mProfileId);
+//           Bitmap bitmap = BitmapFactory.decodeFile(profileImage.getAbsolutePath());
+           Bitmap bitmap= PictureScale.getScaledBitmap(dir + mProfileId + ".jpg",400,400,6);
            mProfilePicture.setImageBitmap(bitmap);
        } else {
            Log.d(TAG, "Getting from firebase");
@@ -170,6 +175,9 @@ public class ProfileFragment extends Fragment {
                e.printStackTrace();
            }
        }
+       if(profileImage.length()==0){
+           mProfilePicture.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.smlogo));
+       }
 
 
        return v;
@@ -191,12 +199,14 @@ public class ProfileFragment extends Fragment {
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Log.d(TAG, file);
-            Bitmap bitmap = BitmapFactory.decodeFile(file);
-            mProfilePicture.setImageBitmap(bitmap);
+//            Bitmap bitmap = BitmapFactory.decodeFile(file);
+
             //Uri u = Uri.parse("file://"+file);
             Log.d(TAG, "Pic saved");
             //mTaskImageView.setImageURI(u);
             Uri uriFile = Uri.fromFile(new File(file));
+            Bitmap bitmap= PictureScale.getScaledBitmap(dir + mProfileId + ".jpg",400,400,6);
+            mProfilePicture.setImageBitmap(bitmap);
             UploadTask uploadTask;
 
             StorageReference fileUpload = storageRef.child("images/" + uriFile.getLastPathSegment());

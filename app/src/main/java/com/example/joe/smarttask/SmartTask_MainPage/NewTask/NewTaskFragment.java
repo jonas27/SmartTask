@@ -215,6 +215,7 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
 
 
     private void createNewTask() {
+        sTaskChecked=true;
         if (mCategories.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_categories, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
