@@ -13,6 +13,7 @@
         android:layout_height="fill_parent">
 
         <RelativeLayout
+            android:id="@+id/newtask_location_image"
             android:layout_width="match_parent"
             android:layout_height="1000dp"
             android:orientation="vertical">
@@ -36,10 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/newtask_name"
+
                 android:layout_below="@+id/newtask_name"
                 android:layout_marginLeft="50dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="22dp"
                 android:ems="25"
                 android:hint="@string/NewTaskDescription"
                 android:inputType="textAutoComplete"
@@ -51,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/newtask_description"
                 android:layout_below="@+id/newtask_description"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="14dp"
                 android:ems="25"
@@ -66,7 +67,7 @@
                 android:layout_alignEnd="@+id/newtask_description"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/newtask_time"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="18dp"
                 android:ems="25"
@@ -79,11 +80,11 @@
                 android:id="@+id/newtask_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/newtask_frequency"
+
                 android:layout_below="@+id/newtask_date"
                 android:layout_marginLeft="50dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="17dp"
                 android:ems="25"
                 android:hint="@string/NewTaskCategory"
                 android:inputType="textAutoCorrect"
@@ -94,6 +95,8 @@
                 android:id="@+id/newtask_frequency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/newtask_category"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="13dp"
@@ -102,9 +105,7 @@
                 android:hint="@string/NewTaskFrequency"
                 android:inputType="number"
                 android:padding="15dp"
-                android:textSize="25sp"
-                android:layout_below="@+id/newtask_category"
-                android:layout_alignParentStart="true" />
+                android:textSize="25sp" />
 
 
             <Spinner
@@ -143,6 +144,8 @@
                 android:id="@+id/newtask_responsible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/newtask_points"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="16dp"
@@ -151,27 +154,25 @@
                 android:hint="@string/NewTaskResponsible"
                 android:inputType="textPersonName"
                 android:padding="15dp"
-                android:textSize="25sp"
-                android:layout_below="@+id/newtask_points"
-                android:layout_alignParentStart="true" />
+                android:textSize="25sp" />
 
 
             <Button
                 android:id="@+id/newtask_create"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/newtask_responsible"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="23dp"
                 android:background="#1565C0"
                 android:ems="25"
                 android:text="@string/NewTaskCreateTaskButton"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:layout_below="@+id/newtask_responsible"
-                android:layout_centerHorizontal="true" />
+                android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/newtask_describtion_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true"
@@ -180,60 +181,60 @@
                 app:srcCompat="@drawable/ic_description_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/newtask_time_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignStart="@+id/imageView4"
+                android:layout_alignStart="@+id/newtask_describtion_image"
                 android:layout_alignTop="@+id/newtask_time"
                 app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/newtask_date_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignEnd="@+id/imageView5"
+                android:layout_alignEnd="@+id/newtask_time_image"
                 android:layout_alignTop="@+id/newtask_date"
                 app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/newtask_place_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignEnd="@+id/imageView7"
+                android:layout_alignEnd="@+id/newtask_date_image"
                 android:layout_alignTop="@+id/newtask_category"
                 app:srcCompat="@drawable/ic_place_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/newtask_Freq_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/ic_refresh_black_24dp"
+                android:layout_alignStart="@+id/newtask_place_image"
                 android:layout_alignTop="@+id/newtask_frequency"
-                android:layout_alignStart="@+id/imageView9" />
+                app:srcCompat="@drawable/ic_refresh_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView13"
+                android:id="@+id/newtask_priority_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/ic_priority_high_black_24dp"
+                android:layout_alignStart="@+id/newtask_Freq_image"
                 android:layout_alignTop="@+id/newtask_priority"
-                android:layout_alignStart="@+id/imageView12" />
+                app:srcCompat="@drawable/ic_priority_high_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView14"
+                android:id="@+id/newtask_points_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignEnd="@+id/imageView13"
+                android:layout_alignEnd="@+id/newtask_priority_image"
                 android:layout_alignTop="@+id/newtask_points"
                 app:srcCompat="@drawable/ic_stars_black_24dp" />
 
             <ImageView
-                android:id="@+id/imageView15"
+                android:id="@+id/newtask_responsible_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/ic_person_black_24dp"
                 android:layout_above="@+id/newtask_create"
-                android:layout_alignStart="@+id/imageView14" />
+                android:layout_alignStart="@+id/newtask_points_image"
+                app:srcCompat="@drawable/ic_person_black_24dp" />
 
         </RelativeLayout>
     </ScrollView>
