@@ -15,7 +15,18 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+                <ImageView
+                    android:id="@+id/toolbar_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    />
+
+
+        </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_search"
@@ -23,8 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar_search"
             android:background="@android:color/white"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

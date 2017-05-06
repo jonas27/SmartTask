@@ -83,6 +83,7 @@ public class SMMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
+
     private FloatingActionButton mActionAdd;
     private Menu subMenu;
     private Menu mMenuSettings;
@@ -93,7 +94,7 @@ public class SMMainActivity extends AppCompatActivity {
 
 
     private static Bitmap bitmap;
-    private static StorageReference storageRef;
+    private static ImageView mTollbarIcon;
 
 
     public static Context getAppContext() {
@@ -103,7 +104,7 @@ public class SMMainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        setIconToolbar(getAppContext(),getSupportActionBar());
+        setIconToolbar();
     }
 
 
@@ -125,11 +126,16 @@ public class SMMainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mTollbarIcon= (ImageView) findViewById(R.id.toolbar_icon);
+        mTollbarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         getSupportActionBar().setTitle("   SmartTask");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setIconToolbar(getAppContext(),getSupportActionBar());
 
 
 
@@ -331,7 +337,7 @@ public class SMMainActivity extends AppCompatActivity {
         }
     }
 
-    private static void setIconToolbar(final Context context, ActionBar actionBar){
+    private static void setIconToolbar(){
 
 
         File mProfilePicture;
@@ -346,10 +352,11 @@ public class SMMainActivity extends AppCompatActivity {
             Log.d(TAG, "Picture exists for: " + userID);
 //           Bitmap bitmap = BitmapFactory.decodeFile(profileImage.getAbsolutePath());
             Bitmap bitmap= PictureScale.getScaledBitmap(dir + userID + ".jpg",44,44,10);
-            Drawable d = new BitmapDrawable(context.getResources(), bitmap);
-            actionBar.setIcon(d);
+//            Drawable d = new BitmapDrawable(context.getResources(), bitmap);
+            mTollbarIcon.setImageBitmap(bitmap);
         } else {
             Log.d(TAG, "Getting from firebase");
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
             StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
 
             File localFile = null;
@@ -378,12 +385,11 @@ public class SMMainActivity extends AppCompatActivity {
             }
         }
         if(profileImage.length()==0){
-            actionBar.setLogo(R.mipmap.smlogo);
+            mTollbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
         }}
         else{
-            actionBar.setLogo(R.mipmap.smlogo);
+            mTollbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
             }
-        actionBar.setDisplayUseLogoEnabled(true);
     }
 
 
