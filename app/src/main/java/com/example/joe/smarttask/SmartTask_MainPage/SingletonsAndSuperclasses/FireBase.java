@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
+import com.example.joe.smarttask.SmartTask_MainPage.Messenger.MessageObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
@@ -91,31 +92,50 @@ public class FireBase extends AppCompatActivity {
         }
     }
 
-    public void push(Map<String, String> map, String root) {
-        /*
-            Information should be pushed as a map with String destination on firebase server,value.
-         */
-        mDatabase = FirebaseDatabase.getInstance();
-
-        DatabaseReference myRef = mDatabase.getReference("User/" + user.getUid());
-
-        Iterator it = map.entrySet().iterator();
-        String rootElement = null;
-        String rootdistanation = root;
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            Log.d(TAG, "key: " + pair.getKey() + "  val   " + pair.getValue());
-            if (rootElement == null) {
-                rootElement = myRef.push().getKey();
-            }
-            if (rootElement == null) {
-                myRef.child(pair.getKey().toString()).setValue(pair.getValue());
-            } else {
-                myRef.child(rootdistanation).child(rootElement).child(pair.getKey().toString()).setValue(pair.getValue());
-            }
-            it.remove();
-        }
+    //    [start: create a new Task]
+    public void createMessage(MessageObject mMessageObject) {
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("messages");
+        mPostReference.child(Long.toString(mMessageObject.getDateTime())).setValue(mMessageObject);
     }
+
+//    private void createNewMessage(MessageObject mMessageObject) {
+//        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("messages");
+////        Log.d(TAG, key);
+////        if(mMessageObject.getDateTime().equals("")){
+////            mPostReference.child("User/" + user.getUid() + "/task/" + mMessageObject.getDateTime()).setValue(mMessageObject);
+//////            mMessageObject.setId(key);
+//////            mPostReference.child(key).setValue(mMessageObject);
+////        }
+////        else{
+//            mPostReference.child(mMessageObject.getDateTime()).setValue(mMessageObject);
+////        }
+//    }
+
+//    public void push(Map<String, String> map, String root) {
+//        /*
+//            Information should be pushed as a map with String destination on firebase server,value.
+//         */
+//        mDatabase = FirebaseDatabase.getInstance();
+//
+//        DatabaseReference myRef = mDatabase.getReference("User/" + user.getUid());
+//
+//        Iterator it = map.entrySet().iterator();
+//        String rootElement = null;
+//        String rootdistanation = root;
+//        while (it.hasNext()) {
+//            Map.Entry pair = (Map.Entry) it.next();
+//            Log.d(TAG, "key: " + pair.getKey() + "  val   " + pair.getValue());
+//            if (rootElement == null) {
+//                rootElement = myRef.push().getKey();
+//            }
+//            if (rootElement == null) {
+//                myRef.child(pair.getKey().toString()).setValue(pair.getValue());
+//            } else {
+//                myRef.child(rootdistanation).child(rootElement).child(pair.getKey().toString()).setValue(pair.getValue());
+//            }
+//            it.remove();
+//        }
+//    }
 
     /**
      * Methods from here fetch/pull data from server

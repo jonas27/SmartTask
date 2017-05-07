@@ -91,7 +91,5 @@ public class CreateProfileFragment extends Fragment {
         t.setPprivileges(Privilgies.getSelectedItem().toString());
         t.setPid("");
         t.setPtotalscore("0");
-
-
     }
 }

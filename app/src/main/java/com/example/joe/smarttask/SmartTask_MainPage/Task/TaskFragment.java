@@ -256,10 +256,9 @@ public class TaskFragment extends Fragment {
                 }
         });
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
-
         int permsRequestCode = 200;
-
         requestPermissions(perms, permsRequestCode);
+
         mTaskPicture = (Button) v.findViewById(R.id.task_btn_add_picture);
         mTaskPicture.setOnClickListener(new View.OnClickListener() {
             @Override

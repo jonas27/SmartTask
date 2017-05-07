@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
-import com.example.joe.smarttask.SignUp.SignUpActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.auth.api.Auth;
@@ -89,6 +87,10 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
 
+//        TODO: Requires API 23
+        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
+        int permsRequestCode = 200;
+        requestPermissions(perms, permsRequestCode);
 
         // add Views
         email = (EditText) findViewById(R.id.enter_email);

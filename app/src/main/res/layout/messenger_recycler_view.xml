@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:id="@+id/messenger_recycler_view">
+
+    <TextView
+        android:id="@+id/messages_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="80dp"
+        android:textSize="24sp"
+        android:text="placeholder"/>
+    <TextView
+        android:id="@+id/messages_own"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="80dp"
+        android:textSize="24sp"
+        android:text="placeholder"/>
+
+    <TextView
+        android:id="@+id/name_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messages_other"
+        android:layout_alignStart="@id/messages_other"
+        android:textSize="16sp"
+        android:text="placeholder_username_other"/>
+    <TextView
+        android:id="@+id/name_own"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messages_own"
+        android:layout_alignEnd="@id/messages_own"
+        android:textSize="16sp"
+        android:text="placeholder_username_own"/>
+
+    <TextView
+        android:id="@+id/datetime_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messages_other"
+        android:layout_toRightOf="@id/name_other"
+        android:layout_marginLeft="6dp"
+        android:textSize="16sp"
+        android:text="placeholder"/>
+    <TextView
+        android:id="@+id/datetime_own"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messages_other"
+        android:layout_toLeftOf="@id/name_own"
+        android:layout_marginRight="6dp"
+        android:textSize="16sp"
+        android:text="placeholder_time_own"/>
+
+
+
+</RelativeLayout>

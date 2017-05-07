@@ -91,24 +91,29 @@ public class IntroActivity extends AppCompatActivity {
 
     @Override
     public void onResume(){
-
+        super.onResume();
         if(userAdded && !taskAdded){
             Intent intent= new Intent(this, NewTaskActivity.class);
             startActivity(intent);
+            return;
         }
         else if(userAdded && taskAdded){
             Intent intent= new Intent(this, SMMainActivity.class);
             startActivity(intent);
             finish();
         }
-
-        if(introWasShown){
+        if(SharedPrefs.getCurrentProfile().equals("")){
+            Intent intent= new Intent(this, ChooseProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
             Intent intent= new Intent(this, SMMainActivity.class);
             startActivity(intent);
             finish();
         }
 
-        super.onResume();
+
     }
 
 
@@ -233,7 +238,7 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        if(SharedPrefs.getCurrentProfile()=="" && loadedList && pList.size()==0 && !userAdded){
+        if(SharedPrefs.getCurrentProfile().equals("") && loadedList && pList.size()==0 && !userAdded){
             taskAdded=false;
             Intent intent = new Intent(this, CreateProfile.class);
             startActivity(intent);
@@ -244,6 +249,18 @@ public class IntroActivity extends AppCompatActivity {
         else if(loadedList && pList.size()>0 && taskAdded){
             Log.d(TAG, "profiles are there: " + loadedList);
             intent = new Intent(this, ChooseProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(SharedPrefs.getCurrentProfile().compareToIgnoreCase("")==0){
+            Log.d(TAG, "Kein Profile");
+            intent = new Intent(this, ChooseProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(SharedPrefs.getCurrentProfile().compareToIgnoreCase("")!=0){
+            Log.d(TAG, "Main wird geladen von skip");
+            intent = new Intent(this, SMMainActivity.class);
             startActivity(intent);
             finish();
         }

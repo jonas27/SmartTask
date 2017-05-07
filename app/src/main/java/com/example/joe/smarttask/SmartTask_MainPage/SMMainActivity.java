@@ -34,6 +34,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.joe.smarttask.ChooseProfile.ChooseProfileActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Messenger.MessengerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
@@ -172,7 +174,8 @@ public class SMMainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 if (position == 1) {
                     mActionAdd.setVisibility(View.VISIBLE);
-                } else {
+                }
+                else {
                     mActionAdd.setVisibility(View.INVISIBLE);
                 }
             }
@@ -185,7 +188,15 @@ public class SMMainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        mViewPager.setCurrentItem(2);
+        mViewPager.setCurrentItem(1);
+    }
+
+
+    private void setupViewPager(ViewPager viewPager) {
+        mMainPagerAdapter.addFragment(new CalendarFragment(), getString(R.string.main_screen_calendar));
+        mMainPagerAdapter.addFragment(new ListFragment(), getString(R.string.main_screen_tasks));
+        mMainPagerAdapter.addFragment(new MessengerFragment(), "Messenger");
+        mViewPager.setAdapter(mMainPagerAdapter);
     }
 
 //    [Start: Define Menu]
@@ -210,50 +221,54 @@ public class SMMainActivity extends AppCompatActivity {
 
     //show profile selector dialog, with or without close button
     public void showProfiles(boolean c) {
-        final Dialog dialog = new Dialog(instance);
-        dialog.setContentView(R.layout.change_profile);
-        dialog.setTitle("Change profile");
-        dialog.setCancelable(true);
+//        final Dialog dialog = new Dialog(instance);
+//        dialog.setContentView(R.layout.change_profile);
+//        dialog.setTitle("Change profile");
+//        dialog.setCancelable(true);
+//
+//        GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
+//        grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
+//
+//
+//        //set up button
+//        Button close = (Button) dialog.findViewById(R.id.close);
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.cancel();
+//            }
+//        });
+//        if (c) {
+//            close.setVisibility(View.INVISIBLE);
+//        }
+//
+//        Button add = (Button) dialog.findViewById(R.id.add_profile);
+//        add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                intent = new Intent(contextMain, CreateProfile.class);
+//                contextMain.startActivity(intent);
+//                dialog.cancel();
+//            }
+//        });
+//
+//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
+//                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
+//                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
+//                dialog.cancel();
+//                finish();
+//            }
+//        });
+//
+//        //now that the dialog is set up, it's time to show it
+//        dialog.show();
 
-        GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
-        grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
+        intent = new Intent(getAppContext(), ChooseProfileActivity.class);
+        startActivity(intent);
 
-
-        //set up button
-        Button close = (Button) dialog.findViewById(R.id.close);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.cancel();
-            }
-        });
-        if (c) {
-            close.setVisibility(View.INVISIBLE);
-        }
-
-        Button add = (Button) dialog.findViewById(R.id.add_profile);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(contextMain, CreateProfile.class);
-                contextMain.startActivity(intent);
-                dialog.cancel();
-            }
-        });
-
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
-                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
-                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
-                dialog.cancel();
-                finish();
-            }
-        });
-
-        //now that the dialog is set up, it's time to show it
-        dialog.show();
     }
 
     @Override
@@ -302,12 +317,6 @@ public class SMMainActivity extends AppCompatActivity {
 //    [End: Define Menu]
 
 
-    private void setupViewPager(ViewPager viewPager) {
-        mMainPagerAdapter.addFragment(new CalendarFragment(), getString(R.string.main_screen_calendar));
-        mMainPagerAdapter.addFragment(new ListFragment(), getString(R.string.main_screen_tasks));
-//        mMainPagerAdapter.addFragment(new MessengerFragment(), "Messenger");
-        mViewPager.setAdapter(mMainPagerAdapter);
-    }
 
     public class MainPagerAdapter extends FragmentPagerAdapter {
         private final List<String> mFragmentTitleList = new ArrayList<>();
