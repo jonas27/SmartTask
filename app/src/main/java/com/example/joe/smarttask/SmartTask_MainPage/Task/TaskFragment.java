@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -23,11 +21,10 @@ import android.widget.Toast;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
-import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -35,14 +32,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -66,6 +61,7 @@ public class TaskFragment extends Fragment {
     private ImageView mTaskUnSolved;
     private Button mTaskEdit;
     private Button mTaskDelete;
+    private Button mTaskUnConfirm;
     private TextView mTaskName;
     private TextView mTaskResponsible;
     private TextView mTaskDescription;
@@ -84,6 +80,7 @@ public class TaskFragment extends Fragment {
     private String dir = "/storage/emulated/0/smarttask/";
     private StorageReference storageRef;
     private GregorianCalendar td;
+    ProfileObject t;
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -195,18 +192,31 @@ public class TaskFragment extends Fragment {
         });
 
 
+        mTaskUnConfirm = (Button) v.findViewById(R.id.task_unbtn_confirm);
+        mTaskUnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FireBase fireBase = FireBase.fireBase(getContext());
+                mTask.setStatus("false");
+                Toast.makeText(getContext(), R.string.ViewTaskUnConfirmButton, Toast.LENGTH_SHORT).show();
+                fireBase.createTask(mTask);
+            }});
+
+
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updatepoints();
                 FireBase fireBase = FireBase.fireBase(getContext());
-                Toast.makeText(getContext(),R.string.ViewTaskConfirmButton,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.ViewTaskConfirmButton, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, mTaskFrequency.getText().toString());
                 switch (mTaskFrequency.getText().toString()) {
                     case "0": {
                         mTask.setStatus("true");
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(),"case 0",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "case 0", Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "1": {
@@ -216,7 +226,7 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(),"case 1",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "case 1", Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "2": {
@@ -226,7 +236,7 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(),"case 2",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "case 2", Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "3": {
@@ -236,7 +246,7 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(),"case 3",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "case 3", Toast.LENGTH_LONG).show();
                         break;
                     }
                     case "4": {
@@ -246,14 +256,16 @@ public class TaskFragment extends Fragment {
                         mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(),"case 4",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "case 4", Toast.LENGTH_LONG).show();
                         break;
                     }
-
                 }
                 mTask.setStatus("true");
                 fireBase.createTask(mTask);
-                }
+
+                Toast.makeText(getContext(), "using fix", Toast.LENGTH_LONG).show();
+
+            }
         });
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
         int permsRequestCode = 200;
@@ -357,13 +369,35 @@ public class TaskFragment extends Fragment {
         if (mTask.getStatus().toString().equals("true")) {
             mTaskSolved.setVisibility(View.VISIBLE);
             mTaskUnSolved.setVisibility(View.INVISIBLE);
+            mTaskConfirm.setVisibility(View.INVISIBLE);
+            mTaskUnConfirm.setVisibility(View.VISIBLE);
         } else {
             mTaskSolved.setVisibility(View.INVISIBLE);
             mTaskUnSolved.setVisibility(View.VISIBLE);
+            mTaskConfirm.setVisibility(View.VISIBLE);
+            mTaskUnConfirm.setVisibility(View.INVISIBLE);
         }
 
 
+
+
         return v;
+    }
+
+    public void updatepoints() {
+        Iterator<ProfileObject> itr = ListProfile.getProfileList().iterator();
+        while (itr.hasNext()) {
+            t=itr.next();
+            if (t.getPname().equals(mTask.getResponsible())) {
+                t.setPtotalscore(Long.toString(Long.parseLong(t.getPtotalscore() + 1)));
+                t.setPscore(Long.toString(Long.parseLong(t.getPscore()) + Long.parseLong(mTask.getPoints())));
+                FireBase fireBase =  FireBase.fireBase(getContext());
+                fireBase.createProfile(t);
+                return;
+            }
+
+        }
+
     }
 
     @Override
@@ -407,5 +441,6 @@ public class TaskFragment extends Fragment {
             });
         }
     }
+
 
 }

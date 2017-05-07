@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
     private String dir = "/storage/emulated/0/smarttask/";
     private String file;
     private StorageReference storageRef;
-
+    private Button profileviewdone;
 
     public static ProfileFragment newInstance (String profileId) {
         Bundle args = new Bundle();
@@ -93,6 +93,12 @@ public class ProfileFragment extends Fragment {
        Log.d(TAG, "Profile id: " + mProfileId);
        storageRef = FirebaseStorage.getInstance().getReference();
 
+       profileviewdone = (Button) v.findViewById(R.id.view_profile_done) ;
+       profileviewdone.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               getActivity().finish();
+           }});
         mViewProfileName = (TextView) v.findViewById(R.id.view_profile_name);
         mViewProfileName.setText(mProfile.getPname());
 
@@ -100,7 +106,19 @@ public class ProfileFragment extends Fragment {
         mViewProfileScore.setText(mProfile.getPscore() + getString(R.string.view_profile_addtext_points));
 
         mViewProfilePrivileges = (TextView) v.findViewById(R.id.view_profile_privileges);
-        mViewProfilePrivileges.setText(mProfile.getPprivileges() + getString(R.string.view_profile_addtext_levek));
+       String privilegesview = null;
+       switch (mProfile.getPprivileges()){
+           case("1"):
+               privilegesview = getString(R.string.smarttask_create_profile_spinner_admin);
+               break;
+           case("2"):
+               privilegesview = getString(R.string.smarttask_create_profile_spinner_user);
+               break;
+           case("3"):
+               privilegesview = getString(R.string.smarttask_create_profile_spinner_kid);
+               break;
+       }
+        mViewProfilePrivileges.setText(privilegesview + getString(R.string.view_profile_addtext_levek));
 
         mViewProfileTotalTask = (TextView) v.findViewById(R.id.view_profile_total_task);
         mViewProfileTotalTask.setText(mProfile.getPtotalscore() + getString(R.string.view_profile_addtext_completed_task));
@@ -182,6 +200,7 @@ public class ProfileFragment extends Fragment {
 
        return v;
     }
+
 
 
 
