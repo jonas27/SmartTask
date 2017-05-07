@@ -52,7 +52,7 @@
         android:id="@+id/datetime_own"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/messages_other"
+        android:layout_below="@id/messages_own"
         android:layout_toLeftOf="@id/name_own"
         android:layout_marginRight="6dp"
         android:textSize="16sp"

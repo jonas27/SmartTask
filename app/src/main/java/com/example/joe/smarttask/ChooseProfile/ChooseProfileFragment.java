@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
@@ -72,7 +73,7 @@ public class ChooseProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Pass layout xml to the inflater and assign it to View v.
-        View v = inflater.inflate(R.layout.recycler_list, container, false);
+        View v = inflater.inflate(R.layout.recycler_profile, container, false);
         sContext = v.getContext();
         activity = this.getActivity();
         sList = ListProfile.getProfileList();
@@ -82,6 +83,24 @@ public class ChooseProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         pullProfiles();
+
+        Button close = (Button) v.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+
+        Button add = (Button) v.findViewById(R.id.add_profile);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CreateProfile.class);
+                getContext().startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         sRecyclerView = (RecyclerView) v.findViewById(R.id.list_recycler_view);
         sRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
