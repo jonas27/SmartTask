@@ -92,6 +92,7 @@
     <string name="ViewTaskDoneButton">Task Complete</string>
     <string name="ViewTaskAddPictureButton">Upload Picture</string>
     <string name="ViewTaskConfirmButton">Task Confirmed</string>
+    <string name="ViewTaskUnConfirmButton">Restore Task</string>
 
 
     <string name="open">open</string>

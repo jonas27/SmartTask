@@ -235,7 +235,7 @@ public class MessengerFragment extends Fragment {
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
         sList = MessageList.getSortedMessageList();
-        Log.d(TAG, "pull Messafes post reference: " + sList.get(0).getSenderName());
+//        Log.d(TAG, "pull Messafes post reference: " + sList.get(0).getSenderName());
 
         if (sRecyclerView != null) {
             sAdapter = new Adapter(sList);
