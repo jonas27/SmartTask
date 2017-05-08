@@ -93,12 +93,7 @@ public class ProfileFragment extends Fragment {
        Log.d(TAG, "Profile id: " + mProfileId);
        storageRef = FirebaseStorage.getInstance().getReference();
 
-       profileviewdone = (Button) v.findViewById(R.id.view_profile_done) ;
-       profileviewdone.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               getActivity().finish();
-           }});
+
         mViewProfileName = (TextView) v.findViewById(R.id.view_profile_name);
         mViewProfileName.setText(mProfile.getPname());
 

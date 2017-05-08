@@ -125,19 +125,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/view_profile_done"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/smarttask_create_profile_done"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"
-            />
-
             <View
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 
@@ -30,7 +32,7 @@ public class CreateProfileFragment extends Fragment {
     private Spinner Privilgies;
     private EditText ProfileName, PinCode;
     ProfileObject t;
-    private static boolean sProfileCheck;
+    private static boolean sProfileChecked;
     FireBase fireBase;
 
     @Override
@@ -38,7 +40,7 @@ public class CreateProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         fireBase = FireBase.fireBase(getContext());
         t = new ProfileObject();
-        sProfileCheck = true;
+        sProfileChecked = true;
 
     }
 
@@ -60,7 +62,7 @@ public class CreateProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createNewProfile();
-                if (sProfileCheck) {
+                if (sProfileChecked) {
                     fireBase.createProfile(t);
                     getActivity().finish();
                 }
@@ -74,13 +76,13 @@ public class CreateProfileFragment extends Fragment {
     private void createNewProfile() {
         if (ProfileName.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.smarttask_create_profile_name_toast, Toast.LENGTH_SHORT).show();
-            sProfileCheck = false;
+            sProfileChecked = false;
         } else {
             t.setPname(ProfileName.getText().toString());
         }
         if (PinCode.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.smarttask_create_profile_pincode_toast, Toast.LENGTH_SHORT).show();
-            sProfileCheck = false;
+            sProfileChecked = false;
         } else {
             t.setPpincode(PinCode.getText().toString());
         }
