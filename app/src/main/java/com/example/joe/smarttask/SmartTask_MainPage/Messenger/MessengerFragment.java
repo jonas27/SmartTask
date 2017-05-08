@@ -198,6 +198,7 @@ public class MessengerFragment extends Fragment {
         mO.setDateTime(Calendar.getInstance().getTimeInMillis());
         mO.setSenderId(SharedPrefs.getCurrentProfile());
         mO.setSenderName(SharedPrefs.getCurrentUser());
+        message.setText("");
     }
 
     private void pullMessages() {
