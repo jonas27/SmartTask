@@ -69,6 +69,7 @@ public class ListProfile {
      * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
+        addUserPlaceholder();
         if (sProfileSnapshot != null) {
             Map<String, ProfileObject> ProfilesMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
@@ -83,7 +84,7 @@ public class ListProfile {
                 ProfileObject mProfile = ProfilesMap.get(current.getKey());
                 mProfile = current.getValue(ProfileObject.class);
                 mProfile.setPid(current.getKey());
-                sPlist.add(mProfile);
+                sPlist.add(0,mProfile);
             }
             Log.d(TAG + "profiles size ", String.valueOf(ProfilesMap.size()));
             Log.d(TAG + "profiles size ", ""+sPlist.size());
@@ -102,6 +103,10 @@ public class ListProfile {
             }
         }
         return null;
+    }
+
+    public static void addUserPlaceholder(){
+
     }
 
 }

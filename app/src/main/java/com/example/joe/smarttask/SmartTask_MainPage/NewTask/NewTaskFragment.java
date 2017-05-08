@@ -186,7 +186,6 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
                 createNewTask();
                 if (sTaskChecked) {
                     fireBase.createTask(t);
-                    IntroActivity.taskAdded=true;
                     getActivity().finish();
                 }
             }

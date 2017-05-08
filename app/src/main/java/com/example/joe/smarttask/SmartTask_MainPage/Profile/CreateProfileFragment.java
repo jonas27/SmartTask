@@ -64,7 +64,6 @@ public class CreateProfileFragment extends Fragment {
                 createNewProfile();
                 if (sTaskChecked) {
                     fireBase.createProfile(t);
-                    IntroActivity.userAdded=true;
                     getActivity().finish();
                 }
             }

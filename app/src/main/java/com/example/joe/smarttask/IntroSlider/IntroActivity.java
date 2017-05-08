@@ -23,15 +23,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.ChooseProfile.ChooseProfileActivity;
-import com.example.joe.smarttask.LogInActivity;
 import com.example.joe.smarttask.R;
+import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,9 +55,12 @@ public class IntroActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private ValueEventListener postListener;
+    private ValueEventListener postListenerTasks;
     private DatabaseReference mPostReference;
     private List<ProfileObject> pList;
-    private static boolean loadedList;
+    private List<TaskObject> tList;
+    private static boolean loadedProfilList;
+    private static boolean loadedTaskList;
 
     //Intent
     private Intent intent;
@@ -79,41 +82,16 @@ public class IntroActivity extends AppCompatActivity {
     //    for SharedPrefs instance
     private SharedPrefs sharedPrefs;
 
-
-//    new user created, go to main
-    public static boolean userAdded=false;
-    public static boolean taskAdded=true;
-
     //boolean to show tutorial again
+    private boolean skippedBtn;
     private boolean skipTutorial;
     private static boolean introWasShown;
 
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        if(userAdded && !taskAdded){
-            Intent intent= new Intent(this, NewTaskActivity.class);
-            startActivity(intent);
-            return;
-        }
-        else if(userAdded && taskAdded){
-            Intent intent= new Intent(this, SMMainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        if(SharedPrefs.getCurrentProfile().equals("")){
-            Intent intent= new Intent(this, ChooseProfileActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
-            Intent intent= new Intent(this, SMMainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-
+//        openApp();
     }
 
 
@@ -130,8 +108,8 @@ public class IntroActivity extends AppCompatActivity {
 //        get Firebase user
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
         pullProfiles();
+        pullTasks();
 
 
         //set's the content (layout)
@@ -206,6 +184,8 @@ public class IntroActivity extends AppCompatActivity {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                skippedBtn = true;
+                introWasShown=true;
                 openApp();
             }
         });
@@ -213,6 +193,8 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
+                    skippedBtn = true;
+                    introWasShown=true;
                     openApp();
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
@@ -238,34 +220,35 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        if(SharedPrefs.getCurrentProfile().equals("") && loadedList && pList.size()==0 && !userAdded){
-            taskAdded=false;
-            Intent intent = new Intent(this, CreateProfile.class);
-            startActivity(intent);
-        }else if(loadedList  && pList.size()>0 && !taskAdded){
-            intent = new Intent(this, NewTaskActivity.class);
-            startActivity(intent);
-        }
-        else if(loadedList && pList.size()>0 && taskAdded){
-            Log.d(TAG, "profiles are there: " + loadedList);
-            intent = new Intent(this, ChooseProfileActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else if(SharedPrefs.getCurrentProfile().compareToIgnoreCase("")==0){
-            Log.d(TAG, "Kein Profile");
-            intent = new Intent(this, ChooseProfileActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else if(SharedPrefs.getCurrentProfile().compareToIgnoreCase("")!=0){
-            Log.d(TAG, "Main wird geladen von skip");
-            intent = new Intent(this, SMMainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
-            Toast.makeText(this, "Waiting for a connection!", Toast.LENGTH_LONG).show();
+        pList = ListProfile.getProfileList();
+        tList = ListTask.getTaskList();
+
+        if (introWasShown) {
+            if (loadedProfilList) {
+                if (pList.size() == 0) {
+                    Intent intent = new Intent(this, CreateProfile.class);
+                    startActivity(intent);
+                } else if (SharedPrefs.getCurrentProfile().equals("")) {
+                    Intent intent = new Intent(this, ChooseProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    if (loadedTaskList) {
+                        if (tList.size() == 0) {
+                            intent = new Intent(this, NewTaskActivity.class);
+                            startActivity(intent);
+                        } else {
+                            if (skippedBtn) {
+                                intent = new Intent(this, ChooseProfileActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            }
+                        }
+                    }
+                }
+            else {
+                Toast.makeText(this, "Waiting for a connection!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -284,7 +267,7 @@ public class IntroActivity extends AppCompatActivity {
             //modify boolean showIntroAgain
             sharedPrefs.setSharedPreferencesIntro(!skipTutorial);
         }
-        introWasShown=true;
+        introWasShown = true;
         super.onStop();
     }
 
@@ -329,38 +312,65 @@ public class IntroActivity extends AppCompatActivity {
             View view = (View) object;
             container.removeView(view);
         }
+
     }
 
 
-
-
-
-//    Firebase loads profiles to check if new user
-private void pullProfiles() {
+    //    Firebase loads profiles to check if new user
+    private void pullProfiles() {
 //    Log.d(TAG, mAuth.getCurrentUser().toString());
-    mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("profile");
-    postListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot mDataSnapshot) {
-            callback(mDataSnapshot);
-            Log.d(TAG,"Getting profiles"+mDataSnapshot.getChildren().toString());
-        }
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("profile");
+        postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot mDataSnapshot) {
+                callback(mDataSnapshot);
+                Log.d(TAG, "Getting profiles" + mDataSnapshot.getChildren().toString());
+            }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            // Getting Post failed, log a message
-            Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
-        }
-    };
-    mPostReference.addValueEventListener(postListener);
-    //       mPostReference2.addValueEventListener(postListener);
-}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mPostReference.addValueEventListener(postListener);
+        //       mPostReference2.addValueEventListener(postListener);
+    }
 
 
     private void callback(DataSnapshot mDataSnapshot) {
         ListProfile.setDataSnapshot(mDataSnapshot);
-        pList=ListProfile.getProfileList();
-        loadedList=true;
+        pList = ListProfile.getProfileList();
+        loadedProfilList = true;
+
+    }
+
+    //    Firebase loads tasks to check if new user
+    private void pullTasks() {
+//    Log.d(TAG, mAuth.getCurrentUser().toString());
+        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("profile");
+        postListenerTasks = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot mDataSnapshot) {
+                loadTasks(mDataSnapshot);
+                Log.d(TAG, "Getting profiles" + mDataSnapshot.getChildren().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mPostReference.addValueEventListener(postListener);
+        //       mPostReference2.addValueEventListener(postListener);
+    }
+
+
+    private void loadTasks(DataSnapshot mDataSnapshot) {
+        ListTask.setDataSnapshot(mDataSnapshot);
+        tList = ListTask.getTaskList();
+        loadedTaskList = true;
 
     }
 
