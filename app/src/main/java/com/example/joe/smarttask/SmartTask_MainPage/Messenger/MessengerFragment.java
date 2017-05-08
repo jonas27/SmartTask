@@ -145,7 +145,7 @@ public class MessengerFragment extends Fragment {
         private void bindMessage(MessageObject mMessageObject) {
             if (mMessageObject != null) {
                 if (mMessageObject.getSenderId().equals(SharedPrefs.getCurrentProfile())) {
-                    message_own.setText((mMessageObject.getMessage()));
+                    message_own.setText(mMessageObject.getMessage());
                     name_own.setText(mMessageObject.getSenderName());
                     new GregorianCalendar();
                     datetime_own.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
@@ -156,7 +156,7 @@ public class MessengerFragment extends Fragment {
                     message_own.setVisibility(View.INVISIBLE);
                     name_own.setVisibility(View.INVISIBLE);
                     datetime_own.setVisibility(View.INVISIBLE);
-                    message_other.setText((mMessageObject.getMessage()));
+                    message_other.setText(mMessageObject.getMessage());
                     name_other.setText(mMessageObject.getSenderName());
                     datetime_other.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
                 }
