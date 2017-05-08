@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -87,9 +88,9 @@ public class SMMainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private FloatingActionButton mActionAdd;
+    private EditText message;
+    private ImageView send;
     private Menu subMenu;
-    private Menu mMenuSettings;
-    private Menu mMenuClose;
     private static Intent intent;
     private static ImageView picture;
     private static final String dir = "/storage/emulated/0/smarttask/";
@@ -164,6 +165,8 @@ public class SMMainActivity extends AppCompatActivity {
 //        mViewPager.setAdapter(mMainPagerAdapter);
 
 
+        send=(ImageView) findViewById(R.id.send) ;
+        message=(EditText) findViewById(R.id.message);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -172,11 +175,20 @@ public class SMMainActivity extends AppCompatActivity {
             //Listener for when new page is selected
             @Override
             public void onPageSelected(int position) {
-                if (position == 1) {
-                    mActionAdd.setVisibility(View.VISIBLE);
-                }
-                else {
+                if (position == 0) {
                     mActionAdd.setVisibility(View.INVISIBLE);
+                    send.setVisibility(View.INVISIBLE);
+                    message.setVisibility(View.INVISIBLE);
+                }
+                else if(position==1){
+                    mActionAdd.setVisibility(View.VISIBLE);
+                    send.setVisibility(View.INVISIBLE);
+                    message.setVisibility(View.INVISIBLE);
+                } else if (position == 2) {
+                    mActionAdd.setVisibility(View.INVISIBLE);
+                    send.setVisibility(View.VISIBLE);
+                    message.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -221,53 +233,53 @@ public class SMMainActivity extends AppCompatActivity {
 
     //show profile selector dialog, with or without close button
     public void showProfiles(boolean c) {
-//        final Dialog dialog = new Dialog(instance);
-//        dialog.setContentView(R.layout.change_profile);
-//        dialog.setTitle("Change profile");
-//        dialog.setCancelable(true);
-//
-//        GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
-//        grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
-//
-//
-//        //set up button
-//        Button close = (Button) dialog.findViewById(R.id.close);
-//        close.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.cancel();
-//            }
-//        });
-//        if (c) {
-//            close.setVisibility(View.INVISIBLE);
-//        }
-//
-//        Button add = (Button) dialog.findViewById(R.id.add_profile);
-//        add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                intent = new Intent(contextMain, CreateProfile.class);
-//                contextMain.startActivity(intent);
-//                dialog.cancel();
-//            }
-//        });
-//
-//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
-//                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
-//                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
-//                dialog.cancel();
-//                finish();
-//            }
-//        });
-//
-//        //now that the dialog is set up, it's time to show it
-//        dialog.show();
+        final Dialog dialog = new Dialog(instance);
+        dialog.setContentView(R.layout.change_profile);
+        dialog.setTitle("Change profile");
+        dialog.setCancelable(true);
 
-        intent = new Intent(getAppContext(), ChooseProfileActivity.class);
-        startActivity(intent);
+        GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
+        grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
+
+
+        //set up button
+        Button close = (Button) dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        if (c) {
+            close.setVisibility(View.INVISIBLE);
+        }
+
+        Button add = (Button) dialog.findViewById(R.id.add_profile);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(contextMain, CreateProfile.class);
+                contextMain.startActivity(intent);
+                dialog.cancel();
+            }
+        });
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
+                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
+                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
+                dialog.cancel();
+                finish();
+            }
+        });
+
+        //now that the dialog is set up, it's time to show it
+        dialog.show();
+
+//        intent = new Intent(getAppContext(), ChooseProfileActivity.class);
+//        startActivity(intent);
 
     }
 

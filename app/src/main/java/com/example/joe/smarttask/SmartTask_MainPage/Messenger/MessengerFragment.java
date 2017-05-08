@@ -76,19 +76,21 @@ public class MessengerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycler_messenger, container, false);
+        View view = inflater.inflate(R.layout.recycler_list, container, false);
 
         sContext = getContext();
 
         fireBase = FireBase.fireBase(sContext);
 
-        message = (EditText) view.findViewById(R.id.message);
-        send = (ImageView) view.findViewById(R.id.send);
+        message = (EditText) getActivity().findViewById(R.id.message);
+        send=(ImageView) getActivity().findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewMessage();
+                if(message.getText().toString().compareTo("")!=0){
+                    createNewMessage();
                 fireBase.createMessage(mO);
+                }
             }
         });
 
@@ -97,10 +99,12 @@ public class MessengerFragment extends Fragment {
         user = mAuth.getCurrentUser();
         pullMessages();
 
-        sRecyclerView = (RecyclerView) view.findViewById(R.id.messenger_recycler_view);
+        sRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
+
+    public void setSendButton(){}
 
 
     //    [Start: RecyclerView Holder and Adapter]
