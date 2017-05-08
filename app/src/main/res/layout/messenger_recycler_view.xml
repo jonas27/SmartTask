@@ -1,63 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:id="@+id/messenger_recycler_view">
+    android:id="@+id/messenger_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
 
     <TextView
         android:id="@+id/messages_other"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/name_other"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="80dp"
-        android:textSize="24sp"
-        android:text="placeholder"/>
+        android:text="placeholderOther"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/messages_own"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/name_own"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="80dp"
-        android:textSize="24sp"
-        android:text="placeholder"/>
+        android:text="placeholderOwn"
+        android:textAlignment="textEnd"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/name_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/messages_other"
-        android:layout_alignStart="@id/messages_other"
-        android:textSize="16sp"
-        android:text="placeholder_username_other"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/messages_other"
+        android:layout_marginTop="12dp"
+        android:text="name_other"
+        android:textSize="15dp" />
+
     <TextView
         android:id="@+id/name_own"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/messages_own"
-        android:layout_alignEnd="@id/messages_own"
-        android:textSize="16sp"
-        android:text="placeholder_username_own"/>
+        android:layout_alignBaseline="@+id/name_other"
+        android:layout_alignBottom="@+id/name_other"
+        android:layout_alignEnd="@+id/messages_own"
+        android:text="name_own"
+        android:textAlignment="textEnd"
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/datetime_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/messages_other"
-        android:layout_toRightOf="@id/name_other"
-        android:layout_marginLeft="6dp"
-        android:textSize="16sp"
-        android:text="placeholder"/>
+        android:layout_centerHorizontal="true"
+        android:text="TimeOther"
+        android:textAlignment="center"
+        android:textSize="11sp" />
+
     <TextView
         android:id="@+id/datetime_own"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/messages_own"
-        android:layout_toLeftOf="@id/name_own"
-        android:layout_marginRight="6dp"
-        android:textSize="16sp"
-        android:text="placeholder_time_own"/>
-
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="TimeOwn"
+        android:textAlignment="center"
+        android:textSize="11sp" />
 
 
 </RelativeLayout>
