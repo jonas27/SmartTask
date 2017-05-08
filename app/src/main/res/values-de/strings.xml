@@ -66,9 +66,8 @@
     <string name="newtask_description">Bitte bestimme eine Beschreibung</string>
     <string name="newtask_datetime">Bitte bestimme ein Enddatum</string>
     <string name="newtask_colorcode">Bitte bestimme eine Farbe</string>
-    <string name="newtask_categories">Bitte bestimme eine Kategorie</string>
+    <string name="newtask_categories">Bitte bestimme eine ort</string>
     <string name="NewTaskCategory">Zimmer/Ort?</string>
-    <string name="NewTaskCreateTaskButton">Speichern</string>
     <string name="NewTaskDate">Bestimme ein Datum</string>
     <string name="NewTaskDescription">Bestimme eine Beschreibung</string>
     <string name="NewTaskFrequency">Bestimme eine Wiederholung</string>
@@ -114,4 +113,5 @@
     <string name="view_profile_addtext_completed_task">" Abgeschlossene Aufgaben"</string>
     <string name="view_profile_addtext_levek">" level"</string>
     <string name="view_profile_addtext_points">" punkte"</string>
+    <string name="NewTaskCreateTaskButton">hinzufügen</string>
 </resources>

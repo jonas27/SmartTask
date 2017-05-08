@@ -39,6 +39,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -146,7 +147,8 @@ public class MessengerFragment extends Fragment {
                 if (mMessageObject.getSenderId().equals(SharedPrefs.getCurrentProfile())) {
                     message_own.setText((mMessageObject.getMessage()));
                     name_own.setText(mMessageObject.getSenderName());
-                    datetime_own.setText(Long.toString(mMessageObject.getDateTime()));
+                    new GregorianCalendar();
+                    datetime_own.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
                     message_other.setVisibility(View.INVISIBLE);
                     name_other.setVisibility(View.INVISIBLE);
                     datetime_other.setVisibility(View.INVISIBLE);
@@ -156,7 +158,7 @@ public class MessengerFragment extends Fragment {
                     datetime_own.setVisibility(View.INVISIBLE);
                     message_other.setText((mMessageObject.getMessage()));
                     name_other.setText(mMessageObject.getSenderName());
-                    datetime_other.setText(Long.toString(mMessageObject.getDateTime()));
+                    datetime_other.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
                 }
             }
 

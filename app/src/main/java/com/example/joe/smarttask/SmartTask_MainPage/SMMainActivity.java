@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +99,7 @@ public class SMMainActivity extends AppCompatActivity {
 
     private static Bitmap bitmap;
     private static ImageView mTollbarIcon;
+    private ProfileObject mProfile;
 
 
     public static Context getAppContext() {
@@ -127,6 +129,7 @@ public class SMMainActivity extends AppCompatActivity {
         FireBase.fireBase(getAppContext());
 
 
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mTollbarIcon= (ImageView) findViewById(R.id.toolbar_icon);
@@ -151,6 +154,9 @@ public class SMMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), NewTaskActivity.class);
                 startActivity(intent);
+
+
+
             }
         });
 
@@ -181,7 +187,13 @@ public class SMMainActivity extends AppCompatActivity {
                     message.setVisibility(View.INVISIBLE);
                 }
                 else if(position==1){
-                    mActionAdd.setVisibility(View.VISIBLE);
+                    mProfile=ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+                    switch(mProfile.getPprivileges().toString()){
+                        case"1":{mActionAdd.setVisibility(View.VISIBLE);break;}
+                        case"2":{mActionAdd.setVisibility(View.VISIBLE);break;}
+                        case"3":{mActionAdd.setVisibility(View.INVISIBLE);break;}
+                        default:{mActionAdd.setVisibility(View.VISIBLE);}
+                        }
                     send.setVisibility(View.INVISIBLE);
                     message.setVisibility(View.INVISIBLE);
                 } else if (position == 2) {
@@ -487,5 +499,7 @@ public class SMMainActivity extends AppCompatActivity {
 
             return view;
         }
+
     }
+
 }

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">SmartTask</string>
     <string name="NewTaskCategory">Rum/Sted</string>
-    <string name="NewTaskCreateTaskButton">Gem</string>
+    <string name="NewTaskCreateTaskButton">Tilføj</string>
     <string name="NewTaskDate">Vælg Dato</string>
     <string name="NewTaskDescription">Skriv en beskrivelse</string>
     <string name="NewTaskFrequency">Gentag</string>
@@ -19,7 +19,7 @@
     <string name="close">Luk</string>
     <string name="date_picker_title">Dato for opgaven</string>
     <string name="intro_dont_show_again">Vis vejledning ved næste start?</string>
-    <string name="intro_got_it">Forstået</string>
+    <string name="intro_got_it">OK</string>
     <string name="intro_next">Næste</string>
     <string name="intro_skip">Skip</string>
     <string name="main_log_in">Log ind</string>
@@ -30,7 +30,7 @@
     <string name="menu_profile">Profiler</string>
     <string name="menu_settings">Indstillinger</string>
     <string name="newtask_colorcode">Angiv venligst farvekode</string>
-    <string name="newtask_categories">Angiv venligst en kategori.</string>
+    <string name="newtask_categories">Angiv venligst en sted</string>
     <string name="newtask_datetime">Angiv venligst en dato</string>
     <string name="newtask_description">Angiv venligst beskrivelse</string>
     <string name="newtask_frequency">Angiv venligst gentagelse</string>

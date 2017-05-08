@@ -66,9 +66,9 @@
     <string name="NewTaskName">Name of the Task</string>
     <string name="NewTaskPriority">Set priority</string>
     <string name="NewTaskResponsible">Assign task to</string>
-    <string name="NewTaskCreateTaskButton">Save</string>
+    <string name="NewTaskCreateTaskButton">Add</string>
     <!-- Toasts -->
-    <string name="newtask_categories">Please specify a category.</string>
+    <string name="newtask_categories">Please specify a place.</string>
     <string name="newtask_colorcode">Please specify a color code.</string>
     <string name="newtask_datetime">Please specify an end date.</string>
     <string name="newtask_description">Please specify a description.</string>

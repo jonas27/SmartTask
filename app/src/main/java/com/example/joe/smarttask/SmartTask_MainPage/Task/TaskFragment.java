@@ -22,9 +22,13 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettProUser.ProUserFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -81,6 +85,7 @@ public class TaskFragment extends Fragment {
     private StorageReference storageRef;
     private GregorianCalendar td;
     ProfileObject t;
+    private Object mProfileId;
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -200,6 +205,7 @@ public class TaskFragment extends Fragment {
                 mTask.setStatus("false");
                 Toast.makeText(getContext(), R.string.ViewTaskUnConfirmButton, Toast.LENGTH_SHORT).show();
                 fireBase.createTask(mTask);
+                getActivity().finish();
             }});
 
 
@@ -264,7 +270,7 @@ public class TaskFragment extends Fragment {
                 fireBase.createTask(mTask);
 
                 Toast.makeText(getContext(), "using fix", Toast.LENGTH_LONG).show();
-
+                getActivity().finish();
             }
         });
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
@@ -377,11 +383,18 @@ public class TaskFragment extends Fragment {
             mTaskConfirm.setVisibility(View.VISIBLE);
             mTaskUnConfirm.setVisibility(View.INVISIBLE);
         }
+        t=ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+        storageRef = FirebaseStorage.getInstance().getReference();
 
+        if (t.getPprivileges().toString().equals("3")){
+            mTaskDelete.setVisibility(View.INVISIBLE);
+            mTaskEdit.setVisibility(View.INVISIBLE);
+            mTaskConfirm.setVisibility(View.INVISIBLE);
+            mTaskUnConfirm.setVisibility(View.INVISIBLE);
 
-
-
-        return v;
+        }
+        
+            return v;
     }
 
     public void updatepoints() {

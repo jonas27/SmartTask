@@ -26,9 +26,9 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="15dp"
         android:adjustViewBounds="false"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:background="@drawable/ic_launcher"
         android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/smlogo" />
+        app:srcCompat="@drawable/ic_person_black_24dp" />
 
 
     <RelativeLayout
