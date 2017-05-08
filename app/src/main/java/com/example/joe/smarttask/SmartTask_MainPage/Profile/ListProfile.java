@@ -57,10 +57,10 @@ public class ListProfile {
     public static void setDataSnapshot(DataSnapshot mProfileSnapshot) {
         sPlist = new ArrayList<>();
         sProfileSnapshot = mProfileSnapshot;
-//        if (sPlist.isEmpty()) {
-//            createList();
-//        }
-        createList();
+        if (sProfileSnapshot.hasChildren()) {
+            createList();
+        }
+//        createList();
     }
 
     /**
@@ -69,22 +69,21 @@ public class ListProfile {
      * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
-        addUserPlaceholder();
+//        addUserPlaceholder();
         if (sProfileSnapshot != null) {
             Map<String, ProfileObject> ProfilesMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 ProfileObject profile = new ProfileObject();
                 ProfilesMap.put(i.next().getKey(), profile);
             }
-
+sPlist.clear();
             Log.d(TAG, String.valueOf(sProfileSnapshot.getChildrenCount()));
-            sPlist.clear();
             for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
                 DataSnapshot current = i.next();
                 ProfileObject mProfile = ProfilesMap.get(current.getKey());
                 mProfile = current.getValue(ProfileObject.class);
                 mProfile.setPid(current.getKey());
-                sPlist.add(0,mProfile);
+                sPlist.add(mProfile);
             }
             Log.d(TAG + "profiles size ", String.valueOf(ProfilesMap.size()));
             Log.d(TAG + "profiles size ", ""+sPlist.size());

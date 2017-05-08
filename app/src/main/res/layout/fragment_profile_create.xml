@@ -7,6 +7,16 @@
     <!-- layout for creating profiles -->
 
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -20,13 +30,6 @@
         android:scaleType="fitCenter"
         app:srcCompat="@mipmap/smlogo" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
-
-    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -118,6 +121,9 @@
         android:layout_toEndOf="@+id/CreateProfileSavePictureButton"
         android:visibility="invisible"
         app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
