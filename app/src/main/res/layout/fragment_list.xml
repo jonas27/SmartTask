@@ -63,13 +63,13 @@
 
     <View
         android:id="@+id/list_line_divide"
-        android:layout_width="fill_parent"
-        android:layout_height="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
         android:layout_above="@+id/list_item_description"
         android:layout_marginBottom="-10dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:background="@color/list_separator_pink" />
+        android:background="@color/colorSecondary" />
 
     <View
         android:id="@+id/list_item_separator"
