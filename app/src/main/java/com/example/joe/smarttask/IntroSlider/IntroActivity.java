@@ -221,7 +221,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (pList.size() == 0) {
                     Intent intent = new Intent(this, CreateProfile.class);
                     startActivity(intent);
-                } else if (SharedPrefs.getCurrentProfile().equals("")) {
+                } else if (SharedPrefs.getCurrentProfile().equals("") && pList.size()!=0) {
                     Intent intent = new Intent(this, ChooseProfileActivity.class);
                     startActivity(intent);
                 } else {

@@ -70,7 +70,7 @@ public class MessengerFragment extends Fragment {
     //    Views
     private EditText message;
     private ImageView send;
-    private LinearLayoutManager mLinearLayoutManager;
+    private static LinearLayoutManager mLinearLayoutManager;
 
     //    normal objects
     private MessageObject mO;

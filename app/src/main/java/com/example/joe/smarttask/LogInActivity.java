@@ -87,7 +87,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        sharedPrefs = SharedPrefs.getSharedPrefs(this);
+        sharedPrefs = SharedPrefs.getSharedPrefs(getApplicationContext());
 
         Intent intent = new Intent(this, PermissionActivity.class);
         startActivity(intent);
@@ -326,6 +326,7 @@ public class LogInActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(LogInActivity.this, "Account already exists!", Toast.LENGTH_SHORT).show();
+                            sendVerificationEmail();
                         } else {
                             Toast.makeText(LogInActivity.this, "Account created. Please verify your email.", Toast.LENGTH_SHORT).show();
                             sendVerificationEmail();

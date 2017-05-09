@@ -284,6 +284,7 @@ public class SMMainActivity extends AppCompatActivity {
                 SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
                 SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
                 dialog.cancel();
+
                 finish();
             }
         });
