@@ -21,6 +21,7 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureScale;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
@@ -65,6 +66,7 @@ public class MessengerFragment extends Fragment {
     private static Context sContext;
     private static RecyclerView sRecyclerView;
     private static Adapter sAdapter;
+    private static LinearLayoutManager llm = new LinearLayoutManager(SMMainActivity.getAppContext());
 
     //    Views
     private EditText message;
@@ -101,7 +103,9 @@ public class MessengerFragment extends Fragment {
         pullMessages();
 
         sRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
-        sRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        sRecyclerView.setHasFixedSize(true);
+        sRecyclerView.setLayoutManager(llm);
+        llm.setStackFromEnd(true);
         return view;
     }
 
@@ -222,6 +226,8 @@ public class MessengerFragment extends Fragment {
         sList = MessageList.getSortedMessageList();
         if (sAdapter != null) {
             sAdapter.notifyDataSetChanged();
+            sAdapter.notifyItemInserted(sList.size() - 1);
+            llm.scrollToPosition(sList.size() - 1);
         }
 
     }
