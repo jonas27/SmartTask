@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 
 /**
  * Created by joe on 04/05/2017.
@@ -102,5 +103,6 @@ public class CreateProfileFragment extends Fragment {
         }
         t.setPid("");
         t.setPtotalscore("0");
+
     }
 }

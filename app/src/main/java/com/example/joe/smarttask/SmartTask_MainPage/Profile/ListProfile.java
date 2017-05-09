@@ -96,16 +96,14 @@ sPlist.clear();
     }
 
     public static ProfileObject getProfile(String mProfileId) {
+        Log.d(TAG, "SPlist size  " + Integer.toString(sPlist.size()));
+        Log.d(TAG, "SPlist user id  " + sPlist.get(0).getPid());
         for (ProfileObject t : sPlist) {
             if (t.getPid().equals(mProfileId)) {
                 return t;
             }
         }
         return null;
-    }
-
-    public static void addUserPlaceholder(){
-
     }
 
 }

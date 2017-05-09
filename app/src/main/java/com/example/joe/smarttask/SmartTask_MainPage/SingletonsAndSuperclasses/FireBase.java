@@ -158,6 +158,10 @@ public class FireBase extends AppCompatActivity {
             Log.d(TAG,"key "+key);
             mProfileObject.setPid(key);
             mPostReference2.child(key).setValue(mProfileObject);
+            if(ListProfile.getProfileList().size()==0){
+                SharedPrefs.setCurrentProfile(key);
+                SharedPrefs.setCurrentUser(mProfileObject.getPname());
+            }
         }
         else{
             mPostReference2.child(mProfileObject.getPid()).setValue(mProfileObject);

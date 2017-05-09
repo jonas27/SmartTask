@@ -25,6 +25,7 @@
         <activity
             android:name=".IntroSlider.IntroActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".RequestPermission.PermissionActivity" />
         <activity android:name=".ChooseProfile.ChooseProfileActivity" />
         <activity android:name=".SmartTask_MainPage.Calendar.SingleDayActivity" />
         <activity android:name=".SmartTask_MainPage.Task.TaskPagerActivity" />

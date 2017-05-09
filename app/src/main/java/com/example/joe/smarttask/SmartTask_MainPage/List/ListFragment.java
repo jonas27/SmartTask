@@ -87,8 +87,9 @@ public class ListFragment extends Fragment {
         sList = ListTask.getTaskList();
         if (sListRecyclerView != null) {
             sAdapter = new TaskAdapter(list);
-            sAdapter.notifyDataSetChanged();
             sListRecyclerView.setAdapter(sAdapter);
+            sAdapter.notifyDataSetChanged();
+
         }
 
     }
@@ -97,6 +98,11 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_masterdetail, container, false);
+
+        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
+        int permsRequestCode = 200;
+        requestPermissions(perms, permsRequestCode);
+
 //        initSingletons();
         sContext = this.getContext();
 
@@ -164,7 +170,7 @@ public class ListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_title);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
-            mTaskCompleted = (CheckBox) itemView.findViewById(R.id.list_item_box);
+//            mTaskCompleted = (CheckBox) itemView.findViewById(R.id.list_item_box);
             mViewLine = (View) itemView.findViewById(R.id.list_line_divide);
             mTaskUnsolved = (ImageView) itemView.findViewById(R.id.list_task_uncheck);
             mTaskSolved = (ImageView) itemView.findViewById(R.id.list_task_check);

@@ -1,7 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Messenger;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -23,7 +23,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureScale;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureConverter;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -66,11 +66,12 @@ public class MessengerFragment extends Fragment {
     private static Context sContext;
     private static RecyclerView sRecyclerView;
     private static Adapter sAdapter;
-    private static LinearLayoutManager llm = new LinearLayoutManager(SMMainActivity.getAppContext());
+    private LinearLayoutManager llm = new LinearLayoutManager(SMMainActivity.getAppContext());
 
     //    Views
     private EditText message;
     private ImageView send;
+    private LinearLayoutManager mLinearLayoutManager;
 
     //    normal objects
     private MessageObject mO;
@@ -106,6 +107,15 @@ public class MessengerFragment extends Fragment {
         sRecyclerView.setHasFixedSize(true);
         sRecyclerView.setLayoutManager(llm);
         llm.setStackFromEnd(true);
+
+        //        CoordinatorLayout.LayoutParams p = new CoordinatorLayout(sContext).LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//        p.addRule(RelativeLayout.ABOVE, R.id.send);
+//        sRecyclerView.setLayoutParams(p);
+
+//        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+//        sRecyclerView.setLayoutManager(mLinearLayoutManager);
         return view;
     }
 
@@ -122,12 +132,14 @@ public class MessengerFragment extends Fragment {
         TextView message_other;
         TextView datetime_own;
         TextView datetime_other;
+        ImageView icon;
         private MessageObject messageObject;
 
         //        bind views here (The Holder defines one list item, which are then coppied)
         public Holder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            icon = (ImageView) itemView.findViewById(R.id.icon);
             name_own = (TextView) itemView.findViewById(R.id.name_own);
             name_other = (TextView) itemView.findViewById(R.id.name_other);
             message_own = (TextView) itemView.findViewById(R.id.messages_own);
@@ -163,10 +175,48 @@ public class MessengerFragment extends Fragment {
                     message_other.setText(mMessageObject.getMessage());
                     name_other.setText(mMessageObject.getSenderName());
                     datetime_other.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
+//                    setIcon(mMessageObject.getSenderId());
                 }
             }
 
         }
+
+//        TODO: this is super intensive for the phone!
+        private void setIcon(String userId){
+            File mProfilePicture;
+            String path=DIR + userId + ".jpg";
+            if(userId!="0"){
+                File profileImage = new File(path);
+                if (profileImage.length()!=0) {
+                    icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 30));
+                } else {
+                    Log.d(TAG, "Getting from firebase");
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                    StorageReference currentImage = storageRef.child("images/" + userId + ".jpg");
+                    File localFile = null;
+                    try {
+                        localFile = new File(path);
+                        localFile.createNewFile();
+                        final File finalLocalFile = localFile;
+                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Log.d(TAG, "Picture exist");
+                                icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                                Log.d(TAG, "NO Picture exist");
+                                icon.setImageDrawable(sContext.getResources().getDrawable(R.mipmap.smlogo));
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }}
     }
 
     //    Purpose of the Addapter is to provide the data items for the recycler view (or more general the AdapterView)
@@ -180,7 +230,7 @@ public class MessengerFragment extends Fragment {
         @Override
         public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(sContext);
-            View view = layoutInflater.inflate(R.layout.messenger_recycler_view, parent, false);
+            View view = layoutInflater.inflate(R.layout.fragment_messenger, parent, false);
             return new Holder(view);
         }
 

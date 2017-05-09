@@ -64,8 +64,8 @@ public class SharedPrefs {
         return sharedPreferences.getString(CURRENT_USER, "");
     }
 
-    public static void setCurrentUser(String id) {
-        editor.putString(CURRENT_USER, id);
+    public static void setCurrentUser(String name) {
+        editor.putString(CURRENT_USER, name);
         editor.commit();
     }
 

@@ -10,19 +10,17 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureScale;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureConverter;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +31,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -157,7 +154,7 @@ public class ProfileFragment extends Fragment {
 
            Log.d(TAG, "Picture exists for: " + mProfileId);
 //           Bitmap bitmap = BitmapFactory.decodeFile(profileImage.getAbsolutePath());
-           Bitmap bitmap= PictureScale.getScaledBitmap(dir + mProfileId + ".jpg",400,400,6);
+           Bitmap bitmap= PictureConverter.getScaledBitmap(dir + mProfileId + ".jpg",400,400,6);
            mProfilePicture.setImageBitmap(bitmap);
        } else {
            Log.d(TAG, "Getting from firebase");
@@ -219,7 +216,7 @@ public class ProfileFragment extends Fragment {
             Log.d(TAG, "Pic saved");
             //mTaskImageView.setImageURI(u);
             Uri uriFile = Uri.fromFile(new File(file));
-            Bitmap bitmap= PictureScale.getScaledBitmap(dir + mProfileId + ".jpg",400,400,6);
+            Bitmap bitmap= PictureConverter.getScaledBitmap(dir + mProfileId + ".jpg",400,400,6);
             mProfilePicture.setImageBitmap(bitmap);
             UploadTask uploadTask;
 

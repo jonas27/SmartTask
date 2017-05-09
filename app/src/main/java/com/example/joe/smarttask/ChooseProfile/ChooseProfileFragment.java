@@ -25,7 +25,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureScale;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureConverter;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,10 +70,23 @@ public class ChooseProfileFragment extends Fragment {
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
+        int permsRequestCode = 200;
+        requestPermissions(perms, permsRequestCode);
+
+    }
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Pass layout xml to the inflater and assign it to View v.
         View v = inflater.inflate(R.layout.recycler_profile, container, false);
+
+
         sContext = v.getContext();
         activity = this.getActivity();
         sList = ListProfile.getProfileList();
@@ -172,45 +185,38 @@ public class ChooseProfileFragment extends Fragment {
                 name.setText(profileObject.getPname());
                 score.setText(profileObject.getPscore());
                 String userID = profileObject.getPid();
-                if (userID != "0") {
-                    File profileImage = new File(DIR + userID + ".jpg");
-                    if (profileImage.exists()) {
-                        Log.d(TAG, "Picture exists for: " + userID);
-                        Bitmap bitmap = PictureScale.getScaledBitmap(DIR + userID + ".jpg", 80, 80, 2);
-                        icon.setImageBitmap(bitmap);
+                String path=DIR + userID + ".jpg";
+                if(userID!="0"){
+                    File profileImage = new File(path);
+                    if (profileImage.length()!=0) {
+                        icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 300));
                     } else {
                         Log.d(TAG, "Getting from firebase");
                         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
                         StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
                         File localFile = null;
                         try {
-                            localFile = new File(DIR + userID + ".jpg");
+                            localFile = new File(path);
                             localFile.createNewFile();
                             final File finalLocalFile = localFile;
                             currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                     Log.d(TAG, "Picture exist");
-                                    Bitmap bitmap = PictureScale.getScaledBitmap(finalLocalFile.getAbsolutePath(), 80, 80, 2);
-                                    icon.setImageBitmap(bitmap);
-                                    sAdapter.notifyDataSetChanged();
+                                    icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception exception) {
                                     // Handle any errors
                                     Log.d(TAG, "NO Picture exist");
+                                    icon.setImageDrawable(sContext.getResources().getDrawable(R.mipmap.smlogo));
                                 }
                             });
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
-                    if (profileImage.length() == 0) {
-                        icon.setImageDrawable(sContext.getApplicationContext().getResources().getDrawable(R.mipmap.smlogo));
-                    }
-                } else {
-                    icon.setImageDrawable(sContext.getApplicationContext().getResources().getDrawable(R.mipmap.smlogo));
                 }
             }
         }

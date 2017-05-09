@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
+import com.example.joe.smarttask.RequestPermission.PermissionActivity;
+import com.example.joe.smarttask.RequestPermission.PermissionFragment;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
@@ -87,6 +89,8 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
 
+        Intent intent = new Intent(this, PermissionActivity.class);
+        startActivity(intent);
 
 
         // add Views

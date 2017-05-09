@@ -101,7 +101,7 @@ public class SingleDayFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_title);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
-            mTaskCompleted = (CheckBox) itemView.findViewById(R.id.list_item_box);
+//            mTaskCompleted = (CheckBox) itemView.findViewById(R.id.list_item_box);
             mViewLine = (View) itemView.findViewById(R.id.list_line_divide);
             mTaskUnsolved = (ImageView) itemView.findViewById(R.id.list_task_uncheck);
             mTaskSolved = (ImageView) itemView.findViewById(R.id.list_task_check);

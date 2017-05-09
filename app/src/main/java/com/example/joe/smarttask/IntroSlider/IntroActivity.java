@@ -214,7 +214,8 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-
+        pList=ListProfile.getProfileList();
+        tList=ListTask.getTaskList();
 
             if (pList!=null) {
                 if (pList.size() == 0) {
