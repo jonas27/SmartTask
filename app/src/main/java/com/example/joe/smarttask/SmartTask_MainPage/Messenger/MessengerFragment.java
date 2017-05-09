@@ -66,7 +66,6 @@ public class MessengerFragment extends Fragment {
     private static Context sContext;
     private static RecyclerView sRecyclerView;
     private static Adapter sAdapter;
-    private LinearLayoutManager llm = new LinearLayoutManager(SMMainActivity.getAppContext());
 
     //    Views
     private EditText message;
@@ -105,8 +104,9 @@ public class MessengerFragment extends Fragment {
 
         sRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sRecyclerView.setHasFixedSize(true);
-        sRecyclerView.setLayoutManager(llm);
-        llm.setStackFromEnd(true);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        sRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mLinearLayoutManager.setStackFromEnd(true);
 
         //        CoordinatorLayout.LayoutParams p = new CoordinatorLayout(sContext).LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -277,7 +277,7 @@ public class MessengerFragment extends Fragment {
         if (sAdapter != null) {
             sAdapter.notifyDataSetChanged();
             sAdapter.notifyItemInserted(sList.size() - 1);
-            llm.scrollToPosition(sList.size() - 1);
+            mLinearLayoutManager.scrollToPosition(sList.size() - 1);
         }
 
     }
