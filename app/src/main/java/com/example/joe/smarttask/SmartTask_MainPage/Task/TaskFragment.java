@@ -402,7 +402,8 @@ public class TaskFragment extends Fragment {
         while (itr.hasNext()) {
             t=itr.next();
             if (t.getPname().equals(mTask.getResponsible())) {
-                t.setPtotalscore(Long.toString(Long.parseLong(t.getPtotalscore() + 1)));
+                int add = 1;
+                t.setPtotalscore(Long.toString(Long.parseLong(t.getPtotalscore()) + Long.parseLong("1")));
                 t.setPscore(Long.toString(Long.parseLong(t.getPscore()) + Long.parseLong(mTask.getPoints())));
                 FireBase fireBase =  FireBase.fireBase(getContext());
                 fireBase.createProfile(t);
