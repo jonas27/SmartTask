@@ -40,7 +40,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
+            app:tabIndicatorColor="@color/colorSecondary"
             app:tabGravity="fill"
+            app:tabIndicatorHeight="4dp"
             app:tabMode="fixed" />
     </android.support.design.widget.AppBarLayout>
 
