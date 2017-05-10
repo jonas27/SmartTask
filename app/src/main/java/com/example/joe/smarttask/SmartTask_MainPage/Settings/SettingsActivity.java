@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettProUser.ProUserFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SubMenuActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
@@ -17,7 +17,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  * Created by joe on 23/04/2017.
  */
 
-public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks, ListFragment.Callbacks, ProUserFragment.Callbacks{
+public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks, SubSettingsListFragment.Callbacks, ProUserFragment.Callbacks{
     Toolbar toolbar;
 
     @Override
@@ -46,7 +46,7 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
 
 //        Put List sorting on screen if there is a detail_fragment_container in the layout
         if (findViewById(R.id.detail_fragment_container) != null) {
-            Fragment newDetail = new ListFragment();
+            Fragment newDetail = new SubSettingsListFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail_fragment_container, newDetail)
                     .commit();
@@ -73,13 +73,13 @@ public class SettingsActivity extends SingleFragmentActivity implements Settings
             Fragment newDetail;
 //            Show options for list
             if (settingsObject.getmTitle().equals(getResources().getString(R.string.settings_list_title))) {
-                newDetail = new ListFragment();
+                newDetail = new SubSettingsListFragment();
             } else if (settingsObject.getmTitle().equals(getResources().getString(R.string.settings_prouser_title))) {
                 Log.d("cl_SettingsAc ", settingsObject.getmTitle());
                 newDetail = new ProUserFragment();
             }
             else {
-                newDetail = new ListFragment();
+                newDetail = new SubSettingsListFragment();
             }
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail_fragment_container, newDetail)

@@ -84,7 +84,7 @@ public class ListFragment extends Fragment {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
 
-        sList = ListTask.getTaskList();
+        sList = ListTask.getSortList();
         if (sListRecyclerView != null) {
             sAdapter = new TaskAdapter(list);
             sListRecyclerView.setAdapter(sAdapter);
@@ -118,7 +118,7 @@ public class ListFragment extends Fragment {
         user = mAuth.getCurrentUser();
         pull();
 
-        sList = ListTask.getTaskList();
+        sList = ListTask.getSortList();
 
         if(detailView!=null && sList.size()>0) {
 //              @param getId: Create new Fragment with first TaskObject in list
@@ -307,7 +307,7 @@ public class ListFragment extends Fragment {
             }
         };
         mPostReference.addValueEventListener(postListener);
-        sList=ListTask.getTaskList();
+        sList=ListTask.getSortList();
         if(sAdapter!=null) {
             sAdapter.notifyDataSetChanged();
         }
@@ -316,7 +316,7 @@ public class ListFragment extends Fragment {
 
     private void callback(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
-        sList=ListTask.getTaskList();
+        sList=ListTask.getSortList();
 
 //        Log.d(TAG, sList.get(2).getName());
         updateUI(sList);

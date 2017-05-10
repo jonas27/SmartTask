@@ -1,15 +1,14 @@
 package com.example.joe.smarttask.SmartTask_MainPage.List;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Calendar.CalendarView;
+import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,15 +38,25 @@ public class ListTask {
         createList();
     }
 
-    //    getter Method for List of Tasks
-    public static List<TaskObject> getTaskList() {
+//    resorts the list and returns a sorted list
+    public static List<TaskObject> getSortList() {
+        sSortedList = SortList.sortList(sList);
+        if(SMMainActivity.showOnlyOwnTasks){
+            return getPersonalList();
+        }
         return sSortedList;
     }
 
-//    resorts the list with a given list and returns a sorted list
-    public static List<TaskObject> sortList() {
-        sSortedList = null;
-        sSortedList = SortList.sortList(sList);
+    public static List<TaskObject> getPersonalList(){
+        TaskObject t;
+        for (int c=0; c<sSortedList.size(); c++){
+            t=sSortedList.get(c);
+            if(t.getResponsible().compareTo(SharedPrefs.getCurrentUser())!=0){
+                Log.d(TAG, "THey are equal: " + t.getResponsible());
+                sSortedList.remove(t);
+                c--;
+            }
+        }
         return sSortedList;
     }
 
@@ -60,7 +69,7 @@ public class ListTask {
      * *
      */
     public static TaskObject getTask(String mTaskId) {
-        sSortedList=sortList();
+        sSortedList= getSortList();
         Log.d(TAG, "size of sortedlist: " + Integer.toString(sSortedList.size()) );
         for (TaskObject t : sSortedList) {
             Log.d(TAG, "Name of sortedlist items: " + t.getId() );

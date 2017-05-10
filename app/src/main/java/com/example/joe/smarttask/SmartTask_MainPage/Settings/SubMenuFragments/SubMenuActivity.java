@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.ListFragment;
+import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettProUser.ProUserFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
 
@@ -15,7 +15,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.Si
  * Created by joe on 27/04/2017.
  */
 
-public class SubMenuActivity extends SingleFragmentActivity implements ListFragment.Callbacks, ProUserFragment.Callbacks {
+public class SubMenuActivity extends SingleFragmentActivity implements SubSettingsListFragment.Callbacks, ProUserFragment.Callbacks {
 
     //Specify parameter for Intent
     public static final String SETTINGS_OPTION = "Settings_Option";
@@ -46,14 +46,14 @@ public class SubMenuActivity extends SingleFragmentActivity implements ListFragm
         String mTitle = (String) getIntent().getSerializableExtra(SETTINGS_OPTION);
 
         if (mTitle.equals(getResources().getString(R.string.settings_list_title))) {
-            return new ListFragment();
+            return new SubSettingsListFragment();
         } else if (mTitle.equals(getResources().getString(R.string.settings_notifications_title))) {
             return new NotificationFragment();
         } else if (mTitle.equals(getResources().getString(R.string.settings_prouser_title))) {
             return new ProUserFragment();
         }
         else {
-            return new ListFragment();
+            return new SubSettingsListFragment();
         }
 
 

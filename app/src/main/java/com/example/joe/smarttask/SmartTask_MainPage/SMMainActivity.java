@@ -32,7 +32,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.joe.smarttask.RequestPermission.PermissionActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Messenger.MessengerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.LogInActivity;
@@ -96,13 +95,15 @@ public class SMMainActivity extends AppCompatActivity {
     private static ImageView mToolbarIcon;
     private ProfileObject mProfile;
 
+    public static boolean showOnlyOwnTasks = false;
+
 
     public static Context getAppContext() {
         return SMMainActivity.context;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         setIconToolbar();
     }
@@ -117,13 +118,12 @@ public class SMMainActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         contextMain = this;
-        ListTask.sortList();
+        ListTask.getSortList();
 
         //    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         //    new FetchPicture().execute();
 
         FireBase.fireBase(getAppContext());
-
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -132,14 +132,24 @@ public class SMMainActivity extends AppCompatActivity {
         mToolbarIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(intent);
+                showOnlyOwnTasks = !showOnlyOwnTasks;
+                if (showOnlyOwnTasks) {
+                    getSupportActionBar().setTitle("   " + SharedPrefs.getCurrentUser());
+                    mToolbarIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_list_white_24dp));
+                    finish();
+                } else {
+                    getSupportActionBar().setTitle("   SmartTask");
+                    setIconToolbar();
+                    finish();
+                }
             }
         });
-        getSupportActionBar().setTitle("   SmartTask");
+        if (showOnlyOwnTasks) {
+            getSupportActionBar().setTitle("   " + SharedPrefs.getCurrentUser());
+        } else {
+            getSupportActionBar().setTitle("   SmartTask");
+        }
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-
 
 
 //        getSupportActionBar().setHomeButtonEnabled(true);
@@ -165,10 +175,9 @@ public class SMMainActivity extends AppCompatActivity {
 //        mViewPager.setAdapter(mMainPagerAdapter);
 
 
-
-        send=(ImageView) findViewById(R.id.send) ;
-        message=(EditText) findViewById(R.id.message);
-        linear=(LinearLayout) findViewById(R.id.linear);
+        send = (ImageView) findViewById(R.id.send);
+        message = (EditText) findViewById(R.id.message);
+        linear = (LinearLayout) findViewById(R.id.linear);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -178,29 +187,39 @@ public class SMMainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) mViewPager.getLayoutParams();
-                p.setMargins(0,0,0,0);
+                p.setMargins(0, 0, 0, 0);
                 mViewPager.setLayoutParams(p);
                 linear.setVisibility(View.INVISIBLE);
                 if (position == 0) {
                     mActionAdd.setVisibility(View.INVISIBLE);
-                }
-                else if(position==1){
-                    Log.d(TAG,"Current profile" + SharedPrefs.getCurrentProfile() );
-                    mProfile=ListProfile.getProfile(SharedPrefs.getCurrentProfile());
-                    switch(mProfile.getPprivileges()){
-                        case"1":{mActionAdd.setVisibility(View.VISIBLE);break;}
-                        case"2":{mActionAdd.setVisibility(View.VISIBLE);break;}
-                        case"3":{mActionAdd.setVisibility(View.INVISIBLE);break;}
-                        default:{mActionAdd.setVisibility(View.VISIBLE);}
+                } else if (position == 1) {
+                    Log.d(TAG, "Current profile" + SharedPrefs.getCurrentProfile());
+                    mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+                    switch (mProfile.getPprivileges()) {
+                        case "1": {
+                            mActionAdd.setVisibility(View.VISIBLE);
+                            break;
                         }
+                        case "2": {
+                            mActionAdd.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case "3": {
+                            mActionAdd.setVisibility(View.INVISIBLE);
+                            break;
+                        }
+                        default: {
+                            mActionAdd.setVisibility(View.VISIBLE);
+                        }
+                    }
 
                 } else if (position == 2) {
                     mActionAdd.setVisibility(View.INVISIBLE);
                     linear.setVisibility(View.VISIBLE);
                     int dpValue = 50; // margin in dips
                     float d = context.getResources().getDisplayMetrics().density;
-                    int margin = (int)(dpValue * d); // margin in pixels
-                    p.setMargins(0,0,0,margin);
+                    int margin = (int) (dpValue * d); // margin in pixels
+                    p.setMargins(0, 0, 0, margin);
                     mViewPager.setLayoutParams(p);
                 }
             }
@@ -345,7 +364,6 @@ public class SMMainActivity extends AppCompatActivity {
 //    [End: Define Menu]
 
 
-
     public class MainPagerAdapter extends FragmentPagerAdapter {
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
@@ -375,42 +393,47 @@ public class SMMainActivity extends AppCompatActivity {
         }
     }
 
-    private static void setIconToolbar(){
-        File mProfilePicture;
-        String userID=SharedPrefs.getCurrentProfile();
-        String path=dir + userID + ".jpg";
-        if(userID!="0"){
-        File profileImage = new File(path);
-        if (profileImage.length()>0) {
-            mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 100));
+    private static void setIconToolbar() {
+        if (showOnlyOwnTasks) {
+            mToolbarIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
         } else {
-            Log.d(TAG, "Getting from firebase");
-            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
-            File localFile = null;
-            try {
-                localFile = new File(path);
-                localFile.createNewFile();
-                final File finalLocalFile = localFile;
-                currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Log.d(TAG, "Picture exist");
-                        mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
+            File mProfilePicture;
+            String userID = SharedPrefs.getCurrentProfile();
+            String path = dir + userID + ".jpg";
+            if (userID != "0") {
+                File profileImage = new File(path);
+                if (profileImage.length() > 0) {
+                    mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 100));
+                } else {
+                    Log.d(TAG, "Getting from firebase");
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
+                    File localFile = null;
+                    try {
+                        localFile = new File(path);
+                        localFile.createNewFile();
+                        final File finalLocalFile = localFile;
+                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Log.d(TAG, "Picture exist");
+                                mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                                Log.d(TAG, "NO Picture exist");
+                                mToolbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                        Log.d(TAG, "NO Picture exist");
-                        mToolbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
+                }
             }
         }
-    }}
+    }
 
 
 //    //    Start new thread to download adds
@@ -448,11 +471,11 @@ public class SMMainActivity extends AppCompatActivity {
 
             picture = (ImageView) view.findViewById(R.id.profile_image);
             File mProfilePicture;
-            String userID=current.getPid();
-            String path=dir + userID + ".jpg";
-            if(userID!="0"){
+            String userID = current.getPid();
+            String path = dir + userID + ".jpg";
+            if (userID != "0") {
                 File profileImage = new File(path);
-                if (profileImage.length()!=0) {
+                if (profileImage.length() != 0) {
                     picture.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 100));
                 } else {
                     Log.d(TAG, "Getting from firebase");
@@ -485,4 +508,5 @@ public class SMMainActivity extends AppCompatActivity {
             return view;
         }
 
-}}
+    }
+}

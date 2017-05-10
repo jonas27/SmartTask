@@ -47,27 +47,6 @@ public class SortList {
 
         return splitList(list);
     }
-/*
-
-//    if user is no admin only the users tasks should show
-    private static List<TaskObject> deleteNonUserTasks(List<TaskObject> list){
-        if(ListProfile.getProfile(SharedPrefs.getCurrentProfile()).getPprivileges().equals("true")){
-//            nothing, show all tasks
-        }else {
-            Iterator<TaskObject> itr = list.iterator();
-            while(itr.hasNext()){
-                TaskObject t=itr.next();
-                if(t.getResponsible().equals(SharedPrefs.getCurrentUser())){
-//                    leave task
-                }
-                else{
-                    list.remove(t);
-                }
-            }
-        }
-        return list;
-    }
-*/
 
     private static List<TaskObject> splitList(List<TaskObject> list) {
 
@@ -82,10 +61,7 @@ public class SortList {
                 c--;
             }
         }
-
-        //reverse because of controlling for false --> can be deleted if (TODO controll on false) is implement
         Collections.reverse(newList);
-
 
         //        Add completed items if set in settings
         if (SharedPrefs.getShowPastItems() == true) {
@@ -95,6 +71,7 @@ public class SortList {
         tO.setId(DRAW_LINE);
             tO.setDatetime("1111111111111");
             tO.setPriority("-1");
+            tO.setResponsible("0");
         tO.setName("0");
         tO.setDescription("0");
         newList.add(0, tO);
@@ -103,7 +80,6 @@ public class SortList {
                 newList.add(0, t);
             }
         }
-//reverse because of controlling for false --> can be deleted if (TODO controll on false) is implement
         Collections.reverse(newList);
 
         return newList;
@@ -149,115 +125,9 @@ public class SortList {
                 c--;
             }
         }
-
         priorityMiddleList.addAll(list);
         priorityHighList.addAll(priorityMiddleList);
 
         return priorityHighList;
     }
 }
-
-
-//
-//
-//
-//    //    [Start: Sort by Date (merge Sort)]
-////    leave creation of new List as not it is not working --> don't do: return divideList(list);
-////    TODO: Implement merge sort correctly. Maybe....
-//
-//    protected static synchronized List<TaskObject>  sortedList(List<TaskObject> list){
-//        List<TaskObject> newList=list;
-//        return sortDate(newList);
-//    }
-//
-//    private static List<TaskObject> sortList(List<TaskObject> list) {
-//        while(locked) {}
-//        List<TaskObject> newList=new ArrayList<TaskObject>();
-//        locked=true;
-//        Log.d(TAG, " locked");
-//
-//        sharedPrefs = SharedPrefs.getSharedPrefs(SMMainActivity.getAppContext());
-//        switch (sharedPrefs.getSharedPrefencesListSort()) {
-//            case SettingsHandler.LIST_SORTED_DATE: {
-//                newList=sortDate(list);
-//                break;
-//            }
-//        }
-//
-//
-//    if(newList==null){newList=sortDate(list);}
-//        return newList;
-//    }
-//
-//    private static List<TaskObject> sortDate(List<TaskObject> list) {
-//
-//        for(TaskObject i:list){
-//            Log.d(TAG, "list: " + i.getName());
-//        }
-//
-//        List<TaskObject> sortedList = divideList(list);
-////        List<TaskObject> splitedList = splitList(sortedList);
-//        return sortedList;
-//    }
-//
-//    private static List<TaskObject> divideList(List<TaskObject> list) {
-//        List<TaskObject> dList=list;
-//        List<TaskObject> upperList = new ArrayList<TaskObject>();
-//        List<TaskObject> bottomList = dList;
-//        if (list.size() <= 1) {
-//            return dList;
-//        } else {
-//            for (int counter = 0; counter < dList.size() / 2; counter++) {
-//                upperList.add(0, dList.get(counter));
-//                bottomList.remove(0);
-//            }
-//            upperList = divideList(upperList);
-//            bottomList = divideList(bottomList);
-//        }
-//        List<TaskObject> l = mergeList(bottomList, upperList);
-//        return l;
-//    }
-//
-//
-////    private static  List<TaskObject> splitList(List<TaskObject> myLlist){
-////        List<TaskObject> checkedTaskAtBottomList= new ArrayList<>();
-////        for (TaskObject t: myLlist){
-////            if(t.getStatus().equals("true")){
-////                checkedTaskAtBottomList.add(checkedTaskAtBottomList.size(),t);
-////                myLlist.remove(t);
-////            }
-////        }
-////        for (TaskObject t: myLlist){
-////                checkedTaskAtBottomList.add(checkedTaskAtBottomList.size(),t);
-////        }
-////        return checkedTaskAtBottomList;
-////    }
-//
-//    private static List<TaskObject> mergeList(List<TaskObject> bottom, List<TaskObject> upper) {
-//        List<TaskObject> newList = new ArrayList<>();
-//        for(TaskObject i:upper){
-//            Log.d(TAG, "upper: " + i.getName());
-//        }
-//        for(TaskObject i:bottom){
-//            Log.d(TAG, "bottom: " + i.getName());
-//        }
-//
-//        int size = (bottom.size() + upper.size());
-//        for (int c = 0; c < size; c++) {
-//            if (bottom.size() > 0 && upper.size() > 0 && Long.parseLong(bottom.get(0).getDatetime()) < Long.parseLong(upper.get(0).getDatetime())) {
-//                newList.add(bottom.get(0));
-//                bottom.remove(0);
-//            } else if (bottom.size() == 0) {
-//                newList.add(upper.get(0));
-//                upper.remove(0);
-//            } else if (upper.size() == 0) {
-//                newList.add(bottom.get(0));
-//                bottom.remove(0);
-//            } else {
-//                newList.add(upper.get(0));
-//                upper.remove(0);
-//            }
-//
-//        }
-//        return newList;
-//    }

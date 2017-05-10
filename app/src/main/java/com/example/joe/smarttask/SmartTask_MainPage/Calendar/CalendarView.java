@@ -74,14 +74,14 @@ public class CalendarView extends LinearLayout
     public CalendarView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        list = ListTask.getTaskList();
+        list = ListTask.getSortList();
         initControl(context);
     }
 
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
-        list = ListTask.getTaskList();
+        list = ListTask.getSortList();
         initControl(context);
     }
 
@@ -89,7 +89,7 @@ public class CalendarView extends LinearLayout
      * Display dates correctly in grid
      */
     public static void updateCalendar() {
-        list = ListTask.getTaskList();
+        list = ListTask.getSortList();
         ArrayList<Date> cells = new ArrayList<>();
         Calendar calendar = (Calendar) currentDate.clone();
 

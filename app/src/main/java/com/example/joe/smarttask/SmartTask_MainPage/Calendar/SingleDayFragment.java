@@ -56,7 +56,7 @@ public class SingleDayFragment extends Fragment {
         sListRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         sListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        sList = ListTask.getTaskList();
+        sList = ListTask.getSortList();
         list = new ArrayList<TaskObject>();
 
         Date ccDate = new Date(SingleDayActivity.getDate());

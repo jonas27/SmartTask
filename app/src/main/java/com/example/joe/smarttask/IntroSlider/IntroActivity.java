@@ -215,7 +215,7 @@ public class IntroActivity extends AppCompatActivity {
     //opens main app
     private void openApp() {
         pList=ListProfile.getProfileList();
-        tList=ListTask.getTaskList();
+        tList=ListTask.getSortList();
 
             if (pList!=null) {
                 if (pList.size() == 0) {
@@ -337,7 +337,7 @@ public class IntroActivity extends AppCompatActivity {
 
     private void loadTasks(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
-        tList = ListTask.getTaskList();
+        tList = ListTask.getSortList();
         Log.d(TAG, "Tasks List size: " + tList.size());
     }
 

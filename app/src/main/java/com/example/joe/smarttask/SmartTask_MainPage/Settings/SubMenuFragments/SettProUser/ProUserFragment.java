@@ -19,7 +19,6 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsList;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 
 import java.util.List;
@@ -95,7 +94,7 @@ public class ProUserFragment extends Fragment{
     @Override
     public void onStop() {
         super.onStop();
-        ListTask.sortList();
+        ListTask.getSortList();
     }
 
     @Override

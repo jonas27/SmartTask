@@ -26,7 +26,7 @@ import java.util.List;
  * Created by joe on 27/04/2017.
  */
 
-public class ListFragment extends Fragment {
+public class SubSettingsListFragment extends Fragment {
 
     //TAG for Logs
     private static final String TAG = "CL_SettF";
@@ -94,7 +94,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        ListTask.sortList();
+        ListTask.getSortList();
     }
 
     @Override
@@ -155,7 +155,7 @@ public class ListFragment extends Fragment {
             }
 
             if (listObject.getTitle().equals(sContext.getResources().getString(R.string.subsettings_list_title_pastitems))) {
-                ListTask.sortList();
+                ListTask.getSortList();
                 listObject.setShowPastItems(!listObject.isShowPastItems());
             }
 
