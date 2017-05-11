@@ -3,8 +3,7 @@ package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.S
 import android.content.Context;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListObject;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 
 import java.util.ArrayList;
 import java.util.List;

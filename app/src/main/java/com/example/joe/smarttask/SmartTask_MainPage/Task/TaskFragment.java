@@ -22,13 +22,10 @@ import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.NewTask.NewTaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileFragment;
-import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettProUser.ProUserFragment;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -84,7 +81,7 @@ public class TaskFragment extends Fragment {
     private String dir = "/storage/emulated/0/smarttask/";
     private StorageReference storageRef;
     private GregorianCalendar td;
-    ProfileObject t;
+    ProfileObject p;
     private Object mProfileId;
 
     public static TaskFragment newInstance(String taskId) {
@@ -99,7 +96,6 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mTaskId = (String) getArguments().getSerializable(TASK_ID);
     }
 
@@ -217,7 +213,7 @@ public class TaskFragment extends Fragment {
                 FireBase fireBase = FireBase.fireBase(getContext());
                 Toast.makeText(getContext(), R.string.ViewTaskConfirmButton, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, mTaskFrequency.getText().toString());
-                switch (mTaskFrequency.getText().toString()) {
+                switch (mTask.getFrequency()) {
                     case "0": {
                         mTask.setStatus("true");
                         fireBase.createTask(mTask);
@@ -266,7 +262,6 @@ public class TaskFragment extends Fragment {
                         break;
                     }
                 }
-                mTask.setStatus("true");
                 fireBase.createTask(mTask);
 
                 Toast.makeText(getContext(), "using fix", Toast.LENGTH_LONG).show();
@@ -383,30 +378,28 @@ public class TaskFragment extends Fragment {
             mTaskConfirm.setVisibility(View.VISIBLE);
             mTaskUnConfirm.setVisibility(View.INVISIBLE);
         }
-        t=ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+        p =ListProfile.getProfile(SharedPrefs.getCurrentProfile(getContext()));
         storageRef = FirebaseStorage.getInstance().getReference();
 
-        if (t.getPprivileges().toString().equals("3")){
+        if (p.getPprivileges().toString().equals("3")){
             mTaskDelete.setVisibility(View.INVISIBLE);
             mTaskEdit.setVisibility(View.INVISIBLE);
             mTaskConfirm.setVisibility(View.INVISIBLE);
             mTaskUnConfirm.setVisibility(View.INVISIBLE);
-
         }
-        
             return v;
     }
 
     public void updatepoints() {
         Iterator<ProfileObject> itr = ListProfile.getProfileList().iterator();
         while (itr.hasNext()) {
-            t=itr.next();
-            if (t.getPname().equals(mTask.getResponsible())) {
+            p=itr.next();
+            if (p.getPname().equals(mTask.getResponsible())) {
                 int add = 1;
-                t.setPtotalscore(Long.toString(Long.parseLong(t.getPtotalscore()) + Long.parseLong("1")));
-                t.setPscore(Long.toString(Long.parseLong(t.getPscore()) + Long.parseLong(mTask.getPoints())));
+                p.setPtotalscore(Long.toString(Long.parseLong(p.getPtotalscore()) + Long.parseLong("1")));
+                p.setPscore(Long.toString(Long.parseLong(p.getPscore()) + Long.parseLong(mTask.getPoints())));
                 FireBase fireBase =  FireBase.fireBase(getContext());
-                fireBase.createProfile(t);
+                fireBase.createProfile(p);
                 return;
             }
 

@@ -3,16 +3,14 @@ package com.example.joe.smarttask.SmartTask_MainPage.List;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Singleton for handling the list of all tasks which is then displayed in the List fragment
@@ -38,20 +36,20 @@ public class ListTask {
         createList();
     }
 
-//    resorts the list and returns a sorted list
+    //    resorts the list and returns a sorted list
     public static List<TaskObject> getSortList() {
         sSortedList = SortList.sortList(sList);
-        if(SMMainActivity.showOnlyOwnTasks){
+        if (SMMainActivity.showOnlyOwnTasks) {
             return getPersonalList();
         }
         return sSortedList;
     }
 
-    public static List<TaskObject> getPersonalList(){
+    public static List<TaskObject> getPersonalList() {
         TaskObject t;
-        for (int c=0; c<sSortedList.size(); c++){
-            t=sSortedList.get(c);
-            if(t.getResponsible().compareTo(SharedPrefs.getCurrentUser())!=0){
+        for (int c = 0; c < sSortedList.size(); c++) {
+            t = sSortedList.get(c);
+            if (t.getResponsible().compareTo(SharedPrefs.getCurrentUser()) != 0) {
                 Log.d(TAG, "THey are equal: " + t.getResponsible());
                 sSortedList.remove(t);
                 c--;
@@ -69,10 +67,10 @@ public class ListTask {
      * *
      */
     public static TaskObject getTask(String mTaskId) {
-        sSortedList= getSortList();
-        Log.d(TAG, "size of sortedlist: " + Integer.toString(sSortedList.size()) );
+        sSortedList = getSortList();
+        Log.d(TAG, "size of sortedlist: " + Integer.toString(sSortedList.size()));
         for (TaskObject t : sSortedList) {
-            Log.d(TAG, "Name of sortedlist items: " + t.getId() );
+            Log.d(TAG, "Name of sortedlist items: " + t.getId());
             if (mTaskId.equals(t.getId())) {
                 return t;
             }
@@ -89,25 +87,12 @@ public class ListTask {
         sList = new ArrayList<>();
         sSortedList = new ArrayList<>();
         if (sDataSnapshot != null) {
-            Map<String, TaskObject> tasksMap = new HashMap<>();
             for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                TaskObject task = new TaskObject();
-                tasksMap.put(i.next().getKey(), task);
+                TaskObject taskObject = i.next().getValue(TaskObject.class);
+                sList.add(taskObject);
             }
-
-            Log.d(TAG, String.valueOf(sDataSnapshot.getChildrenCount()));
-
-            for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                DataSnapshot current = i.next();
-                TaskObject mTask = tasksMap.get(current.getKey());
-                mTask = current.getValue(TaskObject.class);
-                mTask.setId(current.getKey());
-                sList.add(mTask);
-            }
-
-
             sSortedList = SortList.sortList(sList);
-//            CalendarView.updateCalendar();
+            //            CalendarView.updateCalendar();
         }
     }
 }

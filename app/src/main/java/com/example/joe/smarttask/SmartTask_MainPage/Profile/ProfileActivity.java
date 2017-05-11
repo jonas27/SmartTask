@@ -6,8 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class ProfileActivity extends SingleFragmentActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile());
+        return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile(getAppContext()));
     }
 
     //    Set Toolbar back button action equal to system back button

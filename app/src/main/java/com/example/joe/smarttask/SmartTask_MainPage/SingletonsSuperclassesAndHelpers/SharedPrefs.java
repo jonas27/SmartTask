@@ -1,7 +1,9 @@
-package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * Intro into our app
@@ -9,6 +11,9 @@ import android.content.SharedPreferences;
  */
 
 public class SharedPrefs {
+
+    //TAG for Logs
+    private static final String TAG = "CL_SharedPrefs";
 
     public static final String PREFS_NAME = "MyPrefs";
     private static final String SHOW_WELCOME = "ShowIntroDialog";
@@ -51,11 +56,12 @@ public class SharedPrefs {
         editor.commit();
     }
 
-    public static String getCurrentProfile() {
+    public static String getCurrentProfile(Context context) {
         return sharedPreferences.getString(CURRENT_PROFILE, "");
     }
 
     public static void setCurrentProfile(String id) {
+
         editor.putString(CURRENT_PROFILE, id);
         editor.commit();
     }

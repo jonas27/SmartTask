@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers;
 
 import android.content.Context;
 import android.graphics.Bitmap;

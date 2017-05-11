@@ -1,12 +1,9 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Calendar;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.util.AttributeSet;
 import android.util.Log;
 
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 /**
  * Created by joe on 28/04/2017.

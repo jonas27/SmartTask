@@ -19,7 +19,7 @@ public class TaskObject implements Serializable {
     //TAG for Logs
     private static final String TAG = "CLASS_Task";
 
-//    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
+//    [Start: Variables of a task (Naming has to be equal to FireBase, so don'p change!)]
     private String categories;
     private String colorcode;
     private String datetime;

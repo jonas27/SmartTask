@@ -4,15 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
-import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,7 +28,7 @@ public class ListProfile {
 
     private static ListProfile sListProfile;
     private static ArrayList<ProfileObject> sPlist;
-    private static DataSnapshot sProfileSnapshot;
+    private static DataSnapshot sDataSnapshot;
     private SharedPrefs sharedPrefs;
     private Context context;
 
@@ -56,37 +55,22 @@ public class ListProfile {
 
     public static void setDataSnapshot(DataSnapshot mProfileSnapshot) {
         sPlist = new ArrayList<>();
-        sProfileSnapshot = mProfileSnapshot;
-        if (sProfileSnapshot.hasChildren()) {
+        sDataSnapshot = mProfileSnapshot;
+        if (sDataSnapshot.hasChildren()) {
             createList();
         }
-//        createList();
     }
 
     /**
      * This method is called by {@link FireBase} and creates List of profiles
-     * It then calls the recycler view in {@link ListFragment} to update itslef
-     * Static methods are used to ease the call backs from the OnDataChangeListener in {@link FireBase}
      */
     private static void createList() {
 //        addUserPlaceholder();
-        if (sProfileSnapshot != null) {
-            Map<String, ProfileObject> ProfilesMap = new HashMap<>();
-            for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                ProfileObject profile = new ProfileObject();
-                ProfilesMap.put(i.next().getKey(), profile);
-            }
-sPlist.clear();
-            Log.d(TAG, String.valueOf(sProfileSnapshot.getChildrenCount()));
-            for (Iterator<DataSnapshot> i = sProfileSnapshot.getChildren().iterator(); i.hasNext(); ) {
-                DataSnapshot current = i.next();
-                ProfileObject mProfile = ProfilesMap.get(current.getKey());
-                mProfile = current.getValue(ProfileObject.class);
-                mProfile.setPid(current.getKey());
+        if (sDataSnapshot != null) {
+            for (Iterator<DataSnapshot> i = sDataSnapshot.getChildren().iterator(); i.hasNext(); ) {
+                ProfileObject mProfile = i.next().getValue(ProfileObject.class);
                 sPlist.add(mProfile);
             }
-            Log.d(TAG + "profiles size ", String.valueOf(ProfilesMap.size()));
-            Log.d(TAG + "profiles size ", ""+sPlist.size());
         }
     }
 
@@ -96,15 +80,17 @@ sPlist.clear();
     }
 
     public static ProfileObject getProfile(String mProfileId) {
-        Log.d(TAG, "SPlist size  " + Integer.toString(sPlist.size()));
-        Log.d(TAG, "SPlist user id  " + sPlist.get(0).getPid());
-        for (ProfileObject t : sPlist) {
-            if (t.getPid().equals(mProfileId)) {
-                return t;
+        Iterator<ProfileObject> itr = sPlist.iterator();
+        ProfileObject p;
+        for (ProfileObject pp : sPlist) {
+            Log.d(TAG, pp.getPname());
+            Log.d(TAG, mProfileId);
+        }
+        for (int c = 0; c < ListProfile.getProfileList().size(); c++) {
+            if (ListProfile.getProfileList().get(c).getPid().equals(mProfileId)) {
+                return ListProfile.getProfileList().get(c);
             }
         }
         return null;
     }
-
 }
-

@@ -1,30 +1,23 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Messenger;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
-import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureConverter;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.PictureConverter;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -160,7 +153,7 @@ public class MessengerFragment extends Fragment {
         //    specify individual settings behaviour on layout
         private void bindMessage(MessageObject mMessageObject) {
             if (mMessageObject != null) {
-                if (mMessageObject.getSenderId().equals(SharedPrefs.getCurrentProfile())) {
+                if (mMessageObject.getSenderId().equals(SharedPrefs.getCurrentProfile(sContext))) {
                     message_own.setText(mMessageObject.getMessage());
                     name_own.setText(mMessageObject.getSenderName());
                     new GregorianCalendar();
@@ -252,7 +245,7 @@ public class MessengerFragment extends Fragment {
         mO = new MessageObject();
         mO.setMessage(message.getText().toString());
         mO.setDateTime(Calendar.getInstance().getTimeInMillis());
-        mO.setSenderId(SharedPrefs.getCurrentProfile());
+        mO.setSenderId(SharedPrefs.getCurrentProfile(getContext()));
         mO.setSenderName(SharedPrefs.getCurrentUser());
         message.setText("");
     }

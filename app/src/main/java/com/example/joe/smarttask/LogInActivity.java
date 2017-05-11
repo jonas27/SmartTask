@@ -14,10 +14,9 @@ import android.widget.Toast;
 
 import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.RequestPermission.PermissionActivity;
-import com.example.joe.smarttask.RequestPermission.PermissionFragment;
 import com.example.joe.smarttask.SignUp.CheckSingUpData;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -32,6 +31,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -79,32 +79,27 @@ public class LogInActivity extends AppCompatActivity {
     }
 
 
-/*
-* TODO: Use firebase singleton class here
-* */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        Attach Firebase carsh reporting tool
+        FirebaseCrash.report(new Exception("First Test"));
+//        initialize SharedPreferences for app
         sharedPrefs = SharedPrefs.getSharedPrefs(getApplicationContext());
 
+//        We had problems with the permissions! Requesting them inside activities requires min API 23
+//        Intent starts new activity with fragment with sole purpose of asking for permissions
         Intent intent = new Intent(this, PermissionActivity.class);
         startActivity(intent);
 
-
-        // add Views
         email = (EditText) findViewById(R.id.enter_email);
         password = (EditText) findViewById(R.id.enter_password);
-        // add Buttons
 
-        // initialize_auth
+        // initialize_auth and database
         mAuth = FirebaseAuth.getInstance();
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Log.d("data", mDatabase.toString());
-        Log.d("data", mDatabase.getDatabase().toString());
-
 
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
@@ -124,25 +119,12 @@ public class LogInActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    //check if user is verified
                     isVerified(user);
                 } else {
-                    // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-
-
-                // ...
             }
         };
-
-        /*
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        */
 
 
         //Log in button, either shows intro or goes into app
@@ -168,7 +150,6 @@ public class LogInActivity extends AppCompatActivity {
                                             }
                                         }
         );
-
         //Googelogin buttons
         mGoogleButton =(SignInButton) findViewById(R.id.googleButton);
         // Configure Google Sign In
@@ -176,7 +157,6 @@ public class LogInActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-
         mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
 
@@ -188,12 +168,11 @@ public class LogInActivity extends AppCompatActivity {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-
         mGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, " Button working");
-                signIn();
+                signInGoogle();
 
             }
         });
@@ -201,7 +180,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     // Sign in via google
-    private void signIn() {
+    private void signInGoogle() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -245,32 +224,18 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-    //Starts a new sign up activity
-//    private void signUp() {
-//        intent = new Intent(this, SignUpActivity.class);
-//        startActivity(intent);
-//    }
-
     //starts new intro activity
     private void introShow() {
         intent = new Intent(this, IntroActivity.class);
         startActivity(intent);
     }
 
-    //checks if intro page did already run. If yes nothing happens. If no it shows intro page
-    //Intent needs activity line in manifest to access subpackage
-    //Creates new Intent with IntroActivity and starts it
-    private boolean checkShowIntro() {
-        sharedPrefs = SharedPrefs.getSharedPrefs(this);
-        return sharedPrefs.getSharedPrefencesIntro();
-    }
-
     //opens main app and disconnects
     private void openApp() {
         intent = new Intent(this, IntroActivity.class);
         startActivity(intent);
+        finish();
     }
-
 
     @Override
     public void onStart() {
@@ -279,50 +244,26 @@ public class LogInActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-
     private void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(LogInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-
                         }
-
-                        // ...
                     }
                 });
-
     }
 
     private void createAccount(String email, String password) {
-        Log.d(TAG, email + " " + password);
-
-        Log.d(TAG, (mAuth == null) ? "null" : "not null");
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(LogInActivity.this, "Account already exists!", Toast.LENGTH_SHORT).show();
                             sendVerificationEmail();
@@ -336,7 +277,6 @@ public class LogInActivity extends AppCompatActivity {
 
     private void sendVerificationEmail() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         user.sendEmailVerification()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -358,7 +298,7 @@ public class LogInActivity extends AppCompatActivity {
 
     public void isVerified(FirebaseUser user) {
         if (user.isEmailVerified()) {
-            if (checkShowIntro() && introWasShown==false) {
+            if (sharedPrefs.getSharedPrefencesIntro() && introWasShown==false) {
                 introWasShown=true;
                 introShow();
             } else {

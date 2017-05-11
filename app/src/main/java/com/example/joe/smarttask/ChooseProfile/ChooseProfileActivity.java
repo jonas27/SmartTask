@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SingleFragmentActivity;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 /**
  * Created by joe on 06/05/2017.
@@ -25,7 +25,7 @@ public class ChooseProfileActivity extends SingleFragmentActivity{
         getSupportActionBar().setTitle("SmartTask_place_holder");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        if(SharedPrefs.getCurrentProfile().compareToIgnoreCase("")!=0) {
+        if(SharedPrefs.getCurrentProfile(getAppContext()).compareToIgnoreCase("")!=0) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         View v = findViewById(R.id.coordinator);

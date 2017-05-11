@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="newtask_spinner_array_priority">
+        <item>@string/newtask_spinner_high</item>
+        <item>@string/newtask_spinner_middle</item>
+        <item>@string/newtask_spinner_low</item>
+    </string-array>
+</resources>

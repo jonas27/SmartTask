@@ -1,7 +1,7 @@
 package com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList;
 
 
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 
 /**
  * Created by joe on 28/04/2017.

@@ -44,9 +44,9 @@ import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SettingsActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureConverter;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.PictureConverter;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -94,6 +94,7 @@ public class SMMainActivity extends AppCompatActivity {
     private static Bitmap bitmap;
     private static ImageView mToolbarIcon;
     private ProfileObject mProfile;
+    private static String mProfileId;
 
     public static boolean showOnlyOwnTasks = false;
 
@@ -106,6 +107,7 @@ public class SMMainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         setIconToolbar();
+
     }
 
 
@@ -193,8 +195,10 @@ public class SMMainActivity extends AppCompatActivity {
                 if (position == 0) {
                     mActionAdd.setVisibility(View.INVISIBLE);
                 } else if (position == 1) {
-                    Log.d(TAG, "Current profile" + SharedPrefs.getCurrentProfile());
-                    mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+                    mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile(context));
+
+                    Log.d(TAG,"Value for current profile in shared: ");
+                    Log.d(TAG,"Value for current profile: " + mProfile.getPid());
                     switch (mProfile.getPprivileges()) {
                         case "1": {
                             mActionAdd.setVisibility(View.VISIBLE);
@@ -398,7 +402,7 @@ public class SMMainActivity extends AppCompatActivity {
             mToolbarIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
         } else {
             File mProfilePicture;
-            String userID = SharedPrefs.getCurrentProfile();
+            String userID = SharedPrefs.getCurrentProfile(context);
             String path = dir + userID + ".jpg";
             if (userID != "0") {
                 File profileImage = new File(path);

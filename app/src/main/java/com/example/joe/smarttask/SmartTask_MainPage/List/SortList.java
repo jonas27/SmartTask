@@ -1,13 +1,11 @@
 package com.example.joe.smarttask.SmartTask_MainPage.List;
 
-import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Settings.SubMenuFragments.SettList.SubSettingsListObject;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,7 +16,6 @@ public class SortList {
 
     public static final String DRAW_LINE = "drawLine";
     private static final String TAG = "CL_SortList";
-    private static SharedPrefs sharedPrefs;
 
 
     public static List<TaskObject> sortList(List<TaskObject> list) {
@@ -30,7 +27,6 @@ public class SortList {
     }
 
     private static List<TaskObject> preferedSort(List<TaskObject> list) {
-//        list=deleteNonUserTasks(list);
         switch (SharedPrefs.getPreferredOrder()) {
             case SubSettingsListObject.ORDER_BY_DATE: {
                 list = sortByDate(list);
@@ -112,7 +108,6 @@ public class SortList {
         list = sortByDate(list);
         List<TaskObject> priorityHighList = new ArrayList<>();
         List<TaskObject> priorityMiddleList = new ArrayList<>();
-        int position = 0;
 
         for (int c = 0; c < list.size(); c++) {
             if (list.get(c).getPriority().equals("1")) {

@@ -1,16 +1,14 @@
-package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers;
 
 import android.graphics.Bitmap;
 import android.view.View;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import java.net.URL;
-
 /**
+ * For future!
  * Created by joe on 02/05/2017.
  */
 

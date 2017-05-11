@@ -1,4 +1,4 @@
-package com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses;
+package com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -18,10 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.Map;
-
 /**
  * Created by us (with googles firebase methods)
  * Singleton class to manage all connections (Push and Pull) to FireBase
@@ -39,7 +35,6 @@ public class FireBase extends AppCompatActivity {
     private static ListTask mListTask;
     private static DataSnapshot sDataSnapshot;
     private static DataSnapshot sPDataSnapshot;
-    private Context context;
     // [Start declare Firebase variables]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -53,7 +48,6 @@ public class FireBase extends AppCompatActivity {
 
 
     private FireBase(Context context) {
-        this.context = context;
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 //        pull();
@@ -98,44 +92,6 @@ public class FireBase extends AppCompatActivity {
         mPostReference.child(Long.toString(mMessageObject.getDateTime())).setValue(mMessageObject);
     }
 
-//    private void createNewMessage(MessageObject mMessageObject) {
-//        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("messages");
-////        Log.d(TAG, key);
-////        if(mMessageObject.getDateTime().equals("")){
-////            mPostReference.child("User/" + user.getUid() + "/task/" + mMessageObject.getDateTime()).setValue(mMessageObject);
-//////            mMessageObject.setId(key);
-//////            mPostReference.child(key).setValue(mMessageObject);
-////        }
-////        else{
-//            mPostReference.child(mMessageObject.getDateTime()).setValue(mMessageObject);
-////        }
-//    }
-
-//    public void push(Map<String, String> map, String root) {
-//        /*
-//            Information should be pushed as a map with String destination on firebase server,value.
-//         */
-//        mDatabase = FirebaseDatabase.getInstance();
-//
-//        DatabaseReference myRef = mDatabase.getReference("User/" + user.getUid());
-//
-//        Iterator it = map.entrySet().iterator();
-//        String rootElement = null;
-//        String rootdistanation = root;
-//        while (it.hasNext()) {
-//            Map.Entry pair = (Map.Entry) it.next();
-//            Log.d(TAG, "key: " + pair.getKey() + "  val   " + pair.getValue());
-//            if (rootElement == null) {
-//                rootElement = myRef.push().getKey();
-//            }
-//            if (rootElement == null) {
-//                myRef.child(pair.getKey().toString()).setValue(pair.getValue());
-//            } else {
-//                myRef.child(rootdistanation).child(rootElement).child(pair.getKey().toString()).setValue(pair.getValue());
-//            }
-//            it.remove();
-//        }
-//    }
 
     /**
      * Methods from here fetch/pull data from server
@@ -201,7 +157,6 @@ public class FireBase extends AppCompatActivity {
     public boolean deleteTask(String id){
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child(("task/")+ id);
         mPostReference.removeValue();
-
         return false;
     }
 

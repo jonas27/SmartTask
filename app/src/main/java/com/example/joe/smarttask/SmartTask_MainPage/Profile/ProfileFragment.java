@@ -20,8 +20,8 @@ import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.PictureConverter;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.PictureConverter;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -85,7 +85,7 @@ public class ProfileFragment extends Fragment {
 
 //        on logout shared prefs are deleted and user should sign into profile again
 //       mProfile = ListProfile.getProfileList().get(0);
-       mProfile=ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+       mProfile=ListProfile.getProfile(SharedPrefs.getCurrentProfile(getContext()));
        this.mProfileId=mProfile.getPid();
        Log.d(TAG, "Profile id: " + mProfileId);
        storageRef = FirebaseStorage.getInstance().getReference();
@@ -188,18 +188,12 @@ public class ProfileFragment extends Fragment {
        if(profileImage.length()==0){
            mProfilePicture.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.smlogo));
        }
-
-
        return v;
     }
 
-
-
-
     @Override
     public void onResume(){
-        mListProfile = ListProfile.list();
-        this.mProfile=mListProfile.getProfile(mProfileId);
+        this.mProfile=ListProfile.getProfile(mProfileId);
         super.onResume();
         }
 

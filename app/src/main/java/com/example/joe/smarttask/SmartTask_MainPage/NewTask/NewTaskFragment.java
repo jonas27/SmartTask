@@ -16,11 +16,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.joe.smarttask.IntroSlider.IntroActivity;
 import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.FireBase;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.DatePickerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Widgets.TimePickerFragment;
@@ -110,14 +109,15 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
     //    This is for editing tasks.
 //    The old task is initialized as a new task with the values from the old task
     public void setParameters() {
+        int c;
         mCategories.setText(taskObject.getCategories());
         mDescription.setText(taskObject.getDescription());
 //        mFrequencySpinner.setText(taskObject.getFrequency());
         mName.setText(taskObject.getName());
         mPoints.setText(taskObject.getPoints());
-//        mPriority.setOnItemSelectedListener(taskObject.getPriority());
-//        mResponsible.setText(taskObject.getResponsible());
-
+        mPriority.setSelection(Integer.parseInt(taskObject.getPriority()));
+mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
+//        mResponsible.setPromptId(c);
         cal = new GregorianCalendar();
         cal.setTimeInMillis(Long.parseLong(taskObject.getDatetime()));
         mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
@@ -138,23 +138,25 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
 
         mPriority = (Spinner) v.findViewById(R.id.newtask_priority);
         mPriority.setPrompt(getString(R.string.newtask_priority));
-        String [] taskpriority={"1","2","3"};
-        ArrayAdapter adapterPriority = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,taskpriority);
+        ArrayAdapter adapterPriority =ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_item);
         mPriority.setAdapter(adapterPriority);
+        mPriority.setPrompt(getString(R.string.newtask_spinner_priority_prompt));
 
         mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
-
 //      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mFrequencySpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mFrequencySpinner.setAdapter(spinnerAdapter);
+        mFrequencySpinner.setPrompt(getString(R.string.newtask_spinner_frequency_prompt));
+        mFrequencySpinner.setPrompt(getResources().getString(R.string.newtask_spinner_frequency_prompt));
 
 //      Set click listener to Spinner for names, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mResponsible.setOnItemSelectedListener(this);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getProfileNames());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponsible.setAdapter(dataAdapter);
+
 
 
         mTime = (Button) v.findViewById(R.id.newtask_time);
@@ -263,7 +265,7 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
             Toast.makeText(getContext(), R.string.newtask_priority, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            t.setPriority(mPriority.getSelectedItem().toString());
+            t.setPriority(priority);
         }
         if (mPoints.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_points, Toast.LENGTH_SHORT).show();
@@ -287,42 +289,30 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
 
+    private void setSpinText(Spinner spin, String text)
+    {
+        for(int i= 0; i < spin.getAdapter().getCount(); i++)
+        {
+            if(spin.getAdapter().getItem(i).toString().contains(text))
+            {
+                spin.setSelection(i);
+            }
+        }
+
+    }
+
     /**
      * This defines the onclick behaviour of the spinner
      */
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         Spinner spinnerParent = (Spinner) parent;
         if (spinnerParent.getId() == R.id.newtask_frequency) {
-            switch (pos) {
-//            sets frequency
-                case 0: {
-                    frequency = "0";
-                    break;
-                }
-                case 1: {
-                    frequency = "1";
-                    break;
-                }
-                case 2: {
-                    frequency = "2";
-                    break;
-                }
-                case 3: {
-                    frequency = "3";
-                    break;
-                }
-                case 4: {
-                    frequency = "4";
-                    break;
-                }
-                case 5: {
-                    frequency = "5";
-                    break;
-                }
-            }
+           frequency=Integer.toString(0);
         } else if (spinnerParent.getId() == R.id.newtask_responsible) {
 //            sets responsible
-            mNameResponsible = getName(pos);
+            mNameResponsible = Integer.toString(pos);
+        }else if(spinnerParent.getId() == R.id.newtask_priority){
+            priority=Integer.toString(pos);
         }
     }
 

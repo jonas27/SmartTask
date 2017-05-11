@@ -30,7 +30,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsAndSuperclasses.SharedPrefs;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -87,28 +87,23 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if(introWasShown){
+        if (introWasShown) {
             openApp();
         }
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        intent = getIntent();
         super.onCreate(savedInstanceState);
 
         //        get sharedPrefs instance and open app if set to skip intro
         sharedPrefs = SharedPrefs.getSharedPrefs(this);
 
-
 //        get Firebase user
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        pullProfiles();
-//        pullTasks();
-
+        pullProfilesAndTasks();
 
         //set's the content (layout)
         setContentView(R.layout.intro_view_menu);
@@ -195,8 +190,6 @@ public class IntroActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
 
@@ -214,33 +207,32 @@ public class IntroActivity extends AppCompatActivity {
 
     //opens main app
     private void openApp() {
-        pList=ListProfile.getProfileList();
-        tList=ListTask.getSortList();
+        pList = ListProfile.getProfileList();
+        tList = ListTask.getSortList();
 
-            if (pList!=null) {
-                if (pList.size() == 0) {
-                    Intent intent = new Intent(this, CreateProfile.class);
-                    startActivity(intent);
-                } else if (SharedPrefs.getCurrentProfile().equals("") && pList.size()!=0) {
-                    Intent intent = new Intent(this, ChooseProfileActivity.class);
-                    startActivity(intent);
-                } else {
-                    if (tList!=null) {
-                        if (tList.size() == 1) {
-                            intent = new Intent(this, NewTaskActivity.class);
-                            startActivity(intent);
-                        } else {
-                                intent = new Intent(this, SMMainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
+        if (pList != null) {
+            if (pList.size() == 0) {
+                Intent intent = new Intent(this, CreateProfile.class);
+                startActivity(intent);
+            } else if (SharedPrefs.getCurrentProfile(getApplicationContext()).equals("")) {
+                Intent intent = new Intent(this, ChooseProfileActivity.class);
+                startActivity(intent);
+            } else {
+                if (tList != null) {
+                    if (tList.size() == 1) {
+                        intent = new Intent(this, NewTaskActivity.class);
+                        startActivity(intent);
+                    } else {
+                        intent = new Intent(this, SMMainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
-            else {
-                Toast.makeText(this, "Waiting for a connection!", Toast.LENGTH_LONG).show();
             }
+        } else {
+            Toast.makeText(this, "Waiting for a connection!", Toast.LENGTH_LONG).show();
         }
+    }
 
 
     public void onCheckboxClicked(View view) {
@@ -307,7 +299,7 @@ public class IntroActivity extends AppCompatActivity {
 
 
     //    Firebase loads profiles to check if new user
-    private void pullProfiles() {
+    private void pullProfilesAndTasks() {
 //    Log.d(TAG, mAuth.getCurrentUser().toString());
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid());
         postListener = new ValueEventListener() {
@@ -317,8 +309,8 @@ public class IntroActivity extends AppCompatActivity {
                 loadProfiles(profiles);
                 DataSnapshot tasks = mDataSnapshot.child(("task"));
                 loadTasks(tasks);
-                Log.d(TAG, "Getting profiles" + mDataSnapshot.getChildren().toString());
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
@@ -329,16 +321,13 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void loadProfiles(DataSnapshot mDataSnapshot) {
-            ListProfile.setDataSnapshot(mDataSnapshot);
+        ListProfile.setDataSnapshot(mDataSnapshot);
         pList = ListProfile.getProfileList();
-        Log.d(TAG, "Profile List size: " + pList.size());
     }
-
 
     private void loadTasks(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
         tList = ListTask.getSortList();
-        Log.d(TAG, "Tasks List size: " + tList.size());
     }
 
 
