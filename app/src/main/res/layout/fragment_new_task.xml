@@ -77,7 +77,7 @@
 
 
             <EditText
-                android:id="@+id/newtask_category"
+                android:id="@+id/newtask_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/newtask_frequency"
@@ -86,7 +86,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="17dp"
                 android:ems="25"
-                android:hint="@string/NewTaskCategory"
+                android:hint="@string/NewTaskLocation"
                 android:inputType="textAutoCorrect"
                 android:textSize="20sp" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/newtask_category"
+                android:layout_below="@+id/newtask_location"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="13dp"
@@ -104,6 +104,7 @@
                 android:gravity="left"
                 android:hint="@string/NewTaskFrequency"
                 android:inputType="number"
+                android:spinnerMode="dialog"
                 android:padding="15dp"
                 android:textSize="25sp" />
 
@@ -201,7 +202,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignEnd="@+id/newtask_date_image"
-                android:layout_alignTop="@+id/newtask_category"
+                android:layout_alignTop="@+id/newtask_location"
                 app:srcCompat="@drawable/ic_place_black_24dp" />
 
             <ImageView

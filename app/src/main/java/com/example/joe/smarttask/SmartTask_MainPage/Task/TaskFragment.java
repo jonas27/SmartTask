@@ -221,11 +221,12 @@ public class TaskFragment extends Fragment {
             public void onClick(View v) {
                 updatepoints();
                 FireBase fireBase = FireBase.fireBase(getContext());
-                Toast.makeText(getContext(), R.string.ViewTaskConfirmButton, Toast.LENGTH_SHORT).show();
+
                 Log.d(TAG, mTaskFrequency.getText().toString());
                 switch (mTask.getFrequency()) {
                     case 0: {
                         mTask.setStatus("true");
+                        Toast.makeText(getContext(), R.string.ViewTaskConfirmButton, Toast.LENGTH_SHORT).show();
                         fireBase.createTask(mTask);
                         getActivity().finish();
                         break;
@@ -236,6 +237,7 @@ public class TaskFragment extends Fragment {
                         cal.add(Calendar.DAY_OF_YEAR, 1);
                         mTask.setDatetime((cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
+                        Toast.makeText(getContext(), R.string.ViewTaskConfirmMoveOneDay, Toast.LENGTH_SHORT).show();
                         getActivity().finish();
                         break;
                     }
@@ -243,6 +245,7 @@ public class TaskFragment extends Fragment {
                         GregorianCalendar cal = new GregorianCalendar();
                         cal.setTimeInMillis((mTask.getDatetime()));
                         cal.add(Calendar.WEEK_OF_YEAR, 1);
+                        Toast.makeText(getContext(), R.string.ViewTaskConfirmMoveOneWeek, Toast.LENGTH_SHORT).show();
                         mTask.setDatetime((cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
@@ -251,6 +254,7 @@ public class TaskFragment extends Fragment {
                     case 3: {
                         GregorianCalendar cal = new GregorianCalendar();
                         cal.setTimeInMillis((mTask.getDatetime()));
+                        Toast.makeText(getContext(), R.string.ViewTaskConfirmMoveOneMonth, Toast.LENGTH_SHORT).show();
                         cal.add(Calendar.MONTH, 1);
                         mTask.setDatetime(cal.getTimeInMillis());
                         fireBase.createTask(mTask);
@@ -262,9 +266,9 @@ public class TaskFragment extends Fragment {
                         cal.setTimeInMillis((mTask.getDatetime()));
                         cal.add(Calendar.YEAR, 1);
                         mTask.setDatetime(cal.getTimeInMillis());
+                        Toast.makeText(getContext(), R.string.ViewTaskConfirmMoveOneYear, Toast.LENGTH_SHORT).show();
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(), "case 4", Toast.LENGTH_LONG).show();
                         break;
                     }
                 }

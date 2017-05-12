@@ -130,7 +130,7 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_task, container, false);
 
-        mCategories = (EditText) v.findViewById(R.id.newtask_category);
+        mCategories = (EditText) v.findViewById(R.id.newtask_location);
         mDescription = (EditText) v.findViewById(R.id.newtask_description);
         mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mName = (EditText) v.findViewById(R.id.newtask_name);
@@ -138,14 +138,15 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
 
         mPriority = (Spinner) v.findViewById(R.id.newtask_priority);
         mPriority.setPrompt(getString(R.string.newtask_priority));
-        ArrayAdapter adapterPriority =ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_item);
+        ArrayAdapter adapterPriority = ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_dropdown_item);
         mPriority.setAdapter(adapterPriority);
         mPriority.setPrompt(getString(R.string.newtask_spinner_priority_prompt));
+
 
         mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
 //      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mFrequencySpinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_dropdown_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mFrequencySpinner.setAdapter(spinnerAdapter);
         mFrequencySpinner.setPrompt(getString(R.string.newtask_spinner_frequency_prompt));
@@ -245,7 +246,7 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
 //            Toast.makeText(getContext(), R.string.newtask_frequency, Toast.LENGTH_SHORT).show();
 //            sTaskChecked = false;
         } else {
-            t.setFrequency(frequency);
+            t.setFrequency(mFrequencySpinner.getSelectedItemPosition());
         }
         if (mNameResponsible == "") {
             Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
@@ -265,7 +266,7 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
             Toast.makeText(getContext(), R.string.newtask_priority, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            t.setPriority(priority);
+            t.setPriority(mPriority.getSelectedItemPosition()+1);
         }
         if (mPoints.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_points, Toast.LENGTH_SHORT).show();

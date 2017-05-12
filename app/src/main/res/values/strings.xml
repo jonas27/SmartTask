@@ -56,7 +56,7 @@
 
     <!-- SmartTask Create Tasks -->
     <string name="NewTask_Headline">Define the task</string>
-    <string name="NewTaskCategory">Room/Area?</string>
+    <string name="NewTaskLocation">Room/Area?</string>
     <string name="smarttask_create_task_colour">Choose colour for task</string>
     <string name="NewTaskPoints">Define Points</string>
     <string name="NewTaskTime">Enter Due Time</string>
@@ -98,6 +98,13 @@
     <string name="ViewTaskAddPictureButton">Upload Picture</string>
     <string name="ViewTaskConfirmButton">Task Confirmed</string>
     <string name="ViewTaskUnConfirmButton">Restore Task</string>
+    <string name="ViewTaskConfirmMoveOneYear">Task Completed and move to next year</string>
+    <string name="ViewTaskConfirmMoveOneMonth">Task Completed and move to next Month</string>
+    <string name="ViewTaskConfirmMoveOneWeek">Task Completed and move to next Week</string>
+    <string name="ViewTaskConfirmMoveOneDay">Task Completed and move to tomorrow</string>
+
+
+
 
 
     <string name="open">open</string>
