@@ -41,6 +41,7 @@ public class ProfileObject implements Serializable {
         this.id = id;
         this.ptotalscore = ptotalscore;
         this.ppincode = ppincode;
+
     }
 
     //      [Start: Getter and setters for variables]

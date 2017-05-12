@@ -59,28 +59,6 @@ public class TaskObject implements Serializable {
         this.status = status;
         this.id = id;
         this.task = task;
-
-    }
-
-    // [START post_to_map]
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("categories", categories);
-        result.put("id", id);
-        result.put("status", status);
-        result.put("responsible", responsible);
-        result.put("priority", priority);
-        result.put("points", points);
-        result.put("owner", owner);
-        result.put("name", name);
-        result.put("frequency", frequency);
-        result.put("description", description);
-        result.put("datetime", datetime);
-        result.put("colorcode", colorcode);
-        result.put("task", task);
-
-        return result;
     }
 
 //      [Start: Getter and setters for variables]
@@ -168,8 +146,12 @@ public class TaskObject implements Serializable {
     public void setmCompleted(boolean mCompleted) {
         this.mCompleted = mCompleted;
     }
-
-
+    public long getDateTimePhoto() {
+        return dateTimePhoto;
+    }
+    public void setDateTimePhoto(long dateTimePhoto) {
+        this.dateTimePhoto = dateTimePhoto;
+    }
 //      [End: Getter and setters for variables]
 
 

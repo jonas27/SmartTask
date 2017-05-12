@@ -101,14 +101,6 @@ public class MessengerFragment extends Fragment {
         sRecyclerView.setLayoutManager(mLinearLayoutManager);
         mLinearLayoutManager.setStackFromEnd(true);
 
-        //        CoordinatorLayout.LayoutParams p = new CoordinatorLayout(sContext).LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT);
-//
-//        p.addRule(RelativeLayout.ABOVE, R.id.send);
-//        sRecyclerView.setLayoutParams(p);
-
-//        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-//        sRecyclerView.setLayoutManager(mLinearLayoutManager);
         return view;
     }
 
@@ -127,14 +119,14 @@ public class MessengerFragment extends Fragment {
         TextView message_other;
         TextView datetime_own;
         TextView datetime_other;
-        ImageView icon;
+//        ImageView icon;
         private MessageObject messageObject;
 
         //        bind views here (The Holder defines one list item, which are then coppied)
         public Holder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            icon = (ImageView) itemView.findViewById(R.id.icon);
+//            icon = (ImageView) itemView.findViewById(R.id.icon);
             name_own = (TextView) itemView.findViewById(R.id.name_own);
             name_other = (TextView) itemView.findViewById(R.id.name_other);
             message_own = (TextView) itemView.findViewById(R.id.messages_own);
@@ -148,9 +140,6 @@ public class MessengerFragment extends Fragment {
         public void onClick(View v) {
         }
 
-
-
-        //        TODO: Lots of duplicated code with loading image from sd --> centralize somewhere
         //    specify individual settings behaviour on layout
         private void bindMessage(MessageObject mMessageObject) {
             if (mMessageObject != null) {
@@ -175,42 +164,19 @@ public class MessengerFragment extends Fragment {
 
         }
 
-//        TODO: this is super intensive for the phone!
-        private void setIcon(String userId){
-            File mProfilePicture;
-            String path=DIR + userId + ".jpg";
-            if(userId!="0"){
-                File profileImage = new File(path);
-                if (profileImage.length()!=0) {
-                    icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 30));
-                } else {
-                    Log.d(TAG, "Getting from firebase");
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                    StorageReference currentImage = storageRef.child("images/" + userId + ".jpg");
-                    File localFile = null;
-                    try {
-                        localFile = new File(path);
-                        localFile.createNewFile();
-                        final File finalLocalFile = localFile;
-                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                Log.d(TAG, "Picture exist");
-                                icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle any errors
-                                Log.d(TAG, "NO Picture exist");
-                                icon.setImageDrawable(sContext.getResources().getDrawable(R.mipmap.smlogo));
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }}
+////        TODO: this is super intensive for the phone!
+//        private void setIcon(String userId){
+//            String path=DIR + userId + ".jpg";
+//            if(userId!="0"){
+//                File profileImage = new File(path);
+//                if (profileImage.length()>0) {
+//                    icon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 30));
+//                } else {
+////                    picture is downloaded either at ChooseProfile or at change user (in this class)
+//                        icon.setImageDrawable(sContext.getResources().getDrawable(R.mipmap.smlogo));
+//                    }
+//                }
+//            }
     }
 
     //    Purpose of the Addapter is to provide the data items for the recycler view (or more general the AdapterView)
@@ -286,8 +252,6 @@ public class MessengerFragment extends Fragment {
     private void callback(DataSnapshot mDataSnapshot) {
         MessageList.setDataSnapshot(mDataSnapshot);
         sList = MessageList.getSortedMessageList();
-
-//        Log.d(TAG, sList.get(2).getName());
         updateUI(sList);
     }
 

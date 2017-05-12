@@ -70,6 +70,7 @@ public class TaskFragment extends Fragment {
     private TextView mTaskPriority;
     private TextView mTaskPoints;
     private TextView mTaskFrequency;
+    private Button mTaskComplete;
     private Button mTaskDone;
     private Button mTaskPicture;
     private Button mTaskConfirm;
@@ -191,6 +192,8 @@ public class TaskFragment extends Fragment {
         });
 
 
+
+
         mTaskUnConfirm = (Button) v.findViewById(R.id.task_unbtn_confirm);
         mTaskUnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,6 +204,15 @@ public class TaskFragment extends Fragment {
                 fireBase.createTask(mTask);
                 getActivity().finish();
             }});
+
+        mTaskComplete = (Button) v.findViewById(R.id.task_btn_complete);
+        mTaskComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTask.setmCompleted(true);
+                Toast.makeText(getContext(), R.string.ViewTaskDoneButton, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);

@@ -1,7 +1,9 @@
 package com.example.joe.smarttask.SmartTask_MainPage;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,9 +14,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +37,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.joe.smarttask.ChooseProfile.ChooseProfileFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Messenger.MessengerFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.CreateProfile;
 import com.example.joe.smarttask.LogInActivity;
@@ -95,6 +101,8 @@ public class SMMainActivity extends AppCompatActivity {
     private static ImageView mToolbarIcon;
     private ProfileObject mProfile;
     private static String mProfileId;
+
+    private static EditText password;
 
     public static boolean showOnlyOwnTasks = false;
 
@@ -309,13 +317,44 @@ public class SMMainActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
-                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
-                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
                 dialog.cancel();
-                Intent intent= new Intent(context, SMMainActivity.class);
-                startActivity(intent);
-                finish();
+                final int pos = position;
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                alertDialog.setTitle("Place holder Passwort enter");
+                final EditText password = new EditText(getApplicationContext());
+                password.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                password.setHint(getString(R.string.signup_password));
+
+                LinearLayout ll=new LinearLayout(getApplicationContext());
+                ll.setOrientation(LinearLayout.VERTICAL);
+                ll.addView(password);
+                alertDialog.setView(ll);
+
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("Update",  new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (password.getText().toString().equals(ListProfile.getProfileList().get(pos).getPid())) {
+                            SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(pos).getPid());
+                            SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(pos).getPname());
+                            Intent intent = new Intent(getAppContext(), SMMainActivity.class);
+                            getAppContext().startActivity(intent);
+                            finish();
+                        } else {
+
+                            Toast.makeText(getAppContext(), "Placeholder but try again!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                alertDialog.create().show();
+
+
+//                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
+//                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
+//                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
+//                dialog.cancel();
+//                Intent intent= new Intent(context, SMMainActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
 
@@ -327,21 +366,38 @@ public class SMMainActivity extends AppCompatActivity {
 
     }
 
+    public void showDialog() {
+
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(new ChooseProfileFragment(), "dialog");
+        Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        ChooseProfileFragment newFragment = new ChooseProfileFragment();
+        newFragment.show(ft, "dialog");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 intent = new Intent(getAppContext(), ProfileActivity.class);
                 startActivity(intent);
-                finish();
                 return true;
             case R.id.menu_settings:
                 intent = new Intent(getAppContext(), SettingsActivity.class);
                 startActivity(intent);
-                finish();
                 return true;
             case R.id.menu_change_profile:
-                showProfiles(false);
+//                showProfiles(false);
+                showDialog();
                 return true;
             case R.id.menu_profile:
                 intent = new Intent(getAppContext(), ProfileActivity.class);
@@ -415,33 +471,10 @@ public class SMMainActivity extends AppCompatActivity {
             if (userID != "0") {
                 File profileImage = new File(path);
                 if (profileImage.length() > 0) {
-                    mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 100));
+                    mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
                 } else {
-                    Log.d(TAG, "Getting from firebase");
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
-                    File localFile = null;
-                    try {
-                        localFile = new File(path);
-                        localFile.createNewFile();
-                        final File finalLocalFile = localFile;
-                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                Log.d(TAG, "Picture exist");
-                                mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle any errors
-                                Log.d(TAG, "NO Picture exist");
-                                mToolbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    picture is downloaded either at ChooseProfile or at change user (in this class)
+                    mToolbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
                 }
             }
         }
@@ -472,53 +505,46 @@ public class SMMainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             view = inflater.inflate(R.layout.profile_square, parent, false);
-//            ProfileObject current = getItem(position);
-            Log.d(TAG, "Current postion of adapter: " + Integer.toString(position));
             ProfileObject current = ListProfile.getProfileList().get(position);
             TextView name = (TextView) view.findViewById(R.id.name);
             name.setText(current.getPname());
-
             TextView score = (TextView) view.findViewById(R.id.score);
-            Log.d(TAG, current.getPid());
             score.setText(Integer.toString(current.getPscore()));
 
             picture = (ImageView) view.findViewById(R.id.profile_image);
-            File mProfilePicture;
             String userID = current.getPid();
             String path = dir + userID + ".jpg";
-            if (userID != "0") {
+            if (userID != "") {
                 File profileImage = new File(path);
                 if (profileImage.length() != 0) {
-                    picture.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 100));
+                    picture.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 500));
                 } else {
-//                    Log.d(TAG, "Getting from firebase");
-//                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-//                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
-//                    File localFile = null;
-//                    try {
-//                        localFile = new File(path);
-//                        localFile.createNewFile();
-//                        final File finalLocalFile = localFile;
-//                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                                Log.d(TAG, "Picture exist");
-//                                picture.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 300));
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception exception) {
-//                                // Handle any errors
-//                                Log.d(TAG, "NO Picture exist");
-//                                picture.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
-//                            }
-//                        });
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+                    Log.d(TAG, "Getting from firebase");
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
+                    File localFile = null;
+                    try {
+                        localFile = new File(path);
+                        localFile.createNewFile();
+                        final File finalLocalFile = localFile;
+                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                picture.setImageBitmap(PictureConverter.getRoundProfilePicture(finalLocalFile.getAbsolutePath(), 500));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                picture.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             return view;
+
         }
 
     }

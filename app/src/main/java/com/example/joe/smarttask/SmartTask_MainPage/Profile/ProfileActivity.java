@@ -25,11 +25,6 @@ public class ProfileActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile(getAppContext()));
     }
 
@@ -44,60 +39,16 @@ public class ProfileActivity extends SingleFragmentActivity {
         return false;
     }
 
-
-
-    /*public static Intent newIntent(Context packageContext, String mId) {
-        Intent intent = new Intent(packageContext, ProfileActivity.class);
-        intent.putExtra(PROFILE_ID, mId);
-        return intent;
+    @Override
+    public void onResume(){
+        super.onResume();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    protected Fragment createFragment() {
-        return new ProfileFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewpager);
-
-        final String mPid = (String) getIntent().getSerializableExtra(PROFILE_ID);
-
-
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mProfileList = ListProfile.getProfileList();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
-            @Override
-            public Fragment getItem(int position) {
-                if (mProfileList == null) {
-                    ProfileFragment p=new ProfileFragment();
-                    return p;
-                }
-                ProfileObject profile = mProfileList.get(position);
-                return ProfileFragment.newInstance(profile.getPid());
-            }
-            @Override
-            public int getCount() {
-                if (mProfileList == null) {
-                    return 0;
-                }
-                return mProfileList.size();}
-
-
-        });
-        if (mProfileList == null) {
-            return;
-        }
-
-        for (int i = 0; i < mProfileList.size(); i++) {
-
-            if (mProfileList.get(i).getPid().equals(mPid)) {
-                mViewPager.setCurrentItem(i);
-                break; }
-        }
-*/    }
+  }
 
 
 
