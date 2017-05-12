@@ -78,11 +78,11 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
     private int time;
     private long datetime;
     private String description;
-    private String frequency;
+    private int frequency;
     private String mNameResponsible;
     private String owner;
     private String points;
-    private String priority;
+    private int priority;
     private String responsible;
     private String status;
     //    [End: Variables of a task]
@@ -114,12 +114,12 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
         mDescription.setText(taskObject.getDescription());
 //        mFrequencySpinner.setText(taskObject.getFrequency());
         mName.setText(taskObject.getName());
-        mPoints.setText(taskObject.getPoints());
-        mPriority.setSelection(Integer.parseInt(taskObject.getPriority()));
-mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
+        mPoints.setText(Integer.toString(taskObject.getPoints()));
+        mPriority.setSelection((taskObject.getPriority()));
+mFrequencySpinner.setSelection((taskObject.getFrequency()));
 //        mResponsible.setPromptId(c);
         cal = new GregorianCalendar();
-        cal.setTimeInMillis(Long.parseLong(taskObject.getDatetime()));
+        cal.setTimeInMillis((taskObject.getDatetime()));
         mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
         mTime.setText(String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
     }
@@ -233,7 +233,7 @@ mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
             cal.add(Calendar.MINUTE, time);
             datetime = cal.getTimeInMillis();
             Log.d(TAG, Long.toString(datetime));
-            t.setDatetime(Long.toString(datetime));
+            t.setDatetime((datetime));
         }
         if (mDescription.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_description, Toast.LENGTH_SHORT).show();
@@ -241,9 +241,9 @@ mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
         } else {
             t.setDescription(mDescription.getText().toString());
         }
-        if (frequency == "") {
-            Toast.makeText(getContext(), R.string.newtask_frequency, Toast.LENGTH_SHORT).show();
-            sTaskChecked = false;
+        if (frequency == 0) {
+//            Toast.makeText(getContext(), R.string.newtask_frequency, Toast.LENGTH_SHORT).show();
+//            sTaskChecked = false;
         } else {
             t.setFrequency(frequency);
         }
@@ -251,7 +251,7 @@ mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
             Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            t.setResponsible(mNameResponsible);
+            t.setResponsible(mResponsible.getSelectedItem().toString());
         }
 
         if (mName.getText().toString().equals("")) {
@@ -271,7 +271,7 @@ mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
             Toast.makeText(getContext(), R.string.newtask_points, Toast.LENGTH_SHORT).show();
             sTaskChecked = false;
         } else {
-            t.setPoints(mPoints.getText().toString());
+            t.setPoints(Integer.parseInt(mPoints.getText().toString()));
         }
         t.setStatus("false");
         if (taskObject != null) {
@@ -307,12 +307,9 @@ mFrequencySpinner.setSelection(Integer.parseInt(taskObject.getFrequency()));
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         Spinner spinnerParent = (Spinner) parent;
         if (spinnerParent.getId() == R.id.newtask_frequency) {
-           frequency=Integer.toString(0);
-        } else if (spinnerParent.getId() == R.id.newtask_responsible) {
-//            sets responsible
-            mNameResponsible = Integer.toString(pos);
+           frequency=pos;
         }else if(spinnerParent.getId() == R.id.newtask_priority){
-            priority=Integer.toString(pos);
+            priority=pos;
         }
     }
 

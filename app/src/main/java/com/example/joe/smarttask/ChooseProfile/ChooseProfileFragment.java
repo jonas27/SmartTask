@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +48,7 @@ import java.util.List;
  * Created by joe on 06/05/2017.
  */
 
-public class ChooseProfileFragment extends Fragment {
+public class ChooseProfileFragment extends DialogFragment {
 
     //TAG for Logs
     private static final String TAG = "CL_ChoosePrFr";
@@ -69,14 +70,19 @@ public class ChooseProfileFragment extends Fragment {
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
-        int permsRequestCode = 200;
-        requestPermissions(perms, permsRequestCode);
+    /**
+     * Create a new instance of MyDialogFragment, providing "num"
+     * as an argument.
+     */
+    public static ChooseProfileFragment newInstance() {
+        ChooseProfileFragment f = new ChooseProfileFragment();
 
+        // Supply num input as an argument.
+        Bundle args = new Bundle();
+        f.setArguments(args);
+
+        return f;
     }
 
 
@@ -166,7 +172,8 @@ public class ChooseProfileFragment extends Fragment {
                         SharedPrefs.setCurrentProfile(profileObject.getPid());
                         Intent intent = new Intent(sContext, SMMainActivity.class);
                         sContext.startActivity(intent);
-                        activity.finish();
+                        dialog.cancel();
+//                        activity.finish();
                     } else {
                         dialog.cancel();
                         Toast.makeText(sContext, "Placeholder but try again!", Toast.LENGTH_SHORT).show();
@@ -179,18 +186,16 @@ public class ChooseProfileFragment extends Fragment {
         //    specify individual settings behaviour on layout
         private void bindProfile(ProfileObject mProfileObject) {
             profileObject = mProfileObject;
-            Log.d(TAG, "This is Profile with name: " + profileObject.getPname());
             if (profileObject != null) {
                 name.setText(profileObject.getPname());
-                score.setText(profileObject.getPscore());
+                score.setText(Integer.toString(profileObject.getPscore()));
                 String userID = profileObject.getPid();
                 String path=DIR + userID + ".jpg";
                 if(userID!="0"){
                     File profileImage = new File(path);
                     if (profileImage.length()!=0) {
-                        icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 500));
+                        icon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 500));
                     } else {
-                        Log.d(TAG, "Getting from firebase");
                         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
                         StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
                         File localFile = null;
@@ -202,7 +207,7 @@ public class ChooseProfileFragment extends Fragment {
                                 @Override
                                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                     Log.d(TAG, "Picture exist");
-                                    icon.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 100));
+                                    icon.setImageBitmap(PictureConverter.getRoundProfilePicture(finalLocalFile.getAbsolutePath(), 500));
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override

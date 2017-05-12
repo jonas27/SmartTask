@@ -1,15 +1,19 @@
 package com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.joe.smarttask.R;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Messenger.MessageObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +21,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by us (with googles firebase methods)
@@ -28,6 +38,8 @@ public class FireBase extends AppCompatActivity {
 
     //TAG for Logs
     private static final String TAG = "CL_FireBase";
+
+    private static final String dir = "/storage/emulated/0/smarttask/";
     public static boolean isAdmin;
     //private static final String TAG = "SmartTask_FireBase";
     // Singleton object of class itself
@@ -75,7 +87,6 @@ public class FireBase extends AppCompatActivity {
 
     private void createNewTask(TaskObject mTaskObject) {
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
-//        Log.d(TAG, key);
         if(mTaskObject.getId().equals("")){
             String key = mPostReference.child("User/" + user.getUid() + "/task").push().getKey();
             mTaskObject.setId(key);
@@ -159,8 +170,6 @@ public class FireBase extends AppCompatActivity {
         mPostReference.removeValue();
         return false;
     }
-
-
 
 
     //        [Start: logout]

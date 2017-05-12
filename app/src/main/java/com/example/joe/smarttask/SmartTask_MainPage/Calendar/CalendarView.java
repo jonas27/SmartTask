@@ -230,7 +230,7 @@ public class CalendarView extends LinearLayout
             Date ccDate = null;
             for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
                 TaskObject current = i.next();
-                Date cDate = new Date(Long.parseLong(current.getDatetime()));
+                Date cDate = new Date(current.getDatetime());
 
                 if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
                     counter++;

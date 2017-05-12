@@ -22,17 +22,18 @@ public class TaskObject implements Serializable {
 //    [Start: Variables of a task (Naming has to be equal to FireBase, so don'p change!)]
     private String categories;
     private String colorcode;
-    private String datetime;
+    private long datetime;
     private String description;
-    private String frequency;
+    private int frequency;
     private String name;
     private String owner;
-    private String points;
-    private String priority;
+    private int points;
+    private int priority;
     private String responsible;
     private String status;
     private String id;
     private String task;
+    private long dateTimePhoto;
 //    [End: Variables of a task]
 
     private boolean mCompleted;
@@ -42,9 +43,9 @@ public class TaskObject implements Serializable {
         super();
     }
 
-    public TaskObject(String categories, String datetime,
-                      String description, String frequency, String name, String owner,
-                      String priority, String responsible, String points, String status, String id, String task) {
+    public TaskObject(String categories, long datetime,
+                      String description, int frequency, String name, String owner,
+                      int priority, String responsible, int points, String status, String id, String task) {
         super();
         this.categories = categories;
         this.datetime = datetime;
@@ -58,28 +59,6 @@ public class TaskObject implements Serializable {
         this.status = status;
         this.id = id;
         this.task = task;
-
-    }
-
-    // [START post_to_map]
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("categories", categories);
-        result.put("id", id);
-        result.put("status", status);
-        result.put("responsible", responsible);
-        result.put("priority", priority);
-        result.put("points", points);
-        result.put("owner", owner);
-        result.put("name", name);
-        result.put("frequency", frequency);
-        result.put("description", description);
-        result.put("datetime", datetime);
-        result.put("colorcode", colorcode);
-        result.put("task", task);
-
-        return result;
     }
 
 //      [Start: Getter and setters for variables]
@@ -95,10 +74,10 @@ public class TaskObject implements Serializable {
     public void setColorcode(String colorcode) {
         this.colorcode = colorcode;
     }
-    public String getDatetime() {
+    public long getDatetime() {
         return datetime;
     }
-    public void setDatetime(String datetime) {
+    public void setDatetime(long datetime) {
         this.datetime = datetime;
     }
     public String getDescription() {
@@ -107,10 +86,10 @@ public class TaskObject implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getFrequency() {
+    public int getFrequency() {
         return frequency;
     }
-    public void setFrequency(String frequency) {
+    public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
     public String getName() {
@@ -125,16 +104,16 @@ public class TaskObject implements Serializable {
     public void setOwner(String owner) {
         this.owner = owner;
     }
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
-    public String getPriority() {
+    public int getPriority() {
         return priority;
     }
-    public void setPriority(String priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
     public String getResponsible() {
@@ -167,8 +146,12 @@ public class TaskObject implements Serializable {
     public void setmCompleted(boolean mCompleted) {
         this.mCompleted = mCompleted;
     }
-
-
+    public long getDateTimePhoto() {
+        return dateTimePhoto;
+    }
+    public void setDateTimePhoto(long dateTimePhoto) {
+        this.dateTimePhoto = dateTimePhoto;
+    }
 //      [End: Getter and setters for variables]
 
 

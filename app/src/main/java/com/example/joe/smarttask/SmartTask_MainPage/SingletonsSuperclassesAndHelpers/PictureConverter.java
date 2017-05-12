@@ -61,10 +61,9 @@ public class PictureConverter extends AppCompatImageView{
     /**
      * @param radius: use around 100 for small profile picture and 300 for bigger pictures
      * */
-    public static Bitmap getRoundProfilePicture(Bitmap bitmap, int radius){
-        return getNewRoundProfilePicture(bitmap, radius);
+    public static Bitmap getRoundProfilePicture(String path, int radius){
+        return getNewRoundProfilePicture(getBitmap(path), radius);
     }
-
 
     private static Bitmap getNewRoundProfilePicture(Bitmap bmp, int radius) {
         Bitmap sbmp;
@@ -115,6 +114,8 @@ public class PictureConverter extends AppCompatImageView{
         // Read in and create final bitmap
         return BitmapFactory.decodeFile(path, options);
     }
+
+
 
     public static Bitmap getBitmap(String path){
         return BitmapFactory.decodeFile(path);

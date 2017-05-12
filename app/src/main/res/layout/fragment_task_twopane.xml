@@ -187,7 +187,7 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:layout_alignStart="@+id/task_btn_done"
+            android:layout_alignStart="@+id/task_btn_complete"
             android:layout_below="@+id/task_status"
             android:layout_marginTop="40dp"
             android:text="@string/ViewTaskAddPictureButton" />
@@ -210,13 +210,13 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/task_btn_done"
+            android:layout_below="@+id/task_btn_complete"
             android:layout_marginStart="11dp"
             android:text="@string/ViewTaskConfirmButton" />
 
 
         <Button
-            android:id="@+id/task_btn_done"
+            android:id="@+id/task_btn_complete"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="150dp"
             android:layout_height="match_parent"
@@ -229,7 +229,7 @@
             android:layout_height="match_parent"
             android:layout_alignBottom="@id/task_btn_confirm"
             android:layout_below="@id/task_status"
-            android:layout_toRightOf="@+id/task_btn_done">
+            android:layout_toRightOf="@+id/task_btn_complete">
 
         <ImageView
             android:id="@+id/task_imageview"

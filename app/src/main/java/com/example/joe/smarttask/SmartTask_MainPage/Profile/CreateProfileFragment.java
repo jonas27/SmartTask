@@ -84,22 +84,21 @@ public class CreateProfileFragment extends Fragment {
         } else {
             t.setPpincode(PinCode.getText().toString());
         }
-        t.setPscore("0");
+        t.setPscore(0);
         switch (Privilgies.getSelectedItemPosition()){
             case(0):
-                t.setPprivileges("1");
+                t.setPprivileges(1);
                 break;
             case(1):
-                t.setPprivileges("2");
+                t.setPprivileges(2);
                 break;
             case(2):
-                t.setPprivileges("3");
+                t.setPprivileges(3);
                 break;
             default:
-                t.setPprivileges("1");
+                t.setPprivileges(1);
         }
         t.setPid("");
-        t.setPtotalscore("0");
-
+        t.setPtotalscore(0);
     }
 }
