@@ -133,42 +133,40 @@ public class TaskFragment extends Fragment {
         switch (mTask.getPriority()) {
 //            case "1": mTaskPriority.setText(R.string.);
         }
-        mTaskPriority.setText(mTask.getPriority());
+        mTaskPriority.setText(Integer.toString(mTask.getPriority()));
 
         mTaskFrequency = (TextView) v.findViewById(R.id.task_frequency);
-        if (mTask.getFrequency() != null) {
             switch (mTask.getFrequency()) {
-                case "0": {
+                case 0: {
                     mTaskFrequency.setText("Once");
                     break;
                 }
-                case "1": {
+                case 1: {
                     mTaskFrequency.setText(R.string.newtask_spinner_daily);
                     break;
                 }
-                case "2": {
+                case 2: {
                     mTaskFrequency.setText(R.string.newtask_spinner_weekly);
                     break;
                 }
-                case "3": {
+                case 3: {
                     mTaskFrequency.setText(R.string.newtask_spinner_monthly);
                     break;
                 }
-                case "4": {
+                case 4: {
                     mTaskFrequency.setText(R.string.newtask_spinner_yearly);
                     break;
                 }
             }
-        }
 
 
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
-        mTaskPoints.setText(mTask.getPoints());
+        mTaskPoints.setText(Integer.toString(mTask.getPoints()));
 
 
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
         td = new GregorianCalendar();
-        td.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+        td.setTimeInMillis((mTask.getDatetime()));
         mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
 
 
@@ -214,48 +212,44 @@ public class TaskFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.ViewTaskConfirmButton, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, mTaskFrequency.getText().toString());
                 switch (mTask.getFrequency()) {
-                    case "0": {
+                    case 0: {
                         mTask.setStatus("true");
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(), "case 0", Toast.LENGTH_LONG).show();
                         break;
                     }
-                    case "1": {
+                    case 1: {
                         GregorianCalendar cal = new GregorianCalendar();
-                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.setTimeInMillis((mTask.getDatetime()));
                         cal.add(Calendar.DAY_OF_YEAR, 1);
-                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        mTask.setDatetime((cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(), "case 1", Toast.LENGTH_LONG).show();
                         break;
                     }
-                    case "2": {
+                    case 2: {
                         GregorianCalendar cal = new GregorianCalendar();
-                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.setTimeInMillis((mTask.getDatetime()));
                         cal.add(Calendar.WEEK_OF_YEAR, 1);
-                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        mTask.setDatetime((cal.getTimeInMillis()));
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(), "case 2", Toast.LENGTH_LONG).show();
                         break;
                     }
-                    case "3": {
+                    case 3: {
                         GregorianCalendar cal = new GregorianCalendar();
-                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.setTimeInMillis((mTask.getDatetime()));
                         cal.add(Calendar.MONTH, 1);
-                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        mTask.setDatetime(cal.getTimeInMillis());
                         fireBase.createTask(mTask);
                         getActivity().finish();
-                        Toast.makeText(getContext(), "case 3", Toast.LENGTH_LONG).show();
                         break;
                     }
-                    case "4": {
+                    case 4: {
                         GregorianCalendar cal = new GregorianCalendar();
-                        cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+                        cal.setTimeInMillis((mTask.getDatetime()));
                         cal.add(Calendar.YEAR, 1);
-                        mTask.setDatetime(Long.toString(cal.getTimeInMillis()));
+                        mTask.setDatetime(cal.getTimeInMillis());
                         fireBase.createTask(mTask);
                         getActivity().finish();
                         Toast.makeText(getContext(), "case 4", Toast.LENGTH_LONG).show();
@@ -263,14 +257,9 @@ public class TaskFragment extends Fragment {
                     }
                 }
                 fireBase.createTask(mTask);
-
-                Toast.makeText(getContext(), "using fix", Toast.LENGTH_LONG).show();
                 getActivity().finish();
             }
         });
-        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
-        int permsRequestCode = 200;
-        requestPermissions(perms, permsRequestCode);
 
         mTaskPicture = (Button) v.findViewById(R.id.task_btn_add_picture);
         mTaskPicture.setOnClickListener(new View.OnClickListener() {
@@ -332,12 +321,11 @@ public class TaskFragment extends Fragment {
         }
 
 //        if separator (list item to show adds)
-        if (mTask.getPriority().equals("-1")) {
+        if (mTask.getPriority()==(-1)) {
             mTaskDate.setVisibility(View.INVISIBLE);
             mTaskSolved.setVisibility(View.INVISIBLE);
             mTaskEdit.setVisibility(View.INVISIBLE);
             mTaskDelete.setVisibility(View.INVISIBLE);
-
             mTaskName.setVisibility(View.INVISIBLE);
             mTaskResponsible.setVisibility(View.INVISIBLE);
             mTaskDescription.setVisibility(View.INVISIBLE);
@@ -381,7 +369,7 @@ public class TaskFragment extends Fragment {
         p =ListProfile.getProfile(SharedPrefs.getCurrentProfile(getContext()));
         storageRef = FirebaseStorage.getInstance().getReference();
 
-        if (p.getPprivileges().toString().equals("3")){
+        if (p.getPprivileges()==3){
             mTaskDelete.setVisibility(View.INVISIBLE);
             mTaskEdit.setVisibility(View.INVISIBLE);
             mTaskConfirm.setVisibility(View.INVISIBLE);
@@ -396,8 +384,8 @@ public class TaskFragment extends Fragment {
             p=itr.next();
             if (p.getPname().equals(mTask.getResponsible())) {
                 int add = 1;
-                p.setPtotalscore(Long.toString(Long.parseLong(p.getPtotalscore()) + Long.parseLong("1")));
-                p.setPscore(Long.toString(Long.parseLong(p.getPscore()) + Long.parseLong(mTask.getPoints())));
+                p.setPtotalscore(p.getPtotalscore() + 1);
+                p.setPscore(p.getPscore() + mTask.getPoints());
                 FireBase fireBase =  FireBase.fireBase(getContext());
                 fireBase.createProfile(p);
                 return;
@@ -409,7 +397,6 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onResume() {
-//        mList = ListTask.list(getContext());
         this.mTask = ListTask.getTask(mTaskId);
         super.onResume();
     }
@@ -417,7 +404,6 @@ public class TaskFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Log.d(TAG, file);
             Bitmap bitmap = BitmapFactory.decodeFile(file);

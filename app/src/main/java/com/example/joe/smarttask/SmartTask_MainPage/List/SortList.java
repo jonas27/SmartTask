@@ -65,8 +65,8 @@ public class SortList {
         TaskObject tO = new TaskObject();
         tO.setStatus(DRAW_LINE);
         tO.setId(DRAW_LINE);
-            tO.setDatetime("1111111111111");
-            tO.setPriority("-1");
+            tO.setDatetime(1111111111111l);
+            tO.setPriority(-1);
             tO.setResponsible("0");
         tO.setName("0");
         tO.setDescription("0");
@@ -90,7 +90,7 @@ public class SortList {
         for (TaskObject t : list) {
             position = 0;
             for (int c = 0; c < sortedList.size(); c++) {
-                if (Long.parseLong(t.getDatetime()) > Long.parseLong(sortedList.get(c).getDatetime())) {
+                if (t.getDatetime() > sortedList.get(c).getDatetime()) {
                     position = c;
                     break;
                 }
@@ -110,11 +110,11 @@ public class SortList {
         List<TaskObject> priorityMiddleList = new ArrayList<>();
 
         for (int c = 0; c < list.size(); c++) {
-            if (list.get(c).getPriority().equals("1")) {
+            if (list.get(c).getPriority()==(1)) {
                 priorityHighList.add(list.get(c));
                 list.remove(c);
                 c--;
-            } else if (list.get(c).getPriority().equals("2")) {
+            } else if (list.get(c).getPriority()==2) {
                 priorityMiddleList.add(list.get(c));
                 list.remove(c);
                 c--;

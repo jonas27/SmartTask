@@ -63,7 +63,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         //                if pro user remove ads (separator line)
         if (SharedPrefs.getProUser()) {
             for (int c = 0; c < mTasksList.size(); c++) {
-                if (mTasksList.get(c).getPriority().equals("-1")) {
+                if (mTasksList.get(c).getPriority()==-1) {
                     separator = mTasksList.get(c);
                     mTasksList.remove(c);
                     separatorPosition = c;

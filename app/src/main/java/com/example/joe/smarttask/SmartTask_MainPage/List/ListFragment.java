@@ -54,7 +54,7 @@ public class ListFragment extends Fragment {
 
     //    sets the seperating bar in the recycler view
     private static boolean firstCompletedTask = true;
-    private static List<TaskObject> sList;
+    public static List<TaskObject> sList;
     public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
     // [Start: get Singletons]
     private FireBase mFireBase;
@@ -77,18 +77,15 @@ public class ListFragment extends Fragment {
     //    Use notifyDataSetChanged on all views as we do not know
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
-    public void updateUI(List<TaskObject> list) {
-//        Log.d("CLASS_LF", Integer.toString(mList.size()));
-//        Log.d("CLASS_LF", mList.get(0).getName());
+    public void updateUI() {
 
         sList = ListTask.getSortList();
         if (sListRecyclerView != null) {
-            sAdapter = new TaskAdapter(list);
+            sAdapter = new TaskAdapter(sList);
             sListRecyclerView.setAdapter(sAdapter);
             sAdapter.notifyDataSetChanged();
 
         }
-
     }
 
     //    specifies what is initialized when the view is created
@@ -129,7 +126,6 @@ public class ListFragment extends Fragment {
         return view;
     }
 
-
 //    private void initSingletons() {
 //        mFireBase = FireBase.fireBase(getContext());
 //    }
@@ -162,7 +158,7 @@ public class ListFragment extends Fragment {
         private TaskObject mTask;
         private GregorianCalendar cal;
 
-        public TaskHolder(View itemView) {
+        private TaskHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_title);
@@ -211,18 +207,18 @@ public class ListFragment extends Fragment {
             }
 
             cal = new GregorianCalendar();
-            cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+            cal.setTimeInMillis((mTask.getDatetime()));
             mDateTextView.setText(new SimpleDateFormat("MMM").format(cal.getTime()) + " " + cal.get(Calendar.DAY_OF_MONTH));
 
 //            change rounded layout view priority
-            if (Integer.parseInt(mTask.getPriority()) == 1) {
+            if (mTask.getPriority() == 1) {
                 String s = Integer.toString(R.string.list_high_p);
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_high_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_high_p_red));
-            } else if (Integer.parseInt(mTask.getPriority()) == 2) {
+            } else if ((mTask.getPriority()) == 2) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_middle_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_middle_p_orange));
-            } else if (Integer.parseInt(mTask.getPriority()) == 3) {
+            } else if ((mTask.getPriority()) == 3) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_low_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }
@@ -257,7 +253,7 @@ public class ListFragment extends Fragment {
     private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
         private List<TaskObject> mListTasks;
 
-        public TaskAdapter(List<TaskObject> mListTasks) {
+        private TaskAdapter(List<TaskObject> mListTasks) {
             this.mListTasks = mListTasks;
         }
 
@@ -316,7 +312,7 @@ public class ListFragment extends Fragment {
         sList=ListTask.getSortList();
 
 //        Log.d(TAG, sList.get(2).getName());
-        updateUI(sList);
+        updateUI();
 
         if(detailView!=null && firstTime) {
 //              @param getId: Create new Fragment with first TaskObject in list

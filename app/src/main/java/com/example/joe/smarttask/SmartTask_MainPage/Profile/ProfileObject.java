@@ -17,11 +17,12 @@ public class ProfileObject implements Serializable {
 
     //    [Start: Variables of a task (Naming has to be equal to FireBase, so don't change!)]
     private String pname;
-    private String pscore;
-    private String pprivileges;
+    private int pscore;
+    private int pprivileges;
     private String id;
-    private String ptotalscore;
+    private int ptotalscore;
     private String ppincode;
+    private long dateTimePhoto;
 //    [End: Variables of a task]
 
     private boolean mCompleted;
@@ -31,8 +32,8 @@ public class ProfileObject implements Serializable {
         super();
     }
 
-    public ProfileObject(String pname, String pscore, String ppincode,
-                         String pprivileges, String id, String ptotalscore) {
+    public ProfileObject(String pname, int pscore, String ppincode,
+                         int pprivileges, String id, int ptotalscore) {
         super();
         this.pscore = pscore;
         this.pprivileges = pprivileges;
@@ -40,29 +41,14 @@ public class ProfileObject implements Serializable {
         this.id = id;
         this.ptotalscore = ptotalscore;
         this.ppincode = ppincode;
-
-    }
-
-    // [START post_to_map]
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("pscore", pscore);
-        result.put("id", id);
-        result.put("pname", pname);
-        result.put("pprivileges", pprivileges);
-        result.put("ptotalscore", ptotalscore);
-        result.put("ppincode", ppincode);
-
-        return result;
     }
 
     //      [Start: Getter and setters for variables]
-    public String getPscore() {return pscore; }
-    public void setPscore(String score) {this.pscore = score;}
-    public String getPprivileges() {return pprivileges;}
+    public int getPscore() {return pscore; }
+    public void setPscore(int score) {this.pscore = score;}
+    public int getPprivileges() {return pprivileges;}
 
-    public void setPprivileges(String pprivileges) {
+    public void setPprivileges(int pprivileges) {
         this.pprivileges = pprivileges;
     }
 
@@ -76,20 +62,24 @@ public class ProfileObject implements Serializable {
         return id;
     }
     public void setPid(String id) {this.id = id;}
-    public String getPtotalscore() {return ptotalscore;}
-    public void setPtotalscore(String ptotalscore) {this.ptotalscore = ptotalscore;}
+    public int getPtotalscore() {return ptotalscore;}
+    public void setPtotalscore(int ptotalscore) {this.ptotalscore = ptotalscore;}
     public String getPpincode() {return ppincode;}
     public void setPpincode(String ppincode) {this.ppincode = ppincode;
     }
-
     public boolean isCompleted() {
         return mCompleted;
     }
     public void setmCompleted(boolean mCompleted) {
         this.mCompleted = mCompleted;
     }
-
-    //      [End: Getter and setters for variables]
+    public long getDateTimePhoto() {
+        return dateTimePhoto;
+    }
+    public void setDateTimePhoto(long dateTimePhoto) {
+        this.dateTimePhoto = dateTimePhoto;
+    }
+//      [End: Getter and setters for variables]
 
 
 }

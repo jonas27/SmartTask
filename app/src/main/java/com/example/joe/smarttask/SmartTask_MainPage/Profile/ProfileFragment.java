@@ -100,13 +100,13 @@ public class ProfileFragment extends Fragment {
         mViewProfilePrivileges = (TextView) v.findViewById(R.id.view_profile_privileges);
        String privilegesview = null;
        switch (mProfile.getPprivileges()){
-           case("1"):
+           case(1):
                privilegesview = getString(R.string.smarttask_create_profile_spinner_admin);
                break;
-           case("2"):
+           case(2):
                privilegesview = getString(R.string.smarttask_create_profile_spinner_user);
                break;
-           case("3"):
+           case(3):
                privilegesview = getString(R.string.smarttask_create_profile_spinner_kid);
                break;
        }
@@ -116,10 +116,6 @@ public class ProfileFragment extends Fragment {
         mViewProfileTotalTask.setText(mProfile.getPtotalscore() + getString(R.string.view_profile_addtext_completed_task));
 
        getActivity().setTitle(mProfile.getPname());
-
-       String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"};
-       int permsRequestCode = 200;
-       requestPermissions(perms, permsRequestCode);
 
        mProfilePicture = (ImageView) v.findViewById(R.id.profile_image);
        mProfilePicture.setOnClickListener(new View.OnClickListener() {

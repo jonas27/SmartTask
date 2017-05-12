@@ -62,7 +62,7 @@ public class SingleDayFragment extends Fragment {
         Date ccDate = new Date(SingleDayActivity.getDate());
         for (Iterator<TaskObject> i = sList.iterator(); i.hasNext(); ) {
             TaskObject current = i.next();
-            Date cDate = new Date(Long.parseLong(current.getDatetime()));
+            Date cDate = new Date((current.getDatetime()));
             Log.d(TAG," task "+cDate.getDate()+" "+cDate.getMonth()+" "+cDate.getYear());
             Log.d(TAG," current "+ccDate.getDate()+" "+ccDate.getMonth()+" "+ccDate.getYear());
             if(ccDate.getDate()==cDate.getDate()&&ccDate.getMonth()==cDate.getMonth()&&ccDate.getYear()==cDate.getYear()){
@@ -130,18 +130,18 @@ public class SingleDayFragment extends Fragment {
             }
 
             cal = new GregorianCalendar();
-            cal.setTimeInMillis(Long.parseLong(mTask.getDatetime()));
+            cal.setTimeInMillis((mTask.getDatetime()));
             mDateTextView.setText(new SimpleDateFormat("MMM").format(cal.getTime()) + " " + cal.get(Calendar.DAY_OF_MONTH));
 
 //            change rounded layout view priority
-            if (Integer.parseInt(mTask.getPriority()) == 1) {
+            if ((mTask.getPriority()) == 1) {
                 String s = Integer.toString(R.string.list_high_p);
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_high_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_high_p_red));
-            } else if (Integer.parseInt(mTask.getPriority()) == 2) {
+            } else if ((mTask.getPriority()) == 2) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_middle_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_middle_p_orange));
-            } else if (Integer.parseInt(mTask.getPriority()) == 3) {
+            } else if ((mTask.getPriority()) == 3) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_low_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }

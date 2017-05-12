@@ -115,6 +115,8 @@ public class MessengerFragment extends Fragment {
     public void setSendButton(){}
 
 
+
+
     //    [Start: RecyclerView Holder and Adapter]
     // Provides a reference to the views for each data item
     private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -144,9 +146,8 @@ public class MessengerFragment extends Fragment {
         //        specify what happens when click on a list item
         @Override
         public void onClick(View v) {
-
-
         }
+
 
 
         //        TODO: Lots of duplicated code with loading image from sd --> centralize somewhere
@@ -236,6 +237,13 @@ public class MessengerFragment extends Fragment {
         @Override
         public int getItemCount() {
             return list.size();
+        }
+
+        @Override
+        public void onViewAttachedToWindow(Holder holder){
+            super.onViewAttachedToWindow(holder);
+            if(!holder.name_other.getText().toString().contentEquals("#EMPTYVIEW") || !holder.name_own.getText().toString().contentEquals("#EMPTYVIEW"))
+                holder.itemView.setVisibility(View.VISIBLE);
         }
     }
 //    [End: RecyclerView Holder and Adapter]

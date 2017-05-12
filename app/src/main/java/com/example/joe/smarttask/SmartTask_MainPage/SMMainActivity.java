@@ -138,19 +138,25 @@ public class SMMainActivity extends AppCompatActivity {
                 if (showOnlyOwnTasks) {
                     getSupportActionBar().setTitle("   " + SharedPrefs.getCurrentUser());
                     mToolbarIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_list_white_24dp));
-                    finish();
+                    ListFragment listFragment = (ListFragment) mMainPagerAdapter.getItem(1);
+                    // Check if the tab fragment is available
+                    if (listFragment != null) {
+                        // Call your method in the TabFragment
+                        listFragment.updateUI();
+                    }
                 } else {
                     getSupportActionBar().setTitle("   SmartTask");
                     setIconToolbar();
-                    finish();
+                    ListFragment listFragment = (ListFragment) mMainPagerAdapter.getItem(1);
+                    // Check if the tab fragment is available
+                    if (listFragment != null) {
+                        // Call your method in the TabFragment
+                        listFragment.updateUI();
+                    }
                 }
             }
         });
-        if (showOnlyOwnTasks) {
-            getSupportActionBar().setTitle("   " + SharedPrefs.getCurrentUser());
-        } else {
-            getSupportActionBar().setTitle("   SmartTask");
-        }
+        getSupportActionBar().setTitle("   SmartTask");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
@@ -200,15 +206,15 @@ public class SMMainActivity extends AppCompatActivity {
                     Log.d(TAG,"Value for current profile in shared: ");
                     Log.d(TAG,"Value for current profile: " + mProfile.getPid());
                     switch (mProfile.getPprivileges()) {
-                        case "1": {
+                        case 1: {
                             mActionAdd.setVisibility(View.VISIBLE);
                             break;
                         }
-                        case "2": {
+                        case 2: {
                             mActionAdd.setVisibility(View.VISIBLE);
                             break;
                         }
-                        case "3": {
+                        case 3: {
                             mActionAdd.setVisibility(View.INVISIBLE);
                             break;
                         }
@@ -307,7 +313,8 @@ public class SMMainActivity extends AppCompatActivity {
                 SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
                 SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
                 dialog.cancel();
-
+                Intent intent= new Intent(context, SMMainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -397,6 +404,7 @@ public class SMMainActivity extends AppCompatActivity {
         }
     }
 
+
     private static void setIconToolbar() {
         if (showOnlyOwnTasks) {
             mToolbarIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
@@ -471,7 +479,8 @@ public class SMMainActivity extends AppCompatActivity {
             name.setText(current.getPname());
 
             TextView score = (TextView) view.findViewById(R.id.score);
-            score.setText(current.getPscore());
+            Log.d(TAG, current.getPid());
+            score.setText(Integer.toString(current.getPscore()));
 
             picture = (ImageView) view.findViewById(R.id.profile_image);
             File mProfilePicture;
@@ -482,31 +491,31 @@ public class SMMainActivity extends AppCompatActivity {
                 if (profileImage.length() != 0) {
                     picture.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(path), 100));
                 } else {
-                    Log.d(TAG, "Getting from firebase");
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
-                    File localFile = null;
-                    try {
-                        localFile = new File(path);
-                        localFile.createNewFile();
-                        final File finalLocalFile = localFile;
-                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                Log.d(TAG, "Picture exist");
-                                picture.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 300));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle any errors
-                                Log.d(TAG, "NO Picture exist");
-                                picture.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    Log.d(TAG, "Getting from firebase");
+//                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+//                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
+//                    File localFile = null;
+//                    try {
+//                        localFile = new File(path);
+//                        localFile.createNewFile();
+//                        final File finalLocalFile = localFile;
+//                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                                Log.d(TAG, "Picture exist");
+//                                picture.setImageBitmap(PictureConverter.getRoundProfilePicture(PictureConverter.getBitmap(finalLocalFile.getAbsolutePath()), 300));
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception exception) {
+//                                // Handle any errors
+//                                Log.d(TAG, "NO Picture exist");
+//                                picture.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
+//                            }
+//                        });
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }
             return view;
