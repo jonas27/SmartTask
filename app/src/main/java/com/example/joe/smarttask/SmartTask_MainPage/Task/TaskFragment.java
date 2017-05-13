@@ -174,7 +174,7 @@ public class TaskFragment extends Fragment {
 
 
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
-        mTaskPoints.setText(Integer.toString(mTask.getPoints()));
+        mTaskPoints.setText(String.valueOf(mTask.getPoints()));
 
 
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
@@ -411,7 +411,6 @@ public class TaskFragment extends Fragment {
         while (itr.hasNext()) {
             p=itr.next();
             if (p.getPname().equals(mTask.getResponsible())) {
-                int add = 1;
                 p.setPtotalscore(p.getPtotalscore() + 1);
                 p.setPscore(p.getPscore() + mTask.getPoints());
                 FireBase fireBase =  FireBase.fireBase(getContext());
