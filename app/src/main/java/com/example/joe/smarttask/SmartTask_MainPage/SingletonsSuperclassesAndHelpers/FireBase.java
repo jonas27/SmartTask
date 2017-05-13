@@ -160,7 +160,6 @@ public class FireBase extends AppCompatActivity {
 
     private void callback2(DataSnapshot mPDataSnapshot) {
         ListProfile.setDataSnapshot(mPDataSnapshot);
-        SMMainActivity.firebaseLoaded();
         }
 
 

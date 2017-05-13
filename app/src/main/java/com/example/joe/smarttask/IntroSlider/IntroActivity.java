@@ -75,21 +75,20 @@ public class IntroActivity extends AppCompatActivity {
     private LinearLayout boxCircles;
     private Button skipBtn, nextBtn, gotitBtn;
     private CheckBox showIntroAgain;
-
+    private boolean skipButtonPressed;
     //    for SharedPrefs instance
     private SharedPrefs sharedPrefs;
 
     //boolean to show tutorial again
-    private boolean skipTutorial;
+    private boolean skipTutorial=false;
     private static boolean introWasShown;
+
 
 
     @Override
     public void onResume() {
         super.onResume();
-        if (introWasShown) {
-            openApp();
-        }
+openApp();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -107,8 +106,6 @@ public class IntroActivity extends AppCompatActivity {
 
         //set's the content (layout)
         setContentView(R.layout.intro_view_menu);
-
-
         //Bind all elemnts to objects
         skipBtn = (Button) findViewById(R.id.btnSkip);
         nextBtn = (Button) findViewById(R.id.btnNext);
@@ -117,7 +114,6 @@ public class IntroActivity extends AppCompatActivity {
 
         //create Object for Colors
         introColors = new IntroColors();
-
         //add inflating layouts before pageview as it gives nullpointer exception
         intro_layouts = new int[]{
                 R.layout.intro_item_0,
@@ -126,11 +122,8 @@ public class IntroActivity extends AppCompatActivity {
                 R.layout.intro_item_3,
                 R.layout.intro_item_4,
         };
-
-
         //adds circles
         addCircles(0);
-
         //set's status bar color like background
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -149,7 +142,6 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
-
             //Listener for when new page is selected
             @Override
             public void onPageSelected(int position) {
@@ -162,13 +154,9 @@ public class IntroActivity extends AppCompatActivity {
                     nextBtn.setText(R.string.intro_next);
                 }
                 addCircles(position);
-
             }
-
-
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -177,7 +165,7 @@ public class IntroActivity extends AppCompatActivity {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openApp();
+                skipButtonPressed=true;openApp();
             }
         });
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +179,6 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void addCircles(int position) {
         boxCircles.removeAllViews();
@@ -210,7 +197,7 @@ public class IntroActivity extends AppCompatActivity {
         pList = ListProfile.getProfileList();
         tList = ListTask.getSortList();
 
-        if (pList != null) {
+        if (pList != null && (skipButtonPressed || !SharedPrefs.getSharedPrefencesShowIntro())) {
             if (pList.size() == 0) {
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
@@ -219,10 +206,10 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 if (tList != null) {
-                    if (tList.size() == 1) {
+                    if (tList.size() <= 1) {
                         intent = new Intent(this, NewTaskActivity.class);
                         startActivity(intent);
-                    } else {
+                    } else{
                         intent = new Intent(this, SMMainActivity.class);
                         startActivity(intent);
                         finish();
@@ -230,28 +217,17 @@ public class IntroActivity extends AppCompatActivity {
                 }
             }
         } else {
-            Toast.makeText(this, "Waiting for a connection!", Toast.LENGTH_LONG).show();
+           if(skipButtonPressed || !SharedPrefs.getSharedPrefencesShowIntro()) { Toast.makeText(this, getString(R.string.intro_waiting_connection), Toast.LENGTH_SHORT).show();}
         }
     }
 
 
     public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        skipTutorial = ((CheckBox) view).isChecked();
+        skipTutorial=!skipTutorial;
+        sharedPrefs.setSharedPreferencesShowIntro(skipTutorial);
+        Log.d(TAG, Boolean.toString(SharedPrefs.getSharedPrefencesShowIntro()));
     }
 
-
-    //If activity goes into pause, it writes preference of showing tutorial again in file.
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (skipTutorial) {
-            sharedPrefs = SharedPrefs.getSharedPrefs(this);
-            //modify boolean showIntroAgain
-            sharedPrefs.setSharedPreferencesIntro(!skipTutorial);
-        }
-        introWasShown = true;
-    }
 
 
     /**
@@ -259,10 +235,7 @@ public class IntroActivity extends AppCompatActivity {
      * instantiates and sets new Window/Container as current. Destroys old window
      * Overwritten Methods below  are requirement to use PagerAdapter
      */
-
-
     private class ViewPagerAdapter extends PagerAdapter {
-
 
         private LayoutInflater layoutInflater;
 
@@ -328,6 +301,7 @@ public class IntroActivity extends AppCompatActivity {
     private void loadTasks(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
         tList = ListTask.getSortList();
+        openApp();
     }
 
 

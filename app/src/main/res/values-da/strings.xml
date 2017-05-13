@@ -18,7 +18,7 @@
     <string name="ViewTask_delete_btn">Slet</string>
     <string name="close">Luk</string>
     <string name="date_picker_title">Dato for opgaven</string>
-    <string name="intro_dont_show_again">Vis vejledning ved næste start?</string>
+    <string name="intro_dont_show_again">Vis vejledning ikke ved næste start?</string>
     <string name="intro_got_it">OK</string>
     <string name="intro_next">Næste</string>
     <string name="intro_skip">Skip</string>

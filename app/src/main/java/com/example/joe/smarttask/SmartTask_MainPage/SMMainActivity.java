@@ -101,7 +101,7 @@ public class SMMainActivity extends AppCompatActivity {
     private static ImageView mToolbarIcon;
     private ProfileObject mProfile;
     private static String mProfileId;
-
+private static int backButtonCounter;
     private static EditText password;
 
     public static boolean showOnlyOwnTasks = false;
@@ -124,16 +124,15 @@ public class SMMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.instance = this;
-
-
+        FireBase.fireBase(getAppContext());
         context = getApplicationContext();
         contextMain = this;
         ListTask.getSortList();
+        sFragmentList = new ArrayList<>();
 
         //    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         //    new FetchPicture().execute();
 
-        FireBase.fireBase(getAppContext());
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -147,18 +146,16 @@ public class SMMainActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle("   " + SharedPrefs.getCurrentUser());
                     mToolbarIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_list_white_24dp));
                     ListFragment listFragment = (ListFragment) mMainPagerAdapter.getItem(1);
-                    // Check if the tab fragment is available
+                    // Check if the tab fragment is available and update recyclerview
                     if (listFragment != null) {
-                        // Call your method in the TabFragment
                         listFragment.updateUI();
                     }
                 } else {
                     getSupportActionBar().setTitle("   SmartTask");
                     setIconToolbar();
                     ListFragment listFragment = (ListFragment) mMainPagerAdapter.getItem(1);
-                    // Check if the tab fragment is available
+                    // Check if the tab fragment is available and update recyclerview
                     if (listFragment != null) {
-                        // Call your method in the TabFragment
                         listFragment.updateUI();
                     }
                 }
@@ -166,9 +163,6 @@ public class SMMainActivity extends AppCompatActivity {
         });
         getSupportActionBar().setTitle("   SmartTask");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-
-//        getSupportActionBar().setHomeButtonEnabled(true);
 
         mActionAdd = (FloatingActionButton) findViewById(R.id.fab);
         mActionAdd.setOnClickListener(new View.OnClickListener() {
@@ -179,21 +173,13 @@ public class SMMainActivity extends AppCompatActivity {
             }
         });
 
-
-        sFragmentList = new ArrayList<>();
-
-        // ViewPager and its adapters use support library
-        // layout.layouts.fragments, so use getSupportFragmentManager.
-        mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_main);
-
-        setupViewPager(mViewPager);
-//        mViewPager.setAdapter(mMainPagerAdapter);
-
-
         send = (ImageView) findViewById(R.id.send);
         message = (EditText) findViewById(R.id.message);
         linear = (LinearLayout) findViewById(R.id.linear);
+
+        mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_main);
+        setupViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -247,7 +233,6 @@ public class SMMainActivity extends AppCompatActivity {
 
             }
         });
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(1);
@@ -266,113 +251,17 @@ public class SMMainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
 //        TODO: Add right maring to menu inflator
         subMenu = (Menu) findViewById(R.id.menu_expand_menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    public static void firebaseLoaded() {
-//        Log.d(TAG,"CURRENT PROFILE "+SharedPrefs.getCurrentProfile());
-
-//        if(SharedPrefs.getCurrentProfile()==""){
-//            showProfiles(true);
-//        }
-    }
-
-    //show profile selector dialog, with or without close button
-    public void showProfiles(boolean c) {
-        final Dialog dialog = new Dialog(instance);
-        dialog.setContentView(R.layout.change_profile);
-        dialog.setTitle("Change profile");
-        dialog.setCancelable(true);
-
-        GridView grid = (GridView) dialog.findViewById(R.id.profile_grid);
-        grid.setAdapter(new ProfileAdapter(context, ListProfile.getProfileList()));
-
-
-        //set up button
-        Button close = (Button) dialog.findViewById(R.id.close);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.cancel();
-            }
-        });
-        if (c) {
-            close.setVisibility(View.INVISIBLE);
-        }
-
-        Button add = (Button) dialog.findViewById(R.id.add_profile);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(contextMain, CreateProfile.class);
-                contextMain.startActivity(intent);
-                dialog.cancel();
-            }
-        });
-
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dialog.cancel();
-                final int pos = position;
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
-                alertDialog.setTitle("Place holder Passwort enter");
-                final EditText password = new EditText(getApplicationContext());
-                password.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                password.setHint(getString(R.string.signup_password));
-
-                LinearLayout ll=new LinearLayout(getApplicationContext());
-                ll.setOrientation(LinearLayout.VERTICAL);
-                ll.addView(password);
-                alertDialog.setView(ll);
-
-                alertDialog.setCancelable(false);
-                alertDialog.setPositiveButton("Update",  new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        if (password.getText().toString().equals(ListProfile.getProfileList().get(pos).getPid())) {
-                            SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(pos).getPid());
-                            SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(pos).getPname());
-                            Intent intent = new Intent(getAppContext(), SMMainActivity.class);
-                            getAppContext().startActivity(intent);
-                            finish();
-                        } else {
-
-                            Toast.makeText(getAppContext(), "Placeholder but try again!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                alertDialog.create().show();
-
-
-//                Toast.makeText(context, "Changed profile", Toast.LENGTH_SHORT).show();
-//                SharedPrefs.setCurrentProfile(ListProfile.getProfileList().get(position).getPid());
-//                SharedPrefs.setCurrentUser(ListProfile.getProfileList().get(position).getPname());
-//                dialog.cancel();
-//                Intent intent= new Intent(context, SMMainActivity.class);
-//                startActivity(intent);
-//                finish();
-            }
-        });
-
-        //now that the dialog is set up, it's time to show it
-        dialog.show();
-
-//        intent = new Intent(getAppContext(), ChooseProfileActivity.class);
-//        startActivity(intent);
-
-    }
 
     public void showDialog() {
-
-        // DialogFragment.show() will take care of adding the fragment
-        // in a transaction.  We also want to remove any currently showing
-        // dialog, so make our own transaction and take care of that here.
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(new ChooseProfileFragment(), "dialog");
+//        remove previous dialogs
         Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
             ft.remove(prev);
@@ -382,6 +271,21 @@ public class SMMainActivity extends AppCompatActivity {
         // Create and show the dialog.
         ChooseProfileFragment newFragment = new ChooseProfileFragment();
         newFragment.show(ft, "dialog");
+    }
+
+    @Override
+    public void onBackPressed() {
+        backButtonCounter++;
+        if(backButtonCounter==0){Toast.makeText(context, getString(R.string.main_double_tap),Toast.LENGTH_SHORT);}
+        if(backButtonCounter==2){
+            finish();
+        }
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        backButtonCounter=0;
     }
 
     @Override
