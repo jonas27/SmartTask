@@ -95,9 +95,8 @@ openApp();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //        get sharedPrefs instance and open app if set to skip intro
-        sharedPrefs = SharedPrefs.getSharedPrefs(this);
+        //get sharedPrefs instance and open app if set to skip intro
+        sharedPrefs = SharedPrefs.getSharedPrefs(getApplicationContext());
 
 //        get Firebase user
         mAuth = FirebaseAuth.getInstance();
@@ -224,7 +223,7 @@ openApp();
 
     public void onCheckboxClicked(View view) {
         skipTutorial=!skipTutorial;
-        sharedPrefs.setSharedPreferencesShowIntro(skipTutorial);
+        SharedPrefs.setSharedPreferencesShowIntro(skipTutorial);
         Log.d(TAG, Boolean.toString(SharedPrefs.getSharedPrefencesShowIntro()));
     }
 
