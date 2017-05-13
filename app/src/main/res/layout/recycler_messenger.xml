@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relative_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
 
     <LinearLayout
-        android:id="@id/linear"
+        android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
-android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
         android:orientation="horizontal"
         >
 
-        <Button
-            android:id="@+id/close"
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/send"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/close"
             android:layout_weight="1"
-            />
-        <Button
-            android:id="@+id/add_profile"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/close"
-            android:text="@string/add_profile"
-            android:layout_weight="1"
-            />
+            android:src="@drawable/ic_send_black_24dp" />
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linear"
-        >
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/bar">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_recycler_view"
             android:layout_width="match_parent"

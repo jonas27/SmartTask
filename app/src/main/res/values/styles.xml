@@ -6,9 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
-        <item name="actionOverflowMenuStyle">@style/AppTheme.MenuOverflowBackground</item>
+        <!--<item name="actionOverflowMenuStyle">@style/AppTheme.MenuOverflowBackground</item>-->
     </style>
 
 
