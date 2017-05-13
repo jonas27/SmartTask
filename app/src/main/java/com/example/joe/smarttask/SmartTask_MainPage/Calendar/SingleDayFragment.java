@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,11 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
-import com.example.joe.smarttask.SmartTask_MainPage.List.ListFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.List.SortList;
 import com.example.joe.smarttask.SmartTask_MainPage.SMMainActivity;
-import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskFragment;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskObject;
 import com.example.joe.smarttask.SmartTask_MainPage.Task.TaskPagerActivity;
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
@@ -92,6 +89,7 @@ public class SingleDayFragment extends Fragment {
         private View mViewLine;
         private View mViewSeparator;
         private TextView mDateTextView;
+        private TextView mTaskResponsibleTextView;
 
         private TaskObject mTask;
         private GregorianCalendar cal;
@@ -108,6 +106,7 @@ public class SingleDayFragment extends Fragment {
             mViewSeparator = (View) itemView.findViewById(R.id.list_item_separator);
             mPriority = (RoundedLetterView) itemView.findViewById(R.id.rlv_name_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_date);
+            mTaskResponsibleTextView = (TextView) itemView.findViewById(R.id.list_task_responsible);
         }
 
         @Override
@@ -128,6 +127,14 @@ public class SingleDayFragment extends Fragment {
             } else {
                 mDescriptionTextView.setText(mTask.getDescription());
             }
+            if (mTask.getResponsible().toCharArray().length > 15) {
+                mTaskResponsibleTextView.setText(mTask.getResponsible().substring(0, 14) + "...");
+            } else {
+                mTaskResponsibleTextView.setText(mTask.getResponsible());
+            }
+
+
+
 
             cal = new GregorianCalendar();
             cal.setTimeInMillis((mTask.getDatetime()));
@@ -153,6 +160,7 @@ public class SingleDayFragment extends Fragment {
             mTaskSolved.setVisibility(View.INVISIBLE);
             mViewLine.setVisibility(View.INVISIBLE);
             mDateTextView.setVisibility(View.VISIBLE);
+            mTaskResponsibleTextView.setVisibility(View.VISIBLE);
 
             if (mTask.getStatus().equals("true")) {
 //                sListRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(sContext));
@@ -161,6 +169,7 @@ public class SingleDayFragment extends Fragment {
             } else if (mTask.getStatus().equals(SortList.DRAW_LINE)) {
                 mTitleTextView.setVisibility(View.INVISIBLE);
                 mDescriptionTextView.setVisibility(View.INVISIBLE);
+                mTaskResponsibleTextView.setVisibility(View.INVISIBLE);
                 mTaskUnsolved.setVisibility(View.INVISIBLE);
                 mTaskSolved.setVisibility(View.INVISIBLE);
                 mViewLine.setVisibility(View.VISIBLE);

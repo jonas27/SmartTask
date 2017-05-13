@@ -132,9 +132,21 @@ public class TaskFragment extends Fragment {
 
         mTaskPriority = (TextView) v.findViewById(R.id.task_priority);
         switch (mTask.getPriority()) {
-//            case "1": mTaskPriority.setText(R.string.);
+            case 1: {
+                mTaskPriority.setText(R.string.newtask_spinner_high);
+                break;
+            }
+            case 2: {
+                mTaskPriority.setText(R.string.newtask_spinner_middle);
+                break;
+            }
+            case 3:{
+                mTaskPriority.setText(R.string.newtask_spinner_low);
+                break;
+            }
+
         }
-        mTaskPriority.setText(Integer.toString(mTask.getPriority()));
+
 
         mTaskFrequency = (TextView) v.findViewById(R.id.task_frequency);
             switch (mTask.getFrequency()) {
