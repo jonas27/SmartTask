@@ -38,7 +38,7 @@ import java.util.List;
  * However, a new task sets all fields to default, whereas editing a tasks takes the values from the old TaskObject
  */
 
-public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class NewTaskFragment extends Fragment {
 
     private static final String TAG = "CL_NTF";
     private static final String DIALOG_DATE = "DialogDate";
@@ -79,6 +79,7 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
     private long datetime;
     private String description;
     private int frequency;
+    private int responsiblePosition;
     private String mNameResponsible;
     private String owner;
     private String points;
@@ -109,15 +110,14 @@ public class NewTaskFragment extends Fragment implements AdapterView.OnItemSelec
     //    This is for editing tasks.
 //    The old task is initialized as a new task with the values from the old task
     public void setParameters() {
-        int c;
         mCategories.setText(taskObject.getCategories());
         mDescription.setText(taskObject.getDescription());
 //        mFrequencySpinner.setText(taskObject.getFrequency());
         mName.setText(taskObject.getName());
         mPoints.setText(Integer.toString(taskObject.getPoints()));
         mPriority.setSelection((taskObject.getPriority()));
-mFrequencySpinner.setSelection((taskObject.getFrequency()));
-//        mResponsible.setPromptId(c);
+        mFrequencySpinner.setSelection((taskObject.getFrequency()));
+        mResponsible.setSelection(responsiblePosition);
         cal = new GregorianCalendar();
         cal.setTimeInMillis((taskObject.getDatetime()));
         mDate.setText(cal.get(Calendar.DAY_OF_MONTH) + " / " + (cal.get(Calendar.MONTH) + 1) + " / " + cal.get(Calendar.YEAR));
@@ -138,19 +138,16 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         mPriority = (Spinner) v.findViewById(R.id.newtask_priority);
         mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
 
-        mPriority.setOnItemSelectedListener(this);
         ArrayAdapter adapterPriority =ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_item);
         adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPriority.setAdapter(adapterPriority);
 
 //      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
-        mFrequencySpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mFrequencySpinner.setAdapter(spinnerAdapter);
 
 //      Set click listener to Spinner for names, define its strings and connect it to the Adapter (Adapter provides access to the data items)
-        mResponsible.setOnItemSelectedListener(this);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getProfileNames());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponsible.setAdapter(dataAdapter);
@@ -262,7 +259,7 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         if (mPriority.getSelectedItem().toString().equals("")) {
             t.setPriority(0);
         } else {
-            t.setPriority(mPriority.getSelectedItemPosition()+1);
+            t.setPriority(mPriority.getSelectedItemPosition());
         }
         if (mPoints.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.newtask_points, Toast.LENGTH_SHORT).show();
@@ -298,22 +295,19 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
 
     }
 
-    /**
-     * This defines the onclick behaviour of the spinner
-     */
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        Spinner spinnerParent = (Spinner) parent;
-        if (spinnerParent.getId() == R.id.newtask_frequency) {
-           frequency=pos;
-        }
-    }
-
     public ArrayList<String> getProfileNames() {
         profileObjectList = ListProfile.getProfileList();
+        ProfileObject p;
         ArrayList<String> list = new ArrayList<>();
         Iterator<ProfileObject> itr = profileObjectList.iterator();
+        int c=0;
         while (itr.hasNext()) {
-            list.add(itr.next().getPname());
+            p=itr.next();
+            list.add(p.getPname());
+            if(p.getPname().equals(taskObject.getResponsible())){
+                responsiblePosition=c;
+            }
+            c++;
         }
         return list;
     }
