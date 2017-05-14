@@ -78,7 +78,6 @@ public class ListFragment extends Fragment {
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
     public void updateUI() {
-
         sList = ListTask.getSortList();
         if (sListRecyclerView != null) {
             sAdapter = new TaskAdapter(sList);
@@ -132,7 +131,7 @@ public class ListFragment extends Fragment {
 
     @Override
     public void onResume() {
-//        updateUI(sList);
+        updateUI();
         super.onResume();
     }
 
@@ -229,6 +228,7 @@ public class ListFragment extends Fragment {
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }
 
+            mPriority.setVisibility(View.VISIBLE);
             mTitleTextView.setVisibility(View.VISIBLE);
             mDescriptionTextView.setVisibility(View.VISIBLE);
             mTaskUnsolved.setVisibility(View.VISIBLE);
@@ -286,12 +286,6 @@ public class ListFragment extends Fragment {
                 return 0;
             }
         }
-        @Override
-        public void onViewAttachedToWindow(TaskHolder holder){
-            super.onViewAttachedToWindow(holder);
-            if(!holder.mTitleTextView.getText().toString().contentEquals("#EMPTYVIEW"))
-                holder.itemView.setVisibility(View.VISIBLE);
-        }
     }
 
 
@@ -324,8 +318,6 @@ public class ListFragment extends Fragment {
     private void callback(DataSnapshot mDataSnapshot) {
         ListTask.setDataSnapshot(mDataSnapshot);
         sList=ListTask.getSortList();
-
-//        Log.d(TAG, sList.get(2).getName());
         updateUI();
 
         if(detailView!=null && firstTime) {
