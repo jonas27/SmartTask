@@ -73,7 +73,7 @@ public class IntroActivity extends AppCompatActivity {
     //define Elements (Buttons, Views...)
     private TextView[] circles;
     private LinearLayout boxCircles;
-    private Button skipBtn, nextBtn, gotitBtn;
+    private Button skipBtn, nextBtn;
     private CheckBox showIntroAgain;
     private boolean skipButtonPressed;
     //    for SharedPrefs instance
@@ -171,6 +171,7 @@ openApp();
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == intro_layouts.length - 1) {
+                    skipButtonPressed=true;
                     openApp();
                 } else {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
@@ -193,10 +194,11 @@ openApp();
 
     //opens main app
     private void openApp() {
+        Log.d(TAG,"Show Intro: " + Boolean.toString(sharedPrefs.getSharedPrefencesShowIntro()));
         pList = ListProfile.getProfileList();
         tList = ListTask.getSortList();
 
-        if (pList != null && (skipButtonPressed || !SharedPrefs.getSharedPrefencesShowIntro())) {
+        if (pList != null && (skipButtonPressed || SharedPrefs.getSharedPrefencesShowIntro())) {
             if (pList.size() == 0) {
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
@@ -216,7 +218,7 @@ openApp();
                 }
             }
         } else {
-           if(skipButtonPressed || !SharedPrefs.getSharedPrefencesShowIntro()) { Toast.makeText(this, getString(R.string.intro_waiting_connection), Toast.LENGTH_SHORT).show();}
+           if(skipButtonPressed || SharedPrefs.getSharedPrefencesShowIntro()) { Toast.makeText(this, getString(R.string.intro_waiting_connection), Toast.LENGTH_SHORT).show();}
         }
     }
 
@@ -226,8 +228,6 @@ openApp();
         SharedPrefs.setSharedPreferencesShowIntro(skipTutorial);
         Log.d(TAG, Boolean.toString(SharedPrefs.getSharedPrefencesShowIntro()));
     }
-
-
 
     /**
      * Base class providing the adapter to populate pages inside of a ViewPager

@@ -286,6 +286,12 @@ public class ListFragment extends Fragment {
                 return 0;
             }
         }
+        @Override
+        public void onViewAttachedToWindow(TaskHolder holder){
+            super.onViewAttachedToWindow(holder);
+            if(!holder.mTitleTextView.getText().toString().contentEquals("#EMPTYVIEW"))
+                holder.itemView.setVisibility(View.VISIBLE);
+        }
     }
 
 

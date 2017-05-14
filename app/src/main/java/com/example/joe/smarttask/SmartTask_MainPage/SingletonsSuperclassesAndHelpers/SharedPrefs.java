@@ -129,7 +129,7 @@ public class SharedPrefs {
 
     //returns the boolean value of SHOW_WELCOME in file PREFS_NAME (if no value it returns true)
     public static boolean getSharedPrefencesShowIntro() {
-        return sharedPreferences.getBoolean(SHOW_WELCOME, true);
+        return sharedPreferences.getBoolean(SHOW_WELCOME, false);
     }
 
     public static int getFeedback() {
