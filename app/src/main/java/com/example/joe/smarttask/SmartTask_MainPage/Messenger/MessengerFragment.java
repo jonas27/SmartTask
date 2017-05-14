@@ -148,6 +148,9 @@ public class MessengerFragment extends Fragment {
                     name_own.setText(mMessageObject.getSenderName());
                     new GregorianCalendar();
                     datetime_own.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
+                    message_own.setVisibility(View.VISIBLE);
+                    name_own.setVisibility(View.VISIBLE);
+                    datetime_own.setVisibility(View.VISIBLE);
                     message_other.setVisibility(View.INVISIBLE);
                     name_other.setVisibility(View.INVISIBLE);
                     datetime_other.setVisibility(View.INVISIBLE);
@@ -155,6 +158,9 @@ public class MessengerFragment extends Fragment {
                     message_own.setVisibility(View.INVISIBLE);
                     name_own.setVisibility(View.INVISIBLE);
                     datetime_own.setVisibility(View.INVISIBLE);
+                    message_other.setVisibility(View.VISIBLE);
+                    name_other.setVisibility(View.VISIBLE);
+                    datetime_other.setVisibility(View.VISIBLE);
                     message_other.setText(mMessageObject.getMessage());
                     name_other.setText(mMessageObject.getSenderName());
                     datetime_other.setText(new SimpleDateFormat("EEE, d MMM HH:mm").format(mMessageObject.getDateTime()));
@@ -261,7 +267,6 @@ public class MessengerFragment extends Fragment {
     public void updateUI(List<MessageObject> list) {
 //        Log.d("CLASS_LF", Integer.toString(mList.size()));
 //        Log.d("CLASS_LF", mList.get(0).getName());
-
         sList = MessageList.getSortedMessageList();
 //        Log.d(TAG, "pull Messafes post reference: " + sList.get(0).getSenderName());
 
