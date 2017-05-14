@@ -105,7 +105,6 @@
                 android:prompt="@string/newtask_spinner_frequency_prompt"
                 android:spinnerMode="dialog"
                 android:inputType="number"
-                android:spinnerMode="dialog"
                 android:padding="15dp"
                 android:textSize="25sp" />
 

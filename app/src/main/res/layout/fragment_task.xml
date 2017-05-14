@@ -48,8 +48,8 @@
 
         <ImageView
             android:id="@+id/task_responsible_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_below="@id/task_name"
             android:layout_alignLeft="@+id/task_responsible"
             android:layout_marginLeft="-40dp"
