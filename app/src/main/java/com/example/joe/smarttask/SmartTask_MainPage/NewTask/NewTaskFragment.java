@@ -247,12 +247,14 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         if (frequency == 0) {
 //            Toast.makeText(getContext(), R.string.newtask_frequency, Toast.LENGTH_SHORT).show();
 //            sTaskChecked = false;
+            t.setFrequency(0);
         } else {
             t.setFrequency(frequency);
         }
         if (mNameResponsible == "") {
-            Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
-            sTaskChecked = false;
+//            Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
+//            sTaskChecked = false;
+            t.setResponsible("");
         } else {
             t.setResponsible(mResponsible.getSelectedItem().toString());
         }
@@ -265,8 +267,9 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         }
         t.setOwner("Owner is admin");
         if (mPriority.getSelectedItem().toString().equals("")) {
-            Toast.makeText(getContext(), R.string.newtask_priority, Toast.LENGTH_SHORT).show();
-            sTaskChecked = false;
+//            Toast.makeText(getContext(), R.string.newtask_priority, Toast.LENGTH_SHORT).show();
+//            sTaskChecked = false;
+            t.setPriority(0);
         } else {
             t.setPriority(priority);
         }
@@ -313,6 +316,7 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
            frequency=pos;
         }else if(spinnerParent.getId() == R.id.newtask_priority){
             priority=pos;
+            Log.d(TAG, "priority of task " + priority);
         }
     }
 

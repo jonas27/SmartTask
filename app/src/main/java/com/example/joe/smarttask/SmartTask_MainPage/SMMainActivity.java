@@ -26,6 +26,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -366,22 +369,29 @@ private static int backButtonCounter;
 
 
     private static void setIconToolbar() {
+        mToolbarIcon.clearAnimation();
         if (showOnlyOwnTasks) {
-            mToolbarIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
+            mToolbarIcon.setBackground(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
         } else {
             File mProfilePicture;
             String userID = SharedPrefs.getCurrentProfile(context);
             String path = dir + userID + ".jpg";
-            if (userID != "0") {
-                File profileImage = new File(path);
+            File profileImage = new File(path);
+            if (profileImage != null) {
                 if (profileImage.length() > 0) {
                     mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
                 } else {
 //                    picture is downloaded either at ChooseProfile or at change user (in this class)
-                    mToolbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
+                    mToolbarIcon.setBackground(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
                 }
             }
         }
+        RotateAnimation anim = new RotateAnimation(180.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        //Setup anim with desired properties
+        anim.setInterpolator(new LinearInterpolator());
+        anim.setRepeatCount(0);
+        anim.setDuration(300);
+        mToolbarIcon.startAnimation(anim);
     }
 
 
