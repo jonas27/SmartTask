@@ -114,4 +114,17 @@
     <string name="view_profile_addtext_completed_task">" færdiggjorte opgaver"</string>
     <string name="view_profile_addtext_levek">" niveau"</string>
     <string name="view_profile_addtext_points">" points"</string>
+    <string name="ViewTaskConfirmMoveOneDay">Opgaven færdig og flyttet til i morgen</string>
+    <string name="ViewTaskConfirmMoveOneMonth">Opgaven færdig og flyttet til næste måned</string>
+    <string name="ViewTaskConfirmMoveOneWeek">Opgaven færdig og er flyttet til næste uge</string>
+    <string name="ViewTaskConfirmMoveOneYear">Opgaven færdig og er flyttet til næste år</string>
+    <string name="ViewTaskUnConfirmButton">genopret opgaven</string>
+    <string name="choose_profile_password">\"adgangskode\"</string>
+    <string name="newtask_spinner_frequency_prompt">indtil gentagelser</string>
+    <string name="newtask_spinner_high">Høj prioritet</string>
+    <string name="newtask_spinner_low">Lav prioritet</string>
+    <string name="newtask_spinner_middle">Middel prioritet</string>
+    <string name="newtask_spinner_priority_prompt">Indstil prioritet</string>
+    <string name="newtask_spinner_responsible_prompt">Indstil prioritet</string>
+    <string name="wrong_password">\"Forkert adgangskode\"</string>
 </resources>

@@ -280,12 +280,15 @@ public class TaskFragment extends Fragment {
         });
 
         mTaskIcon = (ImageView) v.findViewById(R.id.task_responsible_image);
+        if (mTask.getResponsible() != null) {
+
         String path = dir + ListProfile.getProfileByName(mTask.getResponsible()).getPid() + ".jpg";
         File profileImage = new File(path);
-        if (profileImage != null) {
+        if (profileImage.length() != 0) {
             if (profileImage.length() > 0) {
                 mTaskIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
             }
+        }
         }
 
 
