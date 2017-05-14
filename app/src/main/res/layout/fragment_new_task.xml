@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/newtask_location_image"
             android:layout_width="match_parent"
-            android:layout_height="1000dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <EditText
@@ -50,10 +50,11 @@
                 android:id="@+id/newtask_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/newtask_description"
                 android:layout_below="@+id/newtask_description"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="14dp"
                 android:ems="25"
                 android:hint="@string/NewTaskTime"
@@ -64,11 +65,11 @@
                 android:id="@+id/newtask_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/newtask_description"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/newtask_time"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="18dp"
                 android:ems="25"
                 android:hint="@string/NewTaskDate"
@@ -81,7 +82,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/newtask_frequency"
-
                 android:layout_below="@+id/newtask_date"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="17dp"
@@ -99,10 +99,11 @@
                 android:layout_below="@+id/newtask_location"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="15dp"
                 android:ems="25"
                 android:gravity="left"
-                android:hint="@string/NewTaskFrequency"
+                android:prompt="@string/newtask_spinner_frequency_prompt"
+                android:spinnerMode="dialog"
                 android:inputType="number"
                 android:spinnerMode="dialog"
                 android:padding="15dp"
@@ -120,9 +121,8 @@
                 android:layout_marginTop="15dp"
                 android:ems="25"
                 android:gravity="left"
-                android:hint="@string/NewTaskPriority"
-                android:inputType="number"
                 android:prompt="@string/NewTaskPriority"
+                android:inputType="number"
                 android:spinnerMode="dialog"
                 android:padding="15dp"
                 android:textSize="25sp" />
@@ -153,6 +153,8 @@
                 android:ems="25"
                 android:gravity="left"
                 android:hint="@string/NewTaskResponsible"
+                android:prompt="@string/newtask_spinner_responsible_prompt"
+                android:spinnerMode="dialog"
                 android:inputType="textPersonName"
                 android:padding="15dp"
                 android:textSize="25sp" />
@@ -170,7 +172,8 @@
                 android:text="@string/NewTaskCreateTaskButton"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginBottom="150dp"/>
 
             <ImageView
                 android:id="@+id/newtask_describtion_image"

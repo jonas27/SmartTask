@@ -85,7 +85,7 @@
     <string name="ViewTask_delete_btn">Löschen</string>
     <string name="close">Schließen</string>
     <string name="date_picker_title">Enddatum der Aufgabe</string>
-    <string name="intro_dont_show_again">Zeige Einführunge beim nächsten Start?</string>
+    <string name="intro_dont_show_again">Überspringe die Einführunge beim nächsten Start?</string>
     <string name="intro_got_it">Verstanden!</string>
     <string name="intro_next">Weiter</string>
     <string name="intro_skip">Überspringen</string>

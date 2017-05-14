@@ -3,20 +3,17 @@
     android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:layout_centerInParent="true">
 
-    <TextView
-        android:text="Placeholder for enter password"
-        android:id="@+id/enter_password"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/password"
-        android:hint="password"
+        android:hint="@string/choose_profile_password"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="numberPassword"
         android:layout_below="@+id/enter_password"
-        android:layout_marginTop="20dp"
+        style="@style/AlertDialog.AppCompat.Light"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
         />
 
     <Button
@@ -24,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
-        android:layout_marginTop="20dp"
-        android:text="placeholder"
+        android:layout_marginTop="10dp"
+        android:text="@string/main_log_in"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_centerHorizontal="true"/>
 

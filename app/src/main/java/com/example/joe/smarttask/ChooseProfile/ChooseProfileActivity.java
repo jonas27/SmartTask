@@ -22,7 +22,7 @@ public class ChooseProfileActivity extends SingleFragmentActivity{
         //        initialise toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("SmartTask_place_holder");
+        getSupportActionBar().setTitle(getString(R.string.menu_change_profile));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         if(SharedPrefs.getCurrentProfile(getAppContext()).compareToIgnoreCase("")!=0) {

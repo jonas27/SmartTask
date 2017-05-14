@@ -25,6 +25,7 @@ import com.example.joe.smarttask.SmartTask_MainPage.Profile.ListProfile;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
 import com.example.joe.smarttask.SmartTask_MainPage.List.ListTask;
 import com.example.joe.smarttask.SmartTask_MainPage.Profile.ProfileObject;
+import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.PictureConverter;
 import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,9 +49,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class TaskFragment extends Fragment {
 
-    //TAG for Logs
     private static final String TAG = "CL_TaskFragment";
-
     private static final String TASK_ID = "task_id";
 
     private TaskObject mTask;
@@ -60,6 +59,7 @@ public class TaskFragment extends Fragment {
     private TextView mTaskDate;
     private ImageView mTaskSolved;
     private ImageView mTaskUnSolved;
+    private ImageView mTaskIcon;
     private Button mTaskEdit;
     private Button mTaskDelete;
     private Button mTaskUnConfirm;
@@ -131,22 +131,23 @@ public class TaskFragment extends Fragment {
         mTaskCategory.setText(mTask.getCategories());
 
         mTaskPriority = (TextView) v.findViewById(R.id.task_priority);
-        switch (mTask.getPriority()) {
-            case 1: {
-                mTaskPriority.setText(R.string.newtask_spinner_high);
+        switch(mTask.getPriority()){
+            case 0:{
+                mTaskPriority.setText(getString(R.string.newtask_spinner_high));
                 break;
             }
-            case 2: {
-                mTaskPriority.setText(R.string.newtask_spinner_middle);
+            case 1:{
+                mTaskPriority.setText(getString(R.string.newtask_spinner_middle));
+                break;
+            }
+            case 2:{
+                mTaskPriority.setText(getString(R.string.newtask_spinner_low));
                 break;
             }
             case 3:{
-                mTaskPriority.setText(R.string.newtask_spinner_low);
                 break;
             }
-
         }
-
 
         mTaskFrequency = (TextView) v.findViewById(R.id.task_frequency);
             switch (mTask.getFrequency()) {
@@ -172,16 +173,13 @@ public class TaskFragment extends Fragment {
                 }
             }
 
-
         mTaskPoints = (TextView) v.findViewById(R.id.task_points);
-        mTaskPoints.setText(String.valueOf(mTask.getPoints()));
-
+        mTaskPoints.setText(Integer.toString(mTask.getPoints()));
 
         mTaskDate = (TextView) v.findViewById(R.id.task_date);
         td = new GregorianCalendar();
         td.setTimeInMillis((mTask.getDatetime()));
         mTaskDate.setText(new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(td.getTime()));
-
 
         mTaskEdit = (Button) v.findViewById(R.id.task_btn_edit);
         mTaskEdit.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +190,6 @@ public class TaskFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         mTaskDelete = (Button) v.findViewById(R.id.task_btn_delete);
         mTaskDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,10 +199,6 @@ public class TaskFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
-
-
-
         mTaskUnConfirm = (Button) v.findViewById(R.id.task_unbtn_confirm);
         mTaskUnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,7 +209,6 @@ public class TaskFragment extends Fragment {
                 fireBase.createTask(mTask);
                 getActivity().finish();
             }});
-
         mTaskComplete = (Button) v.findViewById(R.id.task_btn_complete);
         mTaskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,8 +217,6 @@ public class TaskFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.ViewTaskDoneButton, Toast.LENGTH_SHORT).show();
             }
         });
-
-
         mTaskConfirm = (Button) v.findViewById(R.id.task_btn_confirm);
         mTaskConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,11 +279,20 @@ public class TaskFragment extends Fragment {
             }
         });
 
+        mTaskIcon = (ImageView) v.findViewById(R.id.task_responsible_image);
+        String path = dir + ListProfile.getProfileByName(mTask.getResponsible()).getPid() + ".jpg";
+        File profileImage = new File(path);
+        if (profileImage != null) {
+            if (profileImage.length() > 0) {
+                mTaskIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
+            }
+        }
+
+
         mTaskPicture = (Button) v.findViewById(R.id.task_btn_add_picture);
         mTaskPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 file = dir + mTaskId + ".jpg";
                 File newfile = new File(file);
                 File folder = new File(dir);

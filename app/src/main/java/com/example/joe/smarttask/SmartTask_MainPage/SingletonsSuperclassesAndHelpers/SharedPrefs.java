@@ -122,13 +122,13 @@ public class SharedPrefs {
 
 
     //sets if Intro should show
-    public static void setSharedPreferencesIntro(boolean skipTurorial) {
+    public static void setSharedPreferencesShowIntro(boolean skipTurorial) {
         editor.putBoolean(SHOW_WELCOME, skipTurorial);
         editor.commit();
     }
 
     //returns the boolean value of SHOW_WELCOME in file PREFS_NAME (if no value it returns true)
-    public static boolean getSharedPrefencesIntro() {
+    public static boolean getSharedPrefencesShowIntro() {
         return sharedPreferences.getBoolean(SHOW_WELCOME, true);
     }
 

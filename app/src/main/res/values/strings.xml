@@ -4,6 +4,7 @@
     <!--- MainScreen Task List and Calendar -->
     <string name="main_screen_tasks">Tasks</string>
     <string name="main_screen_calendar">Calendar</string>
+    <string name="main_double_tap">Double-tap to exit</string>
 
     <!--- LogInActivity -->
     <string name="main_sign_up">Sign up</string>
@@ -27,8 +28,8 @@
     <string name="intro_next">Next</string>
     <string name="intro_skip">Skip</string>
     <string name="intro_got_it">Got It!</string>
-    <string name="intro_dont_show_again">Show tutorial on next start?</string>
-
+    <string name="intro_dont_show_again">Don\'t show tutorial on next start?</string>
+    <string name="intro_waiting_connection"> Waiting for a connection!</string>
 
     <!-- SmartTask SubMenuActivity Rework -->
     <string name="smarttask_activity_tasks">Tasks</string>
@@ -89,6 +90,7 @@
     <string name="newtask_spinner_high">High Priority</string>
     <string name="newtask_spinner_middle">Middle Priority</string>
     <string name="newtask_spinner_low">Low Priority</string>
+    <string name="newtask_spinner_responsible_prompt">Set the priority</string>
 
     <!-- SmartTask View Task -->
     <string name="ViewTaskHeadline">Task Viewer</string>
@@ -170,7 +172,9 @@
     <string name="view_profile_addtext_levek">" level"</string>
     <string name="view_profile_addtext_completed_task">" completed tasks"</string>
 
-
+    <!-- Choose Profile -->
+    <string name="wrong_password">"Wrong password!"</string>
+    <string name="choose_profile_password">"Password"</string>
 
 
 </resources>

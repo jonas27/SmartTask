@@ -80,12 +80,6 @@ public class ListProfile {
     }
 
     public static ProfileObject getProfile(String mProfileId) {
-        Iterator<ProfileObject> itr = sPlist.iterator();
-        ProfileObject p;
-        for (ProfileObject pp : sPlist) {
-            Log.d(TAG, pp.getPname());
-            Log.d(TAG, mProfileId);
-        }
         for (int c = 0; c < ListProfile.getProfileList().size(); c++) {
             if (ListProfile.getProfileList().get(c).getPid().equals(mProfileId)) {
                 return ListProfile.getProfileList().get(c);
@@ -93,4 +87,16 @@ public class ListProfile {
         }
         return null;
     }
+
+    public static ProfileObject getProfileByName(String mProfileName) {
+        ProfileObject p;
+        for (Iterator<ProfileObject> itr = sPlist.iterator(); itr.hasNext();){
+            p=itr.next();
+            if (p.getPname().equals(mProfileName)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 }

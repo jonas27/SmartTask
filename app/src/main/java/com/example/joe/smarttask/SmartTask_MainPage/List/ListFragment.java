@@ -217,14 +217,14 @@ public class ListFragment extends Fragment {
             mDateTextView.setText(new SimpleDateFormat("MMM").format(cal.getTime()) + " " + cal.get(Calendar.DAY_OF_MONTH));
 
 //            change rounded layout view priority
-            if (mTask.getPriority() == 1) {
+            if (mTask.getPriority() == 0) {
                 String s = Integer.toString(R.string.list_high_p);
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_high_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_high_p_red));
-            } else if ((mTask.getPriority()) == 2) {
+            } else if ((mTask.getPriority()) == 1) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_middle_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_middle_p_orange));
-            } else if ((mTask.getPriority()) == 3) {
+            } else if ((mTask.getPriority()) == 2) {
                 mPriority.setTitleText(sContext.getResources().getString(R.string.list_low_p));
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }

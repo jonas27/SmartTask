@@ -54,6 +54,7 @@ public class ChooseProfileFragment extends DialogFragment {
     private static final String TAG = "CL_ChoosePrFr";
 
     private static final String DIR = "/storage/emulated/0/smarttask/";
+    private static final String FROM_MAIN="fromMain";
 
     private static List<ProfileObject> sList;
     private static Context sContext;
@@ -70,22 +71,29 @@ public class ChooseProfileFragment extends DialogFragment {
     private ValueEventListener postListener;
     private DatabaseReference mPostReference;
 
+    private Boolean fromMain;
+
 
     /**
      * Create a new instance of MyDialogFragment, providing "num"
      * as an argument.
      */
-    public static ChooseProfileFragment newInstance() {
+    public static ChooseProfileFragment newInstance(boolean fromMain) {
         ChooseProfileFragment f = new ChooseProfileFragment();
-
         // Supply num input as an argument.
         Bundle args = new Bundle();
+        args.putBoolean(FROM_MAIN, fromMain);
         f.setArguments(args);
-
         return f;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+//        fromMain= getArguments().getBoolean(FROM_MAIN);
+    }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Pass layout xml to the inflater and assign it to View v.
@@ -106,7 +114,7 @@ public class ChooseProfileFragment extends DialogFragment {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
+                dismiss();
             }
         });
 
@@ -116,7 +124,7 @@ public class ChooseProfileFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CreateProfile.class);
                 getContext().startActivity(intent);
-                getActivity().finish();
+                dismiss();
             }
         });
 
@@ -159,7 +167,7 @@ public class ChooseProfileFragment extends DialogFragment {
             //    [Start: Widget for Pincode]
             final Dialog dialog = new Dialog(sContext);
             dialog.setContentView(R.layout.profile_login);
-            dialog.setTitle("Set name in String like in toolbar");
+            dialog.setTitle(profileObject.getPname());
             dialog.setCancelable(true);
             password = (EditText) dialog.findViewById(R.id.password);
             Button login = (Button) dialog.findViewById(R.id.ok_btn);
@@ -173,10 +181,10 @@ public class ChooseProfileFragment extends DialogFragment {
                         Intent intent = new Intent(sContext, SMMainActivity.class);
                         sContext.startActivity(intent);
                         dialog.cancel();
-//                        activity.finish();
+                        activity.finish();
                     } else {
+                        Toast.makeText(sContext, sContext.getString(R.string.wrong_password), Toast.LENGTH_SHORT).show();
                         dialog.cancel();
-                        Toast.makeText(sContext, "Placeholder but try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

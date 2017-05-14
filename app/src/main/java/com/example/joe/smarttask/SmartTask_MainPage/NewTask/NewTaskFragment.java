@@ -132,33 +132,28 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
 
         mCategories = (EditText) v.findViewById(R.id.newtask_location);
         mDescription = (EditText) v.findViewById(R.id.newtask_description);
-        mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mName = (EditText) v.findViewById(R.id.newtask_name);
         mPoints = (EditText) v.findViewById(R.id.newtask_points);
-
+        mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mPriority = (Spinner) v.findViewById(R.id.newtask_priority);
-        mPriority.setPrompt(getString(R.string.newtask_priority));
-        ArrayAdapter adapterPriority = ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_dropdown_item);
-        mPriority.setAdapter(adapterPriority);
-        mPriority.setPrompt(getString(R.string.newtask_spinner_priority_prompt));
-
-
         mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
+
+        mPriority.setOnItemSelectedListener(this);
+        ArrayAdapter adapterPriority =ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_item);
+        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPriority.setAdapter(adapterPriority);
+
 //      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mFrequencySpinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mFrequencySpinner.setAdapter(spinnerAdapter);
-        mFrequencySpinner.setPrompt(getString(R.string.newtask_spinner_frequency_prompt));
-        mFrequencySpinner.setPrompt(getResources().getString(R.string.newtask_spinner_frequency_prompt));
 
 //      Set click listener to Spinner for names, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mResponsible.setOnItemSelectedListener(this);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getProfileNames());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponsible.setAdapter(dataAdapter);
-
-
 
         mTime = (Button) v.findViewById(R.id.newtask_time);
         mTime.setOnClickListener(new View.OnClickListener() {
@@ -245,12 +240,14 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         if (frequency == 0) {
 //            Toast.makeText(getContext(), R.string.newtask_frequency, Toast.LENGTH_SHORT).show();
 //            sTaskChecked = false;
+            t.setFrequency(0);
         } else {
             t.setFrequency(mFrequencySpinner.getSelectedItemPosition());
         }
         if (mNameResponsible == "") {
-            Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
-            sTaskChecked = false;
+//            Toast.makeText(getContext(), R.string.newtask_responsible, Toast.LENGTH_SHORT).show();
+//            sTaskChecked = false;
+            t.setResponsible("");
         } else {
             t.setResponsible(mResponsible.getSelectedItem().toString());
         }
@@ -263,8 +260,7 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         }
         t.setOwner("Owner is admin");
         if (mPriority.getSelectedItem().toString().equals("")) {
-            Toast.makeText(getContext(), R.string.newtask_priority, Toast.LENGTH_SHORT).show();
-            sTaskChecked = false;
+            t.setPriority(0);
         } else {
             t.setPriority(mPriority.getSelectedItemPosition()+1);
         }
@@ -309,8 +305,6 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
         Spinner spinnerParent = (Spinner) parent;
         if (spinnerParent.getId() == R.id.newtask_frequency) {
            frequency=pos;
-        }else if(spinnerParent.getId() == R.id.newtask_priority){
-            priority=pos;
         }
     }
 
