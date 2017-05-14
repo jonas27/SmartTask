@@ -132,27 +132,30 @@ mFrequencySpinner.setSelection((taskObject.getFrequency()));
 
         mCategories = (EditText) v.findViewById(R.id.newtask_category);
         mDescription = (EditText) v.findViewById(R.id.newtask_description);
-        mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mName = (EditText) v.findViewById(R.id.newtask_name);
         mPoints = (EditText) v.findViewById(R.id.newtask_points);
-
+        mFrequencySpinner = (Spinner) v.findViewById(R.id.newtask_frequency);
         mPriority = (Spinner) v.findViewById(R.id.newtask_priority);
-        mPriority.setPrompt(getString(R.string.newtask_priority));
-        ArrayAdapter adapterPriority =ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_item);
-        mPriority.setAdapter(adapterPriority);
-        mPriority.setPrompt(getString(R.string.newtask_spinner_priority_prompt));
-
         mResponsible = (Spinner) v.findViewById(R.id.newtask_responsible);
+
+        mPriority.setOnItemSelectedListener(this);
+        ArrayAdapter adapterPriority =ArrayAdapter.createFromResource(getContext(),R.array.newtask_spinner_array_priority,android.R.layout.simple_spinner_item);
+        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPriority.setAdapter(adapterPriority);
+//        mPriority.setPrompt(getString(R.string.newtask_spinner_priority_prompt));
+
+
 //      Set click listener to Spinner for frequency, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mFrequencySpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.newtask_spinner_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mFrequencySpinner.setAdapter(spinnerAdapter);
-        mFrequencySpinner.setPrompt(getString(R.string.newtask_spinner_frequency_prompt));
-        mFrequencySpinner.setPrompt(getResources().getString(R.string.newtask_spinner_frequency_prompt));
+//        mFrequencySpinner.setPrompt(getString(R.string.newtask_spinner_frequency_prompt));
+//        mFrequencySpinner.setPrompt(getResources().getString(R.string.newtask_spinner_frequency_prompt));
 
 //      Set click listener to Spinner for names, define its strings and connect it to the Adapter (Adapter provides access to the data items)
         mResponsible.setOnItemSelectedListener(this);
+//        mResponsible.setPrompt(getString(R.string.newtask_spinner_responsible_prompt));
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getProfileNames());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponsible.setAdapter(dataAdapter);
