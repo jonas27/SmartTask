@@ -67,7 +67,7 @@
     <string name="newtask_datetime">Bitte bestimme ein Enddatum</string>
     <string name="newtask_colorcode">Bitte bestimme eine Farbe</string>
     <string name="newtask_categories">Bitte bestimme eine ort</string>
-    <string name="NewTaskCategory">Zimmer/Ort?</string>
+    <string name="NewTaskLocation">Zimmer/Ort?</string>
     <string name="NewTaskDate">Bestimme ein Datum</string>
     <string name="NewTaskDescription">Bestimme eine Beschreibung</string>
     <string name="NewTaskFrequency">Bestimme eine Wiederholung</string>

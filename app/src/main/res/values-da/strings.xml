@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SmartTask</string>
-    <string name="NewTaskCategory">Rum/Sted</string>
+    <string name="NewTaskLocation">Rum/Sted</string>
     <string name="NewTaskCreateTaskButton">Tilføj</string>
     <string name="NewTaskDate">Vælg Dato</string>
     <string name="NewTaskDescription">Skriv en beskrivelse</string>

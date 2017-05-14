@@ -154,6 +154,7 @@ public class ListFragment extends Fragment {
         private View mViewLine;
         private View mViewSeparator;
         private TextView mDateTextView;
+        private TextView mResponsibleTextView;
 
         private TaskObject mTask;
         private GregorianCalendar cal;
@@ -170,6 +171,7 @@ public class ListFragment extends Fragment {
             mViewSeparator = (View) itemView.findViewById(R.id.list_item_separator);
             mPriority = (RoundedLetterView) itemView.findViewById(R.id.rlv_name_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_date);
+            mResponsibleTextView = (TextView) itemView.findViewById(R.id.list_task_responsible);
         }
 
         @Override
@@ -195,8 +197,8 @@ public class ListFragment extends Fragment {
 
         private void bindTask(TaskObject task) {
             mTask = task;
-            if (mTask.getName().toCharArray().length > 17) {
-                mTitleTextView.setText(mTask.getName().substring(0, 16) + "...");
+            if (mTask.getName().toCharArray().length > 22) {
+                mTitleTextView.setText(mTask.getName().substring(0, 21) + "...");
             } else {
                 mTitleTextView.setText(mTask.getName());
             }
@@ -204,6 +206,10 @@ public class ListFragment extends Fragment {
                 mDescriptionTextView.setText(mTask.getDescription().substring(0, 59) + "...");
             } else {
                 mDescriptionTextView.setText(mTask.getDescription());
+            } if (mTask.getResponsible().toCharArray().length > 25) {
+                mResponsibleTextView.setText(mTask.getResponsible().substring(0, 24) + "...");
+            } else {
+                mResponsibleTextView.setText(mTask.getResponsible());
             }
 
             cal = new GregorianCalendar();
@@ -230,6 +236,7 @@ public class ListFragment extends Fragment {
             mTaskSolved.setVisibility(View.INVISIBLE);
             mViewLine.setVisibility(View.INVISIBLE);
             mDateTextView.setVisibility(View.VISIBLE);
+            mResponsibleTextView.setVisibility(View.VISIBLE);
 
             if (mTask.getStatus().equals("true")) {
 //                sListRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(sContext));
@@ -244,6 +251,7 @@ public class ListFragment extends Fragment {
                 mViewSeparator.setVisibility(View.VISIBLE);
                 mPriority.setVisibility(View.INVISIBLE);
                 mDateTextView.setVisibility(View.INVISIBLE);
+                mResponsibleTextView.setVisibility(View.INVISIBLE);
             }
 
         }

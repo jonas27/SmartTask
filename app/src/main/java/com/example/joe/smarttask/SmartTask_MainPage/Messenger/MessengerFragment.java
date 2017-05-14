@@ -122,7 +122,7 @@ public class MessengerFragment extends Fragment {
 //        ImageView icon;
         private MessageObject messageObject;
 
-        //        bind views here (The Holder defines one list item, which are then coppied)
+        //        bind views here (The Holder defines one list item, which are then copied)
         public Holder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);

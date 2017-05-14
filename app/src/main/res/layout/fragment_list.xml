@@ -16,7 +16,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/list_grey_dark"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/list_item_description"
@@ -29,7 +29,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="-3dp"
         android:textColor="@color/list_grey"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/list_item_date"
@@ -96,5 +96,15 @@
         app:rlv_titleColor="@android:color/white"
         app:rlv_titleSize="30dp"
         app:rlv_titleText="A" />
+
+    <TextView
+        android:id="@+id/list_task_responsible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/rlv_name_view"
+        android:layout_below="@+id/list_task_check"
+        android:textSize="10dp"
+        android:textColor="@color/black"
+        android:text="TextView" />
 
 </RelativeLayout>
