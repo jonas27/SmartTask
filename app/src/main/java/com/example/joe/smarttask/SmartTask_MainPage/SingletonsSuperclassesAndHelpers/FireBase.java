@@ -56,6 +56,7 @@ public class FireBase extends AppCompatActivity {
     private ValueEventListener PpostListener;
     private DatabaseReference mPostReference;
     private DatabaseReference mPostReference2;
+    private DatabaseReference mPostReferenceMessage;
     // [End declare Firebase variables]
 
 
@@ -99,8 +100,8 @@ public class FireBase extends AppCompatActivity {
 
     //    [start: create a new Task]
     public void createMessage(MessageObject mMessageObject) {
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("messages");
-        mPostReference.child(Long.toString(mMessageObject.getDateTime())).setValue(mMessageObject);
+        mPostReferenceMessage = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("messages");
+        mPostReferenceMessage.child(Long.toString(mMessageObject.getDateTime())).setValue(mMessageObject);
     }
 
 

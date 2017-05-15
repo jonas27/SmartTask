@@ -56,7 +56,7 @@ public class SharedPrefs {
         editor.commit();
     }
 
-    public static String getCurrentProfile(Context context) {
+    public static String getCurrentProfile() {
         return sharedPreferences.getString(CURRENT_PROFILE, "");
     }
 

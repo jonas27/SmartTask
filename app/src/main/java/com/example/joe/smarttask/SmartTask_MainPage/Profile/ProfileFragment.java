@@ -73,7 +73,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile_view, container, false);
 
-        mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile(getContext()));
+        mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile());
         this.mProfileId = mProfile.getPid();
         path = dir + mProfileId + ".jpg";
         getActivity().setTitle(mProfile.getPname());

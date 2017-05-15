@@ -113,15 +113,16 @@ public class ListFragment extends Fragment {
 
         sList = ListTask.getSortList();
 
-        if(detailView!=null && sList.size()>0) {
+        if(detailView!=null && sList.size()>1) {
 //              @param getId: Create new Fragment with first TaskObject in list
-            taskFragment = TaskFragment.newInstance(sList.get(0).getId());
+            if(sList.get(0).getPriority()==-1 ){taskFragment = TaskFragment.newInstance(sList.get(1).getId());}
+            else{taskFragment = TaskFragment.newInstance(sList.get(0).getId());}
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.detail_fragment_container, taskFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
-
+        updateUI();
         return view;
     }
 
@@ -293,11 +294,11 @@ public class ListFragment extends Fragment {
 
 
     private void pull() {
-        Log.d(TAG, mAuth.getCurrentUser().toString());
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mDataSnapshot) {
+                Log.d(TAG, "pull in list fragment");
                 callback(mDataSnapshot);
             }
 
@@ -320,15 +321,15 @@ public class ListFragment extends Fragment {
         sList=ListTask.getSortList();
         updateUI();
 
-        if(detailView!=null && firstTime) {
-//              @param getId: Create new Fragment with first TaskObject in list
-            taskFragment = TaskFragment.newInstance(sList.get(0).getId());
-            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.detail_fragment_container, taskFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-            firstTime=false;
-        }
+//        if(detailView!=null && firstTime) {
+////              @param getId: Create new Fragment with first TaskObject in list
+//            taskFragment = TaskFragment.newInstance(sList.get(0).getId());
+//            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+//            fragmentTransaction.add(R.id.detail_fragment_container, taskFragment);
+//            fragmentTransaction.addToBackStack(null);
+//            fragmentTransaction.commit();
+//            firstTime=false;
+//        }
 
         //            TODO check if calendar has been initialized or initialize calendar before calling update
         CalendarView.updateCalendar();

@@ -48,7 +48,6 @@ public class ListProfile {
      * @return THE single Object of this class
      */
     public static ListProfile list() {
-
         return sListProfile;
     }
 
@@ -80,9 +79,10 @@ public class ListProfile {
     }
 
     public static ProfileObject getProfile(String mProfileId) {
-        for (int c = 0; c < ListProfile.getProfileList().size(); c++) {
-            if (ListProfile.getProfileList().get(c).getPid().equals(mProfileId)) {
-                return ListProfile.getProfileList().get(c);
+        Log.d(TAG, "list size " + sPlist.size());
+        for (int c = 0; c < sPlist.size(); c++) {
+            if (sPlist.get(c).getPid().equals(mProfileId)) {
+                return sPlist.get(c);
             }
         }
         return null;

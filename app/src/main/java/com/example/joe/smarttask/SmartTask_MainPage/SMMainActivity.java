@@ -198,25 +198,24 @@ private static int backButtonCounter;
                 if (position == 0) {
                     mActionAdd.setVisibility(View.INVISIBLE);
                 } else if (position == 1) {
-                    mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile(context));
-
-                    Log.d(TAG,"Value for current profile in shared: ");
-                    Log.d(TAG,"Value for current profile: " + mProfile.getPid());
-                    switch (mProfile.getPprivileges()) {
-                        case 1: {
-                            mActionAdd.setVisibility(View.VISIBLE);
-                            break;
-                        }
-                        case 2: {
-                            mActionAdd.setVisibility(View.VISIBLE);
-                            break;
-                        }
-                        case 3: {
-                            mActionAdd.setVisibility(View.INVISIBLE);
-                            break;
-                        }
-                        default: {
-                            mActionAdd.setVisibility(View.VISIBLE);
+                    mProfile = ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+                    if(mProfile!=null) {
+                        switch (mProfile.getPprivileges()) {
+                            case 1: {
+                                mActionAdd.setVisibility(View.VISIBLE);
+                                break;
+                            }
+                            case 2: {
+                                mActionAdd.setVisibility(View.VISIBLE);
+                                break;
+                            }
+                            case 3: {
+                                mActionAdd.setVisibility(View.INVISIBLE);
+                                break;
+                            }
+                            default: {
+                                mActionAdd.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
 
@@ -320,7 +319,6 @@ private static int backButtonCounter;
                 //        CLear cache for logout
                 File cacheDir = context.getCacheDir();
                 File[] files = cacheDir.listFiles();
-                Log.d(TAG, Integer.toString(files.length));
                 if (files != null) {
                     for (File file : files)
                         file.delete();
@@ -369,12 +367,11 @@ private static int backButtonCounter;
 
 
     private static void setIconToolbar() {
-        mToolbarIcon.clearAnimation();
         if (showOnlyOwnTasks) {
-            mToolbarIcon.setBackground(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
+            mToolbarIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_list_white_24dp));
         } else {
             File mProfilePicture;
-            String userID = SharedPrefs.getCurrentProfile(context);
+            String userID = SharedPrefs.getCurrentProfile();
             String path = dir + userID + ".jpg";
             File profileImage = new File(path);
             if (profileImage != null) {
@@ -382,7 +379,7 @@ private static int backButtonCounter;
                     mToolbarIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
                 } else {
 //                    picture is downloaded either at ChooseProfile or at change user (in this class)
-                    mToolbarIcon.setBackground(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
+                    mToolbarIcon.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
                 }
             }
         }
@@ -433,10 +430,10 @@ private static int backButtonCounter;
                 if (profileImage.length() != 0) {
                     picture.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 500));
                 } else {
-                    Log.d(TAG, "Getting from firebase");
                     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
                     StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
                     File localFile = null;
+                    Log.d(TAG, "Pulling pictures in main");
                     try {
                         localFile = new File(path);
                         localFile.createNewFile();
@@ -458,8 +455,6 @@ private static int backButtonCounter;
                 }
             }
             return view;
-
         }
-
     }
 }

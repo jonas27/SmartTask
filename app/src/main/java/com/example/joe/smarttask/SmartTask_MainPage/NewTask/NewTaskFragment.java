@@ -304,7 +304,7 @@ public class NewTaskFragment extends Fragment {
         while (itr.hasNext()) {
             p=itr.next();
             list.add(p.getPname());
-            if(p.getPname().equals(taskObject.getResponsible())){
+            if(taskObject!=null && p.getPname().equals(taskObject.getResponsible())){
                 responsiblePosition=c;
             }
             c++;

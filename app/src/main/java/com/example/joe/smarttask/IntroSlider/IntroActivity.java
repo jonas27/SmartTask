@@ -5,6 +5,7 @@ package com.example.joe.smarttask.IntroSlider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -195,6 +196,7 @@ openApp();
     //opens main app
     private void openApp() {
         Log.d(TAG,"Show Intro: " + Boolean.toString(sharedPrefs.getSharedPrefencesShowIntro()));
+        Log.d(TAG, "current profile " + SharedPrefs.getCurrentProfile());
         pList = ListProfile.getProfileList();
         tList = ListTask.getSortList();
 
@@ -202,7 +204,7 @@ openApp();
             if (pList.size() == 0) {
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
-            } else if (SharedPrefs.getCurrentProfile(getApplicationContext()).equals("")) {
+            } else if (SharedPrefs.getCurrentProfile().equals("")) {
                 Intent intent = new Intent(this, ChooseProfileActivity.class);
                 startActivity(intent);
             } else {
@@ -273,14 +275,14 @@ openApp();
     //    Firebase loads profiles to check if new user
     private void pullProfilesAndTasks() {
 //    Log.d(TAG, mAuth.getCurrentUser().toString());
-        mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid());
-        postListener = new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mDataSnapshot) {
                 DataSnapshot profiles = mDataSnapshot.child(("profile"));
                 loadProfiles(profiles);
                 DataSnapshot tasks = mDataSnapshot.child(("task"));
                 loadTasks(tasks);
+                Log.d(TAG, "This is still listening!!!!!!!!!");
             }
 
             @Override
@@ -288,8 +290,7 @@ openApp();
                 // Getting Post failed, log a message
                 Log.w(TAG + "Err", "loadPost:onCancelled", databaseError.toException());
             }
-        };
-        mPostReference.addValueEventListener(postListener);
+        });
     }
 
     private void loadProfiles(DataSnapshot mDataSnapshot) {
@@ -302,6 +303,4 @@ openApp();
         tList = ListTask.getSortList();
         openApp();
     }
-
-
 }

@@ -50,7 +50,6 @@ public class ListTask {
         for (int c = 0; c < sSortedList.size(); c++) {
             t = sSortedList.get(c);
             if (t.getResponsible().compareTo(SharedPrefs.getCurrentUser()) != 0) {
-                Log.d(TAG, "THey are equal: " + t.getResponsible());
                 sSortedList.remove(t);
                 c--;
             }
@@ -68,9 +67,7 @@ public class ListTask {
      */
     public static TaskObject getTask(String mTaskId) {
         sSortedList = getSortList();
-        Log.d(TAG, "size of sortedlist: " + Integer.toString(sSortedList.size()));
         for (TaskObject t : sSortedList) {
-            Log.d(TAG, "Name of sortedlist items: " + t.getId());
             if (mTaskId.equals(t.getId())) {
                 return t;
             }

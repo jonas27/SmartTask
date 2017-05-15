@@ -25,7 +25,7 @@ public class ProfileActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
 
-        return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile(getAppContext()));
+        return ProfileFragment.newInstance(SharedPrefs.getCurrentProfile());
     }
 
     //    Set Toolbar back button action equal to system back button

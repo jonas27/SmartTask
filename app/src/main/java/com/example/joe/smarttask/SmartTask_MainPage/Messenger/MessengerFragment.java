@@ -143,7 +143,7 @@ public class MessengerFragment extends Fragment {
         //    specify individual settings behaviour on layout
         private void bindMessage(MessageObject mMessageObject) {
             if (mMessageObject != null) {
-                if (mMessageObject.getSenderId().equals(SharedPrefs.getCurrentProfile(sContext))) {
+                if (mMessageObject.getSenderId().equals(SharedPrefs.getCurrentProfile())) {
                     message_own.setText(mMessageObject.getMessage());
                     name_own.setText(mMessageObject.getSenderName());
                     new GregorianCalendar();
@@ -225,7 +225,7 @@ public class MessengerFragment extends Fragment {
         mO = new MessageObject();
         mO.setMessage(message.getText().toString());
         mO.setDateTime(Calendar.getInstance().getTimeInMillis());
-        mO.setSenderId(SharedPrefs.getCurrentProfile(getContext()));
+        mO.setSenderId(SharedPrefs.getCurrentProfile());
         mO.setSenderName(SharedPrefs.getCurrentUser());
         message.setText("");
     }
@@ -249,8 +249,8 @@ public class MessengerFragment extends Fragment {
         sList = MessageList.getSortedMessageList();
         if (sAdapter != null) {
             sAdapter.notifyDataSetChanged();
-            sAdapter.notifyItemInserted(sList.size() - 1);
-            mLinearLayoutManager.scrollToPosition(sList.size() - 1);
+//            sAdapter.notifyItemInserted(sList.size());
+            mLinearLayoutManager.scrollToPosition(sList.size());
         }
 
     }
@@ -265,15 +265,11 @@ public class MessengerFragment extends Fragment {
 //    which View should be updated when changes on FireBase occur
 //    Is it possible to change that? Results in efficiency gain
     public void updateUI(List<MessageObject> list) {
-//        Log.d("CLASS_LF", Integer.toString(mList.size()));
-//        Log.d("CLASS_LF", mList.get(0).getName());
         sList = MessageList.getSortedMessageList();
-//        Log.d(TAG, "pull Messafes post reference: " + sList.get(0).getSenderName());
-
         if (sRecyclerView != null) {
             sAdapter = new Adapter(sList);
-            sAdapter.notifyDataSetChanged();
             sRecyclerView.setAdapter(sAdapter);
+            sAdapter.notifyDataSetChanged();
         }
 
     }

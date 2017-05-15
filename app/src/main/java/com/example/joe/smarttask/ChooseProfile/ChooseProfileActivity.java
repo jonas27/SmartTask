@@ -25,7 +25,7 @@ public class ChooseProfileActivity extends SingleFragmentActivity{
         getSupportActionBar().setTitle(getString(R.string.menu_change_profile));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        if(SharedPrefs.getCurrentProfile(getAppContext()).compareToIgnoreCase("")!=0) {
+        if(SharedPrefs.getCurrentProfile().compareToIgnoreCase("")!=0) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         View v = findViewById(R.id.coordinator);

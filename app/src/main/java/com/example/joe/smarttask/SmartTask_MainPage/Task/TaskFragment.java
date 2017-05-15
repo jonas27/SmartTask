@@ -107,6 +107,9 @@ public class TaskFragment extends Fragment {
         View v = inflater.inflate(R.layout.task_tabletmode, container, false);
 
         this.mTask = ListTask.getTask(mTaskId);
+        if(mTask.getPriority()==-1){
+            return v;
+        }
 
 
         storageRef = FirebaseStorage.getInstance().getReference();
@@ -280,16 +283,16 @@ public class TaskFragment extends Fragment {
         });
 
         mTaskIcon = (ImageView) v.findViewById(R.id.task_responsible_image);
-        if (mTask.getResponsible() != null) {
 
-        String path = dir + ListProfile.getProfileByName(mTask.getResponsible()).getPid() + ".jpg";
-        File profileImage = new File(path);
-        if (profileImage.length() != 0) {
-            if (profileImage.length() > 0) {
-                mTaskIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
-            }
-        }
-        }
+//        if (mTask.getResponsible() != null && mTask.getResponsible().compareTo("")!=0) {
+//        String path = dir + ListProfile.getProfileByName(mTask.getResponsible()).getPid() + ".jpg";
+//        File profileImage = new File(path);
+//        if (profileImage.length() != 0) {
+//            if (profileImage.length() > 0) {
+//                mTaskIcon.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 100));
+//            }
+//        }
+//        }
 
 
         mTaskPicture = (Button) v.findViewById(R.id.task_btn_add_picture);
@@ -396,7 +399,12 @@ public class TaskFragment extends Fragment {
             mTaskConfirm.setVisibility(View.VISIBLE);
             mTaskUnConfirm.setVisibility(View.INVISIBLE);
         }
-        p =ListProfile.getProfile(SharedPrefs.getCurrentProfile(getContext()));
+        p =ListProfile.getProfile(SharedPrefs.getCurrentProfile());
+        if(p==null){
+            Log.d(TAG, "current profile is null");
+        }
+        Log.d(TAG, "current profile " + SharedPrefs.getCurrentProfile());
+
         storageRef = FirebaseStorage.getInstance().getReference();
 
         if (p.getPprivileges()==3){

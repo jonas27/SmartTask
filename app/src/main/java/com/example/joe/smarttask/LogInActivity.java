@@ -48,6 +48,7 @@ public class LogInActivity extends AppCompatActivity {
     //TAG for Logs
     private static final String TAG = "CL_LogInActivity";
     private static final String DEVELOPER_MAIL= "smarttask17@gmail.com";
+    private static final String TEST_MAIL= "smarttask17@googlemail.com";
 
     private static final int RC_SIGN_IN = 1;
     public static GoogleApiClient mGoogleApiClient;
@@ -136,6 +137,7 @@ public class LogInActivity extends AppCompatActivity {
                                                if (CheckSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
 //                                                   for easy sign in
                                                    if(email.getText().toString().equals("@17")){signIn(DEVELOPER_MAIL,password.getText().toString());}
+                                                   if(email.getText().toString().equals("@test")){signIn(TEST_MAIL,password.getText().toString());}
                                                    signIn(email.getText().toString(), password.getText().toString());
                                                }
                                            }
@@ -255,8 +257,7 @@ public class LogInActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast.makeText(LogInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LogInActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
