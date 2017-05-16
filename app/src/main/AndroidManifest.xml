@@ -21,23 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SmartTask_MainPage.SMMainActivity" />
+        <activity android:name=".smartaskMain.SmarttaskMainActivity" />
         <activity
-            android:name=".IntroSlider.IntroActivity"
+            android:name=".introSlider.IntroActivity"
             />
-        <activity android:name=".RequestPermission.PermissionActivity" />
-        <activity android:name=".ChooseProfile.ChooseProfileActivity" />
-        <activity android:name=".SmartTask_MainPage.Calendar.SingleDayActivity" />
-        <activity android:name=".SmartTask_MainPage.Task.TaskPagerActivity" />
-        <activity android:name=".SmartTask_MainPage.NewTask.NewTaskActivity" />
-        <activity android:name=".SmartTask_MainPage.Settings.SettingsActivity" />
-        <activity android:name=".SmartTask_MainPage.Profile.ProfileActivity" />
-        <activity android:name=".SmartTask_MainPage.Settings.SubMenuFragments.SubMenuActivity" />
+        <activity android:name=".permissionRequester.PermissionRequesterActivity" />
+        <activity android:name=".profileSwitcher.ProfileSwitcherActivity" />
+        <activity android:name=".smartaskMain.calendar.SingleDayActivity" />
+        <activity android:name=".smartaskMain.task.TaskPagerActivity" />
+        <activity android:name=".smartaskMain.newTask.NewTaskActivity" />
+        <activity android:name=".smartaskMain.settings.SettingsActivity" />
+        <activity android:name=".smartaskMain.profile.MyProfileActivity" />
+        <activity android:name=".smartaskMain.settings.settingsCoordinator.SubMenuActivity" />
         <!--
              <activity
             android:hardwareAccelerated="true" />
         -->
-        <activity android:name=".SmartTask_MainPage.Profile.CreateProfile"></activity>
+        <activity android:name=".smartaskMain.profile.ProfileCreatorActivity"></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"

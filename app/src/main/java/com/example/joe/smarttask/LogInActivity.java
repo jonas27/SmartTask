@@ -12,11 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.joe.smarttask.IntroSlider.IntroActivity;
-import com.example.joe.smarttask.RequestPermission.PermissionActivity;
-import com.example.joe.smarttask.SignUp.CheckSingUpData;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.FireBase;
-import com.example.joe.smarttask.SmartTask_MainPage.SingletonsSuperclassesAndHelpers.SharedPrefs;
+import com.example.joe.smarttask.introSlider.IntroActivity;
+import com.example.joe.smarttask.permissionRequester.PermissionRequesterActivity;
+import com.example.joe.smarttask.signUp.SignUpDataChecker;
+import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.FireBase;
+import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SharedPrefs;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -93,7 +93,7 @@ public class LogInActivity extends AppCompatActivity {
 
 //        We had problems with the permissions! Requesting them inside activities requires min API 23
 //        Intent starts new activity with fragment with sole purpose of asking for permissions
-        Intent intent = new Intent(this, PermissionActivity.class);
+        Intent intent = new Intent(this, PermissionRequesterActivity.class);
         startActivity(intent);
 
         email = (EditText) findViewById(R.id.enter_email);
@@ -134,7 +134,7 @@ public class LogInActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                                               if (CheckSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
+                                               if (SignUpDataChecker.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
 //                                                   for easy sign in
                                                    if(email.getText().toString().equals("@17")){signIn(DEVELOPER_MAIL,password.getText().toString());}
                                                    if(email.getText().toString().equals("@test")){signIn(TEST_MAIL,password.getText().toString());}
@@ -149,7 +149,7 @@ public class LogInActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                if (CheckSingUpData.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
+                                                if (SignUpDataChecker.checkEmailWithPassword(email.getText().toString(), password.getText().toString(), LogInActivity.this)) {
                                                     createAccount(email.getText().toString(), password.getText().toString());
                                                 }
                                             }
