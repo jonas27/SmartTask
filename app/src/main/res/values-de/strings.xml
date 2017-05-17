@@ -93,8 +93,8 @@
     <string name="list_low_p">N</string>
     <string name="list_middle_p">M</string>
     <string name="main_log_in">Einloggen</string>
-    <string name="main_log_in_email">Deine Email</string>
-    <string name="main_log_in_pw">Dein Passwort</string>
+    <string name="main_log_in_email">Email</string>
+    <string name="main_log_in_pw">Passwort</string>
     <string name="main_sign_up">Anmelden</string>
     <string name="main_screen_calendar">Kalender</string>
     <string name="main_screen_tasks">Aufgabe</string>

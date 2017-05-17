@@ -9,8 +9,8 @@
     <!--- LogInActivity -->
     <string name="main_sign_up">Sign up</string>
     <string name="main_log_in">Log in</string>
-    <string name="main_log_in_email">Your Email</string>
-    <string name="main_log_in_pw">Your password</string>
+    <string name="main_log_in_email">Email</string>
+    <string name="main_log_in_pw">Password</string>
 
 
     <!-- SignUpActivity -->

@@ -23,7 +23,6 @@
     <string name="intro_next">Næste</string>
     <string name="intro_skip">Skip</string>
     <string name="main_log_in">Log ind</string>
-    <string name="main_log_in_email">Email</string>
     <string name="main_log_in_pw">Adgangskode</string>
     <string name="main_sign_up">Tilmeld</string>
     <string name="menu_logout">Log ud</string>
@@ -127,4 +126,5 @@
     <string name="newtask_spinner_priority_prompt">Indstil prioritet</string>
     <string name="newtask_spinner_responsible_prompt">Indstil prioritet</string>
     <string name="wrong_password">\"Forkert adgangskode\"</string>
+    <string name="main_log_in_email">Email</string>
 </resources>
