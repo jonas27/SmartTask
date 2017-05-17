@@ -3,6 +3,7 @@ package com.example.joe.smarttask.smartaskMain.list;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.joe.smarttask.R;
@@ -60,6 +62,7 @@ public class ListFragment extends Fragment {
     private FireBase mFireBase;
     private ListOfTasks mListOfTasks;
 
+    public static boolean tabletMode=false;
 
     private static FrameLayout detailView;
     private Fragment taskFragment;
@@ -114,6 +117,7 @@ public class ListFragment extends Fragment {
         sList = ListOfTasks.getSortList();
 
         if(detailView!=null && sList.size()>1) {
+            tabletMode=true;
 //              @param getId: Create new Fragment with first TaskObject in list
             if(sList.get(0).getPriority()==-1 ){taskFragment = TaskFragment.newInstance(sList.get(1).getId());}
             else{taskFragment = TaskFragment.newInstance(sList.get(0).getId());}
@@ -147,7 +151,7 @@ public class ListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDescriptionTextView;
-        private CheckBox mTaskCompleted;
+        private RelativeLayout mRelativeLayout;
         private RoundedLetterView mPriority;
         private ImageView mTaskSolved;
         private ImageView mTaskUnsolved;
@@ -162,6 +166,7 @@ public class ListFragment extends Fragment {
         private TaskHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.list_relative_layout);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_title);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
 //            mTaskCompleted = (CheckBox) itemView.findViewById(R.id.list_item_box);
@@ -229,6 +234,12 @@ public class ListFragment extends Fragment {
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }
 
+            if(System.currentTimeMillis()>mTask.getDatetime() && mTask.getStatus().equals("false")){
+                mRelativeLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }else{
+                mRelativeLayout.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+
             mPriority.setVisibility(View.VISIBLE);
             mTitleTextView.setVisibility(View.VISIBLE);
             mDescriptionTextView.setVisibility(View.VISIBLE);
@@ -261,11 +272,9 @@ public class ListFragment extends Fragment {
     //    Adapter converts an object at a certain position into a list row item which will then be inserted
     private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
         private List<TaskObject> mListTasks;
-
         private TaskAdapter(List<TaskObject> mListTasks) {
             this.mListTasks = mListTasks;
         }
-
         @Override
         public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(SmarttaskMainActivity.getAppContext());
@@ -288,10 +297,6 @@ public class ListFragment extends Fragment {
             }
         }
     }
-
-
-
-
 
     private void pull() {
         mPostReference = FirebaseDatabase.getInstance().getReference().child("User/" + user.getUid()).child("task");
@@ -320,18 +325,6 @@ public class ListFragment extends Fragment {
         ListOfTasks.setDataSnapshot(mDataSnapshot);
         sList= ListOfTasks.getSortList();
         updateUI();
-
-//        if(detailView!=null && firstTime) {
-////              @param getId: Create new Fragment with first TaskObject in list
-//            taskFragment = TaskFragment.newInstance(sList.get(0).getId());
-//            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-//            fragmentTransaction.add(R.id.detail_fragment_container, taskFragment);
-//            fragmentTransaction.addToBackStack(null);
-//            fragmentTransaction.commit();
-//            firstTime=false;
-//        }
-
-        //            TODO check if calendar has been initialized or initialize calendar before calling update
         CalendarView.updateCalendar();
 
 

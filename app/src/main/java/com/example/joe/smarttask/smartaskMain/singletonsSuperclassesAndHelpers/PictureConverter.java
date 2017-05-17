@@ -93,26 +93,39 @@ public class PictureConverter extends AppCompatImageView{
         return output;
     }
 
-
-    public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight, int inSampleSize) {
-        // Read in the dimensions of the image on disk
+        /**
+         * @inSampleSize set to 1 for full picture. For 1/4 of the size set to 4...
+        * */
+    public static Bitmap getSquareBitmap(String path,int inSampleSize ) {
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        float srcWidth = options.outWidth;
-        float srcHeight = options.outHeight;
-        // Figure out how much to scale down by
-        if (srcHeight > destHeight || srcWidth > destWidth) {
-            if (srcWidth > srcHeight) {
-                inSampleSize = Math.round(srcHeight / destHeight);
-            } else {
-                inSampleSize = Math.round(srcWidth / destWidth);
-            }
-        }
-        options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         options.inSampleSize = inSampleSize;
+        Bitmap bitmap = BitmapFactory.decodeFile(path, options);
+        // Make bitmap square
+//        Bitmap dstBmp;
+//        if (bitmap.getWidth() >= bitmap.getHeight()){
+//            dstBmp = Bitmap.createBitmap(
+//                    bitmap,
+//                    bitmap.getWidth()/2 - bitmap.getHeight()/2,
+//                    0,
+//                    bitmap.getHeight(),
+//                    bitmap.getHeight()
+//            );
+//
+//        }else{
+//
+//            dstBmp = Bitmap.createBitmap(
+//                    bitmap,
+//                    0,
+//                    bitmap.getHeight()/2 - bitmap.getWidth()/2,
+//                    bitmap.getWidth(),
+//                    bitmap.getWidth()
+//            );
+//        }
+
         // Read in and create final bitmap
-        return BitmapFactory.decodeFile(path, options);
+        return bitmap;
     }
 
 

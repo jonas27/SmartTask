@@ -114,4 +114,7 @@
     <string name="view_profile_addtext_levek">" level"</string>
     <string name="view_profile_addtext_points">" punkte"</string>
     <string name="NewTaskCreateTaskButton">hinzufügen</string>
+    <string name="newtask_spinner_high">Hoch</string>
+    <string name="newtask_spinner_low">Niedrig</string>
+    <string name="newtask_spinner_middle">Mittel</string>
 </resources>

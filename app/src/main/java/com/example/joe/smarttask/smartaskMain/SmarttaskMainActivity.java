@@ -47,6 +47,7 @@ import com.example.joe.smarttask.smartaskMain.settings.SettingsActivity;
 import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.FireBase;
 import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.PictureConverter;
 import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SharedPrefs;
+import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.ViewPagerZoomOutAnimation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -99,7 +100,6 @@ private static int backButtonCounter;
     private static EditText password;
 
     public static boolean showOnlyOwnTasks = false;
-
 
     public static Context getAppContext() {
         return SmarttaskMainActivity.context;
@@ -174,6 +174,7 @@ private static int backButtonCounter;
         mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.viewpager_main);
         setupViewPager(mViewPager);
+        mViewPager.setPageTransformer(true, new ViewPagerZoomOutAnimation());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

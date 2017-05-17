@@ -110,11 +110,11 @@ public class ListSorter {
         List<TaskObject> priorityMiddleList = new ArrayList<>();
 
         for (int c = 0; c < list.size(); c++) {
-            if (list.get(c).getPriority()==(1)) {
+            if (list.get(c).getPriority()==(0)) {
                 priorityHighList.add(list.get(c));
                 list.remove(c);
                 c--;
-            } else if (list.get(c).getPriority()==2) {
+            } else if (list.get(c).getPriority()==1) {
                 priorityMiddleList.add(list.get(c));
                 list.remove(c);
                 c--;

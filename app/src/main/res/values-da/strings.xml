@@ -121,9 +121,9 @@
     <string name="ViewTaskUnConfirmButton">genopret opgaven</string>
     <string name="choose_profile_password">\"adgangskode\"</string>
     <string name="newtask_spinner_frequency_prompt">indtil gentagelser</string>
-    <string name="newtask_spinner_high">Høj prioritet</string>
-    <string name="newtask_spinner_low">Lav prioritet</string>
-    <string name="newtask_spinner_middle">Middel prioritet</string>
+    <string name="newtask_spinner_high">Høj</string>
+    <string name="newtask_spinner_low">Lav</string>
+    <string name="newtask_spinner_middle">Middel</string>
     <string name="newtask_spinner_priority_prompt">Indstil prioritet</string>
     <string name="newtask_spinner_responsible_prompt">Indstil prioritet</string>
     <string name="wrong_password">\"Forkert adgangskode\"</string>

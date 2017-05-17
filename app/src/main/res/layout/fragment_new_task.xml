@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/newtask_description"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginEnd="10dp"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_horizontal"
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/newtask_time"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginEnd="10dp"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_horizontal"
@@ -221,7 +221,7 @@
                 android:layout_height="40dp"
                 android:layout_alignStart="@+id/newtask_Freq_image"
                 android:layout_alignTop="@+id/newtask_priority"
-                app:srcCompat="@drawable/ic_priority_high_black_24dp" />
+                app:srcCompat="@drawable/ic_priority_high_red_24dp" />
 
             <ImageView
                 android:id="@+id/newtask_points_image"

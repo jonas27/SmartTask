@@ -135,7 +135,7 @@ public class MyProfileFragment extends Fragment {
         if (requestCode == 1 && resultCode == RESULT_OK) {
 
             Uri uriFile = Uri.fromFile(new File(path));
-            Bitmap bitmap = PictureConverter.getScaledBitmap(dir + mProfileId + ".jpg", 400, 400, 6);
+            Bitmap bitmap = PictureConverter.getSquareBitmap(dir + mProfileId + ".jpg",1);
             mProfilePicture.setImageBitmap(bitmap);
 
             StorageReference fileUpload = storageRef.child("images/" + uriFile.getLastPathSegment());
