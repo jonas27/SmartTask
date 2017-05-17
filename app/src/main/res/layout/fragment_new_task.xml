@@ -168,7 +168,7 @@
                 android:layout_marginTop="23dp"
                 android:background="#1565C0"
                 android:ems="25"
-                android:text="@string/NewTaskCreateTaskButton"
+                android:text="@string/ViewTaskSaveButton"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"

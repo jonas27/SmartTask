@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -60,6 +61,7 @@ public class LogInActivity extends AppCompatActivity {
     // [END Define Views]
     private Button signUpButton;
     private EditText email, password;
+    private TextInputLayout inputLayoutEmail, inputLayoutPassword;
     // [Start declare Firebase Auth, Auth listener and User]
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -98,6 +100,26 @@ public class LogInActivity extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.enter_email);
         password = (EditText) findViewById(R.id.enter_password);
+        inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
+        inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
+        password.setHint(R.string.main_log_in_pw);
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    email.setHint("");
+                else
+                    email.setHint(R.string.main_log_in_email);
+            }
+        });
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    password.setHint("");
+                else
+                    password.setHint(R.string.main_log_in_pw);
+            }
+        });
+
 
         // initialize_auth and database
         mAuth = FirebaseAuth.getInstance();
@@ -157,6 +179,8 @@ public class LogInActivity extends AppCompatActivity {
         );
         //Googelogin buttons
         mGoogleButton =(SignInButton) findViewById(R.id.googleButton);
+        mGoogleButton.setSize(SignInButton.SIZE_WIDE);
+        mGoogleButton.setColorScheme(0);
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

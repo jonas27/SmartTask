@@ -117,4 +117,5 @@
     <string name="newtask_spinner_high">Hoch</string>
     <string name="newtask_spinner_low">Niedrig</string>
     <string name="newtask_spinner_middle">Mittel</string>
+    <string name="ViewTaskSaveButton">Speichern</string>
 </resources>

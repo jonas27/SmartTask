@@ -97,6 +97,7 @@
     <string name="ViewTaskEditButton">Edit</string>
     <string name="ViewTask_delete_btn">Delete</string>
     <string name="ViewTaskDoneButton">Task Complete</string>
+    <string name="ViewTaskSaveButton">Save</string>
     <string name="ViewTaskAddPictureButton">Upload Picture</string>
     <string name="ViewTaskConfirmButton">Task Confirmed</string>
     <string name="ViewTaskUnConfirmButton">Restore Task</string>

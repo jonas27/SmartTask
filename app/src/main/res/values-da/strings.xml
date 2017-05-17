@@ -127,4 +127,5 @@
     <string name="newtask_spinner_responsible_prompt">Indstil prioritet</string>
     <string name="wrong_password">\"Forkert adgangskode\"</string>
     <string name="main_log_in_email">Email</string>
+    <string name="ViewTaskSaveButton">Gem</string>
 </resources>
