@@ -270,7 +270,7 @@ public class LogInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                             Toast.makeText(LogInActivity.this, "Account already exists!", Toast.LENGTH_SHORT).show();
-                            sendVerificationEmail();
+
                         } else {
                             Toast.makeText(LogInActivity.this, "Account created. Please verify your email.", Toast.LENGTH_SHORT).show();
                             sendVerificationEmail();
