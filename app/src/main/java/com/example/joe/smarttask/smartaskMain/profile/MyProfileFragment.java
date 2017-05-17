@@ -29,6 +29,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
+import static android.os.Environment.getExternalStorageDirectory;
 
 
 /**
@@ -51,7 +52,7 @@ public class MyProfileFragment extends Fragment {
     private ImageView mProfilePicture;
 
     private ListOfProfiles mListOfProfiles;
-    private String dir = "/storage/emulated/0/smarttask/";
+    private String dir = getExternalStorageDirectory()+"/smarttask/";
     private static String path;
     private StorageReference storageRef;
     private Button profileviewdone;

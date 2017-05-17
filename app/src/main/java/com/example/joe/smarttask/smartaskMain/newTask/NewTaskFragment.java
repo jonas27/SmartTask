@@ -320,5 +320,4 @@ public class NewTaskFragment extends Fragment {
         // Another interface callback
     }
 
-
 }
