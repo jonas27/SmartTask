@@ -250,7 +250,6 @@ public class CalendarView extends LinearLayout
                         }
                         counter++;
                         ccDate = cDate;
-                        Log.d(TAG,"Day "+day+" priority "+current.getPriority());
                     }
                 }
             }
