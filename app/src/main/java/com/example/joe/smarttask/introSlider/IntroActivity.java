@@ -90,7 +90,11 @@ public class IntroActivity extends AppCompatActivity {
     //boolean to show tutorial again
     private boolean skipTutorial=false;
     private static boolean introWasShown;
-
+    private boolean first;
+    private TextView welcomeDes1;
+    private TextView welcomeTitel1;
+    private TextView welcomeSwipeText;
+    private boolean noAnim;
 
 
     @Override
@@ -161,12 +165,28 @@ openApp();
                 else {
                     nextBtn.setText(R.string.intro_next);
                 }
+                if(position==0){
+                    welcomeTitel1.animate().y(100).setDuration(1000).start();
+                    welcomeDes1.animate().y(200).setDuration(1000).start();
+                    welcomeSwipeText.animate().x(350).setDuration(1000).start();
+                    noAnim=false;
+                }else if(position==1){
+                    if(!noAnim){
+                        welcomeTitel1.animate().y(-100).setDuration(1000).start();
+                        welcomeDes1.animate().y(-200).setDuration(1000).start();
+                        welcomeSwipeText.animate().x(-350).setDuration(1000).start();
+                    }
+                }else{
+                    noAnim = true;
+                }
+
                 addCircles(position);
             }
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
+
 
         //actions for buttons
         skipBtn.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +272,15 @@ openApp();
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(intro_layouts[position], container, false);
             container.addView(view);
+            welcomeTitel1 = (TextView) findViewById(R.id.welcome_titel);
+            welcomeDes1 = (TextView) findViewById(R.id.textview_description);
+            welcomeSwipeText = (TextView) findViewById(R.id.swipetext);
+            if(position==0){
+                welcomeTitel1.animate().y(100).setDuration(1000).start();
+                welcomeDes1.animate().y(200).setDuration(1000).start();
+                welcomeSwipeText.animate().x(350).setDuration(1000).start();
+            }
+
             return view;
         }
 
