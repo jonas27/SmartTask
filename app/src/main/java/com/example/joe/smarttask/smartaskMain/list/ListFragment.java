@@ -326,8 +326,6 @@ public class ListFragment extends Fragment {
         sList= ListOfTasks.getSortList();
         updateUI();
         CalendarView.updateCalendar();
-
-
     }
 
 }

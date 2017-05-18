@@ -7,6 +7,7 @@ import com.example.joe.smarttask.smartaskMain.task.TaskObject;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -89,6 +90,10 @@ public class ListOfTasks {
             sSortedList = ListSorter.sortList(sList);
             //            CalendarView.updateCalendar();
         }
+    }
+    @Override
+    public String toString(){
+        return Arrays.toString(sSortedList.toArray());
     }
 }
 

@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
     <!-- layout for creating profiles -->
 
 
@@ -17,111 +16,81 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/scrollView2"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="15dp"
-        android:adjustViewBounds="false"
-        android:background="@mipmap/ic_launcher"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ic_person_black_24dp" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/scrollView2"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="15dp"
+                android:adjustViewBounds="false"
+                android:background="@mipmap/ic_launcher"
+                android:scaleType="fitCenter" />
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="29dp">
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imageView"
+                android:layout_marginTop="29dp">
 
-        <EditText
-            android:id="@+id/ProfileName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:ems="25"
-            android:hint="@string/smarttask_create_profile_name"
-            android:inputType="textPersonName"
-            android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/ProfileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:ems="25"
+                    android:hint="@string/smarttask_create_profile_name"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/Score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ProfileName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:ems="25"
-            android:hint="@string/smarttask_create_profile_pincode"
-            android:inputType="text|numberPassword"
-            android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/Score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ProfileName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:ems="25"
+                    android:hint="@string/smarttask_create_profile_pincode"
+                    android:inputType="text|numberPassword"
+                    android:textSize="20sp" />
 
-        <Spinner
-            android:id="@+id/Privilgies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/Score"
-            android:layout_below="@+id/Score"
-            android:layout_marginTop="17dp"
-            android:ems="25"
-            android:hint="@string/smarttask_create_profile_privilgies"
-            android:inputType="text|numberPassword"
-            android:textSize="20sp" />
+                <Spinner
+                    android:id="@+id/Privilgies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/Score"
+                    android:layout_below="@+id/Score"
+                    android:layout_marginTop="17dp"
+                    android:ems="25"
+                    android:hint="@string/smarttask_create_profile_privilgies"
+                    android:inputType="text|numberPassword"
+                    android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/CreateProfileAddButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Privilgies"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
-            android:background="#1565C0"
-            android:text="@string/smarttask_create_profile_Add"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+                <Button
+                    android:id="@+id/CreateProfileAddButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Privilgies"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="18dp"
+                    android:background="#1565C0"
+                    android:text="@string/smarttask_create_profile_Add"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
 
-    </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/CreateProfileUploadButton"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/CreateProfileCameraButton"
-        android:layout_toEndOf="@+id/CreateProfileCameraButton"
-        android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_upload" />
-
-    <ImageButton
-        android:id="@+id/CreateProfileSavePictureButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"
-        android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_save" />
-
-    <ImageButton
-        android:id="@+id/CreateProfileCameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/CreateProfileSavePictureButton"
-        android:layout_toEndOf="@+id/CreateProfileSavePictureButton"
-        android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 

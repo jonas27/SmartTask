@@ -1,10 +1,14 @@
 package com.example.joe.smarttask.smartaskMain.list;
 
+import android.util.Log;
+
 import com.example.joe.smarttask.smartaskMain.settings.settingsCoordinator.listSettings.SubSettingsListObject;
 import com.example.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SharedPrefs;
 import com.example.joe.smarttask.smartaskMain.task.TaskObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -82,8 +86,13 @@ public class ListSorter {
     }
 
 
-    //    Sort by date
+    //    Sort by date - bubble sort
+//    Somehow Collections.sort didn't work
     private static List<TaskObject> sortByDate(List<TaskObject> list) {
+//        Collections.sort(list);
+//        Collections.reverse(list);
+//        Log.d(TAG, Arrays.toString(list.toArray()));
+//        return list;
         List<TaskObject> sortedList = new ArrayList<>();
         int position = 0;
 
@@ -98,7 +107,6 @@ public class ListSorter {
             }
             sortedList.add(position, t);
         }
-
         Collections.reverse(sortedList);
         return sortedList;
     }
