@@ -67,14 +67,14 @@
     <string name="signup_read_terms">*Jeg har læst, forstået og accepterer vilkårene for brug af denne app.</string>
     <string name="signup_sign_me_up">Tilmeld mig</string>
     <string name="signup_sign_up">Tilmeld</string>
-    <string name="signup_user_name">Bruger navn</string>
+    <string name="signup_user_name">Profil navn</string>
     <string name="smarttask_activity_calendar">Kalender</string>
     <string name="smarttask_activity_messages">Beskeder</string>
     <string name="smarttask_activity_tasks">Opgaver</string>
-    <string name="smarttask_create_profile_Add">Tilføj Bruger</string>
+    <string name="smarttask_create_profile_Add">Tilføj Profil</string>
     <string name="smarttask_create_profile_Headline">Profiler</string>
     <string name="smarttask_create_profile_done">Færdig</string>
-    <string name="smarttask_create_profile_name">Indtast dit bruger navn</string>
+    <string name="smarttask_create_profile_name">Indtast dit profil navn</string>
     <string name="smarttask_create_profile_picture">Klik for at tilføje billede</string>
     <string name="smarttask_create_profile_pincode">Indtast PIN-kode (4-cifret)</string>
     <string name="smarttask_create_profile_privilgies">Definer bruger niveau</string>

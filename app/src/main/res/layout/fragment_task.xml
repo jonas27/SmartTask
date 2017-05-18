@@ -343,12 +343,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ViewTaskAddPictureButton" />
 
-                <Button
-                    android:id="@+id/task_btn_confirm"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ViewTaskConfirmButton" />
+
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -361,15 +356,22 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ViewTaskUnConfirmButton" />
 
-
                     <Button
-                        android:id="@+id/task_btn_complete"
+                        android:id="@+id/task_btn_confirm"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/ViewTaskDoneButton" />
+                        android:text="@string/ViewTaskConfirmButton" />
+
+
 
                 </RelativeLayout>
+                <Button
+                    android:id="@+id/task_btn_complete"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ViewTaskDoneButton" />
 
             </LinearLayout>
 
