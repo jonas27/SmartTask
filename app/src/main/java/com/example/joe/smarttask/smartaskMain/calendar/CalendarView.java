@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -107,7 +108,7 @@ public class CalendarView extends LinearLayout
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         txtDate.setText(sdf.format(currentDate.getTime()));
-        header.setBackgroundColor(Color.parseColor("#03a9f4"));
+        header.setBackgroundColor(getAppContext().getResources().getColor(R.color.colorPrimary));
     }
 
     /**
@@ -222,18 +223,40 @@ public class CalendarView extends LinearLayout
                 textDay.setTextColor(Color.parseColor("#4b82ff"));
             }
             int counter = 0;
+            int color = 0;
+            boolean colorfound = false;
             Date ccDate = null;
             for (Iterator<TaskObject> i = list.iterator(); i.hasNext(); ) {
                 TaskObject current = i.next();
                 Date cDate = new Date(current.getDatetime());
 
-                if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
-                    counter++;
-                    ccDate = cDate;
+                if(!current.getStatus()){
+                    if(day==cDate.getDate()&&month==cDate.getMonth()&&year==cDate.getYear()){
+                        if(current.getPriority()==0){
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                color = getAppContext().getResources().getColor(R.color.list_high_p_red);
+                                colorfound = true;
+                            }
+
+                        }else if(current.getPriority()==1&&!colorfound){
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                color = getAppContext().getResources().getColor(R.color.list_middle_p_orange);
+                                colorfound = true;
+                            }
+                        }else if(current.getPriority()==2&&!colorfound){
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                color = getAppContext().getResources().getColor(R.color.list_low_p_green);
+                            }
+                        }
+                        counter++;
+                        ccDate = cDate;
+                        Log.d(TAG,"Day "+day+" priority "+current.getPriority());
+                    }
                 }
             }
             if(counter>0){
                 taskNumber.setText(String.valueOf(counter)+" Tasks");
+                taskNumber.setBackgroundColor(color);
                 taskNumber.setVisibility(VISIBLE);
                 taskNumber.setHint(Long.toString(ccDate.getTime()));
             }

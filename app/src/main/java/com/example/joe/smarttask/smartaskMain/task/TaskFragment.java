@@ -219,7 +219,7 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FireBase fireBase = FireBase.fireBase(getContext());
-                mTask.setStatus("false");
+                mTask.setStatus(false);
                 Toast.makeText(getContext(), R.string.ViewTaskUnConfirmButton, Toast.LENGTH_SHORT).show();
                 fireBase.createTask(mTask);
                 getActivity().finish();
@@ -243,7 +243,7 @@ public class TaskFragment extends Fragment {
                 Log.d(TAG, mTaskFrequency.getText().toString());
                 switch (mTask.getFrequency()) {
                     case 0: {
-                        mTask.setStatus("true");
+                        mTask.setStatus(true);
                         Toast.makeText(getContext(), R.string.ViewTaskConfirmButton, Toast.LENGTH_SHORT).show();
                         fireBase.createTask(mTask);
                         getActivity().finish();
@@ -362,7 +362,7 @@ public class TaskFragment extends Fragment {
             }
         }
 
-        if (mTask.getStatus().toString().equals("true")) {
+        if (mTask.getStatus()) {
             mTaskSolved.setVisibility(View.VISIBLE);
             mTaskUnSolved.setVisibility(View.INVISIBLE);
             mTaskConfirm.setVisibility(View.INVISIBLE);

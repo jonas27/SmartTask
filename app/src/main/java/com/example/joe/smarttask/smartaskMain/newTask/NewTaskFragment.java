@@ -267,7 +267,7 @@ public class NewTaskFragment extends Fragment {
         } else {
             t.setPoints(Integer.parseInt(mPoints.getText().toString()));
         }
-        t.setStatus("false");
+        t.setStatus(false);
         if (taskObject != null) {
             t.setId(taskObject.getId());
         } else {

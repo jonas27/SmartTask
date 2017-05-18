@@ -181,7 +181,7 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            if (mTask.getStatus().equals(ListSorter.DRAW_LINE)) {
+            if (mTask.getPriority()==-1) {
 //                divisor line, no action on click
             } else{
 //                Check for tablet mode
@@ -234,7 +234,7 @@ public class ListFragment extends Fragment {
                 mPriority.setBackgroundColor(sContext.getResources().getColor(R.color.list_low_p_green));
             }
 
-            if(System.currentTimeMillis()>mTask.getDatetime() && mTask.getStatus().equals("false")){
+            if(System.currentTimeMillis()>mTask.getDatetime() && !mTask.getStatus()){
                 mRelativeLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }else{
                 mRelativeLayout.setBackgroundColor(getResources().getColor(R.color.white));
@@ -250,11 +250,11 @@ public class ListFragment extends Fragment {
             mDateTextView.setVisibility(View.VISIBLE);
             mResponsibleTextView.setVisibility(View.VISIBLE);
 
-            if (mTask.getStatus().equals("true")) {
+            if (mTask.getStatus()) {
 //                sListRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(sContext));
                 mTaskUnsolved.setVisibility(View.INVISIBLE);
                 mTaskSolved.setVisibility(View.VISIBLE);
-            } else if (mTask.getStatus().equals(ListSorter.DRAW_LINE)) {
+            } else if (mTask.getPriority()==-1) {
                 mTitleTextView.setVisibility(View.INVISIBLE);
                 mDescriptionTextView.setVisibility(View.INVISIBLE);
                 mTaskUnsolved.setVisibility(View.INVISIBLE);

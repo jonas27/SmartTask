@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="SUN"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="MON"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -76,7 +76,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="TUE"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -84,7 +84,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="WED"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -92,7 +92,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="THU"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -100,7 +100,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="FRI"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -108,7 +108,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="SAT"
-            android:textColor="#222222" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <!-- days view -->

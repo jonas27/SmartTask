@@ -53,7 +53,7 @@ public class ListSorter {
         List<TaskObject> newList = new ArrayList<>();
 
         for (int c = 0; c < list.size(); c++) {
-            if (list.get(c).getStatus().equals("true")) {
+            if (list.get(c).getStatus()) {
 //                TODO: Controll on false
             } else {
                 newList.add(list.get(c));
@@ -67,7 +67,7 @@ public class ListSorter {
         if (SharedPrefs.getShowPastItems() == true) {
 //        define separator line
         TaskObject tO = new TaskObject();
-        tO.setStatus(DRAW_LINE);
+        tO.setStatus(false);
         tO.setId(DRAW_LINE);
             tO.setDatetime(1111111111111l);
             tO.setPriority(-1);

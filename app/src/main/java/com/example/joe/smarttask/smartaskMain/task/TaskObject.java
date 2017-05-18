@@ -28,7 +28,7 @@ public class TaskObject implements Serializable, Comparable<TaskObject> {
     private int points;
     private int priority;
     private String responsible;
-    private String status;
+    private boolean status;
     private String id;
     private String task;
     private long dateTimePhoto;
@@ -43,7 +43,7 @@ public class TaskObject implements Serializable, Comparable<TaskObject> {
 
     public TaskObject(String categories, long datetime,
                       String description, int frequency, String name, String owner,
-                      int priority, String responsible, int points, String status, String id, String task) {
+                      int priority, String responsible, int points, boolean status, String id, String task) {
         super();
         this.categories = categories;
         this.datetime = datetime;
@@ -140,11 +140,11 @@ public class TaskObject implements Serializable, Comparable<TaskObject> {
         this.responsible = responsible;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

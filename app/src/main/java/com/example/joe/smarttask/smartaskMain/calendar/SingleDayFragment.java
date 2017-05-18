@@ -162,11 +162,11 @@ public class SingleDayFragment extends Fragment {
             mDateTextView.setVisibility(View.VISIBLE);
             mTaskResponsibleTextView.setVisibility(View.VISIBLE);
 
-            if (mTask.getStatus().equals("true")) {
+            if (mTask.getStatus()) {
 //                sListRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(sContext));
                 mTaskUnsolved.setVisibility(View.INVISIBLE);
                 mTaskSolved.setVisibility(View.VISIBLE);
-            } else if (mTask.getStatus().equals(ListSorter.DRAW_LINE)) {
+            } else if (mTask.getPriority()==-1) {
                 mTitleTextView.setVisibility(View.INVISIBLE);
                 mDescriptionTextView.setVisibility(View.INVISIBLE);
                 mTaskResponsibleTextView.setVisibility(View.INVISIBLE);

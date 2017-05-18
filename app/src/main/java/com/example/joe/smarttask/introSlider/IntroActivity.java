@@ -13,9 +13,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -90,11 +92,13 @@ public class IntroActivity extends AppCompatActivity {
     //boolean to show tutorial again
     private boolean skipTutorial=false;
     private static boolean introWasShown;
+    private static Display display;
     private boolean first;
     private TextView welcomeDes1;
     private TextView welcomeTitel1;
     private TextView welcomeSwipeText;
     private boolean noAnim;
+    private TextView descriptionTitle;
 
 
     @Override
@@ -128,9 +132,9 @@ openApp();
         //add inflating layouts before pageview as it gives nullpointer exception
         intro_layouts = new int[]{
                 R.layout.intro_item_0,
+                R.layout.intro_item_3,
                 R.layout.intro_item_1,
                 R.layout.intro_item_2,
-                R.layout.intro_item_3,
                 R.layout.intro_item_4,
         };
         //adds circles
@@ -148,7 +152,7 @@ openApp();
         viewPager = (ViewPager) findViewById(R.id.view_pager_intro_view_menu);
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
-
+        display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
         //methods for changes in current slide number
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -167,13 +171,13 @@ openApp();
                 }
                 if(position==0){
                     welcomeTitel1.animate().y(100).setDuration(1000).start();
-                    welcomeDes1.animate().y(200).setDuration(1000).start();
-                    welcomeSwipeText.animate().x(350).setDuration(1000).start();
+                    welcomeSwipeText.animate().x((display.getWidth()/2)-250).setDuration(2000).start();
                     noAnim=false;
                 }else if(position==1){
+                    welcomeDes1.animate().y(200).setDuration(1000).start();
+                    descriptionTitle.animate().y(100).setDuration(1000).start();
                     if(!noAnim){
                         welcomeTitel1.animate().y(-100).setDuration(1000).start();
-                        welcomeDes1.animate().y(-200).setDuration(1000).start();
                         welcomeSwipeText.animate().x(-350).setDuration(1000).start();
                     }
                 }else{
@@ -274,11 +278,11 @@ openApp();
             container.addView(view);
             welcomeTitel1 = (TextView) findViewById(R.id.welcome_titel);
             welcomeDes1 = (TextView) findViewById(R.id.textview_description);
+            descriptionTitle = (TextView) findViewById(R.id.welcome_titel2);
             welcomeSwipeText = (TextView) findViewById(R.id.swipetext);
             if(position==0){
                 welcomeTitel1.animate().y(100).setDuration(1000).start();
-                welcomeDes1.animate().y(200).setDuration(1000).start();
-                welcomeSwipeText.animate().x(350).setDuration(1000).start();
+                welcomeSwipeText.animate().x((display.getWidth()/2)-250).setDuration(2000).start();
             }
 
             return view;
