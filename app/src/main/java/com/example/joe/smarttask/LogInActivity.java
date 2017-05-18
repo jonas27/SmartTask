@@ -88,7 +88,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        Attach Firebase carsh reporting tool
+//        Attach Firebase crash reporting tool
         FirebaseCrash.report(new Exception("First Test"));
 //        initialize SharedPreferences for app
         sharedPrefs = SharedPrefs.getSharedPrefs(getApplicationContext());
@@ -100,9 +100,14 @@ public class LogInActivity extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.enter_email);
         password = (EditText) findViewById(R.id.enter_password);
+
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
         inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
+
         password.setHint(R.string.main_log_in_pw);
+
+
+//      For hiding the hint when editText is selected
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
@@ -111,6 +116,7 @@ public class LogInActivity extends AppCompatActivity {
                     email.setHint(R.string.main_log_in_email);
             }
         });
+//      For hiding the hint when editText is selected
         password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
@@ -179,6 +185,7 @@ public class LogInActivity extends AppCompatActivity {
         );
         //Googelogin buttons
         mGoogleButton =(SignInButton) findViewById(R.id.googleButton);
+        // Customize the google sign in button (size and color)
         mGoogleButton.setSize(SignInButton.SIZE_WIDE);
         mGoogleButton.setColorScheme(0);
         // Configure Google Sign In

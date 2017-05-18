@@ -61,7 +61,7 @@ public class TaskFragment extends Fragment {
     //    [Start: Define views for task]
     private TextView mTaskDate;
     private ImageView mTaskSolved;
-    private ImageView mTaskUnSolved;
+    private Button mTaskUnSolved;
     private ImageView mTaskIcon;
     private Button mTaskEdit;
     private Button mTaskDelete;
@@ -120,7 +120,7 @@ public class TaskFragment extends Fragment {
         storageRef = FirebaseStorage.getInstance().getReference();
 
         mTaskSolved = (ImageView) v.findViewById(R.id.task_full_star);
-        mTaskUnSolved = (ImageView) v.findViewById(R.id.task_empty_star);
+        mTaskUnSolved = (Button) v.findViewById(R.id.task_btn_unconfirm);
 
 
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
@@ -367,11 +367,13 @@ public class TaskFragment extends Fragment {
             mTaskUnSolved.setVisibility(View.INVISIBLE);
             mTaskConfirm.setVisibility(View.INVISIBLE);
             mTaskUnConfirm.setVisibility(View.VISIBLE);
+            mTaskComplete.setVisibility(View.INVISIBLE);
         } else {
             mTaskSolved.setVisibility(View.INVISIBLE);
             mTaskUnSolved.setVisibility(View.VISIBLE);
             mTaskConfirm.setVisibility(View.VISIBLE);
             mTaskUnConfirm.setVisibility(View.INVISIBLE);
+            mTaskComplete.setVisibility(View.VISIBLE);
         }
         p = ListOfProfiles.getProfile(SharedPrefs.getCurrentProfile());
         if (p == null) {

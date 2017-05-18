@@ -48,7 +48,7 @@
     <string name="smarttask_create_profile_privilgies">Define access level</string>
     <string name="smarttask_create_profile_picture">Click to add picture</string>
     <string name="smarttask_create_profile_done">Done</string>
-    <string name="smarttask_create_profile_Add">Add User</string>
+    <string name="smarttask_create_profile_Add">Add Profile</string>
     <string name="smarttask_create_profile_name_toast">Please enter your profile name</string>
     <string name="smarttask_create_profile_pincode_toast">Please enter Pin-code (4-digit)</string>
     <string name="smarttask_create_profile_spinner_admin">Admin</string>
@@ -122,7 +122,7 @@
     <!-- Menu fragment -->
     <string name="menu_settings">Settings</string>
     <string name="menu_profile">Profile</string>
-    <string name="menu_change_profile"> Change profile</string>
+    <string name="menu_change_profile"> Switch profile</string>
     <string name="menu_logout">Logout</string>
 
     <!-- List fragment -->
