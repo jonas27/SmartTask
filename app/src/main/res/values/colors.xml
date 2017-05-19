@@ -48,6 +48,7 @@
     <color name="list_grey">#757575</color>
     <color name="list_grey_lite">#9E9E9E</color>
     <color name="list_separator_pink">#95F06292</color>
+    <color name="list_red">#80EF5350</color>
 
     <!-- Settings fragment -->
     <color name="settings_background_blue_dark">#1A237E</color>

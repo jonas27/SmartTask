@@ -233,9 +233,9 @@ public class ListFragment extends Fragment {
             }
 
             if(System.currentTimeMillis()>mTask.getDatetime() && !mTask.getStatus()){
-                mRelativeLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                mTitleTextView.setTextColor(getResources().getColor(R.color.list_red));
             }else{
-                mRelativeLayout.setBackgroundColor(getResources().getColor(R.color.white));
+                mTitleTextView.setTextColor(getResources().getColor(R.color.white));
             }
 
             mPriority.setVisibility(View.VISIBLE);
