@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SmartTask</string>
     <string name="NewTaskLocation">Rum/Sted</string>
     <string name="NewTaskCreateTaskButton">Tilføj</string>
     <string name="NewTaskDate">Vælg Dato</string>
@@ -39,7 +38,6 @@
     <string name="newtask_responsible">Angiv venligst hvem opgaven skal tildeles</string>
     <string name="open">åben</string>
     <string name="settings_about_title">Om</string>
-    <string name="settings_about_version">"Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  "</string>
     <string name="settings_feedback_off">Feedback fra</string>
     <string name="settings_feedback_on">Tak for hjælpen</string>
     <string name="settings_feedback_title">Feedback</string>
@@ -128,4 +126,7 @@
     <string name="wrong_password">\"Forkert adgangskode\"</string>
     <string name="main_log_in_email">Email</string>
     <string name="ViewTaskSaveButton">Gem</string>
+    <string name="intro_waiting_connection">Venter på en forbindelse!</string>
+    <string name="description_title">Beskrivelse</string>
+    <string name="main_double_tap">Dobbeltklik for at afslutte</string>
 </resources>
