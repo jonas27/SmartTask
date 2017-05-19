@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SmartTask</string>
     <string name="menu_logout">Abmelden</string>
     <string name="menu_profile">Profil</string>
     <string name="menu_settings">Einstellungen</string>
     <string name="open">öffnen</string>
     <string name="settings_about_title">Über uns</string>
-    <string name="settings_about_version">"Version 01010011 01101101 01100001 01110010 01110100 01010100 01100001 01110011 01101011  "</string>
     <string name="settings_feedback_on">Danke für deine Hilfe!</string>
     <string name="settings_language_title">Sprache</string>
     <string name="settings_list_sort_date">Ordne nach Datum</string>
@@ -118,4 +116,17 @@
     <string name="newtask_spinner_low">Niedrig</string>
     <string name="newtask_spinner_middle">Mittel</string>
     <string name="ViewTaskSaveButton">Speichern</string>
+    <string name="intro_waiting_connection">Verbinden</string>
+    <string name="main_double_tap">Doublick zum schließen</string>
+    <string name="newtask_spinner_frequency_prompt">Setze die Frequenz</string>
+    <string name="newtask_spinner_priority_prompt">Setze die Priorität</string>
+    <string name="newtask_spinner_responsible_prompt">Setze die Priorität</string>
+    <string name="wrong_password">\"Falsches Passwort\"</string>
+    <string name="ViewTaskConfirmMoveOneDay">Aufgabe abgeschlossen. Verschiebe Aufgabe auf morgen</string>
+    <string name="ViewTaskConfirmMoveOneMonth">Aufgabe abgeschlossen. Verschiebe Aufgabe auf nächste Woche</string>
+    <string name="ViewTaskConfirmMoveOneWeek">Aufgabe abgeschlossen. Verschiebe Aufgabe auf nächsten Monat</string>
+    <string name="ViewTaskConfirmMoveOneYear">Aufgabe abgeschlossen. Verschiebe Aufgabe auf nächstes Jahr</string>
+    <string name="description_title">Beschreibung</string>
+    <string name="choose_profile_password">Passwort</string>
+    <string name="ViewTaskUnConfirmButton">Aufgabe wiederherstellen</string>
 </resources>

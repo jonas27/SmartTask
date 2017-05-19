@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "75743662297-sol9uh771vd01g5gctij3lo0gti6622b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.joe.smarttask",
+            "certificate_hash": "1036ea26a81f9728856ed0d39d7032695cd0779c"
+          }
+        },
+        {
+          "client_id": "75743662297-i567sjvs1pvjov6r3bukounublqhdkoc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.joe.smarttask",
+            "certificate_hash": "7e7f1a0202ba6239af8d775002d7c31895fea5c5"
+          }
+        },
+        {
           "client_id": "75743662297-8fcmjtgj595igbun62qpn2oj0u6l38dp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -36,6 +52,50 @@
           "android_info": {
             "package_name": "com.example.joe.smarttask",
             "certificate_hash": "f9931ccbf38dc307fcd719d0e211401e6fec7122"
+          }
+        },
+        {
+          "client_id": "75743662297-e8tu4qngebihnl66h4dmg1u7e5hn91s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8I7xlQxJi16-nD2WfG8Zht7x80-9zApU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75743662297-e8tu4qngebihnl66h4dmg1u7e5hn91s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75743662297:android:cec2703aaa6689ef",
+        "android_client_info": {
+          "package_name": "com.smarttask17.joe.smarttask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75743662297-9520bfcm6h5kmi35ecmchakt7uba2dr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smarttask17.joe.smarttask",
+            "certificate_hash": "7e7f1a0202ba6239af8d775002d7c31895fea5c5"
           }
         },
         {
