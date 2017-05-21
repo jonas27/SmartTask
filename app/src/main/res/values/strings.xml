@@ -176,16 +176,16 @@
     <!-- Choose Profile -->
     <string name="wrong_password">"Wrong password!"</string>
     <string name="choose_profile_password">"Password"</string>
-    <string name="welcome_text" translatable="false">Welcome</string>
-    <string name="welcome_description" translatable="false">Smarttask is an app for managing your tasks in your household, this guide will introduce you to the most important features with ease, and you should really follow it and not skip it</string>
-    <string name="welcome_swipe" translatable="false">Swipe right to continue</string>
-    <string name="welcome2_titel" translatable="false">This is the create profile view</string>
-    <string name="welcome2_description" translatable="false">Your first profile should be of the type admin and with a pincode</string>
-    <string name="welcome3_titel" translatable="false">Managing task</string>
-    <string name="welcome3_description" translatable="false">Here you can see all tasks, add new task, and more</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="welcome_description">Smarttask is an app for managing your tasks in your household, this guide will introduce you to the most important features with ease, and you should really follow it and not skip it</string>
+    <string name="welcome_swipe">Swipe right to continue</string>
+    <string name="welcome2_titel">This is the create profile view</string>
+    <string name="welcome2_description">Your first profile should be of the type admin and with a pincode</string>
+    <string name="welcome3_titel">Managing task</string>
+    <string name="welcome3_description">Here you can see all tasks, add new task, and more</string>
     <string name="description_title">Description</string>
-    <string name="welcome_done" translatable="false">Thats it!</string>
-    <string name="welcome_done2" translatable="false">You are now all set to use smarttask, you can disable this intro, and always reenable it in the settings.</string>
+    <string name="welcome_done">Thats it!</string>
+    <string name="welcome_done2">You are now all set to use smarttask, you can disable this intro, and always reenable it in the settings.</string>
 
 
 </resources>

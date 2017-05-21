@@ -129,13 +129,13 @@
     <string name="intro_waiting_connection">Venter på en forbindelse!</string>
     <string name="description_title">Beskrivelse</string>
     <string name="main_double_tap">Dobbeltklik for at afslutte</string>
-    <string name="welcome2_description" translatable="false">Din første profil bør være af typen admin, og med pincode</string>
-    <string name="welcome2_titel" translatable="false">Det her er lav profil skærmen</string>
-    <string name="welcome3_description" translatable="false">Her kan du se alle dine opgaver, og mere</string>
-    <string name="welcome3_titel" translatable="false">Administrer opgaver</string>
-    <string name="welcome_description" translatable="false">SmartTask er en app, til at administrere dine opgaver i hjemmet, denne guide vil introducere dig til de vigtigste funktioner, og du burde virkelig følge den, og ikke skip den.</string>
-    <string name="welcome_done" translatable="false">Det var det</string>
-    <string name="welcome_done2" translatable="false">Du er nu klar til at bruge SmartTask, du kan deaktivere denne intro, og altid aktivere den igen i indstillinger.</string>
-    <string name="welcome_swipe" translatable="false">Swipe til højre for at gå videre</string>
-    <string name="welcome_text" translatable="false">Velkommen</string>
+    <string name="welcome2_description">Din første profil bør være af typen admin, og med pincode</string>
+    <string name="welcome2_titel">Det her er lav profil skærmen</string>
+    <string name="welcome3_description">Her kan du se alle dine opgaver, og mere</string>
+    <string name="welcome3_titel">Administrer opgaver</string>
+    <string name="welcome_description" >SmartTask er en app, til at administrere dine opgaver i hjemmet, denne guide vil introducere dig til de vigtigste funktioner, og du burde virkelig følge den, og ikke skip den.</string>
+    <string name="welcome_done">Det var det</string>
+    <string name="welcome_done2">Du er nu klar til at bruge SmartTask, du kan deaktivere denne intro, og altid aktivere den igen i indstillinger.</string>
+    <string name="welcome_swipe" >Swipe til højre for at gå videre</string>
+    <string name="welcome_text" >Velkommen</string>
 </resources>
