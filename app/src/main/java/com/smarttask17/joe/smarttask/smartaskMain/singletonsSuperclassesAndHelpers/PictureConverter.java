@@ -16,7 +16,8 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 /**
- * Circular image from http://stackoverflow.com/questions/43378223/circular-imageview-in-android
+ * Used for creating circular images from:
+ * http://stackoverflow.com/questions/43378223/circular-imageview-in-android
  */
 
 public class PictureConverter extends AppCompatImageView{

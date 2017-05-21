@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import com.smarttask17.joe.smarttask.R;
 
 /**
-
+ * Fragment for the calendar
  */
+
 public class  CalendarFragment extends Fragment {
 
     CalendarView calendar;

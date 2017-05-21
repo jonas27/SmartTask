@@ -23,7 +23,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.task.TaskPagerActivity;
 import java.util.List;
 
 /**
- * Created by joe on 27/04/2017.
+ * List settings fragment
  */
 
 public class SubSettingsListFragment extends Fragment {

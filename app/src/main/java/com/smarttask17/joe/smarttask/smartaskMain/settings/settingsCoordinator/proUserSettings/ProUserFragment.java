@@ -24,7 +24,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.task.TaskPagerActivity;
 import java.util.List;
 
 /**
- * Created by joe on 01/05/2017.
+ * Pro user fragment
  */
 
 public class ProUserFragment extends Fragment{

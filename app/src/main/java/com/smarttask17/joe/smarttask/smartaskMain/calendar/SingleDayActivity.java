@@ -9,7 +9,7 @@ import com.smarttask17.joe.smarttask.R;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 /**
- * Created by joe on 28/04/2017.
+ * Activity for singledayfragment
  */
 
 public class SingleDayActivity extends SingleFragmentActivity {

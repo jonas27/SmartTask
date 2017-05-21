@@ -7,6 +7,11 @@ import android.view.MenuItem;
 import com.smarttask17.joe.smarttask.R;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
+/**
+ * Activity for creating profile
+ */
+
+
 public class ProfileCreatorActivity extends SingleFragmentActivity {
         Toolbar toolbar;
 

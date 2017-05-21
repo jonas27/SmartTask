@@ -15,7 +15,7 @@ import com.smarttask17.joe.smarttask.R;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.FireBase;
 
 /**
- * Created by joe on 04/05/2017.
+ * Fragment for creating a profile
  */
 
 public class ProfileCreatorFragment extends Fragment {

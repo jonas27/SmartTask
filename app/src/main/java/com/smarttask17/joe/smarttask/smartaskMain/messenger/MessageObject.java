@@ -1,7 +1,7 @@
 package com.smarttask17.joe.smarttask.smartaskMain.messenger;
 
 /**
- * Created by joe on 07/05/2017.
+ * Message object, for information on each message
  */
 
 public class MessageObject {

@@ -13,7 +13,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.SmarttaskMainActivity;
 import com.smarttask17.joe.smarttask.smartaskMain.settings.ListOfSettings;
 
 /**
- * Created by joe on 27/04/2017.
+ * Notification fragment
  */
 
 public class NotificationFragment extends Fragment {

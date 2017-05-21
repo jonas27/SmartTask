@@ -14,7 +14,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.settings.settingsCoordinator.S
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 /**
- * Created by joe on 23/04/2017.
+ * Activity for settings
  */
 
 public class SettingsActivity extends SingleFragmentActivity implements SettingsFragment.Callbacks, SubSettingsListFragment.Callbacks, ProUserFragment.Callbacks{

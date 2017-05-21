@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by joe on 28/04/2017.
+ * List settings options
  */
 
 public class SubsettingsListList {

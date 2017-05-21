@@ -30,7 +30,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
- * Created by joe on 07/05/2017.
+ * Fragment for messages, for users to chat with other people from the same household
  */
 
 public class MessengerFragment extends Fragment {

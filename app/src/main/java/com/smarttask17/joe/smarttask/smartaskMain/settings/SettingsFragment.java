@@ -20,7 +20,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.SmarttaskMainActivity;
 import java.util.List;
 
 /**
- * Created by joe on 23/04/2017.
+ * Fragment for settings
  */
 
 public class SettingsFragment extends Fragment {

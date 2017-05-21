@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by joe on 07/05/2017.
+ * List of all messages
  */
 
 public class ListOfMessages {

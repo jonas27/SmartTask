@@ -13,7 +13,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.settings.settingsCoordinator.p
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 /**
- * Created by joe on 27/04/2017.
+ * Submenu in settings
  */
 
 public class SubMenuActivity extends SingleFragmentActivity implements SubSettingsListFragment.Callbacks, ProUserFragment.Callbacks {

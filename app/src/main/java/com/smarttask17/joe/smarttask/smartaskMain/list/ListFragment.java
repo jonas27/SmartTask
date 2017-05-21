@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by joe on 14/03/2017.
+ * Fragment for list of tasks
  */
 
 public class ListFragment extends Fragment {

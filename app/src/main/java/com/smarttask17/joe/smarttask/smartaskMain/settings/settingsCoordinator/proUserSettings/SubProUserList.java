@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by joe on 01/05/2017.
+ * Pro user list
  */
 
 public class SubProUserList {

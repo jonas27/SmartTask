@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.smarttask17.joe.smarttask.R;
 
 /**
- * Created by joe on 05/04/2017.
+ * Host for most fragments
  */
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {

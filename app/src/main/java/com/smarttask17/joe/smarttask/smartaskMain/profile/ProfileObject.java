@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Built 100% by us
+ * Profile object holds info on a profile
  */
 
 public class ProfileObject implements Serializable {

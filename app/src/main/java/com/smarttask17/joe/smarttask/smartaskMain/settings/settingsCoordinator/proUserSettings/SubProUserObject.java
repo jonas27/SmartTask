@@ -3,7 +3,7 @@ package com.smarttask17.joe.smarttask.smartaskMain.settings.settingsCoordinator.
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SharedPrefs;
 
 /**
- * Created by joe on 28/04/2017.
+ * Prouser submenu
  */
 
 public class SubProUserObject {

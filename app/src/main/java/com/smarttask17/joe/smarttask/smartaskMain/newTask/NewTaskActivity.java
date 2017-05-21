@@ -8,7 +8,7 @@ import com.smarttask17.joe.smarttask.R;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SingleFragmentActivity;
 
 /**
- * Created by joe on 20/04/2017.
+ * Activity for creating new task
  */
 
 public class NewTaskActivity extends SingleFragmentActivity {

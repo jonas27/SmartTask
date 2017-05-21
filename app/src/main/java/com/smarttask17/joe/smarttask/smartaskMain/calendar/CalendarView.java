@@ -31,7 +31,8 @@ import java.util.List;
 import static com.smarttask17.joe.smarttask.smartaskMain.SmarttaskMainActivity.getAppContext;
 
 /**
- * Created by Jones on 04/12/17.
+ * Creating the GUI, and logic of the calendar, taken from: https://github.com/ahmed-alamir/CalendarVie
+ * But we modified it to fit for our application
  */
 
 public class CalendarView extends LinearLayout

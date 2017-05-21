@@ -18,7 +18,7 @@ import com.smarttask17.joe.smarttask.R;
 import java.util.Calendar;
 
 /**
- * Created by joe on 20/04/2017.
+ * Timepicker, used for picking a time when creating a new task
  */
 
 public class TimePickerFragment extends DialogFragment {

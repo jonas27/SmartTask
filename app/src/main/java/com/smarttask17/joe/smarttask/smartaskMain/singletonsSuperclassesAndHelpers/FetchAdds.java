@@ -8,8 +8,8 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
+ * Placeholder for adds not done yet
  * For future!
- * Created by joe on 02/05/2017.
  */
 
 public class FetchAdds {

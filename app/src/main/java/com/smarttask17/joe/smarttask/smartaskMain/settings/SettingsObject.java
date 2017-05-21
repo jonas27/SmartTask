@@ -3,7 +3,6 @@ package com.smarttask17.joe.smarttask.smartaskMain.settings;
 /**
  * Create 100% by us.
  * Defines the objects inside settings (the subcategories: i.e. list behaviour, language etc.)
- * TODO: Wire this class up with sharedPrefs
  */
 public class SettingsObject {
 

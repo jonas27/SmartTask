@@ -18,7 +18,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpe
 import java.util.List;
 
 /**
- * Created by joe on 07/04/2017.
+ * Viewpager for going through tasks
  */
 
 public class TaskPagerActivity extends AppCompatActivity {

@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Intro into our app
- * layout is inflated
+ * Storing shared preferences
  */
 
 public class SharedPrefs {

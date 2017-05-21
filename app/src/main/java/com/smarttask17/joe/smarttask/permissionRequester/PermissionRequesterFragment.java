@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
  * One of the worst fragments....
  * Helper fragment for requesting information only. Afterwards it finishes its hosting activity.
  * You are born to die!
+ * -Jonas Bu 2017
  *
  * 100% by THE SMARTTASK TEAM
  */

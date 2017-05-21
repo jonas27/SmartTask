@@ -13,7 +13,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Created by joe on 24/04/2017.
+ * Sort list of tasks
  */
 
 public class ListSorter {

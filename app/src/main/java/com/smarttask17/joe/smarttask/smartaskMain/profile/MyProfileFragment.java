@@ -33,7 +33,7 @@ import static android.os.Environment.getExternalStorageDirectory;
 
 
 /**
- * Created by joe on 23/04/2017.
+ * Fragment for my profile
  */
 
 @SuppressLint("ValidFragment")

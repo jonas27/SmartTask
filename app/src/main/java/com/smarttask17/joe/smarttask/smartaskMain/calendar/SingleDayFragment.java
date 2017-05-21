@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by joe on 28/04/2017.
+ * View of all tasks from 1 day
  */
 
 public class SingleDayFragment extends Fragment {

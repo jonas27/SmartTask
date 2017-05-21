@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Created by joe on 20/04/2017.
+ * Datepicker, used for picking a date when creating a new task
  */
 
 public class DatePickerFragment extends DialogFragment {

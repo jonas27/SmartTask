@@ -7,7 +7,7 @@ import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpe
 /**
  * Hoster class of fragment
  *
- * 100% by us ;D
+ * 100% by us
  */
 
 public class PermissionRequesterActivity extends SingleFragmentActivity {

@@ -47,7 +47,7 @@ import java.util.Locale;
 import static android.app.Activity.RESULT_OK;
 
 /**
- * Created by joe on 14/03/2017.
+ * Showing detailed view of a task
  */
 
 public class TaskFragment extends Fragment {
