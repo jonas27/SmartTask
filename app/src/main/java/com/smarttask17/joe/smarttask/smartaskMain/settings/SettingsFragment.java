@@ -93,7 +93,6 @@ public class SettingsFragment extends Fragment {
 
     // Provides a reference to the views for each data item
     private static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         TextView title;
         TextView describtion;
         ImageView icon;

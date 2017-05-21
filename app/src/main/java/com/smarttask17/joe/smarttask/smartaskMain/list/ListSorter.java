@@ -1,12 +1,16 @@
 package com.smarttask17.joe.smarttask.smartaskMain.list;
 
+import com.android.internal.util.Predicate;
 import com.smarttask17.joe.smarttask.smartaskMain.settings.settingsCoordinator.listSettings.SubSettingsListObject;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SharedPrefs;
 import com.smarttask17.joe.smarttask.smartaskMain.task.TaskObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by joe on 24/04/2017.
@@ -16,6 +20,22 @@ public class ListSorter {
 
     public static final String DRAW_LINE = "drawLine";
     private static final String TAG = "CL_SortList";
+
+
+    /*
+    * Functional programing only supported in API 25 and alpha channel android studio
+    * gave me huge problems with gradle, Sorry Sokol! :D
+    * */
+//    public static List<TaskObject> sortDateStream(List<TaskObject> list){
+//        return list.stream().sorted(Comparator.comparing(TaskObject::getDatetime)).collect(Collectors.<TaskObject>toList());
+//    }
+//    public static List<TaskObject> sortPriorityDateStream(List<TaskObject> list){
+//        Function<TaskObject, int> byDate=TaskObject::getDatetime;
+//        Function<TaskObject, int> byPriority=TaskObject::getPriority;
+//        Comparator<TaskObject> firstPriorityThenDay= Comparator.comparing(byPriority).thenComparing(byDate);
+//        return list.stream().sorted(firstPriorityThenDay).collect(Collectors.<TaskObject>toList());
+//    }
+
 
 
     public static List<TaskObject> sortList(List<TaskObject> list) {
@@ -67,7 +87,7 @@ public class ListSorter {
         tO.setId(DRAW_LINE);
             tO.setDatetime(1111111111111l);
             tO.setPriority(-1);
-            tO.setResponsible("0");
+            tO.setResponsible("");
         tO.setName("0");
         tO.setDescription("0");
         newList.add(0, tO);

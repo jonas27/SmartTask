@@ -78,15 +78,9 @@ public class TaskPagerActivity extends AppCompatActivity {
 
             @Override
             public Fragment getItem(int position) {
-Log.d(TAG, Integer.toString(position));
                 TaskObject task;
-//                if (position > separatorPosition && separatorPosition != 0 && !SharedPrefs.getProUser()) {
-//                    task = mTasksList.get(position - 1);
-//                } else {
                     task = mTasksList.get(position);
-//                }
-//                    TaskObject task = mTasksList.get(position);
-                Log.d(TAG, "positiion " + position);
+                Log.d(TAG, "position " + position);
                 return TaskFragment.newInstance(task.getId());
             }
 
@@ -115,8 +109,10 @@ Log.d(TAG, Integer.toString(position));
                 if (position > separatorPosition && separatorPosition != 0 && !SharedPrefs.getProUser()) {
                     getSupportActionBar().setTitle(mTasksList.get(position - 1).getName());
                 } else {
-                    Log.d(TAG, "pageselected " + position);
                     getSupportActionBar().setTitle(mTasksList.get(position).getName());
+                }
+                if(mTasksList.get(position).getPriority()==-1){
+                    getSupportActionBar().setTitle("EasyWash");
                 }
             }
 

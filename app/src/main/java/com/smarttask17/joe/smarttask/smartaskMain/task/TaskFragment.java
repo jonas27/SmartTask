@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smarttask17.joe.smarttask.R;
+import com.smarttask17.joe.smarttask.smartaskMain.SmarttaskMainActivity;
 import com.smarttask17.joe.smarttask.smartaskMain.list.ListFragment;
 import com.smarttask17.joe.smarttask.smartaskMain.list.ListOfTasks;
 import com.smarttask17.joe.smarttask.smartaskMain.newTask.NewTaskActivity;
@@ -88,6 +89,7 @@ public class TaskFragment extends Fragment {
     private GregorianCalendar gregorianCalendar;
     ProfileObject p;
     private Object mProfileId;
+    private View v;
 
     public static TaskFragment newInstance(String taskId) {
         Bundle args = new Bundle();
@@ -108,35 +110,27 @@ public class TaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.task_tabletmode, container, false);
-
         this.mTask = ListOfTasks.getTask(mTaskId);
         if (mTask.getPriority() == -1) {
+            v = inflater.inflate(R.layout.fragment_task_add, container, false);
+            setupAdds(v);
             return v;
+        } else {
+            v = inflater.inflate(R.layout.task_tabletmode, container, false);
         }
-
-
         storageRef = FirebaseStorage.getInstance().getReference();
 
         mTaskSolved = (ImageView) v.findViewById(R.id.task_full_star);
         mTaskUnSolved = (Button) v.findViewById(R.id.task_btn_unconfirm);
-
-
         mTaskImageView = (ImageView) v.findViewById(R.id.task_imageview);
-
-
         mTaskName = (TextView) v.findViewById(R.id.task_name);
         mTaskName.setText(mTask.getName());
-
         mTaskResponsible = (TextView) v.findViewById(R.id.task_responsible);
         mTaskResponsible.setText(mTask.getResponsible());
-
         mTaskDescription = (TextView) v.findViewById(R.id.task_description);
         mTaskDescription.setText(mTask.getDescription());
-
         mTaskCategory = (TextView) v.findViewById(R.id.task_category);
         mTaskCategory.setText(mTask.getCategories());
-
         mTaskPriority = (TextView) v.findViewById(R.id.task_priority);
         switch (mTask.getPriority()) {
             case 0: {
@@ -295,7 +289,6 @@ public class TaskFragment extends Fragment {
         });
 
         mTaskIcon = (ImageView) v.findViewById(R.id.task_responsible_image);
-
         if (mTask.getResponsible().compareTo("") != 0) {
             String path = dir + ListOfProfiles.getProfileByName(mTask.getResponsible()).getPid() + ".jpg";
             File profileImage = new File(path);
@@ -305,7 +298,6 @@ public class TaskFragment extends Fragment {
                 }
             }
         }
-
         mTaskPicture = (Button) v.findViewById(R.id.task_btn_add_picture);
         mTaskPicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,11 +319,11 @@ public class TaskFragment extends Fragment {
         });
         File taskImage = new File(dir + mTaskId + ".jpg");
         String path = dir + mTaskId + ".jpg";
-        if (taskImage.length()!=0) {
+        if (taskImage.length() != 0) {
             Log.d(TAG, "IS this in tablet mode? " + ListFragment.tabletMode);
-            if(ListFragment.tabletMode){
-            mTaskImageView.setImageBitmap(PictureConverter.getSquareBitmap(path, 2));}
-            else{
+            if (ListFragment.tabletMode) {
+                mTaskImageView.setImageBitmap(PictureConverter.getSquareBitmap(path, 2));
+            } else {
                 mTaskImageView.setImageBitmap(PictureConverter.getSquareBitmap(taskImage.getAbsolutePath(), 2));
             }
         } else {
@@ -382,42 +374,15 @@ public class TaskFragment extends Fragment {
 
         storageRef = FirebaseStorage.getInstance().getReference();
 
-        if (p.getPprivileges() == 3) {
+        if (mTask.getPriority() == -1) {
+            setupAdds(v);
+        } else if (p.getPprivileges() == 3) {
             mTaskDelete.setVisibility(View.INVISIBLE);
             mTaskEdit.setVisibility(View.INVISIBLE);
             mTaskConfirm.setVisibility(View.INVISIBLE);
             mTaskUnConfirm.setVisibility(View.INVISIBLE);
-
         }
 
-//        if separator (list item to show adds)
-        if (mTask.getPriority() == (-1)) {
-            mTaskDate.setVisibility(View.INVISIBLE);
-            mTaskSolved.setVisibility(View.INVISIBLE);
-            mTaskEdit.setVisibility(View.INVISIBLE);
-            mTaskDelete.setVisibility(View.INVISIBLE);
-            mTaskName.setVisibility(View.INVISIBLE);
-            mTaskResponsible.setVisibility(View.INVISIBLE);
-            mTaskDescription.setVisibility(View.INVISIBLE);
-            mTaskCategory.setVisibility(View.INVISIBLE);
-            mTaskPriority.setVisibility(View.INVISIBLE);
-            mTaskPoints.setVisibility(View.INVISIBLE);
-//            mTaskStatus.setVisibility(View.INVISIBLE);
-//            mTaskDone.setVisibility(View.INVISIBLE);
-            mTaskPicture.setVisibility(View.INVISIBLE);
-            mTaskConfirm.setVisibility(View.INVISIBLE);
-            mTaskImageView.setVisibility(View.INVISIBLE);
-            mTaskSolved.setVisibility(View.INVISIBLE);
-            mTaskUnSolved.setVisibility(View.INVISIBLE);
-            ImageView iconResponsible = (ImageView) v.findViewById(R.id.task_responsible_image);
-            iconResponsible.setVisibility(View.INVISIBLE);
-            ImageView iconDate = (ImageView) v.findViewById(R.id.task_date_image);
-            iconDate.setVisibility(View.INVISIBLE);
-            ImageView iconCategory = (ImageView) v.findViewById(R.id.task_category_image);
-            iconCategory.setVisibility(View.INVISIBLE);
-            ImageView iconPoints = (ImageView) v.findViewById(R.id.task_points_image);
-            iconPoints.setVisibility(View.INVISIBLE);
-        }
         return v;
     }
 
@@ -477,5 +442,12 @@ public class TaskFragment extends Fragment {
         }
     }
 
+    public View setupAdds(View v) {
+        ImageView img = (ImageView) v.findViewById(R.id.task_adds_image);
+        img.setImageBitmap(SmarttaskMainActivity.bitmapAdds);
+        TextView text = (TextView) v.findViewById(R.id.task_adds_description);
+        text.setText(SmarttaskMainActivity.textAdds);
+        return v;
+    }
 
 }

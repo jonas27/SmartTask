@@ -55,10 +55,6 @@ public class ListFragment extends Fragment {
     //    sets the seperating bar in the recycler view
     private static boolean firstCompletedTask = true;
     public static List<TaskObject> sList;
-    public Map<String, TaskObject> tasks = new HashMap<String, TaskObject>();
-    // [Start: get Singletons]
-    private FireBase mFireBase;
-    private ListOfTasks mListOfTasks;
 
     public static boolean tabletMode=false;
 
@@ -114,6 +110,7 @@ public class ListFragment extends Fragment {
 
         sList = ListOfTasks.getSortList();
 
+//        Add TaskFragment if tablet
         if(detailView!=null && sList.size()>1) {
             tabletMode=true;
 //              @param getId: Create new Fragment with first TaskObject in list
@@ -235,7 +232,7 @@ public class ListFragment extends Fragment {
             if(System.currentTimeMillis()>mTask.getDatetime() && !mTask.getStatus()){
                 mTitleTextView.setTextColor(getResources().getColor(R.color.list_red));
             }else{
-                mTitleTextView.setTextColor(getResources().getColor(R.color.white));
+                mTitleTextView.setTextColor(getResources().getColor(R.color.black));
             }
 
             mPriority.setVisibility(View.VISIBLE);
@@ -257,11 +254,12 @@ public class ListFragment extends Fragment {
                 mDescriptionTextView.setVisibility(View.INVISIBLE);
                 mTaskUnsolved.setVisibility(View.INVISIBLE);
                 mTaskSolved.setVisibility(View.INVISIBLE);
-                mViewLine.setVisibility(View.VISIBLE);
-                mViewSeparator.setVisibility(View.VISIBLE);
                 mPriority.setVisibility(View.INVISIBLE);
                 mDateTextView.setVisibility(View.INVISIBLE);
                 mResponsibleTextView.setVisibility(View.INVISIBLE);
+//                Set bar
+                mViewLine.setVisibility(View.VISIBLE);
+                mViewSeparator.setVisibility(View.VISIBLE);
             }
 
         }

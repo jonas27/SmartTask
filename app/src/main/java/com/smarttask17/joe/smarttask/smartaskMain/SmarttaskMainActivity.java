@@ -3,6 +3,8 @@ package com.smarttask17.joe.smarttask.smartaskMain;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -48,16 +50,16 @@ import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpe
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.PictureConverter;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.SharedPrefs;
 import com.smarttask17.joe.smarttask.smartaskMain.singletonsSuperclassesAndHelpers.ViewPagerZoomOutAnimation;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -68,16 +70,14 @@ import java.util.List;
 public class SmarttaskMainActivity extends AppCompatActivity {
 
     private static final String TAG = "CL_MaAc";
+    private static final String ADDRESS= "http://jonasburster.de/html//smarttask/";
     private static Context context;
     private static Context contextMain;
     private static List<Fragment> sFragmentList;
-    private static boolean sStartActivity;
     private static SmarttaskMainActivity instance;
     // When requested, this adapter returns a Fragment,
     // representing an object in the collection.
     MainPagerAdapter mMainPagerAdapter;
-    private ListView mDrawerList;
-    private ArrayAdapter<String> mAdapter;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -88,16 +88,16 @@ public class SmarttaskMainActivity extends AppCompatActivity {
     private Menu subMenu;
     private LinearLayout linear;
     private static Intent intent;
-    private static ImageView picture;
     private static final String dir = "/storage/emulated/0/smarttask/";
 
+//    [Start: For Adds]
+    public static Bitmap bitmapAdds;
+    public static String textAdds;
+//    [End: For Adds]
 
-    private static Bitmap bitmap;
     private static ImageView mToolbarIcon;
     private ProfileObject mProfile;
-    private static String mProfileId;
-private static int backButtonCounter;
-    private static EditText password;
+    private static int backButtonCounter;
 
     public static boolean showOnlyOwnTasks = false;
 
@@ -109,7 +109,6 @@ private static int backButtonCounter;
     public void onResume() {
         super.onResume();
         setIconToolbar();
-
     }
 
 
@@ -125,7 +124,8 @@ private static int backButtonCounter;
         sFragmentList = new ArrayList<>();
 
         //    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
-        //    new FetchPicture().execute();
+            new FetchPicture().execute();
+            new FetchText().execute();
 
 
 
@@ -232,7 +232,7 @@ private static int backButtonCounter;
         mViewPager.setCurrentItem(1);
     }
 
-
+//      Add the fragments to ViewPager
     private void setupViewPager(ViewPager viewPager) {
         mMainPagerAdapter.addFragment(new CalendarFragment(), getString(R.string.main_screen_calendar));
         mMainPagerAdapter.addFragment(new ListFragment(), getString(R.string.main_screen_tasks));
@@ -384,69 +384,56 @@ private static int backButtonCounter;
     }
 
 
-//    //    Start new thread to download adds
-//    private class FetchPicture extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            new FetchAdds().saveImage(FetchAdds.URL_ADDRESS);
-//            return null;
-//        }
-//    }
-
-
-    private static class ProfileAdapter extends ArrayAdapter<ProfileObject> {
-        private LayoutInflater inflater;
-
-        public ProfileAdapter(Context context, ArrayList<ProfileObject> profiles) {
-            super(context, R.layout.profile_square, profiles);
-            inflater = LayoutInflater.from(context);
-        }
-
-        //        Adapter loads all the titles on the view in memory.
-//        This means it renders 12 profile pictures which crashed the programm+
-//        Maybe switch to recycler view
+    //    Start new thread to download adds
+    private class FetchPicture extends AsyncTask<Void, Void, Void> {
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
-            view = inflater.inflate(R.layout.profile_square, parent, false);
-            ProfileObject current = ListOfProfiles.getProfileList().get(position);
-            TextView name = (TextView) view.findViewById(R.id.name);
-            name.setText(current.getPname());
-            TextView score = (TextView) view.findViewById(R.id.score);
-            score.setText(Integer.toString(current.getPscore()));
-
-            picture = (ImageView) view.findViewById(R.id.profile_image);
-            String userID = current.getPid();
-            String path = dir + userID + ".jpg";
-            if (userID != "") {
-                File profileImage = new File(path);
-                if (profileImage.length() != 0) {
-                    picture.setImageBitmap(PictureConverter.getRoundProfilePicture(path, 500));
-                } else {
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                    StorageReference currentImage = storageRef.child("images/" + userID + ".jpg");
-                    File localFile = null;
-                    Log.d(TAG, "Pulling pictures in main");
-                    try {
-                        localFile = new File(path);
-                        localFile.createNewFile();
-                        final File finalLocalFile = localFile;
-                        currentImage.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                picture.setImageBitmap(PictureConverter.getRoundProfilePicture(finalLocalFile.getAbsolutePath(), 500));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                picture.setImageDrawable(getAppContext().getResources().getDrawable(R.mipmap.smlogo));
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+        protected Void doInBackground(Void... params) {
+            try {
+//                Download poicture
+                java.net.URL url = new java.net.URL(ADDRESS + "carwash_img.png");
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                bitmapAdds= myBitmap;
+                Log.d(TAG, "Picture was downloaded");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
             }
-            return view;
+            return null;
         }
     }
+    //    Start new thread to download adds
+    private class FetchText extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+//                Download txt descrpition
+                java.net.URL url = new java.net.URL(ADDRESS + "easywash_description.txt");
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Scanner in= new Scanner(input);
+                StringBuilder s=new StringBuilder();
+                while(in.hasNext()){
+                    s.append(in.next()+ " ");
+                }
+                textAdds=s.toString();
+                Log.d(TAG, "Descritption was downloaded");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+            return null;
+        }
+    }
+
+
+
+
 }
