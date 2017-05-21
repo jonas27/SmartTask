@@ -129,4 +129,13 @@
     <string name="description_title">Beschreibung</string>
     <string name="choose_profile_password">Passwort</string>
     <string name="ViewTaskUnConfirmButton">Aufgabe wiederherstellen</string>
+    <string name="welcome_text">Willkommen</string>
+    <string name="welcome_swipe">Wische nach rechts für weiter</string>
+    <string name="welcome_done2">Du bist jetzt startklar für SmartTask. Du kannst diese Einführung deaktivieren. In den Einstellungen kannst du es wieder reaktivieren.</string>
+    <string name="welcome_done">Fertig!</string>
+    <string name="welcome_description">\"SmartTask is eine App um die Aufagben in deinem zu Hause zu managen. Diese Einführung wird dir die wichtigsten Funktionen zeigen. Du solltest es dir wirklich anschauen und NICHT auf skip drücken. \"</string>
+    <string name="welcome3_titel">Aufgaben managen</string>
+    <string name="welcome3_description">Hier kannst du alle Aufgaben sehen, neue hinzufüguen und vieles mehr</string>
+    <string name="welcome2_titel">Hier kannst du ein neues Profil erstellen</string>
+    <string name="welcome2_description">Dein erstes Profil sollte ein Admin sein mit einem pincode.</string>
 </resources>
